@@ -1,0 +1,33 @@
+[
+    {
+        "name": "Calathea Makoyana",
+        "watered": [
+            "01032022",
+            "08032022",
+            "15032022",
+            "20032022",
+            "25032022",
+            "01042022"
+        ],
+        "wateringSchedule": "7days",
+        "soil": "leca",
+        "potSize": "14cm",
+        "repotted": ["03032021", "01022022"]
+    },
+    {
+        "name": "Monstera Deliciosa",
+        "watered": ["15022022", "04032022", "23032022"],
+        "wateringSchedule": "14days",
+        "soil": "custom",
+        "potSize": "24cm",
+        "repotted": ["01012022"]
+    },
+    {
+        "name": "Maranta 'Lemon lime'",
+        "watered": ["02042022"],
+        "wateringSchedule": "10days",
+        "soil": "seramis",
+        "potSize": "14cm",
+        "repotted": ["02042022"]
+    }
+]
