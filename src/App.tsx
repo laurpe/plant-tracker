@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Plant } from "./types";
+import Plants from "./components/Plants";
 
 const getData = async <T,>(url: string): Promise<T> => {
     const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
@@ -10,8 +11,6 @@ const getData = async <T,>(url: string): Promise<T> => {
 
 const App = () => {
     const [plants, setPlants] = useState<Plant[]>([]);
-    console.log(plants);
-    console.log(process.env.REACT_APP_API_BASE_URL);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -21,7 +20,9 @@ const App = () => {
         fetchData().catch((error) => console.error(error));
     }, []);
 
-    return <div>Plant tracker</div>;
+    console.log(plants);
+
+    return <Plants plants={plants} />;
 };
 
 export default App;
