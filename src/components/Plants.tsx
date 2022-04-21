@@ -1,10 +1,11 @@
 import { Plant } from "../types";
+import PlantCard from "./PlantCard";
 
 const Plants = ({ plants }: { plants: Plant[] }) => {
     return (
         <div>
             {plants.map((plant) => {
-                return <p>{plant.name}</p>;
+                return <PlantCard plant={plant} />;
             })}
         </div>
     );
