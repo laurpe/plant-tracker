@@ -1,8 +1,7 @@
 export interface Plant {
+    id: string;
     name: string;
-    watered: string[];
-    wateringSchedule: string;
     soil: string;
-    potSize: string;
-    repotted: string[];
+    lastWatered: Date;
+    wateringCycle: number;
 }
