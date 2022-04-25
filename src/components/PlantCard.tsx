@@ -1,12 +1,18 @@
 import { Plant } from "../types";
-import moment from "moment";
+import { addDays, formatDistance, parseISO } from "date-fns";
 
 const PlantCard = ({ plant }: { plant: Plant }) => {
     const calculateNextWatering = (plant: Plant): string => {
-        const start = moment();
-        const end = moment(plant.lastWatered).add(plant.wateringCycle, "days");
-        return end.from(start);
+        const nextWatering = addDays(
+            parseISO("2022-04-25T03:57:02.647Z"),
+            plant.wateringCycle
+        );
+        return formatDistance(new Date(), nextWatering);
     };
+
+    // const updateLastWatered = (plant): void => {
+
+    // }
 
     return (
         <>
@@ -14,9 +20,11 @@ const PlantCard = ({ plant }: { plant: Plant }) => {
                 <h2>{plant.name}</h2>
                 <button type="button">water</button>
             </div>
-            <div>water {calculateNextWatering(plant)}</div>
+            <div>water in {calculateNextWatering(plant)}</div>
         </>
     );
 };
 
 export default PlantCard;
+
+//TODO: water button to update last watering date -> also need to update "water in whatever days" view
