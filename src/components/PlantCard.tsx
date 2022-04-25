@@ -4,6 +4,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
 const PlantCard = ({ plant }: { plant: Plant }) => {
+    //TODO: this assumes that next watering day is in the future!
     const calculateNextWatering = (plant: Plant): string => {
         const nextWatering = dayjs(plant.lastWatered).add(
             plant.wateringCycle,
@@ -12,18 +13,13 @@ const PlantCard = ({ plant }: { plant: Plant }) => {
         const daysToNext = dayjs().to(nextWatering);
         return daysToNext;
     };
-    // const updateLastWatered = (plant): void => {
-
-    // }
 
     return (
-        <>
-            <div>
-                <h2>{plant.name}</h2>
-                <button type="button">water</button>
-            </div>
+        <div>
+            <h2>{plant.name}</h2>
+            <button type="button">water</button>
             <div>water {calculateNextWatering(plant)}</div>
-        </>
+        </div>
     );
 };
 
