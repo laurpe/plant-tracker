@@ -1,15 +1,17 @@
 import { Plant } from "../types";
-import { addDays, formatDistance, parseISO } from "date-fns";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
 
 const PlantCard = ({ plant }: { plant: Plant }) => {
     const calculateNextWatering = (plant: Plant): string => {
-        const nextWatering = addDays(
-            parseISO("2022-04-25T03:57:02.647Z"),
-            plant.wateringCycle
+        const nextWatering = dayjs(plant.lastWatered).add(
+            plant.wateringCycle,
+            "day"
         );
-        return formatDistance(new Date(), nextWatering);
+        const daysToNext = dayjs().to(nextWatering);
+        return daysToNext;
     };
-
     // const updateLastWatered = (plant): void => {
 
     // }
@@ -20,7 +22,7 @@ const PlantCard = ({ plant }: { plant: Plant }) => {
                 <h2>{plant.name}</h2>
                 <button type="button">water</button>
             </div>
-            <div>water in {calculateNextWatering(plant)}</div>
+            <div>water {calculateNextWatering(plant)}</div>
         </>
     );
 };
