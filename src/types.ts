@@ -8,5 +8,5 @@ export interface TempPlant {
 
 //Plant model after saving
 export interface Plant extends TempPlant {
-    id: string;
+    _id: string;
 }
