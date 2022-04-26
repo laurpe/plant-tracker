@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Plant } from "./types";
 import Plants from "./components/Plants";
 
-const getData = async <T,>(url: string): Promise<T> => {
-    const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
+const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
+const getData = async <T,>(url: string): Promise<T> => {
     const response = await fetch(`${baseUrl}${url}`);
     return response.json() as Promise<T>;
 };
