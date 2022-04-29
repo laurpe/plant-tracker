@@ -25,7 +25,7 @@ const PlantCard = ({ plant }: { plant: Plant }) => {
                     lastWatered: new Date().toISOString(),
                 }),
             });
-        } catch (error: unknown) {
+        } catch (error) {
             throw new Error();
         }
     };
