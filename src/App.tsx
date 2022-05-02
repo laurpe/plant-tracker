@@ -1,10 +1,29 @@
-import useFetchPlants from "./hooks/useFetchPlants";
+import { useEffect, useState } from "react";
+import { Plant } from "./types";
 import Plants from "./components/Plants";
+import React from "react";
+
+const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
+
+const getData = async <T,>(url: string): Promise<T> => {
+    const response = await fetch(`${baseUrl}${url}`);
+    return response.json() as Promise<T>;
+};
 
 const App = () => {
-    const plants = useFetchPlants();
+    const [plants, setPlants] = useState<Plant[]>([]);
 
-    return <Plants plants={plants} />;
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await getData<Plant[]>("plants");
+            setPlants(result);
+        };
+        fetchData().catch(() => {
+            throw new Error("Fetch plants unsuccessful");
+        });
+    }, []);
+
+    return <Plants plants={plants} setPlants={setPlants} />;
 };
 
 export default App;
