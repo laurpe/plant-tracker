@@ -13,7 +13,6 @@ interface Props {
 }
 
 const PlantCard = ({ plant, plants, setPlants }: Props) => {
-    //TODO: this assumes that next watering day is in the future!
     const calculateNextWatering = (plant: Plant): string => {
         const nextWatering = dayjs(plant.lastWatered).add(
             plant.wateringCycle,
@@ -31,7 +30,7 @@ const PlantCard = ({ plant, plants, setPlants }: Props) => {
         return `water ${daysToNext}`;
     };
 
-    const updateWatered = async (id: string) => {
+    const updateWatered = async (id: string): Promise<void> => {
         try {
             const response = await axios.put<Plant>(`${baseUrl}plants/${id}`, {
                 lastWatered: new Date().toISOString(),
@@ -46,9 +45,30 @@ const PlantCard = ({ plant, plants, setPlants }: Props) => {
         }
     };
 
+    const handleDelete = async (id: string): Promise<void> => {
+        try {
+            await axios.delete<Plant>(`${baseUrl}plants/${id}`);
+            const plantsWithoutDeleted = plants.filter(
+                (plant) => plant.id !== id
+            );
+            setPlants(plantsWithoutDeleted);
+        } catch (error) {
+            throw new Error("Could not delete plant");
+        }
+    };
+    //TODO: set status responses in backend?
+
     return (
         <div>
-            <h2>{plant.name}</h2>
+            <h2>
+                {plant.name}{" "}
+                <button
+                    type="button"
+                    onClick={() => void handleDelete(plant.id)}
+                >
+                    delete
+                </button>
+            </h2>
             <button type="button" onClick={() => void updateWatered(plant.id)}>
                 water
             </button>
