@@ -19,8 +19,16 @@ const PlantCard = ({ plant, plants, setPlants }: Props) => {
             plant.wateringCycle,
             "day"
         );
+        const now = dayjs();
+
         const daysToNext = dayjs().to(nextWatering);
-        return daysToNext;
+
+        if (nextWatering.isBefore(now)) {
+            const daysMissed = dayjs().to(nextWatering, true);
+            return `watering missed by ${daysMissed}`;
+        }
+
+        return `water ${daysToNext}`;
     };
 
     const updateWatered = async (id: string) => {
@@ -44,11 +52,9 @@ const PlantCard = ({ plant, plants, setPlants }: Props) => {
             <button type="button" onClick={() => void updateWatered(plant.id)}>
                 water
             </button>
-            <div>water {calculateNextWatering(plant)}</div>
+            <div>{calculateNextWatering(plant)}</div>
         </div>
     );
 };
 
 export default PlantCard;
-
-//TODO: update watering to local state
