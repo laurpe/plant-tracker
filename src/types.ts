@@ -10,3 +10,5 @@ export interface TempPlant {
 export interface Plant extends TempPlant {
     id: string;
 }
+
+//TODO: set values for soil

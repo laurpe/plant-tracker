@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Plant } from "./types";
 import Plants from "./components/Plants";
 import React from "react";
+import AddPlantForm from "./components/AddPlantForm";
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
@@ -23,7 +24,12 @@ const App = () => {
         });
     }, []);
 
-    return <Plants plants={plants} setPlants={setPlants} />;
+    return (
+        <>
+            <AddPlantForm plants={plants} setPlants={setPlants} />
+            <Plants plants={plants} setPlants={setPlants} />
+        </>
+    );
 };
 
 export default App;
