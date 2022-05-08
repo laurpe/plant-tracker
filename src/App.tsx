@@ -13,6 +13,8 @@ const getData = async <T,>(url: string): Promise<T> => {
 
 const App = () => {
     const [plants, setPlants] = useState<Plant[]>([]);
+    const [toggleAddPlantForm, setToggleAddPlantForm] =
+        useState<boolean>(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,10 +26,17 @@ const App = () => {
         });
     }, []);
 
+    const handleToggleFormClick = (): void => {
+        console.log(toggleAddPlantForm);
+        setToggleAddPlantForm(!toggleAddPlantForm);
+    };
+
     return (
         <div className="content">
-            <Header />
-            <AddPlantForm plants={plants} setPlants={setPlants} />
+            <Header handleToggleFormClick={handleToggleFormClick} />
+            {toggleAddPlantForm && (
+                <AddPlantForm plants={plants} setPlants={setPlants} />
+            )}
             <Plants plants={plants} setPlants={setPlants} />
         </div>
     );
