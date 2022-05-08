@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Plant } from "./types";
 import Plants from "./components/Plants";
-import React from "react";
 import AddPlantForm from "./components/AddPlantForm";
+import Header from "./components/Header";
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
@@ -25,10 +25,11 @@ const App = () => {
     }, []);
 
     return (
-        <>
+        <div className="content">
+            <Header />
             <AddPlantForm plants={plants} setPlants={setPlants} />
             <Plants plants={plants} setPlants={setPlants} />
-        </>
+        </div>
     );
 };
 

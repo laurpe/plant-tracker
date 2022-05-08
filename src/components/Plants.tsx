@@ -8,18 +8,20 @@ interface Props {
 
 const Plants = ({ plants, setPlants }: Props) => {
     return (
-        <div>
+        <ul>
             {plants.map((plant) => {
                 return (
-                    <PlantCard
-                        plant={plant}
-                        key={plant.id}
-                        plants={plants}
-                        setPlants={setPlants}
-                    />
+                    <li key={plant.id}>
+                        <PlantCard
+                            plant={plant}
+                            key={plant.id}
+                            plants={plants}
+                            setPlants={setPlants}
+                        />
+                    </li>
                 );
             })}
-        </div>
+        </ul>
     );
 };
 

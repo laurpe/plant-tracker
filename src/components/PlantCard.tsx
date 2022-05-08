@@ -2,6 +2,10 @@ import { Plant } from "../types";
 import axios from "axios";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDroplet } from "@fortawesome/free-solid-svg-icons";
+
 dayjs.extend(relativeTime);
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
@@ -24,7 +28,7 @@ const PlantCard = ({ plant, plants, setPlants }: Props) => {
 
         if (nextWatering.isBefore(now)) {
             const daysMissed = dayjs().to(nextWatering, true);
-            return `watering missed by ${daysMissed}`;
+            return `watering late by ${daysMissed}`;
         }
 
         return `water ${daysToNext}`;
@@ -45,34 +49,41 @@ const PlantCard = ({ plant, plants, setPlants }: Props) => {
         }
     };
 
-    const handleDelete = async (id: string): Promise<void> => {
-        try {
-            await axios.delete<Plant>(`${baseUrl}plants/${id}`);
-            const plantsWithoutDeleted = plants.filter(
-                (plant) => plant.id !== id
-            );
-            setPlants(plantsWithoutDeleted);
-        } catch (error) {
-            throw new Error("Could not delete plant");
-        }
-    };
-    //TODO: set status responses in backend?
+    // const handleDelete = async (id: string): Promise<void> => {
+    //     try {
+    //         await axios.delete<Plant>(`${baseUrl}plants/${id}`);
+    //         const plantsWithoutDeleted = plants.filter(
+    //             (plant) => plant.id !== id
+    //         );
+    //         setPlants(plantsWithoutDeleted);
+    //     } catch (error) {
+    //         throw new Error("Could not delete plant");
+    //     }
+    // };
 
     return (
-        <div>
-            <h2>
-                {plant.name}{" "}
-                <button
+        <div className="card">
+            <div className="card-top">
+                <h2>
+                    {plant.name}{" "}
+                    {/* <button
                     type="button"
                     onClick={() => void handleDelete(plant.id)}
                 >
                     delete
+                </button> */}
+                </h2>
+                <button
+                    type="button"
+                    id="water-btn"
+                    onClick={() => void updateWatered(plant.id)}
+                >
+                    <FontAwesomeIcon icon={faDroplet} size="2x" />
                 </button>
-            </h2>
-            <button type="button" onClick={() => void updateWatered(plant.id)}>
-                water
-            </button>
-            <div>{calculateNextWatering(plant)}</div>
+            </div>
+            <div className="card-bottom">
+                <div>{calculateNextWatering(plant)}</div>
+            </div>
         </div>
     );
 };

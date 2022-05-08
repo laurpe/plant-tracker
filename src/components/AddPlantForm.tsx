@@ -45,40 +45,63 @@ const AddPlantForm = ({ plants, setPlants }: Props) => {
     };
 
     return (
-        <>
+        <div className="add-plant">
             <h2>Add plant</h2>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="name">Name</label>
-                <input
-                    type="text"
-                    name="name"
-                    onChange={handleChange}
-                    value={plant.name}
-                />
-                <label htmlFor="soil">Soil</label>
-                <input
-                    type="text"
-                    name="soil"
-                    onChange={handleChange}
-                    value={plant.soil}
-                />
-                <label htmlFor="lastWatered">Last watered</label>
-                <input
-                    type="date"
-                    name="lastWatered"
-                    onChange={handleChange}
-                    value={plant.lastWatered}
-                />
-                <label htmlFor="wateringCycle">Watering cycle</label>
-                <input
-                    type="text"
-                    name="wateringCycle"
-                    onChange={handleChange}
-                    value={plant.wateringCycle}
-                />
-                <button type="submit">Add</button>
+                <div className="label">
+                    <label htmlFor="name">Name</label>
+                </div>
+                <div>
+                    <input
+                        type="text"
+                        name="name"
+                        onChange={handleChange}
+                        value={plant.name}
+                    />
+                </div>
+                <div className="label">
+                    <label htmlFor="soil">Soil</label>
+                </div>
+                <div>
+                    <input
+                        type="text"
+                        name="soil"
+                        onChange={handleChange}
+                        value={plant.soil}
+                    />
+                </div>
+                <div className="label">
+                    <label htmlFor="lastWatered">Last watered</label>
+                </div>
+                <div>
+                    <input
+                        type="date"
+                        name="lastWatered"
+                        onChange={handleChange}
+                        value={plant.lastWatered}
+                    />
+                </div>
+                <div className="label">
+                    <label htmlFor="wateringCycle">Watering cycle</label>
+                </div>
+                <div>
+                    <input
+                        type="text"
+                        name="wateringCycle"
+                        onChange={handleChange}
+                        value={plant.wateringCycle}
+                    />
+                </div>
+                <div className="form-btns">
+                    <button className="form-btn" type="submit">
+                        Add
+                    </button>
+                    <button className="form-btn" type="button">
+                        Close
+                    </button>
+                </div>
             </form>
-        </>
+        </div>
     );
 };
 
