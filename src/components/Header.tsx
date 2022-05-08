@@ -1,7 +1,7 @@
 const Header = () => {
     return (
         <header>
-            <h1>Plant tracker</h1>
+            <h1>Kasvuu</h1>
         </header>
     );
 };
