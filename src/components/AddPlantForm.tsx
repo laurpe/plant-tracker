@@ -44,6 +44,8 @@ const AddPlantForm = ({ plants, setPlants }: Props) => {
         });
     };
 
+    const maxDate = new Date().toISOString().substring(0, 10);
+
     return (
         <div className="add-plant">
             <h2>Add plant</h2>
@@ -57,6 +59,9 @@ const AddPlantForm = ({ plants, setPlants }: Props) => {
                         name="name"
                         onChange={handleChange}
                         value={plant.name}
+                        minLength={2}
+                        maxLength={30}
+                        required
                     />
                 </div>
                 <div className="label">
@@ -68,6 +73,7 @@ const AddPlantForm = ({ plants, setPlants }: Props) => {
                         name="soil"
                         onChange={handleChange}
                         value={plant.soil}
+                        required
                     />
                 </div>
                 <div className="label">
@@ -79,6 +85,7 @@ const AddPlantForm = ({ plants, setPlants }: Props) => {
                         name="lastWatered"
                         onChange={handleChange}
                         value={plant.lastWatered}
+                        max={maxDate}
                     />
                 </div>
                 <div className="label">
@@ -86,10 +93,12 @@ const AddPlantForm = ({ plants, setPlants }: Props) => {
                 </div>
                 <div>
                     <input
-                        type="text"
+                        type="number"
                         name="wateringCycle"
                         onChange={handleChange}
                         value={plant.wateringCycle}
+                        min="1"
+                        required
                     />
                 </div>
                 <div className="form-btns">
