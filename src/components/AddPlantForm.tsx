@@ -7,9 +7,10 @@ const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 interface Props {
     plants: Plant[];
     setPlants: (plants: Plant[]) => void;
+    handleToggleFormClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const AddPlantForm = ({ plants, setPlants }: Props) => {
+const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
     const [plant, setPlant] = useState<TempPlant>({
         name: "",
         soil: "",
@@ -105,7 +106,11 @@ const AddPlantForm = ({ plants, setPlants }: Props) => {
                     <button className="form-btn" type="submit">
                         Add
                     </button>
-                    <button className="form-btn" type="button">
+                    <button
+                        className="form-btn"
+                        type="button"
+                        onClick={handleToggleFormClick}
+                    >
                         Close
                     </button>
                 </div>

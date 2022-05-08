@@ -27,7 +27,6 @@ const App = () => {
     }, []);
 
     const handleToggleFormClick = (): void => {
-        console.log(toggleAddPlantForm);
         setToggleAddPlantForm(!toggleAddPlantForm);
     };
 
@@ -35,7 +34,11 @@ const App = () => {
         <div className="content">
             <Header handleToggleFormClick={handleToggleFormClick} />
             {toggleAddPlantForm && (
-                <AddPlantForm plants={plants} setPlants={setPlants} />
+                <AddPlantForm
+                    plants={plants}
+                    setPlants={setPlants}
+                    handleToggleFormClick={handleToggleFormClick}
+                />
             )}
             <Plants plants={plants} setPlants={setPlants} />
         </div>
