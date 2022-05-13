@@ -9,7 +9,7 @@ const Card = styled.div`
         width: 100%;
         height: 100%;
         background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm-exjqx0Fl1nEDgAmjO8O5l-6w8peEiPgdA&usqp=CAU");
-        filter: hue-rotate(20deg) saturate(200%) opacity(60%);
+        filter: hue-rotate(20deg) saturate(400%) contrast(40%);
         border-radius: 10px;
     }
     position: relative;
