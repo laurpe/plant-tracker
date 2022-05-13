@@ -7,6 +7,7 @@ const ButtonWater = styled.button`
     border: 3px dashed rgb(255, 255, 255, 0.5);
     border-radius: 50%;
     color: white;
+    position: relative;
 `;
 
 export default ButtonWater;
