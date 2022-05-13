@@ -1,27 +1,28 @@
 import { Plant } from "../types";
 import PlantCard from "./PlantCard";
+import Cards from "./style/Cards";
 
 interface Props {
     plants: Plant[];
     setPlants: (plants: Plant[]) => void;
 }
 
+//TODO: sort plants so that the one needing watering the most is on the top!
+
 const Plants = ({ plants, setPlants }: Props) => {
     return (
-        <ul>
+        <Cards>
             {plants.map((plant) => {
                 return (
-                    <li key={plant.id}>
-                        <PlantCard
-                            plant={plant}
-                            key={plant.id}
-                            plants={plants}
-                            setPlants={setPlants}
-                        />
-                    </li>
+                    <PlantCard
+                        plant={plant}
+                        key={plant.id}
+                        plants={plants}
+                        setPlants={setPlants}
+                    />
                 );
             })}
-        </ul>
+        </Cards>
     );
 };
 

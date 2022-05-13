@@ -6,6 +6,11 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDroplet } from "@fortawesome/free-solid-svg-icons";
 
+import Card from "./style/Card";
+import CardTitle from "./style/CardTitle";
+import ButtonWater from "./style/ButtonWater";
+import TextWater from "./style/TextWater";
+
 dayjs.extend(relativeTime);
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
@@ -61,30 +66,27 @@ const PlantCard = ({ plant, plants, setPlants }: Props) => {
     //     }
     // };
 
+    //row and column component for flexbox structuring
     return (
-        <div className="card">
-            <div className="card-top">
-                <h2>
-                    {plant.name}{" "}
-                    {/* <button
+        <Card>
+            <CardTitle>
+                {plant.name}{" "}
+                {/* <button
                     type="button"
                     onClick={() => void handleDelete(plant.id)}
                 >
                     delete
                 </button> */}
-                </h2>
-                <button
-                    type="button"
-                    id="water-btn"
-                    onClick={() => void updateWatered(plant.id)}
-                >
-                    <FontAwesomeIcon icon={faDroplet} size="2x" />
-                </button>
-            </div>
-            <div className="card-bottom">
-                <div>{calculateNextWatering(plant)}</div>
-            </div>
-        </div>
+            </CardTitle>
+            <ButtonWater
+                type="button"
+                id="water-btn"
+                onClick={() => void updateWatered(plant.id)}
+            >
+                <FontAwesomeIcon icon={faDroplet} size="2x" />
+            </ButtonWater>
+            <TextWater>{calculateNextWatering(plant)}</TextWater>
+        </Card>
     );
 };
 

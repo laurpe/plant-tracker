@@ -8,7 +8,7 @@
 
 body {
     font-family: "Rubik", sans-serif;
-    font-size: 1rem;
+    font-size: 0.75rem;
 }
 
 ul li {
@@ -17,34 +17,9 @@ ul li {
     margin: 0 1rem;
 }
 
-.card {
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: 1rem;
-    min-height: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-
-.card-top {
-    display: flex;
-    justify-content: space-between;
-    flex: 1;
-}
-
 .card-bottom {
     text-align: center;
     flex: 2;
-}
-
-#water-btn {
-    height: 3rem;
-    width: 3rem;
-    margin-left: 1rem;
-    background-color: transparent;
-    border: 2px solid black;
-    border-radius: 50%;
 }
 
 .add-plant {
