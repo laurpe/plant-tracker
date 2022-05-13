@@ -4,10 +4,9 @@ const ButtonWater = styled.button`
     height: 3rem;
     width: 3rem;
     background-color: transparent;
-    border: 3px dashed rgb(255, 255, 255, 0.5);
+    border: 3px solid rgb(215, 238, 250);
     border-radius: 50%;
-    color: white;
-    position: relative;
+    color: #89bbde;
 `;
 
 export default ButtonWater;

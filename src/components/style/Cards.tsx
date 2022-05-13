@@ -2,10 +2,8 @@ import styled from "styled-components";
 
 const Cards = styled.div`
     border-radius: 10px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(136px, 1fr));
-    justify-content: space-between;
-    gap: 16px;
+    display: flex;
+    flex-direction: column;
     padding: 16px;
 `;
 

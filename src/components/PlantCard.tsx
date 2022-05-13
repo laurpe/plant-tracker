@@ -10,6 +10,9 @@ import Card from "./style/Card";
 import CardTitle from "./style/CardTitle";
 import ButtonWater from "./style/ButtonWater";
 import TextWater from "./style/TextWater";
+import CardLeft from "./style/CardLeft";
+import CardRight from "./style/CardRight";
+import CardImage from "./style/CardImage";
 
 dayjs.extend(relativeTime);
 
@@ -69,23 +72,28 @@ const PlantCard = ({ plant, plants, setPlants }: Props) => {
     //row and column component for flexbox structuring
     return (
         <Card>
-            <CardTitle>
-                {plant.name}{" "}
-                {/* <button
+            <CardLeft>
+                <CardImage src="https://as2.ftcdn.net/v2/jpg/01/85/31/71/1000_F_185317104_XmMUkvpcG2zJHLSTT2f2nTCOBrdWvwMJ.jpg" />
+            </CardLeft>
+            <CardRight>
+                <CardTitle>
+                    {plant.name}{" "}
+                    {/* <button
                     type="button"
                     onClick={() => void handleDelete(plant.id)}
                 >
                     delete
                 </button> */}
-            </CardTitle>
-            <ButtonWater
-                type="button"
-                id="water-btn"
-                onClick={() => void updateWatered(plant.id)}
-            >
-                <FontAwesomeIcon icon={faDroplet} size="2x" />
-            </ButtonWater>
-            <TextWater>{calculateNextWatering(plant)}</TextWater>
+                </CardTitle>
+                <ButtonWater
+                    type="button"
+                    id="water-btn"
+                    onClick={() => void updateWatered(plant.id)}
+                >
+                    <FontAwesomeIcon icon={faDroplet} size="2x" />
+                </ButtonWater>
+                <TextWater>{calculateNextWatering(plant)}</TextWater>
+            </CardRight>
         </Card>
     );
 };
