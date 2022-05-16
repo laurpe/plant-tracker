@@ -3,16 +3,14 @@ import axios from "axios";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDroplet } from "@fortawesome/free-solid-svg-icons";
-
 import Card from "./style/Card";
 import CardTitle from "./style/CardTitle";
 import ButtonWater from "./style/ButtonWater";
 import TextWater from "./style/TextWater";
-import CardLeft from "./style/CardLeft";
 import CardRight from "./style/CardRight";
 import CardImage from "./style/CardImage";
+
+import OpacityIcon from "@mui/icons-material/Opacity";
 
 dayjs.extend(relativeTime);
 
@@ -72,9 +70,7 @@ const PlantCard = ({ plant, plants, setPlants }: Props) => {
     //row and column component for flexbox structuring
     return (
         <Card>
-            <CardLeft>
-                <CardImage src="https://as2.ftcdn.net/v2/jpg/01/85/31/71/1000_F_185317104_XmMUkvpcG2zJHLSTT2f2nTCOBrdWvwMJ.jpg" />
-            </CardLeft>
+            <CardImage src="https://as2.ftcdn.net/v2/jpg/01/85/31/71/1000_F_185317104_XmMUkvpcG2zJHLSTT2f2nTCOBrdWvwMJ.jpg" />
             <CardRight>
                 <CardTitle>
                     {plant.name}{" "}
@@ -90,7 +86,7 @@ const PlantCard = ({ plant, plants, setPlants }: Props) => {
                     id="water-btn"
                     onClick={() => void updateWatered(plant.id)}
                 >
-                    <FontAwesomeIcon icon={faDroplet} size="2x" />
+                    <OpacityIcon sx={{ fontSize: 30 }} />
                 </ButtonWater>
                 <TextWater>{calculateNextWatering(plant)}</TextWater>
             </CardRight>

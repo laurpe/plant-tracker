@@ -1,3 +1,7 @@
+import ButtonAddPlant from "./style/ButtonAddPlant";
+
+import AddIcon from "@mui/icons-material/Add";
+
 interface Props {
     handleToggleFormClick: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -5,14 +9,14 @@ interface Props {
 const Header = ({ handleToggleFormClick }: Props) => {
     return (
         <header>
-            <h1>Kasvuu</h1>
-            <button
+            <h1>Plant tracker</h1>
+            <ButtonAddPlant
                 type="button"
                 id="show-add-plant-form"
                 onClick={handleToggleFormClick}
             >
-                Add plant
-            </button>
+                <AddIcon />
+            </ButtonAddPlant>
         </header>
     );
 };
