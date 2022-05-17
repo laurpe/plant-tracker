@@ -1,6 +1,6 @@
 import { Plant } from "../types";
 import PlantCard from "./PlantCard";
-import Cards from "./style/Cards";
+import Cards from "./style/PlantCard/Cards";
 
 interface Props {
     plants: Plant[];

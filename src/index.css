@@ -12,12 +12,6 @@ body {
     background-color: rgb(235, 243, 241);
 }
 
-ul li {
-    list-style-type: none;
-    padding-bottom: 1rem;
-    margin: 0 1rem;
-}
-
 .add-plant {
     border: 2px solid black;
     border-radius: 5px;
@@ -56,15 +50,4 @@ input {
     border-radius: 5px;
     padding: 0.8rem;
     width: 45%;
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 1rem;
-}
-
-h1 {
-    color: rgb(27, 74, 62);
 }

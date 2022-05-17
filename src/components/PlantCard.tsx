@@ -3,12 +3,12 @@ import axios from "axios";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
-import Card from "./style/Card";
-import CardTitle from "./style/CardTitle";
-import ButtonWater from "./style/ButtonWater";
-import TextWater from "./style/TextWater";
-import CardRight from "./style/CardRight";
-import CardImage from "./style/CardImage";
+import Card from "./style/PlantCard/Card";
+import CardTitle from "./style/PlantCard/CardTitle";
+import ButtonWater from "./style/PlantCard/ButtonWater";
+import TextWater from "./style//PlantCard/TextWater";
+import CardRight from "./style/PlantCard/CardRight";
+import CardImage from "./style/PlantCard/CardImage";
 
 import OpacityIcon from "@mui/icons-material/Opacity";
 
