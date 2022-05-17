@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-const Header = styled.header`
+const AppHeader = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 1rem;
 `;
 
-export default Header;
+export default AppHeader;

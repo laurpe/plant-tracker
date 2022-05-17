@@ -1,6 +1,15 @@
 import React, { useState } from "react";
+
 import { TempPlant, Plant } from "../types";
+
 import axios from "axios";
+
+import Card from "./style/Generics/Card";
+import Input from "./style/Generics/Form/Input";
+import Label from "./style/Generics/Form/Label";
+import Form from "./style/Generics/Form/Form";
+import Button from "./style/Generics/Button";
+import Subtitle from "./style/Generics/Subtitle";
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
@@ -48,74 +57,56 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
     const maxDate = new Date().toISOString().substring(0, 10);
 
     return (
-        <div className="add-plant">
-            <h2>Add plant</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="label">
-                    <label htmlFor="name">Name</label>
-                </div>
-                <div>
-                    <input
-                        type="text"
-                        name="name"
-                        onChange={handleChange}
-                        value={plant.name}
-                        minLength={2}
-                        maxLength={30}
-                        required
-                    />
-                </div>
-                <div className="label">
-                    <label htmlFor="soil">Soil</label>
-                </div>
-                <div>
-                    <input
-                        type="text"
-                        name="soil"
-                        onChange={handleChange}
-                        value={plant.soil}
-                        required
-                    />
-                </div>
-                <div className="label">
-                    <label htmlFor="lastWatered">Last watered</label>
-                </div>
-                <div>
-                    <input
-                        type="date"
-                        name="lastWatered"
-                        onChange={handleChange}
-                        value={plant.lastWatered}
-                        max={maxDate}
-                    />
-                </div>
-                <div className="label">
-                    <label htmlFor="wateringCycle">Watering cycle</label>
-                </div>
-                <div>
-                    <input
-                        type="number"
-                        name="wateringCycle"
-                        onChange={handleChange}
-                        value={plant.wateringCycle}
-                        min="1"
-                        required
-                    />
-                </div>
-                <div className="form-btns">
-                    <button className="form-btn" type="submit">
-                        Add
-                    </button>
-                    <button
-                        className="form-btn"
-                        type="button"
-                        onClick={handleToggleFormClick}
-                    >
-                        Close
-                    </button>
-                </div>
-            </form>
-        </div>
+        <Card>
+            <Form onSubmit={handleSubmit}>
+                <Subtitle>Add plant</Subtitle>
+                <Label htmlFor="name">Name</Label>
+                <Input
+                    type="text"
+                    name="name"
+                    onChange={handleChange}
+                    value={plant.name}
+                    minLength={2}
+                    maxLength={30}
+                    required
+                />
+                <Label htmlFor="soil">Soil</Label>
+                <Input
+                    type="text"
+                    name="soil"
+                    onChange={handleChange}
+                    value={plant.soil}
+                    required
+                />
+                <Label htmlFor="lastWatered">Last watered</Label>
+                <Input
+                    type="date"
+                    name="lastWatered"
+                    onChange={handleChange}
+                    value={plant.lastWatered}
+                    max={maxDate}
+                />
+                <Label htmlFor="wateringCycle">Watering cycle</Label>
+                <Input
+                    type="number"
+                    name="wateringCycle"
+                    onChange={handleChange}
+                    value={plant.wateringCycle}
+                    min="1"
+                    required
+                />
+                <Button type="submit" width="120px">
+                    Add
+                </Button>
+                <Button
+                    type="button"
+                    width="120px"
+                    onClick={handleToggleFormClick}
+                >
+                    Close
+                </Button>
+            </Form>
+        </Card>
     );
 };
 

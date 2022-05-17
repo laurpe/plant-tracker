@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 const CardImage = styled.img`
-    width: 136px;
-    height: 136px;
+    width: 116px;
+    height: 116px;
     object-fit: cover;
-    border-radius: 10px 0 0 10px;
+    border-radius: 5px;
+    margin: 10px 0 10px 10px;
 `;
 
 export default CardImage;

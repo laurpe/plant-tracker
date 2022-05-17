@@ -3,14 +3,16 @@ import axios from "axios";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
-import Card from "./style/PlantCard/Card";
-import CardTitle from "./style/PlantCard/CardTitle";
+import Card from "./style/Generics/Card";
+import CardTitle from "./style/Generics/CardTitle";
 import ButtonWater from "./style/PlantCard/ButtonWater";
 import TextWater from "./style//PlantCard/TextWater";
-import CardRight from "./style/PlantCard/CardRight";
+import CardInfo from "./style/PlantCard/CardInfo";
 import CardImage from "./style/PlantCard/CardImage";
 
 import OpacityIcon from "@mui/icons-material/Opacity";
+import Column from "./style/Generics/Column";
+import Row from "./style/Generics/Row";
 
 dayjs.extend(relativeTime);
 
@@ -70,26 +72,30 @@ const PlantCard = ({ plant, plants, setPlants }: Props) => {
     //row and column component for flexbox structuring
     return (
         <Card>
-            <CardImage src="https://as2.ftcdn.net/v2/jpg/01/85/31/71/1000_F_185317104_XmMUkvpcG2zJHLSTT2f2nTCOBrdWvwMJ.jpg" />
-            <CardRight>
-                <CardTitle>
-                    {plant.name}{" "}
-                    {/* <button
+            <Row>
+                <CardImage src="https://as2.ftcdn.net/v2/jpg/01/85/31/71/1000_F_185317104_XmMUkvpcG2zJHLSTT2f2nTCOBrdWvwMJ.jpg" />
+                <Column flex={1}>
+                    <CardInfo>
+                        <CardTitle>
+                            {plant.name}{" "}
+                            {/* <button
                     type="button"
                     onClick={() => void handleDelete(plant.id)}
                 >
                     delete
                 </button> */}
-                </CardTitle>
-                <ButtonWater
-                    type="button"
-                    id="water-btn"
-                    onClick={() => void updateWatered(plant.id)}
-                >
-                    <OpacityIcon sx={{ fontSize: 30 }} />
-                </ButtonWater>
-                <TextWater>{calculateNextWatering(plant)}</TextWater>
-            </CardRight>
+                        </CardTitle>
+                        <ButtonWater
+                            type="button"
+                            id="water-btn"
+                            onClick={() => void updateWatered(plant.id)}
+                        >
+                            <OpacityIcon sx={{ fontSize: 30 }} />
+                        </ButtonWater>
+                        <TextWater>{calculateNextWatering(plant)}</TextWater>
+                    </CardInfo>
+                </Column>
+            </Row>
         </Card>
     );
 };

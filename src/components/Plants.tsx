@@ -1,6 +1,5 @@
 import { Plant } from "../types";
 import PlantCard from "./PlantCard";
-import Cards from "./style/PlantCard/Cards";
 
 interface Props {
     plants: Plant[];
@@ -11,7 +10,7 @@ interface Props {
 
 const Plants = ({ plants, setPlants }: Props) => {
     return (
-        <Cards>
+        <>
             {plants.map((plant) => {
                 return (
                     <PlantCard
@@ -22,7 +21,7 @@ const Plants = ({ plants, setPlants }: Props) => {
                     />
                 );
             })}
-        </Cards>
+        </>
     );
 };
 
