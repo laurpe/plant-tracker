@@ -10,6 +10,7 @@ import Label from "./style/Generics/Form/Label";
 import Form from "./style/Generics/Form/Form";
 import Button from "./style/Generics/Button";
 import Subtitle from "./style/Generics/Subtitle";
+import Row from "./style/Generics/Row";
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
@@ -56,6 +57,26 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
 
     const maxDate = new Date().toISOString().substring(0, 10);
 
+    const handleImageChange = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ): void => {
+        const data = new FormData();
+
+        const uploadImage = async () => {
+            if (event.target.files) {
+                data.append("file", event.target.files[0]);
+
+                try {
+                    await axios.post(`${baseUrl}upload`, data);
+                } catch (error) {
+                    throw new Error("Could not upload image");
+                }
+            }
+        };
+
+        void uploadImage();
+    };
+
     return (
         <Card>
             <Form onSubmit={handleSubmit}>
@@ -95,16 +116,20 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
                     min="1"
                     required
                 />
-                <Button type="submit" width="120px">
-                    Add
-                </Button>
-                <Button
-                    type="button"
-                    width="120px"
-                    onClick={handleToggleFormClick}
-                >
-                    Close
-                </Button>
+                <Label htmlFor="file">Image</Label>
+                <Input type="file" name="file" onChange={handleImageChange} />
+                <Row justifyContent="space-between">
+                    <Button type="submit" width="120px">
+                        Add
+                    </Button>
+                    <Button
+                        type="button"
+                        width="120px"
+                        onClick={handleToggleFormClick}
+                    >
+                        Close
+                    </Button>
+                </Row>
             </Form>
         </Card>
     );

@@ -7,7 +7,6 @@ const CardInfo = styled.div`
     flex-direction: column;
     justify-content: space-between;
     flex: 1;
-    width: 100%;
 `;
 
 export default CardInfo;
