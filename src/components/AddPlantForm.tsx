@@ -135,4 +135,6 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
     );
 };
 
+//TODO: let user add only one image
+
 export default AddPlantForm;
