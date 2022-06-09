@@ -11,6 +11,8 @@ import Form from "./style/Generics/Form/Form";
 import Button from "./style/Generics/Button";
 import Subtitle from "./style/Generics/Subtitle";
 import Row from "./style/Generics/Row";
+import Overlay from "./style/Generics/Overlay";
+import Popup from "./style/Generics/Popup";
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
@@ -78,60 +80,68 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
     };
 
     return (
-        <Card>
-            <Form onSubmit={handleSubmit}>
-                <Subtitle>Add plant</Subtitle>
-                <Label htmlFor="name">Name</Label>
-                <Input
-                    type="text"
-                    name="name"
-                    onChange={handleChange}
-                    value={plant.name}
-                    minLength={2}
-                    maxLength={30}
-                    required
-                />
-                <Label htmlFor="soil">Soil</Label>
-                <Input
-                    type="text"
-                    name="soil"
-                    onChange={handleChange}
-                    value={plant.soil}
-                    required
-                />
-                <Label htmlFor="lastWatered">Last watered</Label>
-                <Input
-                    type="date"
-                    name="lastWatered"
-                    onChange={handleChange}
-                    value={plant.lastWatered}
-                    max={maxDate}
-                />
-                <Label htmlFor="wateringCycle">Watering cycle</Label>
-                <Input
-                    type="number"
-                    name="wateringCycle"
-                    onChange={handleChange}
-                    value={plant.wateringCycle}
-                    min="1"
-                    required
-                />
-                <Label htmlFor="file">Image</Label>
-                <Input type="file" name="file" onChange={handleImageChange} />
-                <Row justifyContent="space-between">
-                    <Button type="submit" width="120px">
-                        Add
-                    </Button>
-                    <Button
-                        type="button"
-                        width="120px"
-                        onClick={handleToggleFormClick}
-                    >
-                        Close
-                    </Button>
-                </Row>
-            </Form>
-        </Card>
+        <Overlay>
+            <Popup>
+                <Card>
+                    <Form onSubmit={handleSubmit}>
+                        <Subtitle>Add plant</Subtitle>
+                        <Label htmlFor="name">Name</Label>
+                        <Input
+                            type="text"
+                            name="name"
+                            onChange={handleChange}
+                            value={plant.name}
+                            minLength={2}
+                            maxLength={30}
+                            required
+                        />
+                        <Label htmlFor="soil">Soil</Label>
+                        <Input
+                            type="text"
+                            name="soil"
+                            onChange={handleChange}
+                            value={plant.soil}
+                            required
+                        />
+                        <Label htmlFor="lastWatered">Last watered</Label>
+                        <Input
+                            type="date"
+                            name="lastWatered"
+                            onChange={handleChange}
+                            value={plant.lastWatered}
+                            max={maxDate}
+                        />
+                        <Label htmlFor="wateringCycle">Watering cycle</Label>
+                        <Input
+                            type="number"
+                            name="wateringCycle"
+                            onChange={handleChange}
+                            value={plant.wateringCycle}
+                            min="1"
+                            required
+                        />
+                        <Label htmlFor="file">Image</Label>
+                        <Input
+                            type="file"
+                            name="file"
+                            onChange={handleImageChange}
+                        />
+                        <Row justifyContent="space-between">
+                            <Button type="submit" width="120px">
+                                Add
+                            </Button>
+                            <Button
+                                type="button"
+                                width="120px"
+                                onClick={handleToggleFormClick}
+                            >
+                                Close
+                            </Button>
+                        </Row>
+                    </Form>
+                </Card>
+            </Popup>
+        </Overlay>
     );
 };
 

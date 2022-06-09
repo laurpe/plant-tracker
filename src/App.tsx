@@ -31,7 +31,7 @@ const App = () => {
     };
 
     return (
-        <div className="content">
+        <>
             <Header handleToggleFormClick={handleToggleFormClick} />
             {toggleAddPlantForm && (
                 <AddPlantForm
@@ -41,7 +41,7 @@ const App = () => {
                 />
             )}
             <Plants plants={plants} setPlants={setPlants} />
-        </div>
+        </>
     );
 };
 

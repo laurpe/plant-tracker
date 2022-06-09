@@ -12,31 +12,3 @@ body {
     color: #225c55;
     background-color: rgb(235, 243, 241);
 }
-
-/* .add-plant {
-    margin: 1rem;
-    padding: 1rem;
-    border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-    background-color: white;
-}
-
-.add-plant h2 {
-    margin-bottom: 1rem;
-    color: #225c55;
-}
-
-.form-btns {
-    display: flex;
-    justify-content: space-between;
-}
-
-.form-btn {
-    font-family: inherit;
-    font-size: inherit;
-    background-color: transparent;
-    border: none;
-    border-radius: 5px;
-    padding: 0.8rem;
-    width: 45%;
-} */
