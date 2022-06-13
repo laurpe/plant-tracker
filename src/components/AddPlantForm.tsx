@@ -124,6 +124,7 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
                         <Input
                             type="file"
                             name="file"
+                            accept="image/png, image/jpeg"
                             onChange={handleImageChange}
                         />
                         <Row justifyContent="space-between">
