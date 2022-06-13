@@ -7,7 +7,7 @@ import Header from "./components/Header";
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
 const getData = async <T,>(url: string): Promise<T> => {
-    const response = await fetch(`${baseUrl}${url}`);
+    const response = await fetch(`${baseUrl}/${url}`);
     return response.json() as Promise<T>;
 };
 

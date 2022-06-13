@@ -15,6 +15,8 @@ import Overlay from "./style/Generics/Overlay";
 import Popup from "./style/Generics/Popup";
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
+const imgBaseUrl = process.env.REACT_APP_IMAGE_UPLOAD_API_BASE_URL as string;
+console.log(imgBaseUrl);
 
 interface Props {
     plants: Plant[];
@@ -36,7 +38,10 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
 
     const addPlant = async (plant: TempPlant): Promise<void> => {
         try {
-            const response = await axios.post<Plant>(`${baseUrl}plants`, plant);
+            const response = await axios.post<Plant>(
+                `${baseUrl}/plants`,
+                plant
+            );
             setPlants([...plants, response.data]);
         } catch (error) {
             throw new Error("Could not add plant");
@@ -62,14 +67,20 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
     const handleImageChange = (
         event: React.ChangeEvent<HTMLInputElement>
     ): void => {
-        const data = new FormData();
-
         const uploadImage = async () => {
             if (event.target.files) {
-                data.append("file", event.target.files[0]);
+                const image = event.target.files[0];
+
+                const config = { headers: { "Content-Type": "image/jpeg" } };
 
                 try {
-                    await axios.post(`${baseUrl}upload`, data);
+                    console.log(imgBaseUrl);
+                    const response = await axios.post(
+                        `${imgBaseUrl}/upload`,
+                        image,
+                        config
+                    );
+                    console.log(response);
                 } catch (error) {
                     throw new Error("Could not upload image");
                 }
@@ -124,7 +135,7 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
                         <Input
                             type="file"
                             name="file"
-                            accept="image/png, image/jpeg"
+                            accept="image/jpeg, image/png"
                             onChange={handleImageChange}
                         />
                         <Row justifyContent="space-between">

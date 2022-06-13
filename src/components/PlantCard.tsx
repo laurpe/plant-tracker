@@ -44,7 +44,7 @@ const PlantCard = ({ plant, plants, setPlants }: Props) => {
 
     const updateWatered = async (id: string): Promise<void> => {
         try {
-            const response = await axios.put<Plant>(`${baseUrl}plants/${id}`, {
+            const response = await axios.put<Plant>(`${baseUrl}/plants/${id}`, {
                 lastWatered: new Date().toISOString(),
             });
             const newPlant = response.data;
@@ -59,7 +59,7 @@ const PlantCard = ({ plant, plants, setPlants }: Props) => {
 
     // const handleDelete = async (id: string): Promise<void> => {
     //     try {
-    //         await axios.delete<Plant>(`${baseUrl}plants/${id}`);
+    //         await axios.delete<Plant>(`${baseUrl}/plants/${id}`);
     //         const plantsWithoutDeleted = plants.filter(
     //             (plant) => plant.id !== id
     //         );
