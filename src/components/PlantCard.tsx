@@ -17,12 +17,15 @@ import Row from "./style/Generics/Row";
 dayjs.extend(relativeTime);
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
+const imageBaseUrl = process.env.REACT_APP_IMAGE_BASE_URL as string;
 
 interface Props {
     plant: Plant;
     plants: Plant[];
     setPlants: (plants: Plant[]) => void;
 }
+
+//TODO: create type for image link for template literal
 
 const PlantCard = ({ plant, plants, setPlants }: Props) => {
     const calculateNextWatering = (plant: Plant): string => {
@@ -69,11 +72,16 @@ const PlantCard = ({ plant, plants, setPlants }: Props) => {
     //     }
     // };
 
-    //row and column component for flexbox structuring
     return (
         <Card>
             <Row>
-                <CardImage src="https://as2.ftcdn.net/v2/jpg/01/85/31/71/1000_F_185317104_XmMUkvpcG2zJHLSTT2f2nTCOBrdWvwMJ.jpg" />
+                <CardImage
+                    src={
+                        plant.imageName
+                            ? `${imageBaseUrl}/${plant.imageName}`
+                            : "https://as2.ftcdn.net/v2/jpg/01/85/31/71/1000_F_185317104_XmMUkvpcG2zJHLSTT2f2nTCOBrdWvwMJ.jpg"
+                    }
+                />
                 <Column flex={1}>
                     <CardInfo>
                         <CardTitle>

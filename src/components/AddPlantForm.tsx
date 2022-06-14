@@ -16,7 +16,6 @@ import Popup from "./style/Generics/Popup";
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 const imgBaseUrl = process.env.REACT_APP_IMAGE_UPLOAD_API_BASE_URL as string;
-console.log(imgBaseUrl);
 
 interface Props {
     plants: Plant[];
@@ -30,7 +29,9 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
         soil: "",
         lastWatered: "",
         wateringCycle: 0,
+        imageName: "",
     });
+    const [image, setImage] = useState<string>("");
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         setPlant({ ...plant, [event.target.name]: event.target.value });
@@ -50,7 +51,7 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
-        const plantCopy = plant;
+        const plantCopy = { ...plant, imageName: image };
         plantCopy.lastWatered = new Date(plant.lastWatered).toISOString();
         setPlant(plantCopy);
         void addPlant(plantCopy);
@@ -59,6 +60,7 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
             soil: "",
             lastWatered: "",
             wateringCycle: 0,
+            imageName: "",
         });
     };
 
@@ -74,13 +76,10 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
                 const config = { headers: { "Content-Type": "image/jpeg" } };
 
                 try {
-                    console.log(imgBaseUrl);
-                    const response = await axios.post(
-                        `${imgBaseUrl}/upload`,
-                        image,
-                        config
-                    );
-                    console.log(response);
+                    const response = await axios.post<{
+                        [key: string]: string;
+                    }>(`${imgBaseUrl}/upload`, image, config);
+                    setImage(response.data.imgName);
                 } catch (error) {
                     throw new Error("Could not upload image");
                 }

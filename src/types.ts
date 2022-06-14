@@ -4,6 +4,7 @@ export interface TempPlant {
     soil: string;
     lastWatered: string;
     wateringCycle: number;
+    imageName: string;
 }
 
 //Plant model after saving
