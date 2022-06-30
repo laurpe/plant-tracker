@@ -42,6 +42,7 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
         imageName: "",
     });
     const [image, setImage] = useState<string>("");
+    const [uploading, setUploading] = useState<boolean>(false);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         setPlant({ ...plant, [event.target.name]: event.target.value });
@@ -95,8 +96,9 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
                 }
             }
         };
-
+        setUploading(true);
         void uploadImage();
+        setUploading(false);
     };
 
     return (
@@ -155,7 +157,11 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
                             />
                         </Column>
                         <Row justifyContent="space-between">
-                            <Button type="submit" width="120px">
+                            <Button
+                                type="submit"
+                                width="120px"
+                                disabled={uploading}
+                            >
                                 Add
                             </Button>
                             <Button
