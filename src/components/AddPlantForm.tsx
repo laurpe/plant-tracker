@@ -103,6 +103,7 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
                             value={plant.name}
                             minLength={2}
                             maxLength={30}
+                            maximum-scale={1}
                             required
                         />
                         <Label htmlFor="soil">Soil</Label>
@@ -111,6 +112,7 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
                             name="soil"
                             onChange={handleChange}
                             value={plant.soil}
+                            maximum-scale={1}
                             required
                         />
                         <Label htmlFor="lastWatered">Last watered</Label>
@@ -128,6 +130,7 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
                             onChange={handleChange}
                             value={plant.wateringCycle}
                             min="1"
+                            maximum-scale={1}
                             required
                         />
                         <Label htmlFor="file">Image</Label>
