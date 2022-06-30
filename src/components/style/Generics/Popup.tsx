@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 const Popup = styled.div`
-    position: relative;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 60%;
+    bottom: 0;
+    width: 100%;
     margin: 0 auto;
 `;
 

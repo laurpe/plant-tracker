@@ -11,8 +11,18 @@ import Form from "./style/Generics/Form/Form";
 import Button from "./style/Generics/Button";
 import Subtitle from "./style/Generics/Subtitle";
 import Row from "./style/Generics/Row";
-import Overlay from "./style/Generics/Overlay";
 import Popup from "./style/Generics/Popup";
+import Column from "./style/Generics/Column";
+
+import styled from "styled-components";
+
+const StyledCard = styled(Card)`
+    height: 100%;
+`;
+
+const StyledColumn = styled(Column)`
+    height: 100%;
+`;
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 const imgBaseUrl = process.env.REACT_APP_IMAGE_UPLOAD_API_BASE_URL as string;
@@ -90,56 +100,60 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
     };
 
     return (
-        <Overlay>
-            <Popup>
-                <Card>
-                    <Form onSubmit={handleSubmit}>
-                        <Subtitle>Add plant</Subtitle>
-                        <Label htmlFor="name">Name</Label>
-                        <Input
-                            type="text"
-                            name="name"
-                            onChange={handleChange}
-                            value={plant.name}
-                            minLength={2}
-                            maxLength={30}
-                            maximum-scale={1}
-                            required
-                        />
-                        <Label htmlFor="soil">Soil</Label>
-                        <Input
-                            type="text"
-                            name="soil"
-                            onChange={handleChange}
-                            value={plant.soil}
-                            maximum-scale={1}
-                            required
-                        />
-                        <Label htmlFor="lastWatered">Last watered</Label>
-                        <Input
-                            type="date"
-                            name="lastWatered"
-                            onChange={handleChange}
-                            value={plant.lastWatered}
-                            max={maxDate}
-                        />
-                        <Label htmlFor="wateringCycle">Watering cycle</Label>
-                        <Input
-                            type="number"
-                            name="wateringCycle"
-                            onChange={handleChange}
-                            value={plant.wateringCycle}
-                            min="1"
-                            maximum-scale={1}
-                            required
-                        />
-                        <Label htmlFor="file">Image</Label>
-                        <Input
-                            type="file"
-                            name="file"
-                            accept="image/jpeg, image/png"
-                            onChange={handleImageChange}
-                        />
+        <Popup>
+            <StyledCard>
+                <Form onSubmit={handleSubmit}>
+                    <StyledColumn justifyContent="space-between">
+                        <Column>
+                            <Subtitle>Add plant</Subtitle>
+                            <Label htmlFor="name">Name</Label>
+                            <Input
+                                type="text"
+                                name="name"
+                                onChange={handleChange}
+                                value={plant.name}
+                                minLength={2}
+                                maxLength={30}
+                                maximum-scale={1}
+                                required
+                            />
+                            <Label htmlFor="soil">Soil</Label>
+                            <Input
+                                type="text"
+                                name="soil"
+                                onChange={handleChange}
+                                value={plant.soil}
+                                maximum-scale={1}
+                                required
+                            />
+                            <Label htmlFor="lastWatered">Last watered</Label>
+                            <Input
+                                type="date"
+                                name="lastWatered"
+                                onChange={handleChange}
+                                value={plant.lastWatered}
+                                max={maxDate}
+                            />
+                            <Label htmlFor="wateringCycle">
+                                Watering cycle
+                            </Label>
+                            <Input
+                                type="number"
+                                name="wateringCycle"
+                                onChange={handleChange}
+                                value={plant.wateringCycle}
+                                min="1"
+                                maximum-scale={1}
+                                required
+                            />
+                            <Label htmlFor="file">Image</Label>
+                            <Input
+                                type="file"
+                                name="file"
+                                accept="image/jpeg, image/png"
+                                onChange={handleImageChange}
+                            />
+                        </Column>
                         <Row justifyContent="space-between">
                             <Button type="submit" width="120px">
                                 Add
@@ -152,10 +166,10 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
                                 Close
                             </Button>
                         </Row>
-                    </Form>
-                </Card>
-            </Popup>
-        </Overlay>
+                    </StyledColumn>
+                </Form>
+            </StyledCard>
+        </Popup>
     );
 };
 
