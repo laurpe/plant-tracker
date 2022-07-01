@@ -31,9 +31,15 @@ interface Props {
     plants: Plant[];
     setPlants: (plants: Plant[]) => void;
     handleToggleFormClick: React.MouseEventHandler<HTMLButtonElement>;
+    setToggleAddPlantForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
+const AddPlantForm = ({
+    plants,
+    setPlants,
+    handleToggleFormClick,
+    setToggleAddPlantForm,
+}: Props) => {
     const [plant, setPlant] = useState<TempPlant>({
         name: "",
         soil: "",
@@ -73,6 +79,7 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
             wateringCycle: 0,
             imageName: "",
         });
+        setToggleAddPlantForm(false);
     };
 
     const maxDate = new Date().toISOString().substring(0, 10);
@@ -178,7 +185,5 @@ const AddPlantForm = ({ plants, setPlants, handleToggleFormClick }: Props) => {
         </Popup>
     );
 };
-
-//TODO: let user add only one image
 
 export default AddPlantForm;

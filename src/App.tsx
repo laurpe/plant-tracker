@@ -38,6 +38,7 @@ const App = () => {
                     plants={plants}
                     setPlants={setPlants}
                     handleToggleFormClick={handleToggleFormClick}
+                    setToggleAddPlantForm={setToggleAddPlantForm}
                 />
             )}
             <Plants plants={plants} setPlants={setPlants} />
