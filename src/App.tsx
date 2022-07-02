@@ -38,6 +38,15 @@ const App = () => {
         setToggleAddPlantForm(!toggleAddPlantForm);
     };
 
+    useEffect(() => {
+        console.log(toggleAddPlantForm);
+        if (toggleAddPlantForm) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+        }
+    }, [toggleAddPlantForm]);
+
     return (
         <>
             <Header handleToggleFormClick={handleToggleFormClick} />
