@@ -4,11 +4,10 @@ import PlantCard from "./PlantCard";
 interface Props {
     plants: Plant[];
     setPlants: (plants: Plant[]) => void;
+    calculateNextWatering: (plant: Plant) => string;
 }
 
-//TODO: sort plants so that the one needing watering the most is on the top!
-
-const Plants = ({ plants, setPlants }: Props) => {
+const Plants = ({ plants, setPlants, calculateNextWatering }: Props) => {
     return (
         <>
             {plants.map((plant) => {
@@ -18,6 +17,7 @@ const Plants = ({ plants, setPlants }: Props) => {
                         key={plant.id}
                         plants={plants}
                         setPlants={setPlants}
+                        calculateNextWatering={calculateNextWatering}
                     />
                 );
             })}

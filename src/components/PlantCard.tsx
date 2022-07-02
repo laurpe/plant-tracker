@@ -1,7 +1,7 @@
 import { Plant } from "../types";
 import axios from "axios";
 import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
+import utc from "dayjs/plugin/utc";
 
 import Card from "./style/Generics/Card";
 import CardTitle from "./style/Generics/CardTitle";
@@ -16,12 +16,12 @@ import Row from "./style/Generics/Row";
 
 import styled from "styled-components";
 
+dayjs.extend(utc);
+
 const StyledCard = styled(Card)`
     margin: 16px;
     border-radius: 10px;
 `;
-
-dayjs.extend(relativeTime);
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 const imageBaseUrl = process.env.REACT_APP_IMAGE_BASE_URL as string;
@@ -30,30 +30,19 @@ interface Props {
     plant: Plant;
     plants: Plant[];
     setPlants: (plants: Plant[]) => void;
+    calculateNextWatering: (plant: Plant) => string;
 }
 
-const PlantCard = ({ plant, plants, setPlants }: Props) => {
-    const calculateNextWatering = (plant: Plant): string => {
-        const nextWatering = dayjs(plant.lastWatered).add(
-            plant.wateringCycle,
-            "day"
-        );
-        const now = dayjs();
-
-        const daysToNext = dayjs().to(nextWatering);
-
-        if (nextWatering.isBefore(now)) {
-            const daysMissed = dayjs().to(nextWatering, true);
-            return `watering late by ${daysMissed}`;
-        }
-
-        return `water ${daysToNext}`;
-    };
-
+const PlantCard = ({
+    plant,
+    plants,
+    setPlants,
+    calculateNextWatering,
+}: Props) => {
     const updateWatered = async (id: string): Promise<void> => {
         try {
             const response = await axios.put<Plant>(`${baseUrl}/plants/${id}`, {
-                lastWatered: new Date().toISOString(),
+                lastWatered: dayjs().utcOffset(0).startOf("date").toISOString(),
             });
             const newPlant = response.data;
             const i = plants.findIndex((newPlant) => newPlant.id === id);
