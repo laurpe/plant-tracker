@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import isTomorrow from "dayjs/plugin/isTomorrow";
 
 import { Plant } from "./types";
 
@@ -11,6 +12,7 @@ import Header from "./components/Header";
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
 dayjs.extend(relativeTime);
+dayjs.extend(isTomorrow);
 
 const getData = async <T,>(url: string): Promise<T> => {
     const response = await fetch(`${baseUrl}/${url}`);
@@ -35,8 +37,8 @@ const calculateNextWatering = (plant: Plant): string => {
         return `watering late by ${daysMissed}`;
     }
 
-    if (nextWatering.diff(now, "hour") <= 24) {
-        return "water today";
+    if (nextWatering.isTomorrow()) {
+        return "water tomorrow";
     }
 
     return `water ${daysToNext}`;
