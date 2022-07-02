@@ -28,7 +28,15 @@ const calculateNextWatering = (plant: Plant): string => {
 
     if (nextWatering.isBefore(now)) {
         const daysMissed = dayjs().to(nextWatering, true);
+
+        if (nextWatering.diff(now, "hour") <= 24) {
+            return "water today";
+        }
         return `watering late by ${daysMissed}`;
+    }
+
+    if (nextWatering.diff(now, "hour") <= 24) {
+        return "water today";
     }
 
     return `water ${daysToNext}`;
