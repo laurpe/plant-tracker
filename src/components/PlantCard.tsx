@@ -30,15 +30,10 @@ interface Props {
     plant: Plant;
     plants: Plant[];
     setPlants: (plants: Plant[]) => void;
-    calculateNextWatering: (plant: Plant) => string;
+    nextWatering: dayjs.Dayjs;
 }
 
-const PlantCard = ({
-    plant,
-    plants,
-    setPlants,
-    calculateNextWatering,
-}: Props) => {
+const PlantCard = ({ plant, plants, setPlants, nextWatering }: Props) => {
     const updateWatered = async (id: string): Promise<void> => {
         try {
             const response = await axios.put<Plant>(`${baseUrl}/plants/${id}`, {
@@ -52,6 +47,27 @@ const PlantCard = ({
         } catch (error) {
             throw new Error("Could not update watering date");
         }
+    };
+
+    const formatNextWatering = (nextWatering: dayjs.Dayjs) => {
+        const now = dayjs();
+
+        const daysToNext = dayjs().to(nextWatering);
+
+        if (nextWatering.isBefore(now)) {
+            const daysMissed = dayjs().to(nextWatering, true);
+
+            if (nextWatering.diff(now, "hour") <= 24) {
+                return "water today";
+            }
+            return `watering late by ${daysMissed}`;
+        }
+
+        if (nextWatering.isTomorrow()) {
+            return "water tomorrow";
+        }
+
+        return `water ${daysToNext}`;
     };
 
     // const handleDelete = async (id: string): Promise<void> => {
@@ -94,7 +110,9 @@ const PlantCard = ({
                         >
                             <OpacityIcon sx={{ fontSize: 30 }} />
                         </ButtonWater>
-                        <TextWater>{calculateNextWatering(plant)}</TextWater>
+                        <TextWater>
+                            {formatNextWatering(nextWatering)}
+                        </TextWater>
                     </CardInfo>
                 </Column>
             </Row>

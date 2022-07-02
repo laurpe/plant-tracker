@@ -19,31 +19,6 @@ const getData = async <T,>(url: string): Promise<T> => {
     return response.json() as Promise<T>;
 };
 
-const calculateNextWatering = (plant: Plant): string => {
-    const nextWatering = dayjs(plant.lastWatered).add(
-        plant.wateringCycle,
-        "day"
-    );
-    const now = dayjs();
-
-    const daysToNext = dayjs().to(nextWatering);
-
-    if (nextWatering.isBefore(now)) {
-        const daysMissed = dayjs().to(nextWatering, true);
-
-        if (nextWatering.diff(now, "hour") <= 24) {
-            return "water today";
-        }
-        return `watering late by ${daysMissed}`;
-    }
-
-    if (nextWatering.isTomorrow()) {
-        return "water tomorrow";
-    }
-
-    return `water ${daysToNext}`;
-};
-
 const App = () => {
     const [plants, setPlants] = useState<Plant[]>([]);
     const [toggleAddPlantForm, setToggleAddPlantForm] =
@@ -74,11 +49,7 @@ const App = () => {
                     setToggleAddPlantForm={setToggleAddPlantForm}
                 />
             )}
-            <Plants
-                plants={plants}
-                setPlants={setPlants}
-                calculateNextWatering={calculateNextWatering}
-            />
+            <Plants plants={plants} setPlants={setPlants} />
         </>
     );
 };

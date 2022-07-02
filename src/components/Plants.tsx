@@ -1,13 +1,23 @@
+import dayjs from "dayjs";
+
 import { Plant } from "../types";
 import PlantCard from "./PlantCard";
 
 interface Props {
     plants: Plant[];
     setPlants: (plants: Plant[]) => void;
-    calculateNextWatering: (plant: Plant) => string;
 }
 
-const Plants = ({ plants, setPlants, calculateNextWatering }: Props) => {
+const calculateNextWatering = (plant: Plant): dayjs.Dayjs => {
+    const nextWatering = dayjs(plant.lastWatered).add(
+        plant.wateringCycle,
+        "day"
+    );
+
+    return nextWatering;
+};
+
+const Plants = ({ plants, setPlants }: Props) => {
     return (
         <>
             {plants
@@ -15,19 +25,17 @@ const Plants = ({ plants, setPlants, calculateNextWatering }: Props) => {
                     const aNextWatering = calculateNextWatering(a);
                     const bNextWatering = calculateNextWatering(b);
 
-                    console.log("aNextWatering", aNextWatering);
-                    console.log("bNextWatering", bNextWatering);
-
-                    return -1;
+                    return aNextWatering.isBefore(bNextWatering) ? -1 : 1;
                 })
                 .map((plant) => {
+                    const nextWatering = calculateNextWatering(plant);
                     return (
                         <PlantCard
                             plant={plant}
                             key={plant.id}
                             plants={plants}
                             setPlants={setPlants}
-                            calculateNextWatering={calculateNextWatering}
+                            nextWatering={nextWatering}
                         />
                     );
                 })}
