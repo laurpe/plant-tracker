@@ -14,6 +14,13 @@ import OpacityIcon from "@mui/icons-material/Opacity";
 import Column from "./style/Generics/Column";
 import Row from "./style/Generics/Row";
 
+import styled from "styled-components";
+
+const StyledCard = styled(Card)`
+    margin: 16px;
+    border-radius: 10px;
+`;
+
 dayjs.extend(relativeTime);
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
@@ -24,8 +31,6 @@ interface Props {
     plants: Plant[];
     setPlants: (plants: Plant[]) => void;
 }
-
-//TODO: create type for image link for template literal
 
 const PlantCard = ({ plant, plants, setPlants }: Props) => {
     const calculateNextWatering = (plant: Plant): string => {
@@ -73,7 +78,7 @@ const PlantCard = ({ plant, plants, setPlants }: Props) => {
     // };
 
     return (
-        <Card>
+        <StyledCard>
             <Row>
                 <CardImage
                     src={
@@ -104,7 +109,7 @@ const PlantCard = ({ plant, plants, setPlants }: Props) => {
                     </CardInfo>
                 </Column>
             </Row>
-        </Card>
+        </StyledCard>
     );
 };
 

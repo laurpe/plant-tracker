@@ -1,9 +1,15 @@
 import styled from "styled-components";
 
-const Column = styled.div`
+interface Props {
+    flex?: number;
+    justifyContent?: string;
+}
+
+const Column = styled.div<Props>`
     display: flex;
     flex-direction: column;
-    flex: ${(props: { flex?: number }) => props.flex || 0};
+    flex: ${(props) => props.flex || 0};
+    justify-content: ${(props) => props.justifyContent || "flex-start"};
 `;
 
 export default Column;
