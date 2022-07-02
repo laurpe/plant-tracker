@@ -165,18 +165,18 @@ const AddPlantForm = ({
                         </Column>
                         <Row justifyContent="space-between">
                             <Button
-                                type="submit"
-                                width="120px"
-                                disabled={uploading}
-                            >
-                                Add
-                            </Button>
-                            <Button
                                 type="button"
                                 width="120px"
                                 onClick={handleToggleFormClick}
                             >
                                 Close
+                            </Button>
+                            <Button
+                                type="submit"
+                                width="120px"
+                                disabled={uploading}
+                            >
+                                Add
                             </Button>
                         </Row>
                     </StyledColumn>
