@@ -11,13 +11,10 @@ body {
     font-size: 0.75rem;
     color: #225c55;
     background-color: rgb(235, 243, 241);
-    overscroll-behavior-y: none;
     padding-bottom: 40px;
 }
 
-@media only screen and (orientation: landscape) {
-    body {
-        height: 100vw;
-        transform: rotate(-90deg);
-    }
+body,
+html {
+    overscroll-behavior-y: contain;
 }
