@@ -22,6 +22,7 @@ const StyledCard = styled(Card)`
 
 const StyledColumn = styled(Column)`
     height: 100%;
+    padding-bottom: 40px;
 `;
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
