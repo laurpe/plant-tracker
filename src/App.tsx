@@ -14,10 +14,6 @@ const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 dayjs.extend(relativeTime);
 dayjs.extend(isTomorrow);
 
-const lockPortraitMode = async () => {
-    await window.screen.orientation.lock("portrait");
-};
-
 const getData = async <T,>(url: string): Promise<T> => {
     const response = await fetch(`${baseUrl}/${url}`);
     return response.json() as Promise<T>;
@@ -27,8 +23,6 @@ const App = () => {
     const [plants, setPlants] = useState<Plant[]>([]);
     const [toggleAddPlantForm, setToggleAddPlantForm] =
         useState<boolean>(false);
-
-    void lockPortraitMode();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -45,7 +39,6 @@ const App = () => {
     };
 
     useEffect(() => {
-        console.log(toggleAddPlantForm);
         if (toggleAddPlantForm) {
             document.body.style.overflow = "hidden";
         } else {
