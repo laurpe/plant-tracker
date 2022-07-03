@@ -11,10 +11,6 @@ body {
     font-size: 0.75rem;
     color: #225c55;
     background-color: rgb(235, 243, 241);
-    padding-bottom: 40px;
-}
-
-body,
-html {
     overscroll-behavior-y: contain;
+    padding-bottom: 40px;
 }
