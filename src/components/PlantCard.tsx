@@ -16,6 +16,8 @@ import Row from "./style/Generics/Row";
 
 import styled from "styled-components";
 
+import formatNextWatering from "../util/formatNextWatering";
+
 dayjs.extend(utc);
 
 const StyledCard = styled(Card)`
@@ -47,27 +49,6 @@ const PlantCard = ({ plant, plants, setPlants, nextWatering }: Props) => {
         } catch (error) {
             throw new Error("Could not update watering date");
         }
-    };
-
-    const formatNextWatering = (nextWatering: dayjs.Dayjs) => {
-        const now = dayjs();
-
-        const daysToNext = dayjs().to(nextWatering);
-
-        if (nextWatering.isBefore(now)) {
-            const daysMissed = dayjs().to(nextWatering, true);
-
-            if (nextWatering.diff(now, "hour") <= 24) {
-                return "water today";
-            }
-            return `watering late by ${daysMissed}`;
-        }
-
-        if (nextWatering.isTomorrow()) {
-            return "water tomorrow";
-        }
-
-        return `water ${daysToNext}`;
     };
 
     // const handleDelete = async (id: string): Promise<void> => {
