@@ -12,7 +12,11 @@ const Header = ({ handleToggleFormClick }: Props) => {
     return (
         <AppHeader>
             <AppTitle>Plant tracker</AppTitle>
-            <Button type="button" onClick={handleToggleFormClick}>
+            <Button
+                type="button"
+                id="add-plant-form-btn"
+                onClick={handleToggleFormClick}
+            >
                 <AddIcon />
             </Button>
         </AppHeader>

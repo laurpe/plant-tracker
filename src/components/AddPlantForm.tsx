@@ -120,6 +120,7 @@ const AddPlantForm = ({
                             <Input
                                 type="text"
                                 name="name"
+                                id="plant-name-input"
                                 onChange={handleChange}
                                 value={plant.name}
                                 minLength={2}
@@ -131,6 +132,7 @@ const AddPlantForm = ({
                             <Input
                                 type="text"
                                 name="soil"
+                                id="plant-soil-input"
                                 onChange={handleChange}
                                 value={plant.soil}
                                 maximum-scale={1}
@@ -140,6 +142,7 @@ const AddPlantForm = ({
                             <Input
                                 type="date"
                                 name="lastWatered"
+                                id="plant-lastWatered-input"
                                 onChange={handleChange}
                                 value={plant.lastWatered}
                                 max={maxDate}
@@ -150,6 +153,7 @@ const AddPlantForm = ({
                             <Input
                                 type="number"
                                 name="wateringCycle"
+                                id="plant-wateringCycle-input"
                                 onChange={handleChange}
                                 value={plant.wateringCycle}
                                 min="1"
@@ -160,6 +164,7 @@ const AddPlantForm = ({
                             <Input
                                 type="file"
                                 name="file"
+                                id="plant-image-input"
                                 accept="image/jpeg, image/png"
                                 onChange={handleImageChange}
                             />
@@ -174,6 +179,7 @@ const AddPlantForm = ({
                             </Button>
                             <Button
                                 type="submit"
+                                id="add-plant-btn"
                                 width="120px"
                                 disabled={uploading}
                             >
