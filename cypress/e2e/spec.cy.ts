@@ -23,6 +23,10 @@ describe("Plant actions", () => {
         cy.visit(baseUrl);
         cy.addPlant();
 
+        cy.contains("watering late");
+
         cy.contains("calathea-test").parent().find("button").click();
+
+        cy.contains("water in 5 days");
     });
 });

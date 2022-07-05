@@ -56,7 +56,7 @@ Cypress.Commands.add("addPlant", () => {
     cy.get("#add-plant-form-btn").click();
     cy.get("#plant-name-input").type("calathea-test");
     cy.get("#plant-soil-input").type("seramis");
-    cy.get("#plant-lastWatered-input").type("2022-07-01");
+    cy.get("#plant-lastWatered-input").type("2022-06-01");
     cy.get("#plant-wateringCycle-input").type("6");
     cy.get("#add-plant-btn").click();
 });
