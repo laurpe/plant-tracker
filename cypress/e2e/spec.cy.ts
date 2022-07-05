@@ -1,21 +1,28 @@
+const baseUrl = Cypress.env("baseUrl") as string;
+
 describe("Plant tracker", () => {
     it("renders front page", () => {
-        cy.visit("http://localhost:3000");
+        cy.visit(baseUrl);
         cy.contains("Plant tracker");
     });
 });
 
-describe("When adding new plant", () => {
+describe("Plant actions", () => {
+    beforeEach(() => {
+        cy.clearDatabase();
+    });
     //not adding image
-    it("new plant is added and rendered on front page", () => {
-        cy.visit("http://localhost:3000");
-        cy.get("#add-plant-form-btn").click();
-        cy.get("#plant-name-input").type("calathea-test");
-        cy.get("#plant-soil-input").type("seramis");
-        cy.get("#plant-lastWatered-input").type("2022-07-01");
-        cy.get("#plant-wateringCycle-input").type("6");
-        cy.get("#add-plant-btn").click();
+    it("when plant is added, it is rendered on the front page", () => {
+        cy.visit(baseUrl);
+        cy.addPlant();
 
         cy.contains("calathea-test");
+    });
+
+    it("when plant is watered, new time to water shows", () => {
+        cy.visit(baseUrl);
+        cy.addPlant();
+
+        cy.contains("calathea-test").parent().find("button").click();
     });
 });
