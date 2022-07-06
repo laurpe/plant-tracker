@@ -27,6 +27,6 @@ describe("Plant actions", () => {
 
         cy.contains("calathea-test").parent().find("button").click();
 
-        cy.contains("water in 5 days");
+        cy.contains("water in 6 days");
     });
 });
