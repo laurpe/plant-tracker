@@ -16,7 +16,6 @@ jobs:
               with:
                   build: npm run build
                   start: npm start
-                  wait-on: "http://localhost:3000"
               env:
                   CYPRESS_apiUrl: ${{secrets.CYPRESS_API_URL}}
                   CYPRESS_apiKey: ${{secrets.CYPRESS_API_KEY}}
