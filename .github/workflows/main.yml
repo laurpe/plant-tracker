@@ -20,7 +20,7 @@ jobs:
               env:
                   CYPRESS_apiUrl: ${{secrets.CYPRESS_API_URL}}
                   CYPRESS_apiKey: ${{secrets.CYPRESS_API_KEY}}
-                  CYPRESS_baseUrl: http://localhost:3000
+                  CYPRESS_baseUrl: ${{sectrets.CYPRESS_BASE_URL}}
 
     build:
         runs-on: ubuntu-latest
