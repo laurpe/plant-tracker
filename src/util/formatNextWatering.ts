@@ -30,10 +30,10 @@ dayjs.extend(relativeTime, config);
 const formatNextWatering = (nextWatering: dayjs.Dayjs) => {
     const today = dayjs().utcOffset(0).startOf("date");
 
-    const daysToNext = dayjs().to(nextWatering);
+    const daysToNext = today.to(nextWatering);
 
     if (nextWatering.isBefore(today)) {
-        const daysMissed = dayjs().to(nextWatering, true);
+        const daysMissed = today.to(nextWatering, true);
 
         return `watering late by ${daysMissed}`;
     }
