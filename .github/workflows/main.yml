@@ -17,9 +17,9 @@ jobs:
                   build: npm run build
                   start: npm start
               env:
-                  CYPRESS_apiUrl: ${{secrets.CYPRESS_API_URL}}
-                  CYPRESS_apiKey: ${{secrets.CYPRESS_API_KEY}}
-                  CYPRESS_baseUrl: ${{secrets.CYPRESS_BASE_URL}}
+                  apiUrl: ${{secrets.CYPRESS_API_URL}}
+                  apiKey: ${{secrets.CYPRESS_API_KEY}}
+                  baseUrl: ${{secrets.CYPRESS_BASE_URL}}
 
     build:
         runs-on: ubuntu-latest
