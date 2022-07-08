@@ -44,7 +44,7 @@ const AddPlantForm = ({
     const [plant, setPlant] = useState<TempPlant>({
         name: "",
         soil: "",
-        lastWatered: "",
+        lastWatered: new Date().toISOString().substring(0, 10),
         wateringCycle: 0,
         imageName: "",
     });
@@ -76,7 +76,7 @@ const AddPlantForm = ({
         setPlant({
             name: "",
             soil: "",
-            lastWatered: "",
+            lastWatered: "2022-07-07",
             wateringCycle: 0,
             imageName: "",
         });

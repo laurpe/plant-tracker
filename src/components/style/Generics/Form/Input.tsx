@@ -10,6 +10,7 @@ const Input = styled.input`
     margin-bottom: 0.8rem;
     width: 100%;
     background-color: rgb(235, 243, 241);
+    appearance: none;
 `;
 
 export default Input;
