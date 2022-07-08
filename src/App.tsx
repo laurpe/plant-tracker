@@ -1,18 +1,12 @@
 import { useEffect, useState } from "react";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import isTomorrow from "dayjs/plugin/isTomorrow";
 
-import { Plant } from "./types";
+import { Plant, GrowingMedium } from "./types";
 
 import Plants from "./components/Plants";
 import AddPlantForm from "./components/AddPlantForm";
 import Header from "./components/Header";
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
-
-dayjs.extend(relativeTime);
-dayjs.extend(isTomorrow);
 
 const getData = async <T,>(url: string): Promise<T> => {
     const response = await fetch(`${baseUrl}/${url}`);
@@ -21,16 +15,27 @@ const getData = async <T,>(url: string): Promise<T> => {
 
 const App = () => {
     const [plants, setPlants] = useState<Plant[]>([]);
+    const [growingMediums, setGrowingMediums] = useState<GrowingMedium[]>([]);
     const [toggleAddPlantForm, setToggleAddPlantForm] =
         useState<boolean>(false);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchPlants = async () => {
             const result = await getData<Plant[]>("plants");
             setPlants(result);
         };
-        fetchData().catch(() => {
+
+        fetchPlants().catch(() => {
             throw new Error("Fetch plants unsuccessful");
+        });
+
+        const fetchGrowingMediums = async () => {
+            const result = await getData<GrowingMedium[]>("growing-mediums");
+            setGrowingMediums(result);
+        };
+
+        fetchGrowingMediums().catch(() => {
+            throw new Error("Fetch growing mediums unsuccessful");
         });
     }, []);
 
@@ -53,6 +58,7 @@ const App = () => {
                 <AddPlantForm
                     plants={plants}
                     setPlants={setPlants}
+                    growingMediums={growingMediums}
                     handleToggleFormClick={handleToggleFormClick}
                     setToggleAddPlantForm={setToggleAddPlantForm}
                 />

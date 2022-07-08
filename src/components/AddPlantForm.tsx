@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { TempPlant, Plant } from "../types";
+import { TempPlant, Plant, GrowingMedium } from "../types";
 
 import axios from "axios";
 
@@ -13,6 +13,7 @@ import Subtitle from "./style/Generics/Subtitle";
 import Row from "./style/Generics/Row";
 import Popup from "./style/Generics/Popup";
 import Column from "./style/Generics/Column";
+import Select from "./style/Generics/Form/Select";
 
 import styled from "styled-components";
 
@@ -31,6 +32,7 @@ const imgBaseUrl = process.env.REACT_APP_IMAGE_UPLOAD_API_BASE_URL as string;
 interface Props {
     plants: Plant[];
     setPlants: (plants: Plant[]) => void;
+    growingMediums: GrowingMedium[];
     handleToggleFormClick: React.MouseEventHandler<HTMLButtonElement>;
     setToggleAddPlantForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -38,22 +40,24 @@ interface Props {
 const AddPlantForm = ({
     plants,
     setPlants,
+    growingMediums,
     handleToggleFormClick,
     setToggleAddPlantForm,
 }: Props) => {
+    // states
+
     const [plant, setPlant] = useState<TempPlant>({
         name: "",
-        soil: "",
+        growingMedium: "",
         lastWatered: new Date().toISOString().substring(0, 10),
         wateringCycle: 0,
         imageName: "",
     });
     const [image, setImage] = useState<string>("");
+    const [growingMedium, setGrowingMedium] = useState<string>("");
     const [uploading, setUploading] = useState<boolean>(false);
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        setPlant({ ...plant, [event.target.name]: event.target.value });
-    };
+    // add plant to database
 
     const addPlant = async (plant: TempPlant): Promise<void> => {
         try {
@@ -67,23 +71,17 @@ const AddPlantForm = ({
         }
     };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-        event.preventDefault();
-        const plantCopy = { ...plant, imageName: image };
-        plantCopy.lastWatered = new Date(plant.lastWatered).toISOString();
-        setPlant(plantCopy);
-        void addPlant(plantCopy);
-        setPlant({
-            name: "",
-            soil: "",
-            lastWatered: "2022-07-07",
-            wateringCycle: 0,
-            imageName: "",
-        });
-        setToggleAddPlantForm(false);
+    // form functions
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        setPlant({ ...plant, [event.target.name]: event.target.value });
     };
 
-    const maxDate = new Date().toISOString().substring(0, 10);
+    const handleGrowingMediumChange = (
+        event: React.ChangeEvent<HTMLSelectElement>
+    ): void => {
+        setGrowingMedium(event.target.value);
+    };
 
     const handleImageChange = (
         event: React.ChangeEvent<HTMLInputElement>
@@ -109,6 +107,29 @@ const AddPlantForm = ({
         setUploading(false);
     };
 
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+        event.preventDefault();
+        const plantCopy = {
+            ...plant,
+            growingMedium: growingMedium,
+            imageName: image,
+        };
+        plantCopy.lastWatered = new Date(plant.lastWatered).toISOString();
+        setPlant(plantCopy);
+        void addPlant(plantCopy);
+        setPlant({
+            name: "",
+            growingMedium: "",
+            lastWatered: "2022-07-07",
+            wateringCycle: 0,
+            imageName: "",
+        });
+        console.log("plant: ", plantCopy);
+        setToggleAddPlantForm(false);
+    };
+
+    const maxDate = new Date().toISOString().substring(0, 10);
+
     return (
         <Popup>
             <StyledCard>
@@ -128,16 +149,24 @@ const AddPlantForm = ({
                                 maximum-scale={1}
                                 required
                             />
-                            <Label htmlFor="soil">Soil</Label>
-                            <Input
-                                type="text"
-                                name="soil"
-                                id="plant-soil-input"
-                                onChange={handleChange}
-                                value={plant.soil}
-                                maximum-scale={1}
-                                required
-                            />
+                            <Label htmlFor="growingMedium">
+                                Growing medium
+                            </Label>
+                            <Select
+                                onChange={handleGrowingMediumChange}
+                                name="growingMedium"
+                            >
+                                {growingMediums.map((growingMedium) => {
+                                    return (
+                                        <option
+                                            key={growingMedium.id}
+                                            value={growingMedium.id}
+                                        >
+                                            {growingMedium.name}
+                                        </option>
+                                    );
+                                })}
+                            </Select>
                             <Label htmlFor="lastWatered">Last watered</Label>
                             <Input
                                 type="date"

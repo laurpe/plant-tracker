@@ -1,15 +1,37 @@
-//Plant model before saving
+// Plant model before saving
 export interface TempPlant {
     name: string;
-    soil: string;
+    growingMedium: string;
     lastWatered: string;
     wateringCycle: number;
     imageName: string;
 }
 
-//Plant model after saving
+export interface TempPlantNoGrowingMedium {
+    name: string;
+    lastWatered: string;
+    wateringCycle: number;
+    imageName: string;
+}
+
+// Plant model after saving
 export interface Plant extends TempPlant {
     id: string;
 }
 
-//TODO: set values for soil
+// Growing medium
+export interface Component {
+    component: string;
+    percentage: number;
+}
+
+// Growing medium before saving
+export interface TempGrowingMedium {
+    name: string;
+    composition: Component[];
+}
+
+// Growing medium after saving
+export interface GrowingMedium extends TempGrowingMedium {
+    id: string;
+}
