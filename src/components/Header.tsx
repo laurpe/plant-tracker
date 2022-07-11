@@ -1,5 +1,5 @@
 import AppTitle from "./style/Header/AppTitle";
-import Button from "./style/Generics/Button";
+import AddPlantButton from "./style/Header/AddPlantButton";
 import AppHeader from "./style/Header/AppHeader";
 
 import AddIcon from "@mui/icons-material/Add";
@@ -11,14 +11,14 @@ interface Props {
 const Header = ({ handleToggleFormClick }: Props) => {
     return (
         <AppHeader>
-            <AppTitle>Plant tracker</AppTitle>
-            <Button
+            <AppTitle>plant tracker</AppTitle>
+            <AddPlantButton
                 type="button"
                 id="add-plant-form-btn"
                 onClick={handleToggleFormClick}
             >
                 <AddIcon />
-            </Button>
+            </AddPlantButton>
         </AppHeader>
     );
 };

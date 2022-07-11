@@ -3,10 +3,10 @@ import styled from "styled-components";
 const ButtonEdit = styled.button`
     height: 3rem;
     width: 3rem;
-    background-color: white;
+    background-color: #225c55;
     border-radius: 50%;
     border: none;
-    color: #9ecfc6;
+    color: white;
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
