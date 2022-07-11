@@ -9,6 +9,7 @@ const Select = styled.select`
     padding: 0.75rem;
     margin-bottom: 0.8rem;
     background-color: rgb(235, 243, 241);
+    min-height: 1.5rem;
 `;
 
 export default Select;
