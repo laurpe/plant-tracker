@@ -34,7 +34,7 @@ const StyledCardTitle = styled(CardTitle)`
     left: 16px;
     color: white;
     font-weight: bold;
-    text-shadow: 1px 1px 2px black;
+    text-shadow: 0px 0.5px 2px black;
 `;
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;

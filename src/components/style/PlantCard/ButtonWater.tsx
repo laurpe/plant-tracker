@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const ButtonWater = styled.button`
-    height: 3rem;
-    width: 3rem;
+    height: 3.2rem;
+    width: 3.2rem;
     background-color: #35746d;
     border-radius: 50%;
     border: none;
@@ -14,7 +14,7 @@ const ButtonWater = styled.button`
     position: absolute;
     top: 90px;
     right: 88px;
-    box-shadow: rgba(0, 0, 0, 0.15) 0 1px 4px;
+    border: 2px solid white;
 `;
 
 export default ButtonWater;
