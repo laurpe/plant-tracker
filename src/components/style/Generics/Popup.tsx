@@ -7,6 +7,7 @@ const Popup = styled.div`
     bottom: 0;
     width: 100%;
     margin: 0 auto;
+    z-index: 10;
 `;
 
 export default Popup;
