@@ -91,14 +91,14 @@ const PlantCard = ({ plant, plants, setPlants, nextWatering }: Props) => {
                     id="water-btn"
                     onClick={() => void updateWatered(plant.id)}
                 >
-                    <OpacityIcon sx={{ fontSize: 30 }} />
+                    <OpacityIcon sx={{ fontSize: 26 }} />
                 </ButtonWater>
                 <ButtonEdit
                     type="button"
                     id="edit-btn"
                     onClick={() => void updateWatered(plant.id)}
                 >
-                    <ArticleOutlinedIcon sx={{ fontSize: 30 }} />
+                    <ArticleOutlinedIcon sx={{ fontSize: 26 }} />
                 </ButtonEdit>
                 <CardInfo>
                     <TextWater>{formatNextWatering(nextWatering)}</TextWater>
