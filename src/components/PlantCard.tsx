@@ -12,7 +12,7 @@ import CardImage from "./style/PlantCard/CardImage";
 import ButtonEdit from "./style/PlantCard/ButtonEdit";
 
 import OpacityIcon from "@mui/icons-material/Opacity";
-import EditIcon from "@mui/icons-material/Edit";
+import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 
 import Column from "./style/Generics/Column";
 
@@ -98,7 +98,7 @@ const PlantCard = ({ plant, plants, setPlants, nextWatering }: Props) => {
                     id="edit-btn"
                     onClick={() => void updateWatered(plant.id)}
                 >
-                    <EditIcon sx={{ fontSize: 30 }} />
+                    <ArticleOutlinedIcon sx={{ fontSize: 30 }} />
                 </ButtonEdit>
                 <CardInfo>
                     <TextWater>{formatNextWatering(nextWatering)}</TextWater>

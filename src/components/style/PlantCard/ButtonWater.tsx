@@ -7,7 +7,10 @@ const ButtonWater = styled.button`
     border-radius: 50%;
     border: none;
     color: #9ecfc6;
-    align-self: center;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 90px;
     right: 88px;
