@@ -3,7 +3,7 @@ import styled from "styled-components";
 const ButtonWater = styled.button`
     height: 3rem;
     width: 3rem;
-    background-color: #225c55;
+    background-color: #35746d;
     border-radius: 50%;
     border: none;
     color: white;
