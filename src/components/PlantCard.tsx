@@ -9,6 +9,7 @@ import ButtonWater from "./style/PlantCard/ButtonWater";
 import TextWater from "./style//PlantCard/TextWater";
 import CardInfo from "./style/PlantCard/CardInfo";
 import CardImage from "./style/PlantCard/CardImage";
+import TitleLink from "./style/PlantCard/TitleLink";
 
 import OpacityIcon from "@mui/icons-material/Opacity";
 import Column from "./style/Generics/Column";
@@ -76,13 +77,9 @@ const PlantCard = ({ plant, plants, setPlants, nextWatering }: Props) => {
                 <Column flex={1}>
                     <CardInfo>
                         <CardTitle>
-                            {plant.name}{" "}
-                            {/* <button
-                    type="button"
-                    onClick={() => void handleDelete(plant.id)}
-                >
-                    delete
-                </button> */}
+                            <TitleLink to={`plants/${plant.id}`}>
+                                {plant.name}
+                            </TitleLink>
                         </CardTitle>
                         <ButtonWater
                             type="button"
