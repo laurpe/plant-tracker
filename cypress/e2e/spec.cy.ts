@@ -1,5 +1,3 @@
-const baseUrl = Cypress.env("baseUrl") as string;
-
 describe("Plant tracker", () => {
     it("renders front page", () => {
         cy.visit("http://localhost:3000");

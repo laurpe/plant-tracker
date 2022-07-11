@@ -155,6 +155,7 @@ const AddPlantForm = ({
                             <Select
                                 onChange={handleGrowingMediumChange}
                                 name="growingMedium"
+                                id="plant-growingMedium-select"
                             >
                                 {growingMediums.map((growingMedium) => {
                                     return (
