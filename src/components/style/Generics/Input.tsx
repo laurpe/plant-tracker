@@ -11,6 +11,7 @@ const Input = styled.input`
     width: 100%;
     background-color: rgb(235, 243, 241);
     appearance: none;
+    min-height: 1.5rem;
 `;
 
 export default Input;

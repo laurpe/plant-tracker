@@ -69,6 +69,7 @@ const PlantCard = ({ plant, plants, setPlants, nextWatering }: Props) => {
     return (
         <StyledCard>
             <CardImage
+                id="plant-image"
                 src={
                     plant.imageName
                         ? `${imageBaseUrl}/${plant.imageName}`
