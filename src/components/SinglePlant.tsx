@@ -6,10 +6,9 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
-import Card from "./style/Generics/Card";
 import Column from "./style/Generics/Column";
 import Row from "./style/Generics/Row";
-import Subtitle from "./style/Generics/Subtitle";
+import Title from "./style/Generics/Title";
 
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -20,12 +19,6 @@ const getData = async <T,>(url: string): Promise<T> => {
     const response = await fetch(`${baseUrl}/${url}`);
     return response.json() as Promise<T>;
 };
-
-const StyledCard = styled(Card)`
-    height: 100%;
-    padding: 16px;
-    font-size: 1rem;
-`;
 
 const StyledColumn = styled(Column)`
     height: 100%;
@@ -60,22 +53,20 @@ const SinglePlant = () => {
 
     return (
         <Popup>
-            <StyledCard>
-                <StyledColumn>
-                    <Row justifyContent="space-between">
-                        <Subtitle>Plant info</Subtitle>
-                        <Row>
-                            <EditIcon sx={{ fontSize: 30 }} />
-                            <DeleteIcon sx={{ fontSize: 30 }} />
-                        </Row>
+            <StyledColumn>
+                <Row justifyContent="space-between">
+                    <Title>Plant info</Title>
+                    <Row>
+                        <EditIcon sx={{ fontSize: 30 }} />
+                        <DeleteIcon sx={{ fontSize: 30 }} />
                     </Row>
+                </Row>
 
-                    <p>{plant.name}</p>
-                    <p>{plant.growingMedium.name}</p>
-                    <p>{plant.lastWatered}</p>
-                    <p>{plant.wateringCycle}</p>
-                </StyledColumn>
-            </StyledCard>
+                <p>{plant.name}</p>
+                <p>{plant.growingMedium.name}</p>
+                <p>{plant.lastWatered}</p>
+                <p>{plant.wateringCycle}</p>
+            </StyledColumn>
         </Popup>
     );
 };
