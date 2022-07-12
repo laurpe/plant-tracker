@@ -4,26 +4,20 @@ import { TempPlant, Plant, GrowingMedium } from "../types";
 
 import axios from "axios";
 
-import Card from "./style/Generics/Card";
-import Input from "./style/Generics/Form/Input";
-import Label from "./style/Generics/Form/Label";
-import Form from "./style/Generics/Form/Form";
+import Input from "./style/Generics/Input";
+import Label from "./style/Generics/Label";
+import Form from "./style/Generics/Form";
 import Button from "./style/Generics/Button";
-import Subtitle from "./style/Generics/Subtitle";
+import Title from "./style/Generics/Title";
 import Row from "./style/Generics/Row";
 import Popup from "./style/Generics/Popup";
 import Column from "./style/Generics/Column";
-import Select from "./style/Generics/Form/Select";
+import Select from "./style/Generics/Select";
 import IconButton from "./style/Generics/IconButton";
 
 import CloseIcon from "@mui/icons-material/Close";
 
 import styled from "styled-components";
-
-const StyledCard = styled(Card)`
-    height: 100%;
-    padding: 16px;
-`;
 
 const StyledColumn = styled(Column)`
     height: 100%;
@@ -136,94 +130,85 @@ const AddPlantForm = ({
 
     return (
         <Popup>
-            <StyledCard>
-                <StyledColumn justifyContent="space-between">
-                    <Row justifyContent="space-between">
-                        <Subtitle>Add plant</Subtitle>
-                        <IconButton
-                            type="button"
-                            onClick={handleToggleFormClick}
+            <StyledColumn justifyContent="space-between">
+                <Row justifyContent="space-between">
+                    <Title>Add plant</Title>
+                    <IconButton type="button" onClick={handleToggleFormClick}>
+                        <CloseIcon sx={{ fontSize: 26 }} />
+                    </IconButton>
+                </Row>
+                <Form onSubmit={handleSubmit}>
+                    <Column>
+                        <Label htmlFor="name">Name</Label>
+                        <Input
+                            type="text"
+                            name="name"
+                            id="plant-name-input"
+                            onChange={handleChange}
+                            value={plant.name}
+                            minLength={2}
+                            maxLength={30}
+                            maximum-scale={1}
+                            required
+                        />
+                        <Label htmlFor="growingMedium">Growing medium</Label>
+                        <Select
+                            onChange={handleGrowingMediumChange}
+                            name="growingMedium"
+                            id="plant-growingMedium-select"
                         >
-                            <CloseIcon sx={{ fontSize: 26 }} />
-                        </IconButton>
-                    </Row>
-                    <Form onSubmit={handleSubmit}>
-                        <Column>
-                            <Label htmlFor="name">Name</Label>
-                            <Input
-                                type="text"
-                                name="name"
-                                id="plant-name-input"
-                                onChange={handleChange}
-                                value={plant.name}
-                                minLength={2}
-                                maxLength={30}
-                                maximum-scale={1}
-                                required
-                            />
-                            <Label htmlFor="growingMedium">
-                                Growing medium
-                            </Label>
-                            <Select
-                                onChange={handleGrowingMediumChange}
-                                name="growingMedium"
-                                id="plant-growingMedium-select"
-                            >
-                                {growingMediums.map((growingMedium) => {
-                                    return (
-                                        <option
-                                            key={growingMedium.id}
-                                            value={growingMedium.id}
-                                        >
-                                            {growingMedium.name}
-                                        </option>
-                                    );
-                                })}
-                            </Select>
-                            <Label htmlFor="lastWatered">Last watered</Label>
-                            <Input
-                                type="date"
-                                name="lastWatered"
-                                id="plant-lastWatered-input"
-                                onChange={handleChange}
-                                value={plant.lastWatered}
-                                max={maxDate}
-                            />
-                            <Label htmlFor="wateringCycle">
-                                Watering cycle
-                            </Label>
-                            <Input
-                                type="number"
-                                name="wateringCycle"
-                                id="plant-wateringCycle-input"
-                                onChange={handleChange}
-                                value={plant.wateringCycle}
-                                min="1"
-                                maximum-scale={1}
-                                required
-                            />
-                            <Label htmlFor="file">Image</Label>
-                            <Input
-                                type="file"
-                                name="file"
-                                id="plant-image-input"
-                                accept="image/jpeg, image/png"
-                                onChange={handleImageChange}
-                            />
-                        </Column>
-                    </Form>
-                    <Row justifyContent="space-between">
-                        <Button
-                            type="submit"
-                            id="add-plant-btn"
-                            width="100%"
-                            disabled={uploading}
-                        >
-                            Add
-                        </Button>
-                    </Row>
-                </StyledColumn>
-            </StyledCard>
+                            {growingMediums.map((growingMedium) => {
+                                return (
+                                    <option
+                                        key={growingMedium.id}
+                                        value={growingMedium.id}
+                                    >
+                                        {growingMedium.name}
+                                    </option>
+                                );
+                            })}
+                        </Select>
+                        <Label htmlFor="lastWatered">Last watered</Label>
+                        <Input
+                            type="date"
+                            name="lastWatered"
+                            id="plant-lastWatered-input"
+                            onChange={handleChange}
+                            value={plant.lastWatered}
+                            max={maxDate}
+                        />
+                        <Label htmlFor="wateringCycle">Watering cycle</Label>
+                        <Input
+                            type="number"
+                            name="wateringCycle"
+                            id="plant-wateringCycle-input"
+                            onChange={handleChange}
+                            value={plant.wateringCycle}
+                            min="1"
+                            maximum-scale={1}
+                            required
+                        />
+                        <Label htmlFor="file">Image</Label>
+                        <Input
+                            type="file"
+                            name="file"
+                            id="plant-image-input"
+                            accept="image/jpeg, image/png"
+                            onChange={handleImageChange}
+                        />
+                    </Column>
+                </Form>
+                <Row justifyContent="space-between">
+                    <Button
+                        type="submit"
+                        id="add-plant-btn"
+                        width="100%"
+                        disabled={uploading}
+                    >
+                        Add
+                    </Button>
+                </Row>
+            </StyledColumn>
         </Popup>
     );
 };
