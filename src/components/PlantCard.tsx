@@ -2,6 +2,7 @@ import { Plant } from "../types";
 import axios from "axios";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import { Link } from "react-router-dom";
 
 import Card from "./style/Generics/Card";
 import CardTitle from "./style/PlantCard/CardTitle";
@@ -84,14 +85,16 @@ const PlantCard = ({ plant, plants, setPlants, nextWatering }: Props) => {
                 >
                     <OpacityIcon sx={{ fontSize: 26 }} />
                 </CardButton>
-                <CardButton
-                    type="button"
-                    id="edit-btn"
-                    right="16px"
-                    onClick={() => void updateWatered(plant.id)}
-                >
-                    <ArticleOutlinedIcon sx={{ fontSize: 26 }} />
-                </CardButton>
+                <Link to={`plants/${plant.id}`}>
+                    <CardButton
+                        type="button"
+                        id="edit-btn"
+                        right="16px"
+                        onClick={() => void updateWatered(plant.id)}
+                    >
+                        <ArticleOutlinedIcon sx={{ fontSize: 26 }} />
+                    </CardButton>
+                </Link>
                 <CardInfo>
                     <TextWater>{formatNextWatering(nextWatering)}</TextWater>
                 </CardInfo>
