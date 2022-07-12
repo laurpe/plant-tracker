@@ -35,6 +35,8 @@
 //     }
 //   }
 // }
+import "cypress-file-upload";
+
 const apiUrl = Cypress.env("apiUrl") as string;
 const apiKey = Cypress.env("apiKey") as string;
 
@@ -54,6 +56,7 @@ Cypress.Commands.add("clearDatabase", () => {
 
 Cypress.Commands.add("addPlant", () => {
     cy.get("#add-plant-form-btn").click();
+    cy.get("#plant-image-input").attachFile("calathea.jpeg");
     cy.get("#plant-name-input").type("calathea-test");
     cy.get("#plant-growingMedium-select").select(1);
     cy.get("#plant-lastWatered-input").type("2022-06-01");
