@@ -1,7 +1,7 @@
 describe("Plant tracker", () => {
     it("renders front page", () => {
         cy.visit("http://localhost:3000");
-        cy.contains("Plant tracker");
+        cy.contains("plant tracker");
     });
 });
 
@@ -23,7 +23,7 @@ describe("Plant actions", () => {
 
         cy.contains("watering late");
 
-        cy.contains("calathea-test").parent().find("button").click();
+        cy.contains("calathea-test").get('button[id="water-btn"]').click();
 
         cy.contains("water in 6 days");
     });
