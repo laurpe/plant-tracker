@@ -4,12 +4,11 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 
 import Card from "./style/Generics/Card";
-import CardTitle from "./style/Generics/CardTitle";
-import ButtonWater from "./style/PlantCard/ButtonWater";
+import CardTitle from "./style/PlantCard/CardTitle";
+import CardButton from "./style/PlantCard/CardButton";
 import TextWater from "./style//PlantCard/TextWater";
 import CardInfo from "./style/PlantCard/CardInfo";
 import CardImage from "./style/PlantCard/CardImage";
-import ButtonEdit from "./style/PlantCard/ButtonEdit";
 
 import OpacityIcon from "@mui/icons-material/Opacity";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
@@ -26,15 +25,6 @@ const StyledCard = styled(Card)`
     margin: 16px;
     border-radius: 10px;
     position: relative;
-`;
-
-const StyledCardTitle = styled(CardTitle)`
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    color: white;
-    font-weight: bold;
-    text-shadow: 0px 0.5px 2px black;
 `;
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
@@ -85,21 +75,23 @@ const PlantCard = ({ plant, plants, setPlants, nextWatering }: Props) => {
                 }
             />
             <Column flex={1}>
-                <StyledCardTitle>{plant.name}</StyledCardTitle>
-                <ButtonWater
+                <CardTitle>{plant.name}</CardTitle>
+                <CardButton
                     type="button"
                     id="water-btn"
+                    right="83px"
                     onClick={() => void updateWatered(plant.id)}
                 >
                     <OpacityIcon sx={{ fontSize: 26 }} />
-                </ButtonWater>
-                <ButtonEdit
+                </CardButton>
+                <CardButton
                     type="button"
                     id="edit-btn"
+                    right="16px"
                     onClick={() => void updateWatered(plant.id)}
                 >
                     <ArticleOutlinedIcon sx={{ fontSize: 26 }} />
-                </ButtonEdit>
+                </CardButton>
                 <CardInfo>
                     <TextWater>{formatNextWatering(nextWatering)}</TextWater>
                 </CardInfo>
