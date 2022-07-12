@@ -14,11 +14,15 @@ import Row from "./style/Generics/Row";
 import Popup from "./style/Generics/Popup";
 import Column from "./style/Generics/Column";
 import Select from "./style/Generics/Form/Select";
+import IconButton from "./style/Generics/IconButton";
+
+import CloseIcon from "@mui/icons-material/Close";
 
 import styled from "styled-components";
 
 const StyledCard = styled(Card)`
     height: 100%;
+    padding: 16px;
 `;
 
 const StyledColumn = styled(Column)`
@@ -133,10 +137,18 @@ const AddPlantForm = ({
     return (
         <Popup>
             <StyledCard>
-                <Form onSubmit={handleSubmit}>
-                    <StyledColumn justifyContent="space-between">
+                <StyledColumn justifyContent="space-between">
+                    <Row justifyContent="space-between">
+                        <Subtitle>Add plant</Subtitle>
+                        <IconButton
+                            type="button"
+                            onClick={handleToggleFormClick}
+                        >
+                            <CloseIcon sx={{ fontSize: 26 }} />
+                        </IconButton>
+                    </Row>
+                    <Form onSubmit={handleSubmit}>
                         <Column>
-                            <Subtitle>Add plant</Subtitle>
                             <Label htmlFor="name">Name</Label>
                             <Input
                                 type="text"
@@ -199,25 +211,18 @@ const AddPlantForm = ({
                                 onChange={handleImageChange}
                             />
                         </Column>
-                        <Row justifyContent="space-between">
-                            <Button
-                                type="button"
-                                width="120px"
-                                onClick={handleToggleFormClick}
-                            >
-                                Close
-                            </Button>
-                            <Button
-                                type="submit"
-                                id="add-plant-btn"
-                                width="120px"
-                                disabled={uploading}
-                            >
-                                Add
-                            </Button>
-                        </Row>
-                    </StyledColumn>
-                </Form>
+                    </Form>
+                    <Row justifyContent="space-between">
+                        <Button
+                            type="submit"
+                            id="add-plant-btn"
+                            width="100%"
+                            disabled={uploading}
+                        >
+                            Add
+                        </Button>
+                    </Row>
+                </StyledColumn>
             </StyledCard>
         </Popup>
     );
