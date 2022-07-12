@@ -5,8 +5,6 @@ const Image = styled.img`
     height: 121px;
     object-fit: cover;
     border-radius: 5px;
-    margin-right: 16px;
-    margin-bottom: 16px;
 `;
 
 export default Image;

@@ -17,6 +17,7 @@ import IconButton from "./style/Generics/IconButton";
 import Image from "./style/Generics/Image";
 
 import CloseIcon from "@mui/icons-material/Close";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import styled from "styled-components";
 
@@ -25,8 +26,37 @@ const StyledColumn = styled(Column)`
     padding-bottom: 40px;
 `;
 
-const StyledRow = styled(Row)`
-    background-color: rgb(235, 243, 241);
+const StyledDiv = styled.div`
+    position: relative;
+    margin-right: 16px;
+`;
+
+const StyledIconButton = styled(IconButton)`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    box-shadow: none;
+    color: white;
+`;
+
+const StyledDeleteIcon = styled(DeleteIcon)`
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    padding: 2px;
+    height: 100px;
+    width: 100px;
+`;
+
+const StyledInput = styled(Input)`
+    width: 122px;
+    margin-right: 16px;
+    height: 122px;
 `;
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
@@ -132,6 +162,10 @@ const AddPlantForm = ({
         setToggleAddPlantForm(false);
     };
 
+    const handleImageRemove = () => {
+        setImage("");
+    };
+
     const maxDate = new Date().toISOString().substring(0, 10);
 
     return (
@@ -150,7 +184,7 @@ const AddPlantForm = ({
                                 <Column>
                                     <Label htmlFor="file">Image</Label>
                                     {!image && (
-                                        <Input
+                                        <StyledInput
                                             type="file"
                                             name="file"
                                             id="plant-image-input"
@@ -159,10 +193,21 @@ const AddPlantForm = ({
                                         />
                                     )}
                                     {image && (
-                                        <Image
-                                            src={`${imgBaseUrl}/${image}`}
-                                            alt="plant"
-                                        />
+                                        <StyledDiv>
+                                            <Image
+                                                src={`${imgBaseUrl}/${image}`}
+                                                alt="plant"
+                                            />
+                                            <StyledIconButton
+                                                onClick={() => {
+                                                    handleImageRemove();
+                                                }}
+                                            >
+                                                <StyledDeleteIcon
+                                                    sx={{ fontSize: 26 }}
+                                                />
+                                            </StyledIconButton>
+                                        </StyledDiv>
                                     )}
                                 </Column>
                                 <Column flex={1}>
