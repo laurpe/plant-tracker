@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
-const Row = styled.div`
+interface Props {
+    justifyContent?: string;
+    alignItems?: string;
+}
+
+const Row = styled.div<Props>`
     display: flex;
     flex-direction: row;
-    justify-content: ${(props: { justifyContent?: string }) =>
-        props.justifyContent || "start"};
-    align-items: center;
+    justify-content: ${(props) => props.justifyContent || "start"};
+    align-items: ${(props) => props.alignItems || "center"};
 `;
 
 export default Row;
