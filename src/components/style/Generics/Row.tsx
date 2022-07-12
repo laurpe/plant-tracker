@@ -5,6 +5,7 @@ const Row = styled.div`
     flex-direction: row;
     justify-content: ${(props: { justifyContent?: string }) =>
         props.justifyContent || "start"};
+    align-items: center;
 `;
 
 export default Row;

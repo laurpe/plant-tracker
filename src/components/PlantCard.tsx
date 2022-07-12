@@ -4,16 +4,17 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 
 import Card from "./style/Generics/Card";
-import CardTitle from "./style/Generics/CardTitle";
-import ButtonWater from "./style/PlantCard/ButtonWater";
+import CardTitle from "./style/PlantCard/CardTitle";
+import CardButton from "./style/PlantCard/CardButton";
 import TextWater from "./style//PlantCard/TextWater";
 import CardInfo from "./style/PlantCard/CardInfo";
 import CardImage from "./style/PlantCard/CardImage";
 import TitleLink from "./style/PlantCard/TitleLink";
 
 import OpacityIcon from "@mui/icons-material/Opacity";
+import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
+
 import Column from "./style/Generics/Column";
-import Row from "./style/Generics/Row";
 
 import styled from "styled-components";
 
@@ -24,6 +25,7 @@ dayjs.extend(utc);
 const StyledCard = styled(Card)`
     margin: 16px;
     border-radius: 10px;
+    position: relative;
 `;
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
@@ -66,6 +68,7 @@ const PlantCard = ({ plant, plants, setPlants, nextWatering }: Props) => {
 
     return (
         <StyledCard>
+<<<<<<< HEAD
             <Row>
                 <CardImage
                     src={
@@ -94,6 +97,37 @@ const PlantCard = ({ plant, plants, setPlants, nextWatering }: Props) => {
                     </CardInfo>
                 </Column>
             </Row>
+=======
+            <CardImage
+                src={
+                    plant.imageName
+                        ? `${imageBaseUrl}/${plant.imageName}`
+                        : "https://as2.ftcdn.net/v2/jpg/01/85/31/71/1000_F_185317104_XmMUkvpcG2zJHLSTT2f2nTCOBrdWvwMJ.jpg"
+                }
+            />
+            <Column flex={1}>
+                <CardTitle>{plant.name}</CardTitle>
+                <CardButton
+                    type="button"
+                    id="water-btn"
+                    right="83px"
+                    onClick={() => void updateWatered(plant.id)}
+                >
+                    <OpacityIcon sx={{ fontSize: 26 }} />
+                </CardButton>
+                <CardButton
+                    type="button"
+                    id="edit-btn"
+                    right="16px"
+                    onClick={() => void updateWatered(plant.id)}
+                >
+                    <ArticleOutlinedIcon sx={{ fontSize: 26 }} />
+                </CardButton>
+                <CardInfo>
+                    <TextWater>{formatNextWatering(nextWatering)}</TextWater>
+                </CardInfo>
+            </Column>
+>>>>>>> fadb6cdb86830da1fb06114366030d61b7859d14
         </StyledCard>
     );
 };
