@@ -2,7 +2,7 @@ import Popup from "./style/Generics/Popup";
 
 import axios from "axios";
 
-import { Plant } from "../types";
+import { Plant, GrowingMedium } from "../types";
 
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -34,9 +34,10 @@ const StyledColumn = styled(Column)`
 interface Props {
     plants: Plant[];
     setPlants: (plants: Plant[]) => void;
+    growingMediums: GrowingMedium[];
 }
 
-const SinglePlant = ({ plants, setPlants }: Props) => {
+const SinglePlant = ({ plants, setPlants, growingMediums }: Props) => {
     const [plant, setPlant] = useState<Plant>({
         name: "",
         growingMedium: {
@@ -117,21 +118,29 @@ const SinglePlant = ({ plants, setPlants }: Props) => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
-        const plantCopy = {
-            ...plant,
-            growingMedium: growingMedium,
-            imageName: image,
-        };
-        void updatePlant(plantCopy);
-        setPlant({
-            name: "",
-            growingMedium: "",
-            lastWatered: "2022-07-07",
-            wateringCycle: 0,
-            imageName: "",
-        });
-        console.log("plant: ", plantCopy);
-        setToggleAddPlantForm(false);
+        // const plantCopy = {
+        //     ...plant,
+        //     growingMedium: growingMedium,
+        //     imageName: image,
+        // };
+        // void updatePlant(plantCopy);
+        // setPlant({
+        //     name: "",
+        //     growingMedium: {
+        //         name: "",
+        //         composition: [{ component: "", percentage: 100 }],
+        //         id: "",
+        //     },
+        //     lastWatered: "",
+        //     wateringCycle: 0,
+        //     imageName: "",
+        //     id: "",
+        // });
+        // console.log("plant: ", plantCopy);
+    };
+
+    const handleImageRemove = () => {
+        setImage("");
     };
 
     return (
@@ -140,8 +149,8 @@ const SinglePlant = ({ plants, setPlants }: Props) => {
                 <Row justifyContent="space-between">
                     <Title>{plant.name}</Title>
                     <Row>
-                        <EditIcon sx={{ fontSize: 30 }} />
-                        <DeleteIcon sx={{ fontSize: 30 }} />
+                        <EditIcon sx={{ fontSize: 26 }} />
+                        <DeleteIcon sx={{ fontSize: 26 }} />
                         <CloseIcon sx={{ fontSize: 26 }} />
                     </Row>
                 </Row>
@@ -151,6 +160,7 @@ const SinglePlant = ({ plants, setPlants }: Props) => {
                     handleGrowingMediumChange={handleGrowingMediumChange}
                     growingMediums={growingMediums}
                     handleImageChange={handleImageChange}
+                    handleImageRemove={handleImageRemove}
                     plant={plant}
                     uploading={uploading}
                 />
