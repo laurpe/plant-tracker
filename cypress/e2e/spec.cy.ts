@@ -27,11 +27,10 @@ describe("When a new plant is added", () => {
 describe("When plant info is modified", () => {
     beforeEach(() => {
         cy.clearDatabase();
-    });
-    it("new info is shown on the front page (plant has image)", () => {
         cy.visit("http://localhost:3000");
         cy.addPlant();
-
+    });
+    it("new info is shown on the front page (plant has image)", () => {
         cy.contains("calathea").get("#edit-btn").click();
 
         cy.contains("Plant details");
@@ -46,6 +45,13 @@ describe("When plant info is modified", () => {
         cy.get("#submit-btn").click();
 
         cy.contains("calathea beauty star");
+    });
+    it("and user deletes plant, it is removed from front page", () => {
+        cy.contains("calathea").get("#edit-btn").click();
+
+        cy.get("#delete-plant-btn").click();
+
+        cy.get("calathea").should("not.exist");
     });
 });
 

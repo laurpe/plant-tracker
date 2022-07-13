@@ -148,6 +148,7 @@ const SinglePlant = ({ plants, setPlants, growingMediums }: Props) => {
                     <Row>
                         <IconButton
                             type="button"
+                            id="delete-plant-btn"
                             onClick={() => {
                                 void handleDelete(id);
                             }}
