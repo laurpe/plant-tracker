@@ -6,6 +6,7 @@ import { Plant, GrowingMedium } from "./types";
 
 import Main from "./components/Main";
 import SinglePlant from "./components/SinglePlant";
+import AddPlantForm from "./components/AddPlantForm";
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
@@ -17,8 +18,6 @@ const getData = async <T,>(url: string): Promise<T> => {
 const App = () => {
     const [plants, setPlants] = useState<Plant[]>([]);
     const [growingMediums, setGrowingMediums] = useState<GrowingMedium[]>([]);
-    const [toggleAddPlantForm, setToggleAddPlantForm] =
-        useState<boolean>(false);
 
     useEffect(() => {
         const fetchPlants = async () => {
@@ -40,31 +39,20 @@ const App = () => {
         });
     }, []);
 
-    const handleToggleFormClick = (): void => {
-        setToggleAddPlantForm(!toggleAddPlantForm);
-    };
-
-    useEffect(() => {
-        if (toggleAddPlantForm) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "auto";
-        }
-    }, [toggleAddPlantForm]);
-
     return (
         <BrowserRouter>
             <Routes>
                 <Route
                     path="/"
+                    element={<Main plants={plants} setPlants={setPlants} />}
+                />
+                <Route
+                    path="/add"
                     element={
-                        <Main
+                        <AddPlantForm
                             plants={plants}
                             setPlants={setPlants}
                             growingMediums={growingMediums}
-                            handleToggleFormClick={handleToggleFormClick}
-                            toggleAddPlantForm={toggleAddPlantForm}
-                            setToggleAddPlantForm={setToggleAddPlantForm}
                         />
                     }
                 />

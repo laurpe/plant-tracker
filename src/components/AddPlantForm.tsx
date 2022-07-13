@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { TempPlant, Plant, GrowingMedium } from "../types";
 
@@ -67,17 +68,9 @@ interface Props {
     plants: Plant[];
     setPlants: (plants: Plant[]) => void;
     growingMediums: GrowingMedium[];
-    handleToggleFormClick: React.MouseEventHandler<HTMLButtonElement>;
-    setToggleAddPlantForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const AddPlantForm = ({
-    plants,
-    setPlants,
-    growingMediums,
-    handleToggleFormClick,
-    setToggleAddPlantForm,
-}: Props) => {
+const AddPlantForm = ({ plants, setPlants, growingMediums }: Props) => {
     // states
 
     const [plant, setPlant] = useState<TempPlant>({
@@ -90,7 +83,9 @@ const AddPlantForm = ({
     const [image, setImage] = useState<string>("");
     const [growingMedium, setGrowingMedium] = useState<string>("");
     const [uploading, setUploading] = useState<boolean>(false);
-    console.log(growingMediums);
+
+    const navigate = useNavigate();
+
     // add plant to database
 
     const addPlant = async (plant: TempPlant): Promise<void> => {
@@ -158,8 +153,7 @@ const AddPlantForm = ({
             wateringCycle: 0,
             imageName: "",
         });
-        console.log("plant: ", plantCopy);
-        setToggleAddPlantForm(false);
+        navigate("/");
     };
 
     const handleImageRemove = () => {
@@ -173,7 +167,7 @@ const AddPlantForm = ({
             <StyledColumn justifyContent="space-between">
                 <Row justifyContent="space-between">
                     <Title>Add plant</Title>
-                    <IconButton type="button" onClick={handleToggleFormClick}>
+                    <IconButton type="button" onClick={() => navigate("/")}>
                         <CloseIcon sx={{ fontSize: 26 }} />
                     </IconButton>
                 </Row>
