@@ -1,4 +1,4 @@
-import { Plant, GrowingMedium } from "../types";
+import { Plant, GrowingMedium, TempPlant } from "../types";
 
 import Input from "./style/Generics/Input";
 import Label from "./style/Generics/Label";
@@ -24,7 +24,7 @@ interface Props {
     handleImageChange: React.ChangeEventHandler<HTMLInputElement>;
     handleImageRemove: () => void;
     growingMediums: GrowingMedium[];
-    plant: Plant;
+    plant: Plant | TempPlant;
     uploading: boolean;
 }
 

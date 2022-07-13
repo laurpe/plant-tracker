@@ -5,11 +5,11 @@ describe("Plant tracker", () => {
     });
 });
 
-describe("Plant actions", () => {
+describe("When a new plant is added", () => {
     beforeEach(() => {
         cy.clearDatabase();
     });
-    it("when plant is added, it is rendered on the front page", () => {
+    it("the plant is rendered on the front page", () => {
         cy.visit("http://localhost:3000");
         cy.addPlant();
 
@@ -22,21 +22,14 @@ describe("Plant actions", () => {
                 expect(image.naturalHeight).to.equal(259);
             });
     });
+});
 
-    it("when plant is watered, new time to water shows", () => {
-        cy.visit("http://localhost:3000");
-        cy.addPlant();
-
-        cy.contains("watering late");
-
-        cy.contains("calathea").get("#water-btn").click();
-
-        cy.contains("water in 6 days");
+describe("When plant info is modified", () => {
+    beforeEach(() => {
+        cy.clearDatabase();
     });
-
-    it("when plant that has an image is edited, new info is shown on the front page", () => {
+    it("new info is shown on the front page (plant has image)", () => {
         cy.visit("http://localhost:3000");
-        //plant with an image
         cy.addPlant();
 
         cy.contains("calathea").get("#edit-btn").click();
@@ -53,5 +46,21 @@ describe("Plant actions", () => {
         cy.get("#submit-btn").click();
 
         cy.contains("calathea beauty star");
+    });
+});
+
+describe("Plant actions", () => {
+    beforeEach(() => {
+        cy.clearDatabase();
+    });
+    it("when plant is watered, new time to water shows", () => {
+        cy.visit("http://localhost:3000");
+        cy.addPlant();
+
+        cy.contains("watering late");
+
+        cy.contains("calathea").get("#water-btn").click();
+
+        cy.contains("water in 6 days");
     });
 });
