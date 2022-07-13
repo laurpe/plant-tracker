@@ -144,6 +144,7 @@ const AddPlantForm = ({ plants, setPlants, growingMediums }: Props) => {
             imageName: image,
         };
         plantCopy.lastWatered = new Date(plant.lastWatered).toISOString();
+        console.log(plantCopy);
         setPlant(plantCopy);
         void addPlant(plantCopy);
         setPlant({

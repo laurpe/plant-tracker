@@ -15,9 +15,8 @@ export interface TempPlantNoGrowingMedium {
 }
 
 // Plant model after saving
-export interface Plant extends Omit<TempPlant, "growingMedium"> {
+export interface Plant extends TempPlant {
     id: string;
-    growingMedium: GrowingMedium;
 }
 
 // Growing medium

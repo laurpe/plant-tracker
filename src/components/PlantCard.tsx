@@ -42,6 +42,7 @@ const PlantCard = ({ plant, plants, setPlants, nextWatering }: Props) => {
     const updateWatered = async (id: string): Promise<void> => {
         try {
             const response = await axios.put<Plant>(`${baseUrl}/plants/${id}`, {
+                ...plant,
                 lastWatered: dayjs().utcOffset(0).startOf("date").toISOString(),
             });
             const newPlant = response.data;
@@ -53,18 +54,6 @@ const PlantCard = ({ plant, plants, setPlants, nextWatering }: Props) => {
             throw new Error("Could not update watering date");
         }
     };
-
-    // const handleDelete = async (id: string): Promise<void> => {
-    //     try {
-    //         await axios.delete<Plant>(`${baseUrl}/plants/${id}`);
-    //         const plantsWithoutDeleted = plants.filter(
-    //             (plant) => plant.id !== id
-    //         );
-    //         setPlants(plantsWithoutDeleted);
-    //     } catch (error) {
-    //         throw new Error("Could not delete plant");
-    //     }
-    // };
 
     return (
         <StyledCard>

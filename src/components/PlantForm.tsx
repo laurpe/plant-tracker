@@ -18,8 +18,9 @@ const imgBaseUrl = process.env.REACT_APP_IMAGE_BASE_URL as string;
 
 interface Props {
     handleSubmit: React.FormEventHandler<HTMLFormElement>;
-    handleChange: React.ChangeEventHandler<HTMLInputElement>;
-    handleGrowingMediumChange: React.ChangeEventHandler<HTMLSelectElement>;
+    handleChange: React.ChangeEventHandler<
+        HTMLInputElement | HTMLSelectElement
+    >;
     handleImageChange: React.ChangeEventHandler<HTMLInputElement>;
     handleImageRemove: () => void;
     growingMediums: GrowingMedium[];
@@ -63,7 +64,6 @@ const StyledInput = styled(Input)`
 const PlantForm = ({
     handleSubmit,
     handleChange,
-    handleGrowingMediumChange,
     growingMediums,
     handleImageChange,
     handleImageRemove,
@@ -71,7 +71,6 @@ const PlantForm = ({
     uploading,
 }: Props) => {
     const maxDate = new Date().toISOString().substring(0, 10);
-    console.log("plant image name", plant.imageName);
 
     return (
         <Form onSubmit={handleSubmit}>
@@ -124,10 +123,10 @@ const PlantForm = ({
                                 Growing medium
                             </Label>
                             <Select
-                                onChange={handleGrowingMediumChange}
+                                onChange={handleChange}
                                 name="growingMedium"
                                 id="plant-growingMedium-select"
-                                value={plant.growingMedium.id}
+                                value={plant.growingMedium}
                             >
                                 <option hidden>Select...</option>
                                 {growingMediums.map((growingMedium) => {

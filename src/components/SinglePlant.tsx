@@ -40,16 +40,14 @@ interface Props {
 const SinglePlant = ({ plants, setPlants, growingMediums }: Props) => {
     const [plant, setPlant] = useState<Plant>({
         name: "",
-        growingMedium: {
-            name: "",
-            composition: [{ component: "", percentage: 100 }],
-            id: "",
-        },
+        growingMedium: "",
         lastWatered: "",
         wateringCycle: 0,
         imageName: "",
         id: "",
     });
+    const [uploading, setUploading] = useState<boolean>(false);
+
     const id = useParams().id as string;
 
     const navigate = useNavigate();
@@ -65,11 +63,9 @@ const SinglePlant = ({ plants, setPlants, growingMediums }: Props) => {
         });
     }, [id]);
 
-    const [growingMedium, setGrowingMedium] = useState<string>("");
-    const [uploading, setUploading] = useState<boolean>(false);
-
     const updatePlant = async (plant: Plant): Promise<void> => {
         try {
+            console.log(plant);
             await axios.put<Plant>(`${baseUrl}/plants/${id}`, plant);
             const plantsCopy = [...plants];
             const i = plantsCopy.findIndex((plant) => plant.id === id);
@@ -81,16 +77,23 @@ const SinglePlant = ({ plants, setPlants, growingMediums }: Props) => {
         }
     };
 
+    const handleDelete = async (id: string): Promise<void> => {
+        try {
+            await axios.delete<Plant>(`${baseUrl}/plants/${id}`);
+            const plantsWithoutDeleted = plants.filter(
+                (plant) => plant.id !== id
+            );
+            setPlants(plantsWithoutDeleted);
+        } catch (error) {
+            throw new Error("Could not delete plant");
+        }
+        navigate("/");
+    };
+
     // form functions
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         setPlant({ ...plant, [event.target.name]: event.target.value });
-    };
-
-    const handleGrowingMediumChange = (
-        event: React.ChangeEvent<HTMLSelectElement>
-    ): void => {
-        setGrowingMedium(event.target.value);
     };
 
     const handleImageChange = async (
@@ -114,44 +117,27 @@ const SinglePlant = ({ plants, setPlants, growingMediums }: Props) => {
         }
     };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    const handleSubmit = async (
+        event: React.FormEvent<HTMLFormElement>
+    ): Promise<void> => {
         event.preventDefault();
-        // const plantCopy = {
-        //     ...plant,
-        //     growingMedium: growingMedium,
-        //     imageName: image,
-        // };
-        // void updatePlant(plantCopy);
-        // setPlant({
-        //     name: "",
-        //     growingMedium: {
-        //         name: "",
-        //         composition: [{ component: "", percentage: 100 }],
-        //         id: "",
-        //     },
-        //     lastWatered: "",
-        //     wateringCycle: 0,
-        //     imageName: "",
-        //     id: "",
-        // });
-        // console.log("plant: ", plantCopy);
+        const plantCopy = {
+            ...plant,
+        };
+        await updatePlant(plantCopy);
+        setPlant({
+            name: "",
+            growingMedium: "",
+            lastWatered: "",
+            wateringCycle: 0,
+            imageName: "",
+            id: "",
+        });
+        navigate("/");
     };
 
     const handleImageRemove = () => {
         setPlant({ ...plant, imageName: "" });
-    };
-
-    const handleDelete = async (id: string): Promise<void> => {
-        try {
-            await axios.delete<Plant>(`${baseUrl}/plants/${id}`);
-            const plantsWithoutDeleted = plants.filter(
-                (plant) => plant.id !== id
-            );
-            setPlants(plantsWithoutDeleted);
-        } catch (error) {
-            throw new Error("Could not delete plant");
-        }
-        navigate("/");
     };
 
     return (
@@ -176,9 +162,8 @@ const SinglePlant = ({ plants, setPlants, growingMediums }: Props) => {
                     </Row>
                 </Row>
                 <PlantForm
-                    handleSubmit={handleSubmit}
+                    handleSubmit={(event) => void handleSubmit(event)}
                     handleChange={handleChange}
-                    handleGrowingMediumChange={handleGrowingMediumChange}
                     growingMediums={growingMediums}
                     handleImageChange={(event) => void handleImageChange(event)}
                     handleImageRemove={handleImageRemove}
