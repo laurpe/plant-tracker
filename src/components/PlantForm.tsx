@@ -126,6 +126,7 @@ const PlantForm = ({
                                 onChange={handleGrowingMediumChange}
                                 name="growingMedium"
                                 id="plant-growingMedium-select"
+                                value={plant.growingMedium.id}
                             >
                                 <option hidden>Select...</option>
                                 {growingMediums.map((growingMedium) => {

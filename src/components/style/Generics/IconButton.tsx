@@ -11,7 +11,6 @@ const IconButton = styled.button`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: rgba(0, 0, 0, 0.15) 0 1px 4px;
 `;
 
 export default IconButton;

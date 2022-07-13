@@ -147,7 +147,7 @@ const SinglePlant = ({ plants, setPlants, growingMediums }: Props) => {
         <Popup>
             <StyledColumn>
                 <Row justifyContent="space-between">
-                    <Title>{plant.name}</Title>
+                    <Title>Plant details</Title>
                     <Row>
                         <EditIcon sx={{ fontSize: 26 }} />
                         <DeleteIcon sx={{ fontSize: 26 }} />
