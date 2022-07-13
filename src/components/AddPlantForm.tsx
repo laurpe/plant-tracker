@@ -272,7 +272,7 @@ const AddPlantForm = ({ plants, setPlants, growingMediums }: Props) => {
                             width="100%"
                             disabled={uploading}
                         >
-                            Add
+                            Save
                         </Button>
                     </Column>
                 </Form>

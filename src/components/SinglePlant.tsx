@@ -14,7 +14,6 @@ import Title from "./style/Generics/Title";
 
 import PlantForm from "./PlantForm";
 
-import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "./style/Generics/IconButton";
@@ -66,7 +65,6 @@ const SinglePlant = ({ plants, setPlants, growingMediums }: Props) => {
         });
     }, [id]);
 
-    const [image, setImage] = useState<string>("");
     const [growingMedium, setGrowingMedium] = useState<string>("");
     const [uploading, setUploading] = useState<boolean>(false);
 
@@ -95,28 +93,25 @@ const SinglePlant = ({ plants, setPlants, growingMediums }: Props) => {
         setGrowingMedium(event.target.value);
     };
 
-    const handleImageChange = (
+    const handleImageChange = async (
         event: React.ChangeEvent<HTMLInputElement>
-    ): void => {
-        const uploadImage = async () => {
-            if (event.target.files) {
-                const image = event.target.files[0];
+    ): Promise<void> => {
+        if (event.target.files) {
+            setUploading(true);
+            const image = event.target.files[0];
 
-                const config = { headers: { "Content-Type": "image/jpeg" } };
+            const config = { headers: { "Content-Type": "image/jpeg" } };
 
-                try {
-                    const response = await axios.post<{
-                        [key: string]: string;
-                    }>(`${imgBaseUrl}/upload`, image, config);
-                    setImage(response.data.imgName);
-                } catch (error) {
-                    throw new Error("Could not upload image");
-                }
+            try {
+                const response = await axios.post<{
+                    [key: string]: string;
+                }>(`${imgBaseUrl}/upload`, image, config);
+                setPlant({ ...plant, imageName: response.data.imgName });
+            } catch (error) {
+                throw new Error("Could not upload image");
             }
-        };
-        setUploading(true);
-        void uploadImage();
-        setUploading(false);
+            setUploading(false);
+        }
     };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
@@ -143,7 +138,7 @@ const SinglePlant = ({ plants, setPlants, growingMediums }: Props) => {
     };
 
     const handleImageRemove = () => {
-        setImage("");
+        setPlant({ ...plant, imageName: "" });
     };
 
     const handleDelete = async (id: string): Promise<void> => {
@@ -165,7 +160,6 @@ const SinglePlant = ({ plants, setPlants, growingMediums }: Props) => {
                 <Row justifyContent="space-between">
                     <Title>Plant details</Title>
                     <Row>
-                        <EditIcon sx={{ fontSize: 26 }} />
                         <IconButton
                             type="button"
                             onClick={() => {
@@ -186,7 +180,7 @@ const SinglePlant = ({ plants, setPlants, growingMediums }: Props) => {
                     handleChange={handleChange}
                     handleGrowingMediumChange={handleGrowingMediumChange}
                     growingMediums={growingMediums}
-                    handleImageChange={handleImageChange}
+                    handleImageChange={(event) => void handleImageChange(event)}
                     handleImageRemove={handleImageRemove}
                     plant={plant}
                     uploading={uploading}

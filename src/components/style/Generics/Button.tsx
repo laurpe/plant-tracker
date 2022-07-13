@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Button = styled.button`
-    height: 3rem;
+    height: 3.5rem;
     font-family: inherit;
     font-size: 1rem;
     color: white;

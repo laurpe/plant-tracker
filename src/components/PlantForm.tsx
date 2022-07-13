@@ -71,6 +71,7 @@ const PlantForm = ({
     uploading,
 }: Props) => {
     const maxDate = new Date().toISOString().substring(0, 10);
+    console.log("plant image name", plant.imageName);
 
     return (
         <Form onSubmit={handleSubmit}>
@@ -169,7 +170,7 @@ const PlantForm = ({
                     width="100%"
                     disabled={uploading}
                 >
-                    Add
+                    Save
                 </Button>
             </Column>
         </Form>
