@@ -194,6 +194,7 @@ const AddPlantForm = ({ plants, setPlants, growingMediums }: Props) => {
                                                 alt="plant"
                                             />
                                             <StyledIconButton
+                                                type="button"
                                                 onClick={() => {
                                                     handleImageRemove();
                                                 }}

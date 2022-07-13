@@ -95,6 +95,8 @@ const PlantForm = ({
                                         alt="plant"
                                     />
                                     <StyledIconButton
+                                        type="button"
+                                        id="img-remove-btn"
                                         onClick={() => {
                                             handleImageRemove();
                                         }}
@@ -165,7 +167,7 @@ const PlantForm = ({
                 </Column>
                 <Button
                     type="submit"
-                    id="add-plant-btn"
+                    id="submit-btn"
                     width="100%"
                     disabled={uploading}
                 >
