@@ -5,7 +5,7 @@ import axios from "axios";
 import { Plant, GrowingMedium } from "../types";
 
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import styled from "styled-components";
 
 import Column from "./style/Generics/Column";
@@ -17,6 +17,7 @@ import PlantForm from "./PlantForm";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "./style/Generics/IconButton";
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 const imgBaseUrl = process.env.REACT_APP_IMAGE_UPLOAD_API_BASE_URL as string;
@@ -51,6 +52,8 @@ const SinglePlant = ({ plants, setPlants, growingMediums }: Props) => {
         id: "",
     });
     const id = useParams().id as string;
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchPlant = async () => {
@@ -143,6 +146,19 @@ const SinglePlant = ({ plants, setPlants, growingMediums }: Props) => {
         setImage("");
     };
 
+    const handleDelete = async (id: string): Promise<void> => {
+        try {
+            await axios.delete<Plant>(`${baseUrl}/plants/${id}`);
+            const plantsWithoutDeleted = plants.filter(
+                (plant) => plant.id !== id
+            );
+            setPlants(plantsWithoutDeleted);
+        } catch (error) {
+            throw new Error("Could not delete plant");
+        }
+        navigate("/");
+    };
+
     return (
         <Popup>
             <StyledColumn>
@@ -150,8 +166,19 @@ const SinglePlant = ({ plants, setPlants, growingMediums }: Props) => {
                     <Title>Plant details</Title>
                     <Row>
                         <EditIcon sx={{ fontSize: 26 }} />
-                        <DeleteIcon sx={{ fontSize: 26 }} />
-                        <CloseIcon sx={{ fontSize: 26 }} />
+                        <IconButton
+                            type="button"
+                            onClick={() => {
+                                void handleDelete(id);
+                            }}
+                        >
+                            <DeleteIcon sx={{ fontSize: 26 }} />
+                        </IconButton>
+                        <Link to={"/"}>
+                            <IconButton type="button">
+                                <CloseIcon sx={{ fontSize: 26 }} />
+                            </IconButton>
+                        </Link>
                     </Row>
                 </Row>
                 <PlantForm

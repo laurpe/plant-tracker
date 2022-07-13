@@ -87,12 +87,7 @@ const PlantCard = ({ plant, plants, setPlants, nextWatering }: Props) => {
                     <OpacityIcon sx={{ fontSize: 26 }} />
                 </CardButton>
                 <Link to={`plants/${plant.id}`}>
-                    <CardButton
-                        type="button"
-                        id="edit-btn"
-                        right="16px"
-                        onClick={() => void updateWatered(plant.id)}
-                    >
+                    <CardButton type="button" id="edit-btn" right="16px">
                         <ArticleOutlinedIcon sx={{ fontSize: 26 }} />
                     </CardButton>
                 </Link>

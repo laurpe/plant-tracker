@@ -11,6 +11,7 @@ const IconButton = styled.button`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 `;
 
 export default IconButton;
