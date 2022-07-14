@@ -7,7 +7,7 @@ import { Plant, GrowingMedium } from "./types";
 import Main from "./components/Main";
 import SinglePlant from "./components/SinglePlant";
 import AddPlant from "./components/AddPlant";
-import GrowingMediumForm from "./components/GrowingMediumForm";
+import AddGrowingMedium from "./components/AddGrowingMedium";
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
@@ -60,7 +60,7 @@ const App = () => {
                 <Route
                     path="/add-growing-medium"
                     element={
-                        <GrowingMediumForm growingMediums={growingMediums} />
+                        <AddGrowingMedium growingMediums={growingMediums} />
                     }
                 />
                 <Route

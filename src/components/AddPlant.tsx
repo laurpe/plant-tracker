@@ -15,13 +15,6 @@ import PlantForm from "./PlantForm";
 
 import CloseIcon from "@mui/icons-material/Close";
 
-import styled from "styled-components";
-
-const StyledColumn = styled(Column)`
-    height: 100%;
-    padding-bottom: 40px;
-`;
-
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 const imgUploadUrl = process.env.REACT_APP_IMAGE_UPLOAD_API_BASE_URL as string;
 
@@ -113,7 +106,11 @@ const AddPlant = ({ plants, setPlants, growingMediums }: Props) => {
 
     return (
         <Popup>
-            <StyledColumn justifyContent="space-between">
+            <Column
+                justifyContent="space-between"
+                height="100%"
+                padding="0 0 40px 0"
+            >
                 <Row justifyContent="space-between">
                     <Title>Add plant</Title>
                     <IconButton type="button" onClick={() => navigate("/")}>
@@ -129,7 +126,7 @@ const AddPlant = ({ plants, setPlants, growingMediums }: Props) => {
                     plant={plant}
                     uploading={uploading}
                 />
-            </StyledColumn>
+            </Column>
         </Popup>
     );
 };
