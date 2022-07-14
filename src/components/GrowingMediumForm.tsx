@@ -79,6 +79,7 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
 
     const handleAddMoreComponents = () => {
         setButtonDisabled(false);
+
         const newGrowingMedium: TempGrowingMedium = {
             ...growingMedium,
             composition: [
@@ -89,11 +90,13 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
         setGrowingMedium(newGrowingMedium);
     };
 
-    const handleRemoveComponents = () => {
+    const handleRemoveComponents = (indexof: number) => {
         const growingMediumCopy = { ...growingMedium };
-        growingMediumCopy.composition.pop();
+        const filtered = growingMediumCopy.composition.filter(
+            (composition, index) => indexof !== index
+        );
 
-        setGrowingMedium(growingMediumCopy);
+        setGrowingMedium({ ...growingMediumCopy, composition: filtered });
 
         if (growingMedium.composition.length === 1) {
             setButtonDisabled(true);
@@ -186,7 +189,9 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
                                     <Label color="white">-</Label>
                                     <StyledColorsIconButton
                                         type="button"
-                                        onClick={handleRemoveComponents}
+                                        onClick={() =>
+                                            handleRemoveComponents(index)
+                                        }
                                         margin="0 0 0 0.8rem"
                                         disabled={buttonDisabled}
                                     >
