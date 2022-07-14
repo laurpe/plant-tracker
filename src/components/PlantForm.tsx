@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import { Plant, GrowingMedium, TempPlant } from "../types";
 
 import Input from "./style/Generics/Input";
@@ -150,9 +152,11 @@ const PlantForm = ({
                                         );
                                     })}
                                 </Select>
-                                <StyledColorsIconButton type="button">
-                                    <AddIcon sx={{ fontSize: 26 }} />
-                                </StyledColorsIconButton>
+                                <Link to={"/add-growing-medium"}>
+                                    <StyledColorsIconButton type="button">
+                                        <AddIcon sx={{ fontSize: 26 }} />
+                                    </StyledColorsIconButton>
+                                </Link>
                             </Row>
                         </Column>
                     </Row>

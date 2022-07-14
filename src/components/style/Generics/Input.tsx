@@ -7,11 +7,11 @@ const Input = styled.input`
     font-size: inherit;
     color: #225c55;
     padding: 0.8rem;
-    margin-bottom: 0.8rem;
     width: 100%;
     background-color: rgb(235, 243, 241);
     appearance: none;
     min-height: 1.5rem;
+    margin: ${(props: { margin?: string }) => props.margin || "0 0 0.8rem 0"};
 `;
 
 export default Input;
