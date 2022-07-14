@@ -9,7 +9,6 @@ import Row from "./style/Generics/Row";
 import Select from "./style/Generics/Select";
 import Input from "./style/Generics/Input";
 import Label from "./style/Generics/Label";
-import Popup from "./style/Generics/Popup";
 import IconButton from "./style/Generics/IconButton";
 
 import AddIcon from "@mui/icons-material/Add";
@@ -45,15 +44,18 @@ const GrowingMediumForm = ({ growingMediums }: Props) => {
             | React.ChangeEvent<HTMLInputElement>,
         componentIndex: number
     ): void => {
-        growingMedium.composition.map((component, index) => {
-            if (index === componentIndex) {
-                return {
-                    ...component,
-                    [event.target.name]: event.target.value,
-                };
+        const composition = growingMedium.composition.map(
+            (component, index) => {
+                if (index === componentIndex) {
+                    return {
+                        ...component,
+                        [event.target.name]: event.target.value,
+                    };
+                }
+                return component;
             }
-            return component;
-        });
+        );
+        setGrowingMedium({ ...growingMedium, composition: composition });
     };
 
     const handleAddMoreComponents = () => {
@@ -84,19 +86,18 @@ const GrowingMediumForm = ({ growingMediums }: Props) => {
     };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+        event.preventDefault();
         console.log(growingMedium);
     };
-
-    console.log(growingMedium);
 
     return (
         <Form onSubmit={handleSubmit}>
             <Column justifyContent="space-between" height="100%">
                 <Column>
-                    <Label htmlFor="mixName">Mix name</Label>
+                    <Label htmlFor="name">Mix name</Label>
                     <Input
                         type="text"
-                        name="mixName"
+                        name="name"
                         onChange={handleMixNameChange}
                         value={growingMedium.name}
                     />
@@ -143,18 +144,16 @@ const GrowingMediumForm = ({ growingMediums }: Props) => {
                                         }
                                     />
                                 </Column>
-                                {growingMedium.composition.length !== 1 && (
-                                    <Column>
-                                        <Label color="white">-</Label>
-                                        <StyledColorsIconButton
-                                            type="button"
-                                            onClick={handleRemoveComponents}
-                                            margin="0 0 0 0.8rem"
-                                        >
-                                            <RemoveIcon sx={{ fontSize: 20 }} />
-                                        </StyledColorsIconButton>
-                                    </Column>
-                                )}
+                                <Column>
+                                    <Label color="white">-</Label>
+                                    <StyledColorsIconButton
+                                        type="button"
+                                        onClick={handleRemoveComponents}
+                                        margin="0 0 0 0.8rem"
+                                    >
+                                        <RemoveIcon sx={{ fontSize: 20 }} />
+                                    </StyledColorsIconButton>
+                                </Column>
                             </Row>
                         );
                     })}
