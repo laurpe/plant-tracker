@@ -140,6 +140,7 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
                         name="name"
                         onChange={handleMixNameChange}
                         value={growingMedium.name}
+                        required
                     />
                     {growingMedium.composition.map((component, index) => {
                         return (
@@ -158,6 +159,7 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
                                             growingMedium.composition[index]
                                                 .component
                                         }
+                                        required
                                     >
                                         <option hidden>Select...</option>
                                         {growingMediums.map((growingMedium) => {
@@ -187,6 +189,8 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
                                             growingMedium.composition[index]
                                                 .percentage
                                         }
+                                        required
+                                        max="100"
                                     />
                                 </Column>
                                 <Column>
