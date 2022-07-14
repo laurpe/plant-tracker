@@ -35,12 +35,10 @@ const StyledColorsIconButton = styled(IconButton)`
 `;
 
 const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
+    const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
     const [growingMedium, setGrowingMedium] = useState<TempGrowingMedium>({
         name: "",
-        composition: [
-            { component: "", percentage: 50 },
-            { component: "", percentage: 50 },
-        ],
+        composition: [{ component: "", percentage: 100 }],
     });
 
     const navigate = useNavigate();
@@ -80,6 +78,7 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
     };
 
     const handleAddMoreComponents = () => {
+        setButtonDisabled(false);
         const newGrowingMedium: TempGrowingMedium = {
             ...growingMedium,
             composition: [
@@ -95,6 +94,10 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
         growingMediumCopy.composition.pop();
 
         setGrowingMedium(growingMediumCopy);
+
+        if (growingMedium.composition.length === 1) {
+            setButtonDisabled(true);
+        }
     };
 
     const handleMixNameChange = (
@@ -128,7 +131,7 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
         <Form onSubmit={(event) => void handleSubmit(event)}>
             <Column justifyContent="space-between" height="100%">
                 <Column>
-                    <Label htmlFor="name">Mix name</Label>
+                    <Label htmlFor="name">Name</Label>
                     <Input
                         type="text"
                         name="name"
@@ -185,6 +188,7 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
                                         type="button"
                                         onClick={handleRemoveComponents}
                                         margin="0 0 0 0.8rem"
+                                        disabled={buttonDisabled}
                                     >
                                         <RemoveIcon sx={{ fontSize: 20 }} />
                                     </StyledColorsIconButton>
