@@ -90,98 +90,88 @@ const GrowingMediumForm = ({ growingMediums }: Props) => {
     console.log(growingMedium);
 
     return (
-        <Popup>
-            <Form onSubmit={handleSubmit}>
-                <Column justifyContent="space-between" height="100%">
-                    <Column>
-                        <Label htmlFor="mixName">Mix name</Label>
-                        <Input
-                            type="text"
-                            name="mixName"
-                            onChange={handleMixNameChange}
-                            value={growingMedium.name}
-                        />
-                        {growingMedium.composition.map((component, index) => {
-                            return (
-                                <Row key={index} alignItems="start">
-                                    <Column flex={1}>
-                                        <Label htmlFor="component">
-                                            Component #{index + 1}
-                                        </Label>
-                                        <Select
-                                            onChange={(event) =>
-                                                handleChange(event, index)
-                                            }
-                                            name="component"
-                                            margin="0 0.8rem 0.8rem 0"
-                                        >
-                                            {growingMediums.map(
-                                                (growingMedium) => {
-                                                    return (
-                                                        <option
-                                                            key={
-                                                                growingMedium.id
-                                                            }
-                                                            value={
-                                                                growingMedium.name
-                                                            }
-                                                        >
-                                                            {growingMedium.name}
-                                                        </option>
-                                                    );
-                                                }
-                                            )}
-                                        </Select>
-                                    </Column>
+        <Form onSubmit={handleSubmit}>
+            <Column justifyContent="space-between" height="100%">
+                <Column>
+                    <Label htmlFor="mixName">Mix name</Label>
+                    <Input
+                        type="text"
+                        name="mixName"
+                        onChange={handleMixNameChange}
+                        value={growingMedium.name}
+                    />
+                    {growingMedium.composition.map((component, index) => {
+                        return (
+                            <Row key={index} alignItems="start">
+                                <Column flex={1}>
+                                    <Label htmlFor="component">
+                                        Component #{index + 1}
+                                    </Label>
+                                    <Select
+                                        onChange={(event) =>
+                                            handleChange(event, index)
+                                        }
+                                        name="component"
+                                        margin="0 0.8rem 0.8rem 0"
+                                    >
+                                        {growingMediums.map((growingMedium) => {
+                                            return (
+                                                <option
+                                                    key={growingMedium.id}
+                                                    value={growingMedium.name}
+                                                >
+                                                    {growingMedium.name}
+                                                </option>
+                                            );
+                                        })}
+                                    </Select>
+                                </Column>
 
+                                <Column>
+                                    <Label htmlFor="percentage">
+                                        Percentage
+                                    </Label>
+                                    <Input
+                                        type="number"
+                                        name="percentage"
+                                        onChange={(event) =>
+                                            handleChange(event, index)
+                                        }
+                                        value={
+                                            growingMedium.composition[index]
+                                                .percentage
+                                        }
+                                    />
+                                </Column>
+                                {growingMedium.composition.length !== 1 && (
                                     <Column>
-                                        <Label htmlFor="percentage">
-                                            Percentage
-                                        </Label>
-                                        <Input
-                                            type="number"
-                                            name="percentage"
-                                            onChange={(event) =>
-                                                handleChange(event, index)
-                                            }
-                                            value={
-                                                growingMedium.composition[index]
-                                                    .percentage
-                                            }
-                                        />
+                                        <Label color="white">-</Label>
+                                        <StyledColorsIconButton
+                                            type="button"
+                                            onClick={handleRemoveComponents}
+                                            margin="0 0 0 0.8rem"
+                                        >
+                                            <RemoveIcon sx={{ fontSize: 20 }} />
+                                        </StyledColorsIconButton>
                                     </Column>
-                                    {growingMedium.composition.length !== 1 && (
-                                        <Column>
-                                            <Label color="white">-</Label>
-                                            <StyledColorsIconButton
-                                                type="button"
-                                                onClick={handleRemoveComponents}
-                                                margin="0 0 0 0.8rem"
-                                            >
-                                                <RemoveIcon
-                                                    sx={{ fontSize: 20 }}
-                                                />
-                                            </StyledColorsIconButton>
-                                        </Column>
-                                    )}
-                                </Row>
-                            );
-                        })}
+                                )}
+                            </Row>
+                        );
+                    })}
 
-                        <StyledColorsIconButton
-                            type="button"
-                            onClick={handleAddMoreComponents}
-                            margin="0 0 0.8rem 0"
-                        >
-                            <AddIcon sx={{ fontSize: 20 }} />
-                        </StyledColorsIconButton>
-                    </Column>
-                    <Button type="submit" width="100%">
-                        Save growing medium
-                    </Button>
+                    <StyledColorsIconButton
+                        type="button"
+                        onClick={handleAddMoreComponents}
+                        margin="0 0 0.8rem 0"
+                    >
+                        <AddIcon sx={{ fontSize: 20 }} />
+                    </StyledColorsIconButton>
                 </Column>
-            </Form>
-        </Popup>
+                <Button type="submit" width="100%">
+                    Save growing medium
+                </Button>
+            </Column>
+        </Form>
     );
 };
 
