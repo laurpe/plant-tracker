@@ -129,7 +129,6 @@ const AddPlantForm = ({ plants, setPlants, growingMediums }: Props) => {
                     plant={plant}
                     uploading={uploading}
                 />
-                <Row justifyContent="space-between"></Row>
             </StyledColumn>
         </Popup>
     );
