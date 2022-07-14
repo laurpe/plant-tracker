@@ -154,6 +154,10 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
                                         }
                                         name="component"
                                         margin="0 0.8rem 0.8rem 0"
+                                        value={
+                                            growingMedium.composition[index]
+                                                .component
+                                        }
                                     >
                                         <option hidden>Select...</option>
                                         {growingMediums.map((growingMedium) => {
