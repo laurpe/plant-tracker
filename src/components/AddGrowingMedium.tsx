@@ -14,9 +14,10 @@ import CloseIcon from "@mui/icons-material/Close";
 
 interface Props {
     growingMediums: GrowingMedium[];
+    setGrowingMediums: (growingMediums: GrowingMedium[]) => void;
 }
 
-const AddGrowingMedium = ({ growingMediums }: Props) => {
+const AddGrowingMedium = ({ growingMediums, setGrowingMediums }: Props) => {
     const navigate = useNavigate();
 
     return (
@@ -32,7 +33,10 @@ const AddGrowingMedium = ({ growingMediums }: Props) => {
                         <CloseIcon sx={{ fontSize: 26 }} />
                     </IconButton>
                 </Row>
-                <GrowingMediumForm growingMediums={growingMediums} />
+                <GrowingMediumForm
+                    growingMediums={growingMediums}
+                    setGrowingMediums={setGrowingMediums}
+                />
             </Column>
         </Popup>
     );

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import { GrowingMedium, TempGrowingMedium } from "../types";
 
@@ -16,8 +18,11 @@ import RemoveIcon from "@mui/icons-material/Remove";
 
 import styled from "styled-components";
 
+const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
+
 interface Props {
     growingMediums: GrowingMedium[];
+    setGrowingMediums: (growingMediums: GrowingMedium[]) => void;
 }
 
 const StyledColorsIconButton = styled(IconButton)`
@@ -29,7 +34,7 @@ const StyledColorsIconButton = styled(IconButton)`
     margin: ${(props: { margin?: string }) => props.margin || "0"};
 `;
 
-const GrowingMediumForm = ({ growingMediums }: Props) => {
+const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
     const [growingMedium, setGrowingMedium] = useState<TempGrowingMedium>({
         name: "",
         composition: [
@@ -37,6 +42,22 @@ const GrowingMediumForm = ({ growingMediums }: Props) => {
             { component: "", percentage: 50 },
         ],
     });
+
+    const navigate = useNavigate();
+
+    const addGrowingMedium = async (
+        growingMedium: TempGrowingMedium
+    ): Promise<void> => {
+        try {
+            const response = await axios.post<GrowingMedium>(
+                `${baseUrl}/growing-mediums`,
+                growingMedium
+            );
+            setGrowingMediums([...growingMediums, response.data]);
+        } catch (error) {
+            throw new Error("Could not add growing medium");
+        }
+    };
 
     const handleChange = (
         event:
@@ -85,13 +106,26 @@ const GrowingMediumForm = ({ growingMediums }: Props) => {
         });
     };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    const handleSubmit = async (
+        event: React.FormEvent<HTMLFormElement>
+    ): Promise<void> => {
         event.preventDefault();
-        console.log(growingMedium);
+
+        await addGrowingMedium(growingMedium);
+
+        setGrowingMedium({
+            name: "",
+            composition: [
+                { component: "", percentage: 50 },
+                { component: "", percentage: 50 },
+            ],
+        });
+
+        navigate(-1);
     };
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={(event) => void handleSubmit(event)}>
             <Column justifyContent="space-between" height="100%">
                 <Column>
                     <Label htmlFor="name">Mix name</Label>
@@ -115,6 +149,7 @@ const GrowingMediumForm = ({ growingMediums }: Props) => {
                                         name="component"
                                         margin="0 0.8rem 0.8rem 0"
                                     >
+                                        <option hidden>Select...</option>
                                         {growingMediums.map((growingMedium) => {
                                             return (
                                                 <option

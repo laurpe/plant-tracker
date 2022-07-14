@@ -60,7 +60,10 @@ const App = () => {
                 <Route
                     path="/add-growing-medium"
                     element={
-                        <AddGrowingMedium growingMediums={growingMediums} />
+                        <AddGrowingMedium
+                            growingMediums={growingMediums}
+                            setGrowingMediums={setGrowingMediums}
+                        />
                     }
                 />
                 <Route
