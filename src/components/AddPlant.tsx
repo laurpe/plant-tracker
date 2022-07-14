@@ -31,7 +31,7 @@ interface Props {
     growingMediums: GrowingMedium[];
 }
 
-const AddPlantForm = ({ plants, setPlants, growingMediums }: Props) => {
+const AddPlant = ({ plants, setPlants, growingMediums }: Props) => {
     // states
 
     const [plant, setPlant] = useState<TempPlant>({
@@ -134,4 +134,4 @@ const AddPlantForm = ({ plants, setPlants, growingMediums }: Props) => {
     );
 };
 
-export default AddPlantForm;
+export default AddPlant;
