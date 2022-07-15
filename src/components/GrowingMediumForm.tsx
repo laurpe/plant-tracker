@@ -46,17 +46,33 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
 
     const navigate = useNavigate();
 
-    const checkPercentage = (): boolean => {
+    const percentageIsOver100 = (): boolean => {
         const total = growingMedium.composition.reduce((prev, current) => {
             return prev + +current.percentage;
         }, 0);
 
         if (total > 100) {
             setNotification("Components can't add up to more than 100%");
-            return false;
+            return true;
         } else {
             setNotification("");
+            return false;
+        }
+    };
+
+    const nameExists = (): boolean => {
+        const result = growingMediums.filter((item) => {
+            return (
+                item.name.toLowerCase().trim() ===
+                growingMedium.name.toLowerCase().trim()
+            );
+        });
+        if (result.length !== 0) {
+            setNotification("Name already exists");
             return true;
+        } else {
+            setNotification("");
+            return false;
         }
     };
 
@@ -134,7 +150,7 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
     ): Promise<void> => {
         event.preventDefault();
 
-        if (checkPercentage()) {
+        if (!percentageIsOver100() && !nameExists()) {
             await addGrowingMedium(growingMedium);
 
             setGrowingMedium({
