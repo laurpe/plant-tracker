@@ -6,7 +6,8 @@ import { Plant, GrowingMedium } from "./types";
 
 import Main from "./components/Main";
 import SinglePlant from "./components/SinglePlant";
-import AddPlantForm from "./components/AddPlantForm";
+import AddPlant from "./components/AddPlant";
+import AddGrowingMedium from "./components/AddGrowingMedium";
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
@@ -49,10 +50,19 @@ const App = () => {
                 <Route
                     path="/add"
                     element={
-                        <AddPlantForm
+                        <AddPlant
                             plants={plants}
                             setPlants={setPlants}
                             growingMediums={growingMediums}
+                        />
+                    }
+                />
+                <Route
+                    path="/add-growing-medium"
+                    element={
+                        <AddGrowingMedium
+                            growingMediums={growingMediums}
+                            setGrowingMediums={setGrowingMediums}
                         />
                     }
                 />

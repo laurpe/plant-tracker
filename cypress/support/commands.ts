@@ -40,7 +40,7 @@ import "cypress-file-upload";
 const apiUrl = Cypress.env("apiUrl") as string;
 const apiKey = Cypress.env("apiKey") as string;
 
-Cypress.Commands.add("clearDatabase", () => {
+Cypress.Commands.add("deletePlants", () => {
     cy.request({
         method: "POST",
         url: `${apiUrl}/action/deleteMany`,
@@ -50,6 +50,20 @@ Cypress.Commands.add("clearDatabase", () => {
             database: "test",
             collection: "plants",
             filter: {},
+        },
+    });
+});
+
+Cypress.Commands.add("deleteTestGrowingMedium", () => {
+    cy.request({
+        method: "POST",
+        url: `${apiUrl}/action/deleteOne`,
+        headers: { "Content-type": "application/json", "api-key": apiKey },
+        body: {
+            dataSource: "Cluster0",
+            database: "test",
+            collection: "growingmedia",
+            filter: { name: "customMix" },
         },
     });
 });

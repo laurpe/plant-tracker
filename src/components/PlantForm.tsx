@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import { Plant, GrowingMedium, TempPlant } from "../types";
 
 import Input from "./style/Generics/Input";
@@ -11,6 +13,7 @@ import IconButton from "./style/Generics/IconButton";
 import Image from "./style/Generics/Image";
 
 import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
 
 import styled from "styled-components";
 
@@ -33,17 +36,21 @@ const StyledDiv = styled.div`
     margin-right: 16px;
 `;
 
+const StyledColorsIconButton = styled(IconButton)`
+    background-color: #35746d;
+    color: white;
+    border-radius: 5px;
+    height: 2.85rem;
+    width: 2.85rem;
+`;
+
 const StyledIconButton = styled(IconButton)`
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: transparent;
-    box-shadow: none;
     color: white;
 `;
 
@@ -124,24 +131,36 @@ const PlantForm = ({
                             <Label htmlFor="growingMedium">
                                 Growing medium
                             </Label>
-                            <Select
-                                onChange={handleChange}
-                                name="growingMedium"
-                                id="plant-growingMedium-select"
-                                value={plant.growingMedium}
-                            >
-                                <option hidden>Select...</option>
-                                {growingMediums.map((growingMedium) => {
-                                    return (
-                                        <option
-                                            key={growingMedium.id}
-                                            value={growingMedium.id}
-                                        >
-                                            {growingMedium.name}
-                                        </option>
-                                    );
-                                })}
-                            </Select>
+                            <Row alignItems="start">
+                                <Select
+                                    onChange={handleChange}
+                                    name="growingMedium"
+                                    id="plant-growingMedium-select"
+                                    value={plant.growingMedium}
+                                    flex={1}
+                                    margin="0 8px 0 0"
+                                >
+                                    <option hidden>Select...</option>
+                                    {growingMediums.map((growingMedium) => {
+                                        return (
+                                            <option
+                                                key={growingMedium.id}
+                                                value={growingMedium.id}
+                                            >
+                                                {growingMedium.name}
+                                            </option>
+                                        );
+                                    })}
+                                </Select>
+                                <Link to={"/add-growing-medium"}>
+                                    <StyledColorsIconButton
+                                        type="button"
+                                        id="add-growing-medium-btn"
+                                    >
+                                        <AddIcon sx={{ fontSize: 26 }} />
+                                    </StyledColorsIconButton>
+                                </Link>
+                            </Row>
                         </Column>
                     </Row>
                     <Label htmlFor="lastWatered">Last watered</Label>

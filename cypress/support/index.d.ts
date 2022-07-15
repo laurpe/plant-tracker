@@ -6,7 +6,8 @@ declare namespace Cypress {
          * Custom command to ... add your description here
          * @example cy.clickOnMyJourneyInCandidateCabinet()
          */
-        clearDatabase(): Chainable<null>;
+        deletePlants(): Chainable<null>;
+        deleteTestGrowingMedium(): Chainable<null>;
         addPlant(): Chainable<null>;
     }
 }
