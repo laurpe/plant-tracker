@@ -46,15 +46,17 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
 
     const navigate = useNavigate();
 
-    const checkPercentage = () => {
+    const checkPercentage = (): boolean => {
         const total = growingMedium.composition.reduce((prev, current) => {
             return prev + +current.percentage;
         }, 0);
 
         if (total > 100) {
             setNotification("Components can't add up to more than 100%");
+            return false;
         } else {
             setNotification("");
+            return true;
         }
     };
 
@@ -132,16 +134,16 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
     ): Promise<void> => {
         event.preventDefault();
 
-        checkPercentage();
+        if (checkPercentage()) {
+            await addGrowingMedium(growingMedium);
 
-        await addGrowingMedium(growingMedium);
+            setGrowingMedium({
+                name: "",
+                composition: [{ component: "", percentage: 100 }],
+            });
 
-        setGrowingMedium({
-            name: "",
-            composition: [{ component: "", percentage: 100 }],
-        });
-
-        navigate(-1);
+            navigate(-1);
+        }
     };
 
     return (

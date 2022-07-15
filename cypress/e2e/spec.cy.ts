@@ -70,3 +70,9 @@ describe("Plant actions", () => {
         cy.contains("water in 6 days");
     });
 });
+
+describe("Growing mediums", () => {
+    it.only("When new growing medium is added, it shows in add plant form's list of growing mediums", () => {
+        //todo
+    });
+});
