@@ -72,7 +72,62 @@ describe("Plant actions", () => {
 });
 
 describe("Growing mediums", () => {
-    it.only("When new growing medium is added, it shows in add plant form's list of growing mediums", () => {
-        //todo
+    beforeEach(() => {
+        cy.clearDatabase();
     });
+
+    it("When new growing medium is added, it shows in add plant form's list of growing mediums", () => {
+        cy.visit("http://localhost:3000");
+
+        cy.get("#add-plant-form-btn").click();
+        cy.get("#add-growing-medium-btn").click();
+
+        cy.contains("Add growing medium");
+
+        cy.get("#growing-medium-name-input").type("customMix");
+        cy.get("#growing-medium-component-1-select").select(1);
+        cy.get("#growing-medium-percentage-1-input").clear().type("30");
+
+        cy.get("#growing-medium-add-more-components-btn").click();
+
+        cy.get("#growing-medium-component-2-select").select(2);
+        cy.get("#growing-medium-percentage-2-input").clear().type("20");
+
+        cy.get("#growing-medium-add-more-components-btn").click();
+
+        cy.get("#growing-medium-component-3-select").select(3);
+        cy.get("#growing-medium-percentage-3-input").clear().type("50");
+
+        cy.get("#growing-medium-submit-btn").click();
+
+        cy.contains("Add plant");
+        cy.get("#plant-growingMedium-select").select("customMix");
+    });
+
+    // it("Growing medium components' percentage can't add up to more than 100", () => {
+    //     cy.visit("http://localhost:3000");
+
+    //     cy.get("#add-plant-form-btn").click();
+    //     cy.get("#add-growing-medium-btn").click();
+
+    //     cy.contains("Add growing medium");
+
+    //     cy.get("#growing-medium-name-input").type("customMix");
+    //     cy.get("#growing-medium-component-1-select").select(1);
+    //     cy.get("#growing-medium-percentage-1-input").clear().type("30");
+
+    //     cy.get("#growing-medium-add-more-components-btn").click();
+
+    //     cy.get("#growing-medium-component-2-select").select(2);
+    //     cy.get("#growing-medium-percentage-2-input").clear().type("20");
+
+    //     cy.get("#growing-medium-add-more-components-btn").click();
+
+    //     cy.get("#growing-medium-component-3-select").select(3);
+    //     cy.get("#growing-medium-percentage-3-input").clear().type("90");
+
+    //     cy.get("#growing-medium-submit-btn").click();
+
+    //     cy.contains("Components can't add up to more than 100%");
+    // });
 });

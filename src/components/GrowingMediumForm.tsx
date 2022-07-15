@@ -161,6 +161,7 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
                     <Label htmlFor="name">Name</Label>
                     <Input
                         type="text"
+                        id="growing-medium-name-input"
                         name="name"
                         onChange={handleMixNameChange}
                         value={growingMedium.name}
@@ -174,6 +175,9 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
                                         Component #{index + 1}
                                     </Label>
                                     <Select
+                                        id={`growing-medium-component-${
+                                            index + 1
+                                        }-select`}
                                         onChange={(event) =>
                                             handleChange(event, index)
                                         }
@@ -205,6 +209,9 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
                                     </Label>
                                     <Input
                                         type="number"
+                                        id={`growing-medium-percentage-${
+                                            index + 1
+                                        }-input`}
                                         name="percentage"
                                         onChange={(event) =>
                                             handleChange(event, index)
@@ -236,13 +243,18 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
                     })}
                     <StyledColorsIconButton
                         type="button"
+                        id="growing-medium-add-more-components-btn"
                         onClick={handleAddMoreComponents}
                         margin="0 0 0.8rem 0"
                     >
                         <AddIcon sx={{ fontSize: 20 }} />
                     </StyledColorsIconButton>
                 </Column>
-                <Button type="submit" width="100%">
+                <Button
+                    type="submit"
+                    id="growing-medium-submit-btn"
+                    width="100%"
+                >
                     Save growing medium
                 </Button>
             </Column>

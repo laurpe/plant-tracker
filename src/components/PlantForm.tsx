@@ -153,7 +153,10 @@ const PlantForm = ({
                                     })}
                                 </Select>
                                 <Link to={"/add-growing-medium"}>
-                                    <StyledColorsIconButton type="button">
+                                    <StyledColorsIconButton
+                                        type="button"
+                                        id="add-growing-medium-btn"
+                                    >
                                         <AddIcon sx={{ fontSize: 26 }} />
                                     </StyledColorsIconButton>
                                 </Link>
