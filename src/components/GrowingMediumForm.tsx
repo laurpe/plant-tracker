@@ -12,9 +12,11 @@ import Select from "./style/Generics/Select";
 import Input from "./style/Generics/Input";
 import Label from "./style/Generics/Label";
 import IconButton from "./style/Generics/IconButton";
+import Notification from "./style/Generics/Notification";
 
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 
 import styled from "styled-components";
 
@@ -40,8 +42,21 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
         name: "",
         composition: [{ component: "", percentage: 100 }],
     });
+    const [notification, setNotification] = useState<string>("");
 
     const navigate = useNavigate();
+
+    const checkPercentage = () => {
+        const total = growingMedium.composition.reduce((prev, current) => {
+            return prev + +current.percentage;
+        }, 0);
+
+        if (total > 100) {
+            setNotification("Components can't add up to more than 100%");
+        } else {
+            setNotification("");
+        }
+    };
 
     const addGrowingMedium = async (
         growingMedium: TempGrowingMedium
@@ -117,14 +132,13 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
     ): Promise<void> => {
         event.preventDefault();
 
+        checkPercentage();
+
         await addGrowingMedium(growingMedium);
 
         setGrowingMedium({
             name: "",
-            composition: [
-                { component: "", percentage: 50 },
-                { component: "", percentage: 50 },
-            ],
+            composition: [{ component: "", percentage: 100 }],
         });
 
         navigate(-1);
@@ -134,6 +148,14 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
         <Form onSubmit={(event) => void handleSubmit(event)}>
             <Column justifyContent="space-between" height="100%">
                 <Column>
+                    {notification !== "" && (
+                        <Notification>
+                            <Row alignItems="center">
+                                <PriorityHighIcon sx={{ fontSize: 26 }} />
+                                {notification}
+                            </Row>
+                        </Notification>
+                    )}
                     <Label htmlFor="name">Name</Label>
                     <Input
                         type="text"
@@ -191,6 +213,7 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
                                         }
                                         required
                                         max="100"
+                                        min="1"
                                     />
                                 </Column>
                                 <Column>
@@ -209,7 +232,6 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
                             </Row>
                         );
                     })}
-
                     <StyledColorsIconButton
                         type="button"
                         onClick={handleAddMoreComponents}
