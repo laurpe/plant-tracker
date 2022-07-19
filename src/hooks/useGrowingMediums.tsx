@@ -41,5 +41,9 @@ export const useGrowingMediums = () => {
         setStorageItems({ ...storage, growingMediums: itemsToKeep });
     };
 
-    return { addGrowingMedium, removeGrowingMedium };
+    return {
+        growingMediums,
+        addGrowingMedium,
+        removeGrowingMedium,
+    };
 };
