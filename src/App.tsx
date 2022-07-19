@@ -21,8 +21,7 @@ const App = () => {
     const [plants, setPlants] = useState<Plant[]>([]);
     // const [growingMediums, setGrowingMediums] = useState<GrowingMedium[]>([]);
 
-    const { growingMediums, addGrowingMedium, removeGrowingMedium } =
-        useGrowingMediums();
+    const { growingMediums, addGrowingMedium } = useGrowingMediums();
 
     console.log(growingMediums);
 
