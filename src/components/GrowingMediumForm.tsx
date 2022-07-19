@@ -19,13 +19,9 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 
 import styled from "styled-components";
+import { useGrowingMediums } from "../hooks/useGrowingMediums";
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
-
-interface Props {
-    growingMediums: GrowingMedium[];
-    setGrowingMediums: (growingMediums: GrowingMedium[]) => void;
-}
 
 const StyledColorsIconButton = styled(IconButton)`
     background-color: #35746d;
@@ -36,13 +32,15 @@ const StyledColorsIconButton = styled(IconButton)`
     margin: ${(props: { margin?: string }) => props.margin || "0"};
 `;
 
-const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
+const GrowingMediumForm = () => {
     const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
     const [growingMedium, setGrowingMedium] = useState<TempGrowingMedium>({
         name: "",
         composition: [{ component: "", percentage: 100 }],
     });
     const [notification, setNotification] = useState<string>("");
+
+    const { growingMediums, addGrowingMedium } = useGrowingMediums();
 
     const navigate = useNavigate();
 
@@ -76,7 +74,7 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
         }
     };
 
-    const addGrowingMedium = async (
+    const saveGrowingMedium = async (
         growingMedium: TempGrowingMedium
     ): Promise<void> => {
         try {
@@ -84,7 +82,7 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
                 `${baseUrl}/growing-mediums`,
                 growingMedium
             );
-            setGrowingMediums([...growingMediums, response.data]);
+            addGrowingMedium(response.data);
         } catch (error) {
             throw new Error("Could not add growing medium");
         }
@@ -151,7 +149,7 @@ const GrowingMediumForm = ({ growingMediums, setGrowingMediums }: Props) => {
         event.preventDefault();
 
         if (!percentageIsOver100() && !nameExists()) {
-            await addGrowingMedium(growingMedium);
+            await saveGrowingMedium(growingMedium);
 
             setGrowingMedium({
                 name: "",

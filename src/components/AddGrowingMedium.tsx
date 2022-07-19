@@ -1,7 +1,5 @@
 import { useNavigate } from "react-router-dom";
 
-import { GrowingMedium } from "../types";
-
 import Popup from "./style/Generics/Popup";
 import Column from "./style/Generics/Column";
 import Row from "./style/Generics/Row";
@@ -12,12 +10,7 @@ import GrowingMediumForm from "./GrowingMediumForm";
 
 import CloseIcon from "@mui/icons-material/Close";
 
-interface Props {
-    growingMediums: GrowingMedium[];
-    setGrowingMediums: (growingMediums: GrowingMedium[]) => void;
-}
-
-const AddGrowingMedium = ({ growingMediums, setGrowingMediums }: Props) => {
+const AddGrowingMedium = () => {
     const navigate = useNavigate();
 
     return (
@@ -33,10 +26,7 @@ const AddGrowingMedium = ({ growingMediums, setGrowingMediums }: Props) => {
                         <CloseIcon sx={{ fontSize: 26 }} />
                     </IconButton>
                 </Row>
-                <GrowingMediumForm
-                    growingMediums={growingMediums}
-                    setGrowingMediums={setGrowingMediums}
-                />
+                <GrowingMediumForm />
             </Column>
         </Popup>
     );
