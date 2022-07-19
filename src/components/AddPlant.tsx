@@ -21,10 +21,9 @@ const imgUploadUrl = process.env.REACT_APP_IMAGE_UPLOAD_API_BASE_URL as string;
 interface Props {
     plants: Plant[];
     setPlants: (plants: Plant[]) => void;
-    growingMediums: GrowingMedium[];
 }
 
-const AddPlant = ({ plants, setPlants, growingMediums }: Props) => {
+const AddPlant = ({ plants, setPlants }: Props) => {
     // states
 
     const [plant, setPlant] = useState<TempPlant>({
@@ -120,7 +119,6 @@ const AddPlant = ({ plants, setPlants, growingMediums }: Props) => {
                 <PlantForm
                     handleSubmit={(event) => void handleSubmit(event)}
                     handleChange={handleChange}
-                    growingMediums={growingMediums}
                     handleImageChange={(event) => void handleImageChange(event)}
                     handleImageRemove={handleImageRemove}
                     plant={plant}

@@ -54,13 +54,7 @@ const App = () => {
                 />
                 <Route
                     path="/add"
-                    element={
-                        <AddPlant
-                            plants={plants}
-                            setPlants={setPlants}
-                            growingMediums={growingMediums}
-                        />
-                    }
+                    element={<AddPlant plants={plants} setPlants={setPlants} />}
                 />
                 <Route
                     path="/add-growing-medium"
@@ -69,11 +63,7 @@ const App = () => {
                 <Route
                     path="/plants/:id"
                     element={
-                        <SinglePlant
-                            plants={plants}
-                            setPlants={setPlants}
-                            growingMediums={growingMediums}
-                        />
+                        <SinglePlant plants={plants} setPlants={setPlants} />
                     }
                 />
             </Routes>
