@@ -25,6 +25,7 @@ export const useStorage = () => {
 
     const setStorageItems = (items: State) => {
         localStorage.setItem("state", JSON.stringify(items));
+        setStorage(items);
     };
 
     return [storage, setStorageItems] as const;
