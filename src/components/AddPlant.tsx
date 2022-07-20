@@ -54,6 +54,12 @@ const AddPlant = () => {
     // form functions
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        if (
+            event.target.name === "growingMedium" &&
+            event.target.value === "create new"
+        ) {
+            navigate("/add-growing-medium");
+        }
         setPlant({ ...plant, [event.target.name]: event.target.value });
     };
 

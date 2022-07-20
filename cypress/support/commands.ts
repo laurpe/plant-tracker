@@ -73,7 +73,7 @@ Cypress.Commands.add("addPlant", () => {
     cy.get("#plant-image-input").attachFile("calathea.jpeg");
     cy.wait(2000);
     cy.get("#plant-name-input").type("calathea");
-    cy.get("#plant-growingMedium-select").select(1);
+    cy.get("#plant-growingMedium-select").select(3);
     cy.get("#plant-lastWatered-input").type("2022-06-01");
     cy.get("#plant-wateringCycle-input").type("6");
     cy.get("#submit-btn").click();
