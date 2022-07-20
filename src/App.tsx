@@ -4,6 +4,7 @@ import Main from "./components/Main";
 import SinglePlant from "./components/SinglePlant";
 import AddPlant from "./components/AddPlant";
 import AddGrowingMedium from "./components/AddGrowingMedium";
+import LogIn from "./components/LogIn";
 
 const App = () => {
     return (
@@ -16,6 +17,7 @@ const App = () => {
                     element={<AddGrowingMedium />}
                 />
                 <Route path="/plants/:id" element={<SinglePlant />} />
+                <Route path="/login" element={<LogIn />} />
             </Routes>
         </BrowserRouter>
     );
