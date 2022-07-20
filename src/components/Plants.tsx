@@ -14,7 +14,7 @@ const calculateNextWatering = (plant: Plant): dayjs.Dayjs => {
 };
 
 const Plants = () => {
-    const { plants } = usePlants();
+    const { plants, updatePlant } = usePlants();
     return (
         <>
             {plants
@@ -31,6 +31,7 @@ const Plants = () => {
                             plant={plant}
                             key={plant.id}
                             nextWatering={nextWatering}
+                            updatePlant={updatePlant}
                         />
                     );
                 })}

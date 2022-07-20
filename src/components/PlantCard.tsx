@@ -3,7 +3,6 @@ import axios from "axios";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import { Link } from "react-router-dom";
-import { usePlants } from "../hooks/usePlants";
 
 import Card from "./style/Generics/Card";
 import CardTitle from "./style/PlantCard/CardTitle";
@@ -34,11 +33,11 @@ const imageBaseUrl = process.env.REACT_APP_IMAGE_BASE_URL as string;
 
 interface Props {
     plant: Plant;
+    updatePlant: (plant: Plant) => void;
     nextWatering: dayjs.Dayjs;
 }
 
-const PlantCard = ({ plant, nextWatering }: Props) => {
-    const { updatePlant } = usePlants();
+const PlantCard = ({ plant, updatePlant, nextWatering }: Props) => {
     const updateWatered = async (id: string): Promise<void> => {
         try {
             const response = await axios.put<Plant>(`${baseUrl}/plants/${id}`, {
