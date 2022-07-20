@@ -1,24 +1,22 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import Form from "./style/Generics/Form";
 import Label from "./style/Generics/Label";
 import Input from "./style/Generics/Input";
 import Button from "./style/Generics/Button";
 
-import { User, LoggedInUser } from "../types";
+import { User } from "../types";
+
 import axios from "axios";
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
-const LogIn = () => {
+const SignUp = () => {
     const [user, setUser] = useState<User>({ username: "", password: "" });
 
-    const logIn = async (user: User) => {
+    const addUser = async (user: User) => {
         try {
-            const response = await axios.post<LoggedInUser>(
-                `${baseUrl}/login`,
-                user
-            );
+            const response = await axios.post<User>(`${baseUrl}/login`, user);
             console.log(response.data);
         } catch (error) {
             throw new Error("Could not log in");
@@ -34,7 +32,7 @@ const LogIn = () => {
     ): Promise<void> => {
         event.preventDefault();
 
-        await logIn(user);
+        await addUser(user);
 
         setUser({ username: "", password: "" });
     };
@@ -66,4 +64,4 @@ const LogIn = () => {
     );
 };
 
-export default LogIn;
+export default SignUp;
