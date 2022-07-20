@@ -71,7 +71,7 @@ describe("Plant actions", () => {
     });
 });
 
-describe.only("Growing mediums", () => {
+describe("Growing mediums", () => {
     beforeEach(() => {
         cy.deletePlants();
         cy.deleteTestGrowingMedium();
