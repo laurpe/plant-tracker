@@ -8,6 +8,7 @@ import Main from "./components/Main";
 import SinglePlant from "./components/SinglePlant";
 import AddPlant from "./components/AddPlant";
 import AddGrowingMedium from "./components/AddGrowingMedium";
+import { useGrowingMediums } from "./hooks/useGrowingMediums";
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
