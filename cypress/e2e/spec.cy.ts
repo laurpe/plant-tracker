@@ -81,22 +81,22 @@ describe("Growing mediums", () => {
         cy.visit("http://localhost:3000");
 
         cy.get("#add-plant-form-btn").click();
-        cy.get("#add-growing-medium-btn").click();
+        cy.get("#plant-growingMedium-select").select(1);
 
         cy.contains("Add growing medium");
 
         cy.get("#growing-medium-name-input").type("customMix");
-        cy.get("#growing-medium-component-1-select").select(1);
+        cy.get("#growing-medium-component-1-select").select(3);
         cy.get("#growing-medium-percentage-1-input").clear().type("30");
 
         cy.get("#growing-medium-add-more-components-btn").click();
 
-        cy.get("#growing-medium-component-2-select").select(2);
+        cy.get("#growing-medium-component-2-select").select(4);
         cy.get("#growing-medium-percentage-2-input").clear().type("20");
 
         cy.get("#growing-medium-add-more-components-btn").click();
 
-        cy.get("#growing-medium-component-3-select").select(3);
+        cy.get("#growing-medium-component-3-select").select(5);
         cy.get("#growing-medium-percentage-3-input").clear().type("50");
 
         cy.get("#growing-medium-submit-btn").click();
@@ -109,22 +109,22 @@ describe("Growing mediums", () => {
         cy.visit("http://localhost:3000");
 
         cy.get("#add-plant-form-btn").click();
-        cy.get("#add-growing-medium-btn").click();
+        cy.get("#plant-growingMedium-select").select(1);
 
         cy.contains("Add growing medium");
 
         cy.get("#growing-medium-name-input").type("customMix");
-        cy.get("#growing-medium-component-1-select").select(1);
+        cy.get("#growing-medium-component-1-select").select(3);
         cy.get("#growing-medium-percentage-1-input").clear().type("30");
 
         cy.get("#growing-medium-add-more-components-btn").click();
 
-        cy.get("#growing-medium-component-2-select").select(2);
+        cy.get("#growing-medium-component-2-select").select(4);
         cy.get("#growing-medium-percentage-2-input").clear().type("20");
 
         cy.get("#growing-medium-add-more-components-btn").click();
 
-        cy.get("#growing-medium-component-3-select").select(3);
+        cy.get("#growing-medium-component-3-select").select(5);
         cy.get("#growing-medium-percentage-3-input").clear().type("90");
 
         cy.get("#growing-medium-submit-btn").click();
@@ -136,18 +136,18 @@ describe("Growing mediums", () => {
         cy.visit("http://localhost:3000");
 
         cy.get("#add-plant-form-btn").click();
-        cy.get("#add-growing-medium-btn").click();
+        cy.get("#plant-growingMedium-select").select(1);
 
         cy.contains("Add growing medium");
 
         cy.get("#growing-medium-name-input").type("customMix");
-        cy.get("#growing-medium-component-1-select").select(1);
+        cy.get("#growing-medium-component-1-select").select(3);
         cy.get("#growing-medium-submit-btn").click();
 
-        cy.get("#add-growing-medium-btn").click();
+        cy.get("#plant-growingMedium-select").select(1);
 
         cy.get("#growing-medium-name-input").type("customMix");
-        cy.get("#growing-medium-component-1-select").select(3);
+        cy.get("#growing-medium-component-1-select").select(4);
         cy.get("#growing-medium-submit-btn").click();
 
         cy.contains("Name already exists");

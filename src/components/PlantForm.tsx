@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 import { Plant, TempPlant } from "../types";
 
 import Input from "./style/Generics/Input";
@@ -13,7 +11,6 @@ import IconButton from "./style/Generics/IconButton";
 import Image from "./style/Generics/Image";
 
 import DeleteIcon from "@mui/icons-material/Delete";
-import AddIcon from "@mui/icons-material/Add";
 
 import styled from "styled-components";
 import { useGrowingMediums } from "../hooks/useGrowingMediums";
@@ -34,14 +31,6 @@ interface Props {
 const StyledDiv = styled.div`
     position: relative;
     margin-right: 16px;
-`;
-
-const StyledColorsIconButton = styled(IconButton)`
-    background-color: #35746d;
-    color: white;
-    border-radius: 5px;
-    height: 2.85rem;
-    width: 2.85rem;
 `;
 
 const StyledIconButton = styled(IconButton)`
@@ -140,8 +129,13 @@ const PlantForm = ({
                                     value={plant.growingMedium}
                                     flex={1}
                                     margin="0 8px 0 0"
+                                    required
                                 >
-                                    <option hidden>Select...</option>
+                                    <option value="" disabled>
+                                        select...
+                                    </option>
+                                    <option>create new</option>
+                                    <option disabled>-----</option>
                                     {growingMediums.map((growingMedium) => {
                                         return (
                                             <option
@@ -153,14 +147,6 @@ const PlantForm = ({
                                         );
                                     })}
                                 </Select>
-                                <Link to={"/add-growing-medium"}>
-                                    <StyledColorsIconButton
-                                        type="button"
-                                        id="add-growing-medium-btn"
-                                    >
-                                        <AddIcon sx={{ fontSize: 26 }} />
-                                    </StyledColorsIconButton>
-                                </Link>
                             </Row>
                         </Column>
                     </Row>
