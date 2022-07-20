@@ -32,7 +32,5 @@ export const usePlants = () => {
         setPlants(plantsCopy);
     };
 
-    console.log(plants);
-
     return { plants, addPlant, removePlant, updatePlant };
 };
