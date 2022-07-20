@@ -5,6 +5,8 @@ import { TempPlant, Plant } from "../types";
 
 import axios from "axios";
 
+import { usePlants } from "../hooks/usePlants";
+
 import Title from "./style/Generics/Title";
 import Row from "./style/Generics/Row";
 import Popup from "./style/Generics/Popup";
@@ -18,12 +20,7 @@ import CloseIcon from "@mui/icons-material/Close";
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 const imgUploadUrl = process.env.REACT_APP_IMAGE_UPLOAD_API_BASE_URL as string;
 
-interface Props {
-    plants: Plant[];
-    setPlants: (plants: Plant[]) => void;
-}
-
-const AddPlant = ({ plants, setPlants }: Props) => {
+const AddPlant = () => {
     // states
 
     const [plant, setPlant] = useState<TempPlant>({
@@ -35,17 +32,20 @@ const AddPlant = ({ plants, setPlants }: Props) => {
     });
     const [uploading, setUploading] = useState<boolean>(false);
 
+    const { addPlant } = usePlants();
+
     const navigate = useNavigate();
 
     // add plant to database
 
-    const addPlant = async (plant: TempPlant): Promise<void> => {
+    const add = async (plant: TempPlant): Promise<void> => {
         try {
             const response = await axios.post<Plant>(
                 `${baseUrl}/plants`,
                 plant
             );
-            setPlants([...plants, response.data]);
+
+            addPlant(response.data);
         } catch (error) {
             throw new Error("Could not add plant");
         }
@@ -84,11 +84,13 @@ const AddPlant = ({ plants, setPlants }: Props) => {
         event.preventDefault();
         const plantCopy = {
             ...plant,
+            lastWatered: new Date(plant.lastWatered).toISOString(),
         };
-        plantCopy.lastWatered = new Date(plant.lastWatered).toISOString();
 
         setPlant(plantCopy);
-        await addPlant(plantCopy);
+
+        await add(plantCopy);
+
         setPlant({
             name: "",
             growingMedium: "",
@@ -96,6 +98,7 @@ const AddPlant = ({ plants, setPlants }: Props) => {
             wateringCycle: 0,
             imageName: "",
         });
+
         navigate("/");
     };
 

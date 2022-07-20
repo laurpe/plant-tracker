@@ -2,11 +2,7 @@ import dayjs from "dayjs";
 
 import { Plant } from "../types";
 import PlantCard from "./PlantCard";
-
-interface Props {
-    plants: Plant[];
-    setPlants: (plants: Plant[]) => void;
-}
+import { usePlants } from "../hooks/usePlants";
 
 const calculateNextWatering = (plant: Plant): dayjs.Dayjs => {
     const nextWatering = dayjs(plant.lastWatered).add(
@@ -17,7 +13,8 @@ const calculateNextWatering = (plant: Plant): dayjs.Dayjs => {
     return nextWatering;
 };
 
-const Plants = ({ plants, setPlants }: Props) => {
+const Plants = () => {
+    const { plants } = usePlants();
     return (
         <>
             {plants
@@ -33,8 +30,6 @@ const Plants = ({ plants, setPlants }: Props) => {
                         <PlantCard
                             plant={plant}
                             key={plant.id}
-                            plants={plants}
-                            setPlants={setPlants}
                             nextWatering={nextWatering}
                         />
                     );
