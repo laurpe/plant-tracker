@@ -1,28 +1,17 @@
-import { useState, useEffect } from "react";
-
-import axios from "axios";
+import { useEffect, useState } from "react";
 
 import { GrowingMedium } from "../types";
+import { useAPIData } from "./useAPIData";
 
 export const useGrowingMediums = () => {
     const [growingMediums, setGrowingMediums] = useState<GrowingMedium[]>([]);
+    const data = useAPIData<GrowingMedium[]>("growing-mediums");
 
     useEffect(() => {
-        const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
-
-        const fetchData = async () => {
-            const response = await axios.get<GrowingMedium[]>(
-                `${baseUrl}/growing-mediums`
-            );
-            setGrowingMediums(response.data);
-        };
-
-        try {
-            void fetchData();
-        } catch (error) {
-            throw new Error("Could not fetch growing mediums");
+        if (data) {
+            setGrowingMediums(data);
         }
-    }, []);
+    }, [data]);
 
     const addGrowingMedium = (growingMedium: GrowingMedium) => {
         setGrowingMediums([...growingMediums, growingMedium]);

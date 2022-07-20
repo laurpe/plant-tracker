@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 
-import { Plant, GrowingMedium } from "./types";
+import { Plant } from "./types";
 
 import Main from "./components/Main";
 import SinglePlant from "./components/SinglePlant";
@@ -19,11 +19,6 @@ const getData = async <T,>(url: string): Promise<T> => {
 
 const App = () => {
     const [plants, setPlants] = useState<Plant[]>([]);
-    // const [growingMediums, setGrowingMediums] = useState<GrowingMedium[]>([]);
-
-    const { growingMediums, addGrowingMedium } = useGrowingMediums();
-
-    console.log(growingMediums);
 
     useEffect(() => {
         const fetchPlants = async () => {
@@ -34,15 +29,6 @@ const App = () => {
         fetchPlants().catch(() => {
             throw new Error("Fetch plants unsuccessful");
         });
-
-        // const fetchGrowingMediums = async () => {
-        //     const result = await getData<GrowingMedium[]>("growing-mediums");
-        //     setGrowingMediums(result);
-        // };
-
-        // fetchGrowingMediums().catch(() => {
-        //     throw new Error("Fetch growing mediums unsuccessful");
-        // });
     }, []);
 
     return (
