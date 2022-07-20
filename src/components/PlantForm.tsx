@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { Plant, GrowingMedium, TempPlant } from "../types";
+import { Plant, TempPlant } from "../types";
 
 import Input from "./style/Generics/Input";
 import Label from "./style/Generics/Label";
