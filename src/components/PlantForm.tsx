@@ -129,8 +129,11 @@ const PlantForm = ({
                                     value={plant.growingMedium}
                                     flex={1}
                                     margin="0 8px 0 0"
+                                    required
                                 >
-                                    <option hidden>Select...</option>
+                                    <option value="" disabled>
+                                        select...
+                                    </option>
                                     <option>create new</option>
                                     <option disabled>-----</option>
                                     {growingMediums.map((growingMedium) => {
