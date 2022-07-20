@@ -16,6 +16,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 
 import styled from "styled-components";
+import { useGrowingMediums } from "../hooks/useGrowingMediums";
 
 const imgBaseUrl = process.env.REACT_APP_IMAGE_BASE_URL as string;
 
@@ -26,7 +27,6 @@ interface Props {
     >;
     handleImageChange: React.ChangeEventHandler<HTMLInputElement>;
     handleImageRemove: () => void;
-    growingMediums: GrowingMedium[];
     plant: Plant | TempPlant;
     uploading: boolean;
 }
@@ -71,12 +71,13 @@ const StyledInput = styled(Input)`
 const PlantForm = ({
     handleSubmit,
     handleChange,
-    growingMediums,
     handleImageChange,
     handleImageRemove,
     plant,
     uploading,
 }: Props) => {
+    const { growingMediums } = useGrowingMediums();
+
     const maxDate = new Date().toISOString().substring(0, 10);
 
     return (

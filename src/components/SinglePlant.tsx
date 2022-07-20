@@ -2,7 +2,7 @@ import Popup from "./style/Generics/Popup";
 
 import axios from "axios";
 
-import { Plant, GrowingMedium } from "../types";
+import { Plant } from "../types";
 
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
@@ -34,10 +34,9 @@ const StyledColumn = styled(Column)`
 interface Props {
     plants: Plant[];
     setPlants: (plants: Plant[]) => void;
-    growingMediums: GrowingMedium[];
 }
 
-const SinglePlant = ({ plants, setPlants, growingMediums }: Props) => {
+const SinglePlant = ({ plants, setPlants }: Props) => {
     const [plant, setPlant] = useState<Plant>({
         name: "",
         growingMedium: "",
@@ -165,7 +164,6 @@ const SinglePlant = ({ plants, setPlants, growingMediums }: Props) => {
                 <PlantForm
                     handleSubmit={(event) => void handleSubmit(event)}
                     handleChange={handleChange}
-                    growingMediums={growingMediums}
                     handleImageChange={(event) => void handleImageChange(event)}
                     handleImageRemove={handleImageRemove}
                     plant={plant}

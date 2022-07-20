@@ -35,3 +35,8 @@ export interface TempGrowingMedium {
 export interface GrowingMedium extends TempGrowingMedium {
     id: string;
 }
+
+export interface State {
+    plants?: Plant[];
+    growingMediums?: GrowingMedium[];
+}
