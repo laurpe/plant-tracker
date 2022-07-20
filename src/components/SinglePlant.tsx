@@ -3,6 +3,7 @@ import Popup from "./style/Generics/Popup";
 import axios from "axios";
 
 import { Plant } from "../types";
+import { usePlants } from "../hooks/usePlants";
 
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
@@ -31,12 +32,7 @@ const StyledColumn = styled(Column)`
     padding-bottom: 40px;
 `;
 
-interface Props {
-    plants: Plant[];
-    setPlants: (plants: Plant[]) => void;
-}
-
-const SinglePlant = ({ plants, setPlants }: Props) => {
+const SinglePlant = () => {
     const [plant, setPlant] = useState<Plant>({
         name: "",
         growingMedium: "",
@@ -46,6 +42,8 @@ const SinglePlant = ({ plants, setPlants }: Props) => {
         id: "",
     });
     const [uploading, setUploading] = useState<boolean>(false);
+
+    const { updatePlant, removePlant } = usePlants();
 
     const id = useParams().id as string;
 
@@ -62,15 +60,14 @@ const SinglePlant = ({ plants, setPlants }: Props) => {
         });
     }, [id]);
 
-    const updatePlant = async (plant: Plant): Promise<void> => {
+    const update = async (plant: Plant): Promise<void> => {
         try {
-            console.log(plant);
-            await axios.put<Plant>(`${baseUrl}/plants/${id}`, plant);
-            const plantsCopy = [...plants];
-            const i = plantsCopy.findIndex((plant) => plant.id === id);
-            plantsCopy[i] = plant;
+            const response = await axios.put<Plant>(
+                `${baseUrl}/plants/${id}`,
+                plant
+            );
 
-            setPlants(plantsCopy);
+            updatePlant(response.data);
         } catch (error) {
             throw new Error("Could not update plant");
         }
@@ -79,10 +76,8 @@ const SinglePlant = ({ plants, setPlants }: Props) => {
     const handleDelete = async (id: string): Promise<void> => {
         try {
             await axios.delete<Plant>(`${baseUrl}/plants/${id}`);
-            const plantsWithoutDeleted = plants.filter(
-                (plant) => plant.id !== id
-            );
-            setPlants(plantsWithoutDeleted);
+
+            removePlant(id);
         } catch (error) {
             throw new Error("Could not delete plant");
         }
@@ -120,10 +115,9 @@ const SinglePlant = ({ plants, setPlants }: Props) => {
         event: React.FormEvent<HTMLFormElement>
     ): Promise<void> => {
         event.preventDefault();
-        const plantCopy = {
-            ...plant,
-        };
-        await updatePlant(plantCopy);
+
+        await update(plant);
+
         setPlant({
             name: "",
             growingMedium: "",
@@ -132,6 +126,7 @@ const SinglePlant = ({ plants, setPlants }: Props) => {
             imageName: "",
             id: "",
         });
+
         navigate("/");
     };
 

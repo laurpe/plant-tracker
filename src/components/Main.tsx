@@ -1,18 +1,11 @@
-import { Plant } from "../types";
-
 import Plants from "./Plants";
 import Header from "./Header";
 
-interface Props {
-    plants: Plant[];
-    setPlants: (plants: Plant[]) => void;
-}
-
-const Main = ({ plants, setPlants }: Props) => {
+const Main = () => {
     return (
         <>
             <Header />
-            <Plants plants={plants} setPlants={setPlants} />
+            <Plants />
         </>
     );
 };

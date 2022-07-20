@@ -33,23 +33,19 @@ const imageBaseUrl = process.env.REACT_APP_IMAGE_BASE_URL as string;
 
 interface Props {
     plant: Plant;
-    plants: Plant[];
-    setPlants: (plants: Plant[]) => void;
+    updatePlant: (plant: Plant) => void;
     nextWatering: dayjs.Dayjs;
 }
 
-const PlantCard = ({ plant, plants, setPlants, nextWatering }: Props) => {
+const PlantCard = ({ plant, updatePlant, nextWatering }: Props) => {
     const updateWatered = async (id: string): Promise<void> => {
         try {
             const response = await axios.put<Plant>(`${baseUrl}/plants/${id}`, {
                 ...plant,
                 lastWatered: dayjs().utcOffset(0).startOf("date").toISOString(),
             });
-            const newPlant = response.data;
-            const i = plants.findIndex((newPlant) => newPlant.id === id);
-            const newPlants = [...plants];
-            newPlants[i] = newPlant;
-            setPlants(newPlants);
+
+            updatePlant(response.data);
         } catch (error) {
             throw new Error("Could not update watering date");
         }
