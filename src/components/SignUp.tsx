@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 import Form from "./style/Generics/Form";
 import Label from "./style/Generics/Label";
@@ -13,18 +13,30 @@ const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
 const SignUp = () => {
     const [user, setUser] = useState<User>({ username: "", password: "" });
+    const [passwordConfirm, setPasswordConfirm] = useState<string>("");
+    const [notification, setNotification] = useState<string>("");
 
     const addUser = async (user: User) => {
         try {
-            const response = await axios.post<User>(`${baseUrl}/login`, user);
+            const response = await axios.post<User>(`${baseUrl}/signup`, user);
             console.log(response.data);
         } catch (error) {
-            throw new Error("Could not log in");
+            throw new Error("Could not sign up");
         }
+    };
+
+    const passwordsMatch = (password1: string, password2: string) => {
+        return password1 === password2;
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUser({ ...user, [event.target.name]: event.target.value });
+    };
+
+    const handlePasswordConfirmChange = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        setPasswordConfirm(event.target.value);
     };
 
     const handleSubmit = async (
@@ -32,13 +44,18 @@ const SignUp = () => {
     ): Promise<void> => {
         event.preventDefault();
 
-        await addUser(user);
+        if (passwordsMatch(user.password, passwordConfirm)) {
+            setNotification("");
+            await addUser(user);
 
-        setUser({ username: "", password: "" });
+            setUser({ username: "", password: "" });
+        }
+        setNotification("Passwords do not match");
     };
 
     return (
         <Form onSubmit={(event) => void handleSubmit(event)}>
+            {notification}
             <Label>Username</Label>
             <Input
                 type="text"
@@ -55,6 +72,15 @@ const SignUp = () => {
                 id="login-password-input"
                 onChange={handleChange}
                 value={user.password}
+                required
+            />
+            <Label>Confirm password</Label>
+            <Input
+                type="password"
+                name="password"
+                id="login-password-confirm-input"
+                onChange={handlePasswordConfirmChange}
+                value={passwordConfirm}
                 required
             />
             <Button type="submit" id="submit-btn" width="100%">
