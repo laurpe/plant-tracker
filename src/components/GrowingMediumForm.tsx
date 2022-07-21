@@ -29,7 +29,6 @@ const StyledColorsIconButton = styled(IconButton)`
     border-radius: 5px;
     height: 2.85rem;
     width: 2.85rem;
-    margin: ${(props: { margin?: string }) => props.margin || "0"};
 `;
 
 const GrowingMediumForm = () => {
