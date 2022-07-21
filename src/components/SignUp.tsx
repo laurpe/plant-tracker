@@ -1,9 +1,17 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Form from "./style/Generics/Form";
 import Label from "./style/Generics/Label";
 import Input from "./style/Generics/Input";
 import Button from "./style/Generics/Button";
+import Popup from "./style/Generics/Popup";
+import Column from "./style/Generics/Column";
+import Row from "./style/Generics/Row";
+import Title from "./style/Generics/Title";
+import IconButton from "./style/Generics/IconButton";
+
+import CloseIcon from "@mui/icons-material/Close";
 
 import { User } from "../types";
 
@@ -16,17 +24,15 @@ const SignUp = () => {
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
     const [notification, setNotification] = useState<string>("");
 
+    const navigate = useNavigate();
+
     const addUser = async (user: User) => {
         try {
-            const response = await axios.post<User>(`${baseUrl}/signup`, user);
+            const response = await axios.post<User>(`${baseUrl}/users`, user);
             console.log(response.data);
         } catch (error) {
             throw new Error("Could not sign up");
         }
-    };
-
-    const passwordsMatch = (password1: string, password2: string) => {
-        return password1 === password2;
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,49 +50,64 @@ const SignUp = () => {
     ): Promise<void> => {
         event.preventDefault();
 
-        if (passwordsMatch(user.password, passwordConfirm)) {
+        if (user.password === passwordConfirm) {
             setNotification("");
             await addUser(user);
 
             setUser({ username: "", password: "" });
+            setPasswordConfirm("");
         }
         setNotification("Passwords do not match");
     };
 
     return (
-        <Form onSubmit={(event) => void handleSubmit(event)}>
-            {notification}
-            <Label>Username</Label>
-            <Input
-                type="text"
-                name="username"
-                id="login-username-input"
-                onChange={handleChange}
-                value={user.username}
-                required
-            />
-            <Label>Password</Label>
-            <Input
-                type="password"
-                name="password"
-                id="login-password-input"
-                onChange={handleChange}
-                value={user.password}
-                required
-            />
-            <Label>Confirm password</Label>
-            <Input
-                type="password"
-                name="password"
-                id="login-password-confirm-input"
-                onChange={handlePasswordConfirmChange}
-                value={passwordConfirm}
-                required
-            />
-            <Button type="submit" id="submit-btn" width="100%">
-                Save
-            </Button>
-        </Form>
+        <Popup>
+            <Column
+                justifyContent="space-between"
+                height="100%"
+                padding="0 0 40px 0"
+            >
+                <Row justifyContent="space-between">
+                    <Title>Sign up</Title>
+                    <IconButton type="button" onClick={() => navigate("/")}>
+                        <CloseIcon sx={{ fontSize: 26 }} />
+                    </IconButton>
+                </Row>
+                <Form onSubmit={(event) => void handleSubmit(event)}>
+                    {notification}
+                    <Label>Username</Label>
+                    <Input
+                        type="text"
+                        name="username"
+                        id="login-username-input"
+                        onChange={handleChange}
+                        value={user.username}
+                        required
+                    />
+                    <Label>Password</Label>
+                    <Input
+                        type="password"
+                        name="password"
+                        id="login-password-input"
+                        onChange={handleChange}
+                        value={user.password}
+                        required
+                    />
+                    <Label>Confirm password</Label>
+                    <Input
+                        type="password"
+                        name="password"
+                        id="login-password-confirm-input"
+                        onChange={handlePasswordConfirmChange}
+                        value={passwordConfirm}
+                        required
+                    />
+                    <Button type="submit" id="submit-btn" width="100%">
+                        Sign up
+                    </Button>
+                </Form>
+            </Column>
+        </Popup>
     );
 };
 
