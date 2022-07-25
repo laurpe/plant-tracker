@@ -29,7 +29,8 @@ const SignUp = () => {
     const addUser = async (user: User) => {
         try {
             const response = await axios.post<User>(`${baseUrl}/users`, user);
-            console.log(response.data);
+
+            console.log(response);
         } catch (error) {
             throw new Error("Could not sign up");
         }

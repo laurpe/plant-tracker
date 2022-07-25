@@ -14,28 +14,15 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import { useNavigate } from "react-router-dom";
 
-import { User, LoggedInUser } from "../types";
+import { useUser } from "../hooks/useUser";
 
-import axios from "axios";
-
-const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
+import { User } from "../types";
 
 const LogIn = () => {
     const [user, setUser] = useState<User>({ username: "", password: "" });
+    const { logIn } = useUser();
 
     const navigate = useNavigate();
-
-    const logIn = async (user: User) => {
-        try {
-            const response = await axios.post<LoggedInUser>(
-                `${baseUrl}/login`,
-                user
-            );
-            console.log(response.data);
-        } catch (error) {
-            throw new Error("Could not log in");
-        }
-    };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUser({ ...user, [event.target.name]: event.target.value });
@@ -83,7 +70,11 @@ const LogIn = () => {
                         value={user.password}
                         required
                     />
-                    <Button type="submit" id="submit-btn" width="100%">
+                    <Button type="submit" id="login-submit-btn" width="100%">
+                        Log in
+                    </Button>
+                    or
+                    <Button type="button" id="-btn" width="100%">
                         Log in
                     </Button>
                 </Form>
