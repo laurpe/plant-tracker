@@ -10,31 +10,20 @@ import Column from "./style/Generics/Column";
 import Row from "./style/Generics/Row";
 import Title from "./style/Generics/Title";
 import IconButton from "./style/Generics/IconButton";
-
 import CloseIcon from "@mui/icons-material/Close";
 
+import { useUser } from "../hooks/useUser";
+
 import { User } from "../types";
-
-import axios from "axios";
-
-const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
 const SignUp = () => {
     const [user, setUser] = useState<User>({ username: "", password: "" });
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
     const [notification, setNotification] = useState<string>("");
 
+    const { createUser } = useUser();
+
     const navigate = useNavigate();
-
-    const addUser = async (user: User) => {
-        try {
-            const response = await axios.post<User>(`${baseUrl}/users`, user);
-
-            console.log(response);
-        } catch (error) {
-            throw new Error("Could not sign up");
-        }
-    };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUser({ ...user, [event.target.name]: event.target.value });
@@ -53,12 +42,16 @@ const SignUp = () => {
 
         if (user.password === passwordConfirm) {
             setNotification("");
-            await addUser(user);
+
+            const response = await createUser(user);
+
+            console.log(response);
 
             setUser({ username: "", password: "" });
             setPasswordConfirm("");
+        } else {
+            setNotification("Passwords do not match");
         }
-        setNotification("Passwords do not match");
     };
 
     return (
