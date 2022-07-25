@@ -34,12 +34,15 @@ export const useUser = () => {
                 `${baseUrl}/login`,
                 user
             );
-            console.log(response.data);
             setLoggedInUser(response.data);
         } catch (error) {
             throw new Error("Could not log in");
         }
     };
 
-    return { getLoggedInUser, logIn, createUser };
+    const logOut = () => {
+        localStorage.clear();
+    };
+
+    return { getLoggedInUser, logIn, logOut, createUser };
 };

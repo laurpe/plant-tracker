@@ -20,7 +20,7 @@ import { User } from "../types";
 
 const LogIn = () => {
     const [user, setUser] = useState<User>({ username: "", password: "" });
-    const { logIn } = useUser();
+    const { logIn, logOut } = useUser();
 
     const navigate = useNavigate();
 
@@ -74,8 +74,8 @@ const LogIn = () => {
                         Log in
                     </Button>
                     or
-                    <Button type="button" id="-btn" width="100%">
-                        Log in
+                    <Button type="button" width="100%" onClick={() => logOut()}>
+                        Log out
                     </Button>
                 </Form>
             </Column>
