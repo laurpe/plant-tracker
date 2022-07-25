@@ -20,7 +20,7 @@ import { User } from "../types";
 
 const LogIn = () => {
     const [user, setUser] = useState<User>({ username: "", password: "" });
-    const { logIn, logOut } = useUser();
+    const { login, logout } = useUser();
 
     const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ const LogIn = () => {
     ): Promise<void> => {
         event.preventDefault();
 
-        await logIn(user);
+        await login(user);
 
         setUser({ username: "", password: "" });
     };
@@ -74,7 +74,7 @@ const LogIn = () => {
                         Log in
                     </Button>
                     or
-                    <Button type="button" width="100%" onClick={() => logOut()}>
+                    <Button type="button" width="100%" onClick={() => logout()}>
                         Log out
                     </Button>
                 </Form>

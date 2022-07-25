@@ -28,7 +28,7 @@ export const useUser = () => {
         }
     };
 
-    const logIn = async (user: User) => {
+    const login = async (user: User) => {
         try {
             const response = await axios.post<LoggedInUser>(
                 `${baseUrl}/login`,
@@ -40,9 +40,9 @@ export const useUser = () => {
         }
     };
 
-    const logOut = () => {
+    const logout = () => {
         localStorage.clear();
     };
 
-    return { getToken, logIn, logOut, createUser };
+    return { getToken, login, logout, createUser };
 };
