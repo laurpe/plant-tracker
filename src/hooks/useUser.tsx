@@ -4,13 +4,13 @@ import axios from "axios";
 export const useUser = () => {
     const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
-    const getLoggedInUser = (): LoggedInUser | null => {
+    const getToken = (): string | null => {
         const storage = localStorage.getItem("user");
 
         if (typeof storage === "string") {
             const user = JSON.parse(storage) as LoggedInUser;
 
-            return user;
+            return user.token;
         }
 
         return null;
@@ -44,5 +44,5 @@ export const useUser = () => {
         localStorage.clear();
     };
 
-    return { getLoggedInUser, logIn, logOut, createUser };
+    return { getToken, logIn, logOut, createUser };
 };
