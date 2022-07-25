@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../hooks/useUser";
 
 import { TempPlant, Plant } from "../types";
 
@@ -34,6 +35,10 @@ const AddPlant = () => {
 
     const { addPlant } = usePlants();
 
+    const { getToken } = useUser();
+
+    const token = getToken();
+
     const navigate = useNavigate();
 
     // add plant to database
@@ -42,7 +47,8 @@ const AddPlant = () => {
         try {
             const response = await axios.post<Plant>(
                 `${baseUrl}/plants`,
-                plant
+                plant,
+                { headers: { Authorization: `Bearer ${token || ""}` } }
             );
 
             addPlant(response.data);
