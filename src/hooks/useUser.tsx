@@ -1,8 +1,10 @@
 import { User, TempUser } from "../types";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export const useUser = () => {
+    const [user, setUser] = useState<User>({ email: "", token: "" });
     const navigate = useNavigate();
     const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 

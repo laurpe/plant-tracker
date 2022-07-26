@@ -65,7 +65,7 @@ const LogIn = () => {
                 <Form onSubmit={(event) => void handleSubmit(event)}>
                     <Label>Email</Label>
                     <Input
-                        type="text"
+                        type="email"
                         name="email"
                         id="login-email-input"
                         onChange={handleChange}
