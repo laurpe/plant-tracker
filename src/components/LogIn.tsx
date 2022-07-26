@@ -7,26 +7,37 @@ import Button from "./style/Generics/Button";
 import Popup from "./style/Generics/Popup";
 import Column from "./style/Generics/Column";
 import Row from "./style/Generics/Row";
-import Title from "./style/Generics/Title";
-import IconButton from "./style/Generics/IconButton";
+import AppHeader from "./style/Header/AppHeader";
+import AppTitle from "./style/Header/AppTitle";
 
-import CloseIcon from "@mui/icons-material/Close";
-
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import { useUser } from "../hooks/useUser";
 
 import { User } from "../types";
 
+import styled from "styled-components";
+
+const StyledButton = styled(Button)`
+    background-color: white;
+    color: #35746d;
+    font-weight: 700;
+`;
+
+const SignupDiv = styled.div`
+    color: #7faaa5;
+    text-align: center;
+`;
+
 const LogIn = () => {
     const [user, setUser] = useState<User>({ username: "", password: "" });
-    const { login, logout } = useUser();
-
-    const navigate = useNavigate();
+    const { login } = useUser();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUser({ ...user, [event.target.name]: event.target.value });
     };
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (
         event: React.FormEvent<HTMLFormElement>
@@ -36,6 +47,7 @@ const LogIn = () => {
         await login(user);
 
         setUser({ username: "", password: "" });
+        navigate("/main");
     };
 
     return (
@@ -45,11 +57,10 @@ const LogIn = () => {
                 height="100%"
                 padding="0 0 40px 0"
             >
-                <Row justifyContent="space-between">
-                    <Title>Login</Title>
-                    <IconButton type="button" onClick={() => navigate("/")}>
-                        <CloseIcon sx={{ fontSize: 26 }} />
-                    </IconButton>
+                <Row justifyContent="center">
+                    <AppHeader>
+                        <AppTitle>plant tracker</AppTitle>
+                    </AppHeader>
                 </Row>
                 <Form onSubmit={(event) => void handleSubmit(event)}>
                     <Label>Username</Label>
@@ -73,10 +84,12 @@ const LogIn = () => {
                     <Button type="submit" id="login-submit-btn" width="100%">
                         Log in
                     </Button>
-                    or
-                    <Button type="button" width="100%" onClick={() => logout()}>
-                        Log out
-                    </Button>
+                    <SignupDiv>
+                        Don't have an account?
+                        <Link to="/signup">
+                            <StyledButton type="button">Sign up</StyledButton>
+                        </Link>
+                    </SignupDiv>
                 </Form>
             </Column>
         </Popup>

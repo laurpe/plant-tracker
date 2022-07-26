@@ -11,7 +11,8 @@ const App = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Main />} />
+                <Route path="/" element={<LogIn />} />
+                <Route path="/main" element={<Main />} />
                 <Route path="/add" element={<AddPlant />} />
                 <Route
                     path="/add-growing-medium"
