@@ -14,13 +14,13 @@ const StyledRow = styled(Row)`
     padding: 20px 0 20px 0;
 `;
 
-const Settings = () => {
+const Profile = () => {
     const navigate = useNavigate();
     return (
         <Popup>
             <Column height="100%" padding="0 0 40px 0">
                 <Row justifyContent="space-between">
-                    <Title>Settings</Title>
+                    <Title>Profile</Title>
                     <IconButton type="button" onClick={() => navigate("/main")}>
                         <CloseIcon sx={{ fontSize: 26 }} />
                     </IconButton>
@@ -40,4 +40,4 @@ const Settings = () => {
     );
 };
 
-export default Settings;
+export default Profile;
