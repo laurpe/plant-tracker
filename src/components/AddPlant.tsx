@@ -35,9 +35,7 @@ const AddPlant = () => {
 
     const { addPlant } = usePlants();
 
-    const { getToken } = useUser();
-
-    const token = getToken();
+    const { user } = useUser();
 
     const navigate = useNavigate();
 
@@ -48,7 +46,7 @@ const AddPlant = () => {
             const response = await axios.post<Plant>(
                 `${baseUrl}/plants`,
                 plant,
-                { headers: { Authorization: `Bearer ${token || ""}` } }
+                { headers: { Authorization: `Bearer ${user.token || ""}` } }
             );
 
             addPlant(response.data);

@@ -6,14 +6,14 @@ import axios from "axios";
 
 export const useAPIData = <T,>(url: string) => {
     const [data, setData] = useState<T | null>(null);
-    const { getToken } = useUser();
-
-    const token = getToken();
+    const { user } = useUser();
 
     useEffect(() => {
         const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
-        const config = { headers: { Authorization: `Bearer ${token || ""}` } };
+        const config = {
+            headers: { Authorization: `Bearer ${user.token || ""}` },
+        };
 
         const fetchData = async () => {
             try {
@@ -29,7 +29,7 @@ export const useAPIData = <T,>(url: string) => {
         };
 
         void fetchData();
-    }, [url, token]);
+    }, [url, user]);
 
     return data;
 };

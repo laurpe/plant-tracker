@@ -44,8 +44,7 @@ const GrowingMediumForm = () => {
 
     const navigate = useNavigate();
 
-    const { getToken } = useUser();
-    const token = getToken();
+    const { user } = useUser();
 
     const percentageIsOver100 = (): boolean => {
         const total = growingMedium.composition.reduce((prev, current) => {
@@ -85,7 +84,7 @@ const GrowingMediumForm = () => {
                 `${baseUrl}/growing-mediums`,
                 growingMedium,
                 {
-                    headers: { Authorization: `Bearer ${token || ""}` },
+                    headers: { Authorization: `Bearer ${user.token || ""}` },
                 }
             );
             addGrowingMedium(response.data);

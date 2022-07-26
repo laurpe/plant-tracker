@@ -45,13 +45,12 @@ const SinglePlant = () => {
 
     const navigate = useNavigate();
 
-    const { getToken } = useUser();
-    const token = getToken();
+    const { user } = useUser();
 
     useEffect(() => {
         const fetchPlant = async () => {
             const response = await axios.get<Plant>(`${baseUrl}/plants/${id}`, {
-                headers: { Authorization: `Bearer ${token || ""}` },
+                headers: { Authorization: `Bearer ${user.token || ""}` },
             });
             setPlant(response.data);
         };
@@ -59,7 +58,7 @@ const SinglePlant = () => {
         fetchPlant().catch(() => {
             throw new Error("Fetch plant unsuccessful");
         });
-    }, [id, token]);
+    }, [id, user]);
 
     const update = async (plant: Plant): Promise<void> => {
         try {
@@ -67,7 +66,7 @@ const SinglePlant = () => {
                 `${baseUrl}/plants/${id}`,
                 plant,
                 {
-                    headers: { Authorization: `Bearer ${token || ""}` },
+                    headers: { Authorization: `Bearer ${user.token || ""}` },
                 }
             );
 
@@ -80,7 +79,7 @@ const SinglePlant = () => {
     const handleDelete = async (id: string): Promise<void> => {
         try {
             await axios.delete<Plant>(`${baseUrl}/plants/${id}`, {
-                headers: { Authorization: `Bearer ${token || ""}` },
+                headers: { Authorization: `Bearer ${user.token || ""}` },
             });
 
             removePlant(id);

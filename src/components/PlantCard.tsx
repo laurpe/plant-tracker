@@ -40,8 +40,7 @@ interface Props {
 }
 
 const PlantCard = ({ plant, updatePlant, nextWatering }: Props) => {
-    const { getToken } = useUser();
-    const token = getToken();
+    const { user } = useUser();
 
     const updateWatered = async (id: string): Promise<void> => {
         try {
@@ -55,7 +54,7 @@ const PlantCard = ({ plant, updatePlant, nextWatering }: Props) => {
                         .toISOString(),
                 },
                 {
-                    headers: { Authorization: `Bearer ${token || ""}` },
+                    headers: { Authorization: `Bearer ${user.token || ""}` },
                 }
             );
 
