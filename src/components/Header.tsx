@@ -6,7 +6,7 @@ import AppHeader from "./style/Header/AppHeader";
 import Row from "./style/Generics/Row";
 
 import AddIcon from "@mui/icons-material/Add";
-import PersonIcon from "@mui/icons-material/Person";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 import styled from "styled-components";
 
@@ -19,9 +19,9 @@ const Header = () => {
         <AppHeader>
             <AppTitle>plant tracker</AppTitle>
             <Row>
-                <Link to={"/login"}>
+                <Link to={"/settings"}>
                     <StyledIconButton type="button" id="login-form-btn">
-                        <PersonIcon />
+                        <SettingsIcon />
                     </StyledIconButton>
                 </Link>
                 <Link to={"/add"}>
