@@ -4,6 +4,7 @@ import axios from "axios";
 
 import { Plant } from "../types";
 import { usePlants } from "../hooks/usePlants";
+import { useUser } from "../hooks/useUser";
 
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
@@ -21,11 +22,6 @@ import IconButton from "./style/Generics/IconButton";
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 const imgBaseUrl = process.env.REACT_APP_IMAGE_UPLOAD_API_BASE_URL as string;
-
-const getData = async <T,>(url: string): Promise<T> => {
-    const response = await fetch(`${baseUrl}/${url}`);
-    return response.json() as Promise<T>;
-};
 
 const StyledColumn = styled(Column)`
     height: 100%;
@@ -49,16 +45,21 @@ const SinglePlant = () => {
 
     const navigate = useNavigate();
 
+    const { getToken } = useUser();
+    const token = getToken();
+
     useEffect(() => {
         const fetchPlant = async () => {
-            const result = await getData<Plant>(`plants/${id}`);
-            setPlant(result);
+            const response = await axios.get<Plant>(`${baseUrl}/plants/${id}`, {
+                headers: { Authorization: `Bearer ${token || ""}` },
+            });
+            setPlant(response.data);
         };
 
         fetchPlant().catch(() => {
             throw new Error("Fetch plant unsuccessful");
         });
-    }, [id]);
+    }, [id, token]);
 
     const update = async (plant: Plant): Promise<void> => {
         try {
