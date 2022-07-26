@@ -14,10 +14,10 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import { useUser } from "../hooks/useUser";
 
-import { User } from "../types";
+import { TempUser } from "../types";
 
 const SignUp = () => {
-    const [user, setUser] = useState<User>({ username: "", password: "" });
+    const [user, setUser] = useState<TempUser>({ email: "", password: "" });
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
     const [notification, setNotification] = useState<string>("");
 
@@ -47,7 +47,7 @@ const SignUp = () => {
 
             console.log(response);
 
-            setUser({ username: "", password: "" });
+            setUser({ email: "", password: "" });
             setPasswordConfirm("");
         } else {
             setNotification("Passwords do not match");
@@ -69,13 +69,13 @@ const SignUp = () => {
                 </Row>
                 <Form onSubmit={(event) => void handleSubmit(event)}>
                     {notification}
-                    <Label>Username</Label>
+                    <Label>Email</Label>
                     <Input
                         type="text"
-                        name="username"
-                        id="login-username-input"
+                        name="email"
+                        id="login-email-input"
                         onChange={handleChange}
-                        value={user.username}
+                        value={user.email}
                         required
                     />
                     <Label>Password</Label>

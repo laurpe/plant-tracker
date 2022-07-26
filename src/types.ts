@@ -42,12 +42,12 @@ export interface State {
 }
 
 // User before saving
-export interface User {
-    username: string;
+export interface TempUser {
+    email: string;
     password: string;
 }
 
 // User after saving
-export interface LoggedInUser extends Omit<User, "password"> {
+export interface User extends Omit<TempUser, "password"> {
     token: string;
 }

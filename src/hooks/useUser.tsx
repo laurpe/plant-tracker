@@ -1,4 +1,4 @@
-import { LoggedInUser, User } from "../types";
+import { User, TempUser } from "../types";
 import axios from "axios";
 
 export const useUser = () => {
@@ -8,7 +8,7 @@ export const useUser = () => {
         const storage = localStorage.getItem("user");
 
         if (typeof storage === "string") {
-            const user = JSON.parse(storage) as LoggedInUser;
+            const user = JSON.parse(storage) as User;
 
             return user.token;
         }
@@ -16,24 +16,21 @@ export const useUser = () => {
         return null;
     };
 
-    const setLoggedInUser = (user: LoggedInUser) => {
+    const setLoggedInUser = (user: User) => {
         localStorage.setItem("user", JSON.stringify(user));
     };
 
-    const createUser = async (user: User): Promise<void> => {
+    const createUser = async (user: TempUser): Promise<void> => {
         try {
-            await axios.post<User>(`${baseUrl}/users`, user);
+            await axios.post(`${baseUrl}/users`, user);
         } catch (error) {
             throw new Error("Could not sign up");
         }
     };
 
-    const login = async (user: User) => {
+    const login = async (user: TempUser) => {
         try {
-            const response = await axios.post<LoggedInUser>(
-                `${baseUrl}/login`,
-                user
-            );
+            const response = await axios.post<User>(`${baseUrl}/login`, user);
             setLoggedInUser(response.data);
         } catch (error) {
             throw new Error("Could not log in");
