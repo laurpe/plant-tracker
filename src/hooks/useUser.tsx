@@ -1,7 +1,7 @@
 import { User, TempUser } from "../types";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const useUser = () => {
     const [user, setUser] = useState<User>({ email: "", token: "" });
@@ -9,17 +9,15 @@ export const useUser = () => {
     const navigate = useNavigate();
     const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
-    const getToken = (): string | null => {
+    useEffect(() => {
         const storage = localStorage.getItem("user");
 
         if (typeof storage === "string") {
-            const user = JSON.parse(storage) as User;
+            const storedUser = JSON.parse(storage) as User;
 
-            return user.token;
+            setUser(storedUser);
         }
-
-        return null;
-    };
+    }, []);
 
     const createUser = async (user: TempUser): Promise<void> => {
         try {
@@ -44,5 +42,5 @@ export const useUser = () => {
         navigate("/");
     };
 
-    return { getToken, login, logout, createUser };
+    return { user, login, logout, createUser };
 };
