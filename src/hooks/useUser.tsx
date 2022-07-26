@@ -1,7 +1,9 @@
 import { User, TempUser } from "../types";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const useUser = () => {
+    const navigate = useNavigate();
     const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
     const getToken = (): string | null => {
@@ -39,6 +41,7 @@ export const useUser = () => {
 
     const logout = () => {
         localStorage.clear();
+        navigate("/");
     };
 
     return { getToken, login, logout, createUser };

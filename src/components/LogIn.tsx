@@ -14,7 +14,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 import { useUser } from "../hooks/useUser";
 
-import { User } from "../types";
+import { TempUser } from "../types";
 
 import styled from "styled-components";
 
@@ -30,7 +30,7 @@ const SignupDiv = styled.div`
 `;
 
 const LogIn = () => {
-    const [user, setUser] = useState<User>({ username: "", password: "" });
+    const [user, setUser] = useState<TempUser>({ email: "", password: "" });
     const { login } = useUser();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +46,7 @@ const LogIn = () => {
 
         await login(user);
 
-        setUser({ username: "", password: "" });
+        setUser({ email: "", password: "" });
         navigate("/main");
     };
 
@@ -63,13 +63,13 @@ const LogIn = () => {
                     </AppHeader>
                 </Row>
                 <Form onSubmit={(event) => void handleSubmit(event)}>
-                    <Label>Username</Label>
+                    <Label>Email</Label>
                     <Input
                         type="text"
-                        name="username"
-                        id="login-username-input"
+                        name="email"
+                        id="login-email-input"
                         onChange={handleChange}
-                        value={user.username}
+                        value={user.email}
                         required
                     />
                     <Label>Password</Label>

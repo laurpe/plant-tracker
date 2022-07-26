@@ -6,8 +6,10 @@ import Row from "./style/Generics/Row";
 import Title from "./style/Generics/Title";
 import IconButton from "./style/Generics/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import Button from "./style/Generics/Button";
 
 import styled from "styled-components";
+import { useUser } from "../hooks/useUser";
 
 const StyledRow = styled(Row)`
     border-bottom: 1px solid #ccdbd9;
@@ -16,6 +18,8 @@ const StyledRow = styled(Row)`
 
 const Profile = () => {
     const navigate = useNavigate();
+    const { logout } = useUser();
+
     return (
         <Popup>
             <Column height="100%" padding="0 0 40px 0">
@@ -35,6 +39,9 @@ const Profile = () => {
                         <div>change</div>
                     </StyledRow>
                 </Column>
+                <Button type="button" width="100%" onClick={() => logout()}>
+                    Log out
+                </Button>
             </Column>
         </Popup>
     );

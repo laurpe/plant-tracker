@@ -43,12 +43,12 @@ const SignUp = () => {
         if (user.password === passwordConfirm) {
             setNotification("");
 
-            const response = await createUser(user);
-
-            console.log(response);
+            await createUser(user);
 
             setUser({ email: "", password: "" });
             setPasswordConfirm("");
+
+            navigate("/");
         } else {
             setNotification("Passwords do not match");
         }
