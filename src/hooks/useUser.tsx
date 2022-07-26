@@ -30,8 +30,8 @@ export const useUser = () => {
     const login = async (user: TempUser) => {
         try {
             const response = await axios.post<User>(`${baseUrl}/login`, user);
-            setUser(response.data);
             localStorage.setItem("user", JSON.stringify(response.data));
+            setUser(response.data);
         } catch (error) {
             throw new Error("Could not log in");
         }

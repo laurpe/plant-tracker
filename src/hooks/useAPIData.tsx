@@ -11,6 +11,10 @@ export const useAPIData = <T,>(url: string) => {
     useEffect(() => {
         const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
+        if (user.token === "") {
+            return;
+        }
+
         const config = {
             headers: { Authorization: `Bearer ${user.token || ""}` },
         };
