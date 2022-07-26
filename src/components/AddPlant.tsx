@@ -111,7 +111,7 @@ const AddPlant = () => {
             imageName: "",
         });
 
-        navigate("/");
+        navigate("/main");
     };
 
     const handleImageRemove = () => {
@@ -127,7 +127,7 @@ const AddPlant = () => {
             >
                 <Row justifyContent="space-between">
                     <Title>Add plant</Title>
-                    <IconButton type="button" onClick={() => navigate("/")}>
+                    <IconButton type="button" onClick={() => navigate("/main")}>
                         <CloseIcon sx={{ fontSize: 26 }} />
                     </IconButton>
                 </Row>

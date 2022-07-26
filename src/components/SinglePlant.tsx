@@ -87,7 +87,7 @@ const SinglePlant = () => {
         } catch (error) {
             throw new Error("Could not delete plant");
         }
-        navigate("/");
+        navigate("/main");
     };
 
     // form functions
@@ -139,7 +139,7 @@ const SinglePlant = () => {
             id: "",
         });
 
-        navigate("/");
+        navigate("/main");
     };
 
     const handleImageRemove = () => {
@@ -161,7 +161,7 @@ const SinglePlant = () => {
                         >
                             <DeleteIcon sx={{ fontSize: 26 }} />
                         </IconButton>
-                        <Link to={"/"}>
+                        <Link to={"/main"}>
                             <IconButton type="button">
                                 <CloseIcon sx={{ fontSize: 26 }} />
                             </IconButton>
