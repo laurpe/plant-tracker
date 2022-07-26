@@ -21,7 +21,7 @@ const Settings = () => {
             <Column height="100%" padding="0 0 40px 0">
                 <Row justifyContent="space-between">
                     <Title>Settings</Title>
-                    <IconButton type="button" onClick={() => navigate("/")}>
+                    <IconButton type="button" onClick={() => navigate("/main")}>
                         <CloseIcon sx={{ fontSize: 26 }} />
                     </IconButton>
                 </Row>
