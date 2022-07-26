@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export const useUser = () => {
     const [user, setUser] = useState<User>({ email: "", token: "" });
+
     const navigate = useNavigate();
     const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
@@ -20,10 +21,6 @@ export const useUser = () => {
         return null;
     };
 
-    const setLoggedInUser = (user: User) => {
-        localStorage.setItem("user", JSON.stringify(user));
-    };
-
     const createUser = async (user: TempUser): Promise<void> => {
         try {
             await axios.post(`${baseUrl}/users`, user);
@@ -35,7 +32,8 @@ export const useUser = () => {
     const login = async (user: TempUser) => {
         try {
             const response = await axios.post<User>(`${baseUrl}/login`, user);
-            setLoggedInUser(response.data);
+            setUser(response.data);
+            localStorage.setItem("user", JSON.stringify(response.data));
         } catch (error) {
             throw new Error("Could not log in");
         }
