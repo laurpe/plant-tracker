@@ -18,7 +18,7 @@ const StyledRow = styled(Row)`
 
 const Profile = () => {
     const navigate = useNavigate();
-    const { logout } = useUser();
+    const { user, logout } = useUser();
 
     return (
         <Popup>
@@ -29,14 +29,10 @@ const Profile = () => {
                         <CloseIcon sx={{ fontSize: 26 }} />
                     </IconButton>
                 </Row>
-                <Column>
+                <Column padding="0 0 40px 0">
                     <StyledRow justifyContent="space-between">
                         <div>email</div>
-                        <div>email address</div>
-                    </StyledRow>
-                    <StyledRow justifyContent="space-between">
-                        <div>password</div>
-                        <div>change</div>
+                        <div>{user.email}</div>
                     </StyledRow>
                 </Column>
                 <Button type="button" width="100%" onClick={() => logout()}>
