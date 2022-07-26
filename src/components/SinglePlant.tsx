@@ -65,7 +65,10 @@ const SinglePlant = () => {
         try {
             const response = await axios.put<Plant>(
                 `${baseUrl}/plants/${id}`,
-                plant
+                plant,
+                {
+                    headers: { Authorization: `Bearer ${token || ""}` },
+                }
             );
 
             updatePlant(response.data);
@@ -76,7 +79,9 @@ const SinglePlant = () => {
 
     const handleDelete = async (id: string): Promise<void> => {
         try {
-            await axios.delete<Plant>(`${baseUrl}/plants/${id}`);
+            await axios.delete<Plant>(`${baseUrl}/plants/${id}`, {
+                headers: { Authorization: `Bearer ${token || ""}` },
+            });
 
             removePlant(id);
         } catch (error) {

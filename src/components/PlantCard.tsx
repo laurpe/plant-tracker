@@ -20,6 +20,8 @@ import styled from "styled-components";
 
 import formatNextWatering from "../util/formatNextWatering";
 
+import { useUser } from "../hooks/useUser";
+
 dayjs.extend(utc);
 
 const StyledCard = styled(Card)`
@@ -38,12 +40,24 @@ interface Props {
 }
 
 const PlantCard = ({ plant, updatePlant, nextWatering }: Props) => {
+    const { getToken } = useUser();
+    const token = getToken();
+
     const updateWatered = async (id: string): Promise<void> => {
         try {
-            const response = await axios.put<Plant>(`${baseUrl}/plants/${id}`, {
-                ...plant,
-                lastWatered: dayjs().utcOffset(0).startOf("date").toISOString(),
-            });
+            const response = await axios.put<Plant>(
+                `${baseUrl}/plants/${id}`,
+                {
+                    ...plant,
+                    lastWatered: dayjs()
+                        .utcOffset(0)
+                        .startOf("date")
+                        .toISOString(),
+                },
+                {
+                    headers: { Authorization: `Bearer ${token || ""}` },
+                }
+            );
 
             updatePlant(response.data);
         } catch (error) {

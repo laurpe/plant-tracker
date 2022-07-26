@@ -20,6 +20,7 @@ import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 
 import styled from "styled-components";
 import { useGrowingMediums } from "../hooks/useGrowingMediums";
+import { useUser } from "../hooks/useUser";
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
@@ -42,6 +43,9 @@ const GrowingMediumForm = () => {
     const { growingMediums, addGrowingMedium } = useGrowingMediums();
 
     const navigate = useNavigate();
+
+    const { getToken } = useUser();
+    const token = getToken();
 
     const percentageIsOver100 = (): boolean => {
         const total = growingMedium.composition.reduce((prev, current) => {
@@ -79,7 +83,10 @@ const GrowingMediumForm = () => {
         try {
             const response = await axios.post<GrowingMedium>(
                 `${baseUrl}/growing-mediums`,
-                growingMedium
+                growingMedium,
+                {
+                    headers: { Authorization: `Bearer ${token || ""}` },
+                }
             );
             addGrowingMedium(response.data);
         } catch (error) {
