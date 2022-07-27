@@ -39,7 +39,12 @@ export const useUser = () => {
             localStorage.setItem("user", JSON.stringify(response.data));
             setUser(response.data);
         } catch (error) {
-            throw new Error("Could not log in");
+            if (axios.isAxiosError(error)) {
+                const err = error as AxiosError<{ error: string }>;
+
+                throw new Error(err.response?.data.error);
+            }
+            throw error;
         }
     };
 

@@ -9,6 +9,7 @@ import Column from "./style/Generics/Column";
 import Row from "./style/Generics/Row";
 import AppHeader from "./style/Header/AppHeader";
 import AppTitle from "./style/Header/AppTitle";
+import Notification from "./style/Generics/Notification";
 
 import { useNavigate, Link } from "react-router-dom";
 
@@ -31,6 +32,7 @@ const SignupDiv = styled.div`
 
 const LogIn = () => {
     const [user, setUser] = useState<TempUser>({ email: "", password: "" });
+    const [notification, setNotification] = useState<string>("");
     const { login } = useUser();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,10 +46,16 @@ const LogIn = () => {
     ): Promise<void> => {
         event.preventDefault();
 
-        await login(user);
+        try {
+            await login(user);
 
-        setUser({ email: "", password: "" });
-        navigate("/main");
+            setNotification("");
+            setUser({ email: "", password: "" });
+            navigate("/main");
+        } catch (error) {
+            const err = error as Error;
+            setNotification(err.message);
+        }
     };
 
     return (
@@ -62,6 +70,7 @@ const LogIn = () => {
                         <AppTitle>plant tracker</AppTitle>
                     </AppHeader>
                 </Row>
+                {notification && <Notification>{notification}</Notification>}
                 <Form onSubmit={(event) => void handleSubmit(event)}>
                     <Label>Email</Label>
                     <Input
