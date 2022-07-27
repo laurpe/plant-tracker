@@ -78,3 +78,17 @@ Cypress.Commands.add("addPlant", () => {
     cy.get("#plant-wateringCycle-input").type("6");
     cy.get("#submit-btn").click();
 });
+
+Cypress.Commands.add("createUser", () => {
+    cy.get("#signup-btn").click();
+    cy.get("#signup-email-input").type("test@user.com");
+    cy.get("#signup-password-input").type("secret");
+    cy.get("#signup-password-confirm-input").type("secret");
+    cy.get("#signup-submit-btn").click();
+});
+
+Cypress.Commands.add("login", () => {
+    cy.get("#login-email-input").type("test@user.com");
+    cy.get("#login-password-input").type("secret");
+    cy.get("#login-submit-btn").click();
+});

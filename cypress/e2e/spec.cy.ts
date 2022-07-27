@@ -5,14 +5,61 @@ describe("Plant tracker", () => {
     });
 });
 
-describe("When a new plant is added", () => {
+describe("User", () => {
     beforeEach(() => {
         cy.deletePlants();
     });
-    it("the plant is rendered on the front page", () => {
-        cy.visit("http://localhost:3000");
-        cy.addPlant();
 
+    it("can sign up", () => {
+        cy.visit("http://localhost:3000");
+
+        cy.get("#signup-btn").click();
+
+        cy.get("#signup-email-input").type("test@user.com");
+        cy.get("#signup-password-input").type("secret");
+        cy.get("#signup-password-confirm-input").type("secret");
+        cy.get("#signup-submit-btn").click();
+
+        cy.contains("Log in");
+    });
+
+    it("can log in", () => {
+        cy.visit("http://localhost:3000");
+
+        cy.get("#login-email-input").type("test@user.com");
+        cy.get("#login-password-input").type("secret");
+        cy.get("#login-submit-btn").click();
+
+        cy.url().should("include", "/main");
+
+        cy.get("#profile-btn").click();
+
+        cy.contains("test@user.com");
+    });
+
+    it("can log out", () => {
+        cy.visit("http://localhost:3000");
+
+        cy.get("#login-email-input").type("test@user.com");
+        cy.get("#login-password-input").type("secret");
+        cy.get("#login-submit-btn").click();
+
+        cy.get("#profile-btn").click();
+        cy.get("#logout-btn").click();
+
+        cy.contains("Don't have an account?");
+    });
+});
+
+describe.only("Plant", () => {
+    beforeEach(() => {
+        cy.deletePlants();
+        cy.visit("http://localhost:3000");
+        cy.createUser();
+        cy.login();
+        cy.addPlant();
+    });
+    it("can be added", () => {
         cy.contains("calathea");
         cy.get("#plant-image")
             .should("be.visible")
@@ -22,15 +69,7 @@ describe("When a new plant is added", () => {
                 expect(image.naturalHeight).to.equal(259);
             });
     });
-});
-
-describe("When plant info is modified", () => {
-    beforeEach(() => {
-        cy.deletePlants();
-        cy.visit("http://localhost:3000");
-        cy.addPlant();
-    });
-    it("new info is shown on the front page (plant has image)", () => {
+    it("can be updated", () => {
         cy.contains("calathea").get("#edit-btn").click();
 
         cy.contains("Plant details");
@@ -46,23 +85,14 @@ describe("When plant info is modified", () => {
 
         cy.contains("calathea beauty star");
     });
-    it("and user deletes plant, it is removed from front page", () => {
+    it("can be deleted", () => {
         cy.contains("calathea").get("#edit-btn").click();
 
         cy.get("#delete-plant-btn").click();
 
         cy.get("calathea").should("not.exist");
     });
-});
-
-describe("Plant actions", () => {
-    beforeEach(() => {
-        cy.deletePlants();
-    });
-    it("when plant is watered, new time to water shows", () => {
-        cy.visit("http://localhost:3000");
-        cy.addPlant();
-
+    it("can be watered", () => {
         cy.contains("watering late");
 
         cy.contains("calathea").get("#water-btn").click();
@@ -151,51 +181,5 @@ describe("Growing mediums", () => {
         cy.get("#growing-medium-submit-btn").click();
 
         cy.contains("Name already exists");
-    });
-});
-
-describe.only("User", () => {
-    beforeEach(() => {
-        cy.deletePlants();
-    });
-
-    it("can sign up", () => {
-        cy.visit("http://localhost:3000");
-
-        cy.get("#signup-btn").click();
-
-        cy.get("#signup-email-input").type("test@user.com");
-        cy.get("#signup-password-input").type("secret");
-        cy.get("#signup-password-confirm-input").type("secret");
-        cy.get("#signup-submit-btn").click();
-
-        cy.contains("Log in");
-    });
-
-    it("can log in", () => {
-        cy.visit("http://localhost:3000");
-
-        cy.get("#login-email-input").type("test@user.com");
-        cy.get("#login-password-input").type("secret");
-        cy.get("#login-submit-btn").click();
-
-        cy.url().should("include", "/main");
-
-        cy.get("#profile-btn").click();
-
-        cy.contains("test@user.com");
-    });
-
-    it("can log out", () => {
-        cy.visit("http://localhost:3000");
-
-        cy.get("#login-email-input").type("test@user.com");
-        cy.get("#login-password-input").type("secret");
-        cy.get("#login-submit-btn").click();
-
-        cy.get("#profile-btn").click();
-        cy.get("#logout-btn").click();
-
-        cy.contains("Don't have an account?");
     });
 });
