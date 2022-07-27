@@ -10,7 +10,7 @@ declare namespace Cypress {
         deleteUsers(): Chainable<null>;
         deleteTestGrowingMedium(): Chainable<null>;
         addPlant(): Chainable<null>;
-        createUser(): Chainable<null>;
-        login(): Chainable<null>;
+        createUser(email: string, password: string): Chainable<null>;
+        login(email: string, password: string): Chainable<null>;
     }
 }

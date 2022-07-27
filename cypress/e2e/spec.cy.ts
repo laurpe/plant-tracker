@@ -22,7 +22,7 @@ describe("User", () => {
     });
 
     it("can log in", () => {
-        cy.createUser();
+        cy.createUser("test@user.com", "secret");
 
         cy.get("#login-email-input").type("test@user.com");
         cy.get("#login-password-input").type("secret");
@@ -36,8 +36,8 @@ describe("User", () => {
     });
 
     it("can log out", () => {
-        cy.createUser();
-        cy.login();
+        cy.createUser("test@user.com", "secret");
+        cy.login("test@user.com", "secret");
 
         cy.get("#profile-btn").click();
         cy.get("#logout-btn").click();
@@ -45,11 +45,17 @@ describe("User", () => {
         cy.contains("Don't have an account?");
     });
 
-    it.only("email needs to be unique", () => {
-        cy.createUser();
-        cy.createUser();
+    it("email needs to be unique", () => {
+        cy.createUser("test@user.com", "secret");
+        cy.createUser("test@user.com", "secret");
 
         cy.contains("Email already associated with an account");
+    });
+
+    it("only sees plants they have added themselves", () => {
+        cy.createUser("test@user.com", "secret");
+        cy.login("test@user.com", "secret");
+        cy.addPlant();
     });
 });
 
@@ -58,8 +64,8 @@ describe("Plant", () => {
         cy.deletePlants();
         cy.deleteUsers();
         cy.visit("http://localhost:3000");
-        cy.createUser();
-        cy.login();
+        cy.createUser("test@user.com", "secret");
+        cy.login("test@user.com", "secret");
         cy.addPlant();
     });
     it("can be added", () => {
@@ -110,8 +116,8 @@ describe("Growing medium", () => {
         cy.deleteUsers();
         cy.deleteTestGrowingMedium();
         cy.visit("http://localhost:3000");
-        cy.createUser();
-        cy.login();
+        cy.createUser("test@user.com", "secret");
+        cy.login("test@user.com", "secret");
     });
 
     it("can be added and it shows in add plant form's list of growing mediums", () => {

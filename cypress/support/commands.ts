@@ -93,16 +93,16 @@ Cypress.Commands.add("addPlant", () => {
     cy.get("#submit-btn").click();
 });
 
-Cypress.Commands.add("createUser", () => {
+Cypress.Commands.add("createUser", (email, password) => {
     cy.get("#signup-btn").click();
-    cy.get("#signup-email-input").type("test@user.com");
-    cy.get("#signup-password-input").type("secret");
-    cy.get("#signup-password-confirm-input").type("secret");
+    cy.get("#signup-email-input").type(email);
+    cy.get("#signup-password-input").type(password);
+    cy.get("#signup-password-confirm-input").type(password);
     cy.get("#signup-submit-btn").click();
 });
 
-Cypress.Commands.add("login", () => {
-    cy.get("#login-email-input").type("test@user.com");
-    cy.get("#login-password-input").type("secret");
+Cypress.Commands.add("login", (email, password) => {
+    cy.get("#login-email-input").type(email);
+    cy.get("#login-password-input").type(password);
     cy.get("#login-submit-btn").click();
 });
