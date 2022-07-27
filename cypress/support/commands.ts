@@ -54,6 +54,20 @@ Cypress.Commands.add("deletePlants", () => {
     });
 });
 
+Cypress.Commands.add("deleteUsers", () => {
+    cy.request({
+        method: "POST",
+        url: `${apiUrl}/action/deleteMany`,
+        headers: { "Content-type": "application/json", "api-key": apiKey },
+        body: {
+            dataSource: "Cluster0",
+            database: "test",
+            collection: "users",
+            filter: {},
+        },
+    });
+});
+
 Cypress.Commands.add("deleteTestGrowingMedium", () => {
     cy.request({
         method: "POST",

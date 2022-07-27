@@ -7,12 +7,10 @@ describe("Plant tracker", () => {
 
 describe("User", () => {
     beforeEach(() => {
-        cy.deletePlants();
-    });
-
-    it("can sign up", () => {
         cy.visit("http://localhost:3000");
-
+        cy.deleteUsers();
+    });
+    it("can sign up", () => {
         cy.get("#signup-btn").click();
 
         cy.get("#signup-email-input").type("test@user.com");
@@ -24,7 +22,7 @@ describe("User", () => {
     });
 
     it("can log in", () => {
-        cy.visit("http://localhost:3000");
+        cy.createUser();
 
         cy.get("#login-email-input").type("test@user.com");
         cy.get("#login-password-input").type("secret");
@@ -38,11 +36,8 @@ describe("User", () => {
     });
 
     it("can log out", () => {
-        cy.visit("http://localhost:3000");
-
-        cy.get("#login-email-input").type("test@user.com");
-        cy.get("#login-password-input").type("secret");
-        cy.get("#login-submit-btn").click();
+        cy.createUser();
+        cy.login();
 
         cy.get("#profile-btn").click();
         cy.get("#logout-btn").click();
@@ -51,9 +46,10 @@ describe("User", () => {
     });
 });
 
-describe.only("Plant", () => {
+describe("Plant", () => {
     beforeEach(() => {
         cy.deletePlants();
+        cy.deleteUsers();
         cy.visit("http://localhost:3000");
         cy.createUser();
         cy.login();
@@ -101,15 +97,17 @@ describe.only("Plant", () => {
     });
 });
 
-describe("Growing mediums", () => {
+describe("Growing medium", () => {
     beforeEach(() => {
         cy.deletePlants();
+        cy.deleteUsers();
         cy.deleteTestGrowingMedium();
+        cy.visit("http://localhost:3000");
+        cy.createUser();
+        cy.login();
     });
 
-    it("When new growing medium is added, it shows in add plant form's list of growing mediums", () => {
-        cy.visit("http://localhost:3000");
-
+    it("can be added and it shows in add plant form's list of growing mediums", () => {
         cy.get("#add-plant-form-btn").click();
         cy.get("#plant-growingMedium-select").select(1);
 
@@ -135,9 +133,7 @@ describe("Growing mediums", () => {
         cy.get("#plant-growingMedium-select").select("customMix");
     });
 
-    it("Growing medium components' percentage can't add up to more than 100", () => {
-        cy.visit("http://localhost:3000");
-
+    it("components' percentage can't add up to more than 100", () => {
         cy.get("#add-plant-form-btn").click();
         cy.get("#plant-growingMedium-select").select(1);
 
@@ -162,9 +158,7 @@ describe("Growing mediums", () => {
         cy.contains("Components can't add up to more than 100%");
     });
 
-    it("Can't add growing medium with a name that already exists", () => {
-        cy.visit("http://localhost:3000");
-
+    it("can't have a name that already exists", () => {
         cy.get("#add-plant-form-btn").click();
         cy.get("#plant-growingMedium-select").select(1);
 
