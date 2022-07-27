@@ -10,6 +10,8 @@ import Column from "./style/Generics/Column";
 import Row from "./style/Generics/Row";
 import Title from "./style/Generics/Title";
 import IconButton from "./style/Generics/IconButton";
+import Notification from "./style/Generics/Notification";
+
 import CloseIcon from "@mui/icons-material/Close";
 
 import { useUser } from "../hooks/useUser";
@@ -43,12 +45,17 @@ const SignUp = () => {
         if (user.password === passwordConfirm) {
             setNotification("");
 
-            await createUser(user);
+            try {
+                await createUser(user);
 
-            setUser({ email: "", password: "" });
-            setPasswordConfirm("");
+                setUser({ email: "", password: "" });
+                setPasswordConfirm("");
 
-            navigate("/");
+                navigate("/");
+            } catch (error) {
+                const err = error as Error;
+                setNotification(err.message);
+            }
         } else {
             setNotification("Passwords do not match");
         }
@@ -67,8 +74,8 @@ const SignUp = () => {
                         <CloseIcon sx={{ fontSize: 26 }} />
                     </IconButton>
                 </Row>
+                {notification && <Notification>{notification}</Notification>}
                 <Form onSubmit={(event) => void handleSubmit(event)}>
-                    {notification}
                     <Label>Email</Label>
                     <Input
                         type="email"

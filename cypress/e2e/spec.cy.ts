@@ -44,6 +44,13 @@ describe("User", () => {
 
         cy.contains("Don't have an account?");
     });
+
+    it.only("email needs to be unique", () => {
+        cy.createUser();
+        cy.createUser();
+
+        cy.contains("Email already associated with an account");
+    });
 });
 
 describe("Plant", () => {

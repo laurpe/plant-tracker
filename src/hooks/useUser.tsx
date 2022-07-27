@@ -2,6 +2,7 @@ import { User, TempUser } from "../types";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { AxiosError } from "axios";
 
 export const useUser = () => {
     const [user, setUser] = useState<User>({ email: "", token: "" });
@@ -23,7 +24,12 @@ export const useUser = () => {
         try {
             await axios.post(`${baseUrl}/users`, user);
         } catch (error) {
-            throw new Error("Could not sign up");
+            if (axios.isAxiosError(error)) {
+                const err = error as AxiosError<{ error: string }>;
+
+                throw new Error(err.response?.data.error);
+            }
+            throw error;
         }
     };
 
