@@ -153,3 +153,49 @@ describe("Growing mediums", () => {
         cy.contains("Name already exists");
     });
 });
+
+describe.only("User", () => {
+    beforeEach(() => {
+        cy.deletePlants();
+    });
+
+    it("can sign up", () => {
+        cy.visit("http://localhost:3000");
+
+        cy.get("#signup-btn").click();
+
+        cy.get("#signup-email-input").type("test@user.com");
+        cy.get("#signup-password-input").type("secret");
+        cy.get("#signup-password-confirm-input").type("secret");
+        cy.get("#signup-submit-btn").click();
+
+        cy.contains("Log in");
+    });
+
+    it("can log in", () => {
+        cy.visit("http://localhost:3000");
+
+        cy.get("#login-email-input").type("test@user.com");
+        cy.get("#login-password-input").type("secret");
+        cy.get("#login-submit-btn").click();
+
+        cy.url().should("include", "/main");
+
+        cy.get("#profile-btn").click();
+
+        cy.contains("test@user.com");
+    });
+
+    it("can log out", () => {
+        cy.visit("http://localhost:3000");
+
+        cy.get("#login-email-input").type("test@user.com");
+        cy.get("#login-password-input").type("secret");
+        cy.get("#login-submit-btn").click();
+
+        cy.get("#profile-btn").click();
+        cy.get("#logout-btn").click();
+
+        cy.contains("Don't have an account?");
+    });
+});

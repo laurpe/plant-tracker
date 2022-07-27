@@ -87,7 +87,9 @@ const LogIn = () => {
                     <SignupDiv>
                         Don't have an account?
                         <Link to="/signup">
-                            <StyledButton type="button">Sign up</StyledButton>
+                            <StyledButton type="button" id="signup-btn">
+                                Sign up
+                            </StyledButton>
                         </Link>
                     </SignupDiv>
                 </Form>

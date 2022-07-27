@@ -20,7 +20,7 @@ const Header = () => {
             <AppTitle>plant tracker</AppTitle>
             <Row>
                 <Link to={"/profile"}>
-                    <StyledIconButton type="button" id="login-form-btn">
+                    <StyledIconButton type="button" id="profile-btn">
                         <PersonIcon />
                     </StyledIconButton>
                 </Link>

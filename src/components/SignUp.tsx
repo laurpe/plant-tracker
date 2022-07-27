@@ -73,7 +73,7 @@ const SignUp = () => {
                     <Input
                         type="email"
                         name="email"
-                        id="login-email-input"
+                        id="signup-email-input"
                         onChange={handleChange}
                         value={user.email}
                         required
@@ -82,7 +82,7 @@ const SignUp = () => {
                     <Input
                         type="password"
                         name="password"
-                        id="login-password-input"
+                        id="signup-password-input"
                         onChange={handleChange}
                         value={user.password}
                         required
@@ -91,12 +91,12 @@ const SignUp = () => {
                     <Input
                         type="password"
                         name="password"
-                        id="login-password-confirm-input"
+                        id="signup-password-confirm-input"
                         onChange={handlePasswordConfirmChange}
                         value={passwordConfirm}
                         required
                     />
-                    <Button type="submit" id="submit-btn" width="100%">
+                    <Button type="submit" id="signup-submit-btn" width="100%">
                         Sign up
                     </Button>
                 </Form>

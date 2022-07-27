@@ -28,7 +28,11 @@ const Profile = () => {
                 <Row justifyContent="space-between">
                     <Title>Profile</Title>
                     <Row>
-                        <IconButton type="button" onClick={() => logout()}>
+                        <IconButton
+                            type="button"
+                            id="logout-btn"
+                            onClick={() => logout()}
+                        >
                             <LogoutIcon sx={{ fontSize: 26 }} />
                         </IconButton>
                         <IconButton
