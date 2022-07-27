@@ -93,6 +93,7 @@ const SignUp = () => {
                         onChange={handleChange}
                         value={user.password}
                         required
+                        minLength={8}
                     />
                     <Label>Confirm password</Label>
                     <Input
@@ -102,6 +103,7 @@ const SignUp = () => {
                         onChange={handlePasswordConfirmChange}
                         value={passwordConfirm}
                         required
+                        minLength={8}
                     />
                     <Button type="submit" id="signup-submit-btn" width="100%">
                         Sign up
