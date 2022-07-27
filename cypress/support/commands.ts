@@ -106,3 +106,8 @@ Cypress.Commands.add("login", (email, password) => {
     cy.get("#login-password-input").type(password);
     cy.get("#login-submit-btn").click();
 });
+
+Cypress.Commands.add("logout", () => {
+    cy.visit("http://localhost:3000/profile");
+    cy.get("#logout-btn").click();
+});

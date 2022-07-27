@@ -56,6 +56,15 @@ describe("User", () => {
         cy.createUser("test@user.com", "secret");
         cy.login("test@user.com", "secret");
         cy.addPlant();
+        cy.contains("calathea").should("exist");
+
+        cy.logout();
+
+        cy.createUser("second@user.com", "secret");
+        cy.login("second@user.com", "secret");
+        cy.wait(1000);
+
+        cy.contains("calathea").should("not.exist");
     });
 });
 
@@ -188,5 +197,37 @@ describe("Growing medium", () => {
         cy.get("#growing-medium-submit-btn").click();
 
         cy.contains("Name already exists");
+    });
+
+    it("only shows if it's created by the user or is a default growing medium", () => {
+        cy.get("#add-plant-form-btn").click();
+        cy.get("#plant-growingMedium-select").select(1);
+
+        cy.contains("Add growing medium");
+
+        cy.get("#growing-medium-name-input").type("customMix");
+        cy.get("#growing-medium-component-1-select").select(3);
+        cy.get("#growing-medium-percentage-1-input").clear().type("30");
+
+        cy.get("#growing-medium-add-more-components-btn").click();
+
+        cy.get("#growing-medium-component-2-select").select(4);
+        cy.get("#growing-medium-percentage-2-input").clear().type("20");
+
+        cy.get("#growing-medium-add-more-components-btn").click();
+
+        cy.get("#growing-medium-component-3-select").select(5);
+        cy.get("#growing-medium-percentage-3-input").clear().type("50");
+
+        cy.get("#growing-medium-submit-btn").click();
+
+        cy.logout();
+        cy.createUser("second@user.com", "secret");
+        cy.login("second@user.com", "secret");
+
+        cy.get("#add-plant-form-btn").click();
+        cy.get("#plant-growingMedium-select option:contains(customMix)").should(
+            "not.exist"
+        );
     });
 });
