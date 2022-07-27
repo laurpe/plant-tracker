@@ -5,14 +5,79 @@ describe("Plant tracker", () => {
     });
 });
 
-describe("When a new plant is added", () => {
+describe("User", () => {
+    beforeEach(() => {
+        cy.visit("http://localhost:3000");
+        cy.deleteUsers();
+    });
+    it("can sign up", () => {
+        cy.get("#signup-btn").click();
+
+        cy.get("#signup-email-input").type("test@user.com");
+        cy.get("#signup-password-input").type("secret");
+        cy.get("#signup-password-confirm-input").type("secret");
+        cy.get("#signup-submit-btn").click();
+
+        cy.contains("Log in");
+    });
+
+    it("can log in", () => {
+        cy.createUser("test@user.com", "secret");
+
+        cy.get("#login-email-input").type("test@user.com");
+        cy.get("#login-password-input").type("secret");
+        cy.get("#login-submit-btn").click();
+
+        cy.url().should("include", "/main");
+
+        cy.get("#profile-btn").click();
+
+        cy.contains("test@user.com");
+    });
+
+    it("can log out", () => {
+        cy.createUser("test@user.com", "secret");
+        cy.login("test@user.com", "secret");
+
+        cy.get("#profile-btn").click();
+        cy.get("#logout-btn").click();
+
+        cy.contains("Don't have an account?");
+    });
+
+    it("email needs to be unique", () => {
+        cy.createUser("test@user.com", "secret");
+        cy.createUser("test@user.com", "secret");
+
+        cy.contains("Email already associated with an account");
+    });
+
+    it("only sees plants they have added themselves", () => {
+        cy.createUser("test@user.com", "secret");
+        cy.login("test@user.com", "secret");
+        cy.addPlant();
+        cy.contains("calathea").should("exist");
+
+        cy.logout();
+
+        cy.createUser("second@user.com", "secret");
+        cy.login("second@user.com", "secret");
+        cy.wait(1000);
+
+        cy.contains("calathea").should("not.exist");
+    });
+});
+
+describe("Plant", () => {
     beforeEach(() => {
         cy.deletePlants();
-    });
-    it("the plant is rendered on the front page", () => {
+        cy.deleteUsers();
         cy.visit("http://localhost:3000");
+        cy.createUser("test@user.com", "secret");
+        cy.login("test@user.com", "secret");
         cy.addPlant();
-
+    });
+    it("can be added", () => {
         cy.contains("calathea");
         cy.get("#plant-image")
             .should("be.visible")
@@ -22,15 +87,7 @@ describe("When a new plant is added", () => {
                 expect(image.naturalHeight).to.equal(259);
             });
     });
-});
-
-describe("When plant info is modified", () => {
-    beforeEach(() => {
-        cy.deletePlants();
-        cy.visit("http://localhost:3000");
-        cy.addPlant();
-    });
-    it("new info is shown on the front page (plant has image)", () => {
+    it("can be updated", () => {
         cy.contains("calathea").get("#edit-btn").click();
 
         cy.contains("Plant details");
@@ -46,23 +103,14 @@ describe("When plant info is modified", () => {
 
         cy.contains("calathea beauty star");
     });
-    it("and user deletes plant, it is removed from front page", () => {
+    it("can be deleted", () => {
         cy.contains("calathea").get("#edit-btn").click();
 
         cy.get("#delete-plant-btn").click();
 
         cy.get("calathea").should("not.exist");
     });
-});
-
-describe("Plant actions", () => {
-    beforeEach(() => {
-        cy.deletePlants();
-    });
-    it("when plant is watered, new time to water shows", () => {
-        cy.visit("http://localhost:3000");
-        cy.addPlant();
-
+    it("can be watered", () => {
         cy.contains("watering late");
 
         cy.contains("calathea").get("#water-btn").click();
@@ -71,15 +119,17 @@ describe("Plant actions", () => {
     });
 });
 
-describe("Growing mediums", () => {
+describe("Growing medium", () => {
     beforeEach(() => {
         cy.deletePlants();
+        cy.deleteUsers();
         cy.deleteTestGrowingMedium();
+        cy.visit("http://localhost:3000");
+        cy.createUser("test@user.com", "secret");
+        cy.login("test@user.com", "secret");
     });
 
-    it("When new growing medium is added, it shows in add plant form's list of growing mediums", () => {
-        cy.visit("http://localhost:3000");
-
+    it("can be added and it shows in add plant form's list of growing mediums", () => {
         cy.get("#add-plant-form-btn").click();
         cy.get("#plant-growingMedium-select").select(1);
 
@@ -105,9 +155,7 @@ describe("Growing mediums", () => {
         cy.get("#plant-growingMedium-select").select("customMix");
     });
 
-    it("Growing medium components' percentage can't add up to more than 100", () => {
-        cy.visit("http://localhost:3000");
-
+    it("components' percentage can't add up to more than 100", () => {
         cy.get("#add-plant-form-btn").click();
         cy.get("#plant-growingMedium-select").select(1);
 
@@ -132,9 +180,7 @@ describe("Growing mediums", () => {
         cy.contains("Components can't add up to more than 100%");
     });
 
-    it("Can't add growing medium with a name that already exists", () => {
-        cy.visit("http://localhost:3000");
-
+    it("can't have a name that already exists", () => {
         cy.get("#add-plant-form-btn").click();
         cy.get("#plant-growingMedium-select").select(1);
 
@@ -151,5 +197,37 @@ describe("Growing mediums", () => {
         cy.get("#growing-medium-submit-btn").click();
 
         cy.contains("Name already exists");
+    });
+
+    it("only shows if it's created by the user or is a default growing medium", () => {
+        cy.get("#add-plant-form-btn").click();
+        cy.get("#plant-growingMedium-select").select(1);
+
+        cy.contains("Add growing medium");
+
+        cy.get("#growing-medium-name-input").type("customMix");
+        cy.get("#growing-medium-component-1-select").select(3);
+        cy.get("#growing-medium-percentage-1-input").clear().type("30");
+
+        cy.get("#growing-medium-add-more-components-btn").click();
+
+        cy.get("#growing-medium-component-2-select").select(4);
+        cy.get("#growing-medium-percentage-2-input").clear().type("20");
+
+        cy.get("#growing-medium-add-more-components-btn").click();
+
+        cy.get("#growing-medium-component-3-select").select(5);
+        cy.get("#growing-medium-percentage-3-input").clear().type("50");
+
+        cy.get("#growing-medium-submit-btn").click();
+
+        cy.logout();
+        cy.createUser("second@user.com", "secret");
+        cy.login("second@user.com", "secret");
+
+        cy.get("#add-plant-form-btn").click();
+        cy.get("#plant-growingMedium-select option:contains(customMix)").should(
+            "not.exist"
+        );
     });
 });

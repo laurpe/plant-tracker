@@ -7,7 +7,11 @@ declare namespace Cypress {
          * @example cy.clickOnMyJourneyInCandidateCabinet()
          */
         deletePlants(): Chainable<null>;
+        deleteUsers(): Chainable<null>;
         deleteTestGrowingMedium(): Chainable<null>;
         addPlant(): Chainable<null>;
+        createUser(email: string, password: string): Chainable<null>;
+        login(email: string, password: string): Chainable<null>;
+        logout(): Chainable<null>;
     }
 }

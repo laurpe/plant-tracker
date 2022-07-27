@@ -12,6 +12,7 @@ const IconButton = styled.button`
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    margin: ${(props: { margin?: string }) => props.margin || "0"};
 `;
 
 export default IconButton;

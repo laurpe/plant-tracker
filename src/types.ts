@@ -40,3 +40,14 @@ export interface State {
     plants?: Plant[];
     growingMediums?: GrowingMedium[];
 }
+
+// User before saving
+export interface TempUser {
+    email: string;
+    password: string;
+}
+
+// User after saving
+export interface User extends Omit<TempUser, "password"> {
+    token: string;
+}

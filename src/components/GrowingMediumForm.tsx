@@ -20,6 +20,7 @@ import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 
 import styled from "styled-components";
 import { useGrowingMediums } from "../hooks/useGrowingMediums";
+import { useUser } from "../hooks/useUser";
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
@@ -29,7 +30,6 @@ const StyledColorsIconButton = styled(IconButton)`
     border-radius: 5px;
     height: 2.85rem;
     width: 2.85rem;
-    margin: ${(props: { margin?: string }) => props.margin || "0"};
 `;
 
 const GrowingMediumForm = () => {
@@ -43,6 +43,8 @@ const GrowingMediumForm = () => {
     const { growingMediums, addGrowingMedium } = useGrowingMediums();
 
     const navigate = useNavigate();
+
+    const { user } = useUser();
 
     const percentageIsOver100 = (): boolean => {
         const total = growingMedium.composition.reduce((prev, current) => {
@@ -80,7 +82,10 @@ const GrowingMediumForm = () => {
         try {
             const response = await axios.post<GrowingMedium>(
                 `${baseUrl}/growing-mediums`,
-                growingMedium
+                growingMedium,
+                {
+                    headers: { Authorization: `Bearer ${user.token || ""}` },
+                }
             );
             addGrowingMedium(response.data);
         } catch (error) {

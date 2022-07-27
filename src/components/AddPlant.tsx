@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../hooks/useUser";
 
 import { TempPlant, Plant } from "../types";
 
@@ -34,6 +35,8 @@ const AddPlant = () => {
 
     const { addPlant } = usePlants();
 
+    const { user } = useUser();
+
     const navigate = useNavigate();
 
     // add plant to database
@@ -42,7 +45,8 @@ const AddPlant = () => {
         try {
             const response = await axios.post<Plant>(
                 `${baseUrl}/plants`,
-                plant
+                plant,
+                { headers: { Authorization: `Bearer ${user.token || ""}` } }
             );
 
             addPlant(response.data);
@@ -105,7 +109,7 @@ const AddPlant = () => {
             imageName: "",
         });
 
-        navigate("/");
+        navigate("/main");
     };
 
     const handleImageRemove = () => {
@@ -121,7 +125,7 @@ const AddPlant = () => {
             >
                 <Row justifyContent="space-between">
                     <Title>Add plant</Title>
-                    <IconButton type="button" onClick={() => navigate("/")}>
+                    <IconButton type="button" onClick={() => navigate("/main")}>
                         <CloseIcon sx={{ fontSize: 26 }} />
                     </IconButton>
                 </Row>

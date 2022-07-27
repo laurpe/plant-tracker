@@ -4,6 +4,7 @@ import axios from "axios";
 
 import { Plant } from "../types";
 import { usePlants } from "../hooks/usePlants";
+import { useUser } from "../hooks/useUser";
 
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
@@ -21,11 +22,6 @@ import IconButton from "./style/Generics/IconButton";
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 const imgBaseUrl = process.env.REACT_APP_IMAGE_UPLOAD_API_BASE_URL as string;
-
-const getData = async <T,>(url: string): Promise<T> => {
-    const response = await fetch(`${baseUrl}/${url}`);
-    return response.json() as Promise<T>;
-};
 
 const StyledColumn = styled(Column)`
     height: 100%;
@@ -49,22 +45,32 @@ const SinglePlant = () => {
 
     const navigate = useNavigate();
 
+    const { user } = useUser();
+
     useEffect(() => {
+        if (user.token === "") {
+            return;
+        }
         const fetchPlant = async () => {
-            const result = await getData<Plant>(`plants/${id}`);
-            setPlant(result);
+            const response = await axios.get<Plant>(`${baseUrl}/plants/${id}`, {
+                headers: { Authorization: `Bearer ${user.token || ""}` },
+            });
+            setPlant(response.data);
         };
 
         fetchPlant().catch(() => {
             throw new Error("Fetch plant unsuccessful");
         });
-    }, [id]);
+    }, [id, user]);
 
     const update = async (plant: Plant): Promise<void> => {
         try {
             const response = await axios.put<Plant>(
                 `${baseUrl}/plants/${id}`,
-                plant
+                plant,
+                {
+                    headers: { Authorization: `Bearer ${user.token || ""}` },
+                }
             );
 
             updatePlant(response.data);
@@ -75,13 +81,15 @@ const SinglePlant = () => {
 
     const handleDelete = async (id: string): Promise<void> => {
         try {
-            await axios.delete<Plant>(`${baseUrl}/plants/${id}`);
+            await axios.delete<Plant>(`${baseUrl}/plants/${id}`, {
+                headers: { Authorization: `Bearer ${user.token || ""}` },
+            });
 
             removePlant(id);
         } catch (error) {
             throw new Error("Could not delete plant");
         }
-        navigate("/");
+        navigate("/main");
     };
 
     // form functions
@@ -133,7 +141,7 @@ const SinglePlant = () => {
             id: "",
         });
 
-        navigate("/");
+        navigate("/main");
     };
 
     const handleImageRemove = () => {
@@ -155,7 +163,7 @@ const SinglePlant = () => {
                         >
                             <DeleteIcon sx={{ fontSize: 26 }} />
                         </IconButton>
-                        <Link to={"/"}>
+                        <Link to={"/main"}>
                             <IconButton type="button">
                                 <CloseIcon sx={{ fontSize: 26 }} />
                             </IconButton>

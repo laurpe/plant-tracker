@@ -5,8 +5,6 @@ const Button = styled.button`
     font-family: inherit;
     font-size: 1rem;
     color: white;
-    font-weight: 700;
-    letter-spacing: 2px;
     background-color: #35746d;
     border: none;
     border-radius: 5px;
