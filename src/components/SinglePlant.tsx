@@ -48,6 +48,9 @@ const SinglePlant = () => {
     const { user } = useUser();
 
     useEffect(() => {
+        if (user.token === "") {
+            return;
+        }
         const fetchPlant = async () => {
             const response = await axios.get<Plant>(`${baseUrl}/plants/${id}`, {
                 headers: { Authorization: `Bearer ${user.token || ""}` },
