@@ -30,7 +30,6 @@ interface Props {
 
 const StyledDiv = styled.div`
     position: relative;
-    margin-right: 16px;
 `;
 
 const StyledIconButton = styled(IconButton)`
@@ -65,7 +64,7 @@ const PlantForm = ({
     plant,
     uploading,
 }: Props) => {
-    const { growingMediums } = useGrowingMediums();
+        const { growingMediums } = useGrowingMediums();
 
     const maxDate = new Date().toISOString().substring(0, 10);
 
@@ -73,9 +72,7 @@ const PlantForm = ({
         <Form onSubmit={handleSubmit}>
             <Column justifyContent="space-between" height="100%">
                 <Column>
-                    <Row alignItems="start">
-                        <Column>
-                            <Label htmlFor="file">Image</Label>
+                <StyledDiv>
                             {!plant.imageName && (
                                 <StyledInput
                                     type="file"
@@ -86,7 +83,7 @@ const PlantForm = ({
                                 />
                             )}
                             {plant.imageName && (
-                                <StyledDiv>
+                                <>
                                     <Image
                                         src={`${imgBaseUrl}/${plant.imageName}`}
                                         alt="plant"
@@ -102,10 +99,9 @@ const PlantForm = ({
                                             sx={{ fontSize: 26 }}
                                         />
                                     </StyledIconButton>
-                                </StyledDiv>
+                                    </>
                             )}
-                        </Column>
-                        <Column flex={1}>
+                            </StyledDiv>
                             <Label htmlFor="name">Name</Label>
                             <Input
                                 type="text"
@@ -128,7 +124,6 @@ const PlantForm = ({
                                     id="plant-growingMedium-select"
                                     value={plant.growingMedium}
                                     flex={1}
-                                    margin="0 8px 0 0"
                                     required
                                 >
                                     <option value="" disabled>
@@ -148,8 +143,6 @@ const PlantForm = ({
                                     })}
                                 </Select>
                             </Row>
-                        </Column>
-                    </Row>
                     <Label htmlFor="lastWatered">Last watered</Label>
                     <Input
                         type="date"

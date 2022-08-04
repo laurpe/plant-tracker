@@ -28,6 +28,10 @@ const StyledColumn = styled(Column)`
     padding-bottom: 40px;
 `;
 
+const StyledPopup = styled(Popup)`
+    padding: 0;
+`
+
 const SinglePlant = () => {
     const [plant, setPlant] = useState<Plant>({
         name: "",
@@ -149,27 +153,8 @@ const SinglePlant = () => {
     };
 
     return (
-        <Popup>
+        <StyledPopup>
             <StyledColumn>
-                <Row justifyContent="space-between">
-                    <Title>Plant details</Title>
-                    <Row>
-                        <IconButton
-                            type="button"
-                            id="delete-plant-btn"
-                            onClick={() => {
-                                void handleDelete(id);
-                            }}
-                        >
-                            <DeleteIcon sx={{ fontSize: 26 }} />
-                        </IconButton>
-                        <Link to={"/main"}>
-                            <IconButton type="button">
-                                <CloseIcon sx={{ fontSize: 26 }} />
-                            </IconButton>
-                        </Link>
-                    </Row>
-                </Row>
                 <PlantForm
                     handleSubmit={(event) => void handleSubmit(event)}
                     handleChange={handleChange}
@@ -179,7 +164,7 @@ const SinglePlant = () => {
                     uploading={uploading}
                 />
             </StyledColumn>
-        </Popup>
+        </StyledPopup>
     );
 };
 

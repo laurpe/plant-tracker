@@ -7,13 +7,12 @@ interface Props {
 
 const Select = styled.select<Props>`
     border: none;
-    border-radius: 5px;
+    border-bottom: 1px solid #b9ccca;
     font-family: inherit;
-    font-size: inherit;
+    font-size: 1.2rem;
     color: #225c55;
-    padding: 0.75rem;
-    background-color: rgb(235, 243, 241);
-    height: 2.85rem;
+    padding: 0.8rem;
+    height: 3.5rem;
     flex: ${(props) => props.flex || 0};
     margin: ${(props) => props.margin || "0 0 0.8rem 0"};
 `;
