@@ -15,32 +15,36 @@ const StyledIconButton = styled(IconButton)`
 `;
 
 const HoveringIconButton = styled(IconButton)`
-    position: absolute;
+    position: fixed;
     bottom: 1rem;
     right: 1rem;
-    box-shadow: rgba(0, 0, 0, 0.15) 0 1px 4px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 1px 6px 1px;
+    z-index: 100;
+    background-color: #ff9900;
+    color: white;
+    height: 4rem;
+    width: 4rem;
 `
+
 
 const Header = () => {
     return (
         <AppHeader>
             <AppTitle>plant tracker</AppTitle>
-            <Row>
-                {/* <Link to={"/profile"}>
-                    <StyledIconButton type="button" id="profile-btn">
-                        <PersonIcon />
-                    </StyledIconButton>
-                </Link> */}
-                <Link to={"/add"}>
-                    <HoveringIconButton
-                        type="button"
-                        id="add-plant-form-btn"
-                        margin="0 0 0 8px"
-                    >
-                        <AddIcon />
-                    </HoveringIconButton>
-                </Link>
-            </Row>
+            <Link to={"/profile"}>
+                <StyledIconButton type="button" id="profile-btn">
+                    <PersonIcon />
+                </StyledIconButton>
+            </Link>
+            <Link to={"/add"}>
+                <HoveringIconButton
+                    type="button"
+                    id="add-plant-form-btn"
+                    margin="0 0 0 8px"
+                >
+                    <AddIcon sx={{ fontSize: 30 }} />
+                </HoveringIconButton>
+            </Link>
         </AppHeader>
     );
 };
