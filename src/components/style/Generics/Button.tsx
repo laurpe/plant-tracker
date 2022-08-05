@@ -8,8 +8,8 @@ const Button = styled.button`
     background-color: #35746d;
     border: none;
     border-radius: 5px;
-    padding: 0.8rem;
     width: ${(props: { width?: string }) => props.width || "auto"};
+    align-self: center;
 `;
 
 export default Button;

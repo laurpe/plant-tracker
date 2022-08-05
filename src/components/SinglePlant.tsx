@@ -24,7 +24,6 @@ const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 const imgBaseUrl = process.env.REACT_APP_IMAGE_UPLOAD_API_BASE_URL as string;
 
 const StyledColumn = styled(Column)`
-    height: 100%;
     padding-bottom: 40px;
 `;
 

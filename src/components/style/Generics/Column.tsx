@@ -5,6 +5,7 @@ interface Props {
     justifyContent?: string;
     height?: string;
     padding?: string;
+    position?: string;
 }
 
 const Column = styled.div<Props>`
@@ -14,6 +15,7 @@ const Column = styled.div<Props>`
     justify-content: ${(props) => props.justifyContent || "flex-start"};
     height: ${(props) => props.height || "auto"};
     padding: ${(props) => props.padding || "0"};
+    position: ${(props) => props.position || "static"}
 `;
 
 export default Column;

@@ -19,9 +19,7 @@ const imgBaseUrl = process.env.REACT_APP_IMAGE_BASE_URL as string;
 
 interface Props {
     handleSubmit: React.FormEventHandler<HTMLFormElement>;
-    handleChange: React.ChangeEventHandler<
-        HTMLInputElement | HTMLSelectElement
-    >;
+    handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement>;
     handleImageChange: React.ChangeEventHandler<HTMLInputElement>;
     handleImageRemove: () => void;
     plant: Plant | TempPlant;
@@ -29,32 +27,47 @@ interface Props {
 }
 
 const StyledDiv = styled.div`
-    position: relative;
+  position: relative;
 `;
 
 const StyledIconButton = styled(IconButton)`
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: transparent;
-    color: white;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  color: white;
 `;
 
 const StyledDeleteIcon = styled(DeleteIcon)`
-    background-color: rgba(0, 0, 0, 0.25);
-    border-radius: 50%;
-    padding: 2px;
-    height: 100px;
-    width: 100px;
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  padding: 2px;
+  height: 100px;
+  width: 100px;
 `;
 
 const StyledInput = styled(Input)`
-    width: 122px;
-    margin-right: 16px;
-    height: 122px;
+  width: 122px;
+  margin-right: 16px;
+  height: 122px;
 `;
+
+const StyledColumn = styled(Column)`
+    padding-top: 1rem;
+    border-radius: 20px;
+    margin-top: -40px;
+    background-color: white;
+    z-index: 100;
+`
+
+const PicDiv = styled.div`
+    background-image: url(${(props: { url?: string }) => props.url});
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    height: 500px;
+`
 
 const PlantForm = ({
     handleSubmit,
@@ -64,85 +77,75 @@ const PlantForm = ({
     plant,
     uploading,
 }: Props) => {
-        const { growingMediums } = useGrowingMediums();
+    const { growingMediums } = useGrowingMediums();
 
     const maxDate = new Date().toISOString().substring(0, 10);
 
     return (
         <Form onSubmit={handleSubmit}>
             <Column justifyContent="space-between" height="100%">
-                <Column>
                 <StyledDiv>
-                            {!plant.imageName && (
-                                <StyledInput
-                                    type="file"
-                                    name="file"
-                                    id="plant-image-input"
-                                    accept="image/jpeg, image/png"
-                                    onChange={handleImageChange}
-                                />
-                            )}
-                            {plant.imageName && (
-                                <>
-                                    <Image
-                                        src={`${imgBaseUrl}/${plant.imageName}`}
-                                        alt="plant"
-                                    />
-                                    <StyledIconButton
-                                        type="button"
-                                        id="img-remove-btn"
-                                        onClick={() => {
-                                            handleImageRemove();
-                                        }}
-                                    >
-                                        <StyledDeleteIcon
-                                            sx={{ fontSize: 26 }}
-                                        />
-                                    </StyledIconButton>
-                                    </>
-                            )}
-                            </StyledDiv>
-                            <Label htmlFor="name">Name</Label>
-                            <Input
-                                type="text"
-                                name="name"
-                                id="plant-name-input"
-                                onChange={handleChange}
-                                value={plant.name}
-                                minLength={2}
-                                maxLength={30}
-                                maximum-scale={1}
-                                required
-                            />
-                            <Label htmlFor="growingMedium">
-                                Growing medium
-                            </Label>
-                            <Row alignItems="start">
-                                <Select
-                                    onChange={handleChange}
-                                    name="growingMedium"
-                                    id="plant-growingMedium-select"
-                                    value={plant.growingMedium}
-                                    flex={1}
-                                    required
-                                >
-                                    <option value="" disabled>
-                                        select...
+                    {!plant.imageName && (
+                        <StyledInput
+                            type="file"
+                            name="file"
+                            id="plant-image-input"
+                            accept="image/jpeg, image/png"
+                            onChange={handleImageChange}
+                        />
+                    )}
+                    {plant.imageName && (
+                        <>
+                            <PicDiv url={`${imgBaseUrl}/${plant.imageName}`} />
+                            <StyledIconButton
+                                type="button"
+                                id="img-remove-btn"
+                                onClick={() => {
+                                    handleImageRemove();
+                                }}
+                            >
+                                <StyledDeleteIcon sx={{ fontSize: 26 }} />
+                            </StyledIconButton>
+                        </>
+                    )}
+                </StyledDiv>
+                <StyledColumn>
+                    <Label htmlFor="name">Name</Label>
+                    <Input
+                        type="text"
+                        name="name"
+                        id="plant-name-input"
+                        onChange={handleChange}
+                        value={plant.name}
+                        minLength={2}
+                        maxLength={30}
+                        maximum-scale={1}
+                        required
+                    />
+                    <Label htmlFor="growingMedium">Growing medium</Label>
+                    <Row alignItems="start">
+                        <Select
+                            onChange={handleChange}
+                            name="growingMedium"
+                            id="plant-growingMedium-select"
+                            value={plant.growingMedium}
+                            flex={1}
+                            required
+                        >
+                            <option value="" disabled>
+                                select...
+                            </option>
+                            <option>create new</option>
+                            <option disabled>-----</option>
+                            {growingMediums.map((growingMedium) => {
+                                return (
+                                    <option key={growingMedium.id} value={growingMedium.id}>
+                                        {growingMedium.name}
                                     </option>
-                                    <option>create new</option>
-                                    <option disabled>-----</option>
-                                    {growingMediums.map((growingMedium) => {
-                                        return (
-                                            <option
-                                                key={growingMedium.id}
-                                                value={growingMedium.id}
-                                            >
-                                                {growingMedium.name}
-                                            </option>
-                                        );
-                                    })}
-                                </Select>
-                            </Row>
+                                );
+                            })}
+                        </Select>
+                    </Row>
                     <Label htmlFor="lastWatered">Last watered</Label>
                     <Input
                         type="date"
@@ -163,13 +166,8 @@ const PlantForm = ({
                         maximum-scale={1}
                         required
                     />
-                </Column>
-                <Button
-                    type="submit"
-                    id="submit-btn"
-                    width="100%"
-                    disabled={uploading}
-                >
+                </StyledColumn>
+                <Button type="submit" id="submit-btn" width="100%" disabled={uploading}>
                     Save
                 </Button>
             </Column>
