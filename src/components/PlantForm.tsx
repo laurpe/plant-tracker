@@ -48,9 +48,8 @@ const StyledDeleteIcon = styled(DeleteIcon)`
 `;
 
 const StyledInput = styled(Input)`
-  width: 122px;
-  margin-right: 16px;
-  height: 122px;
+    position: absolute;
+    top: 1rem;
 `;
 
 const StyledColumn = styled(Column)`
@@ -67,6 +66,7 @@ const PicDiv = styled.div`
     background-attachment: fixed;
     background-position: center;
     height: 500px;
+    background-color: #ededed;
 `
 
 const PlantForm = ({
@@ -85,15 +85,18 @@ const PlantForm = ({
         <Form onSubmit={handleSubmit}>
             <Column justifyContent="space-between" height="100%">
                 <StyledDiv>
-                    {!plant.imageName && (
-                        <StyledInput
-                            type="file"
-                            name="file"
-                            id="plant-image-input"
-                            accept="image/jpeg, image/png"
-                            onChange={handleImageChange}
-                        />
-                    )}
+                    {!plant.imageName &&
+                        <>
+                            <PicDiv />
+                            <StyledInput
+                                type="file"
+                                name="file"
+                                id="plant-image-input"
+                                accept="image/jpeg, image/png"
+                                onChange={handleImageChange}
+                            />
+                        </>
+                    }
                     {plant.imageName && (
                         <>
                             <PicDiv url={`${imgBaseUrl}/${plant.imageName}`} />

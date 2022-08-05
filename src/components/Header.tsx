@@ -15,7 +15,7 @@ const StyledIconButton = styled(IconButton)`
 
 const HoveringIconButton = styled(IconButton)`
     position: fixed;
-    bottom: 1rem;
+    bottom: 2rem;
     right: 1rem;
     box-shadow: rgba(0, 0, 0, 0.2) 0 1px 6px 1px;
     z-index: 100;
