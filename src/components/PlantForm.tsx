@@ -139,7 +139,6 @@ const PlantForm = ({
                                 select...
                             </option>
                             <option>create new</option>
-                            <option disabled>-----</option>
                             {growingMediums.map((growingMedium) => {
                                 return (
                                     <option key={growingMedium.id} value={growingMedium.id}>
