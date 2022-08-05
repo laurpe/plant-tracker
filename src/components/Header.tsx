@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import AppTitle from "./style/Header/AppTitle";
 import IconButton from "./style/Generics/IconButton";
 import AppHeader from "./style/Header/AppHeader";
-import Row from "./style/Generics/Row";
 
 import AddIcon from "@mui/icons-material/Add";
 import PersonIcon from "@mui/icons-material/Person";
