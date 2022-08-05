@@ -14,24 +14,31 @@ const StyledIconButton = styled(IconButton)`
     box-shadow: rgba(0, 0, 0, 0.15) 0 1px 4px;
 `;
 
+const HoveringIconButton = styled(IconButton)`
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.15) 0 1px 4px;
+`
+
 const Header = () => {
     return (
         <AppHeader>
             <AppTitle>plant tracker</AppTitle>
             <Row>
-                <Link to={"/profile"}>
+                {/* <Link to={"/profile"}>
                     <StyledIconButton type="button" id="profile-btn">
                         <PersonIcon />
                     </StyledIconButton>
-                </Link>
+                </Link> */}
                 <Link to={"/add"}>
-                    <StyledIconButton
+                    <HoveringIconButton
                         type="button"
                         id="add-plant-form-btn"
                         margin="0 0 0 8px"
                     >
                         <AddIcon />
-                    </StyledIconButton>
+                    </HoveringIconButton>
                 </Link>
             </Row>
         </AppHeader>
