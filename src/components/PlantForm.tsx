@@ -235,7 +235,7 @@ const PlantForm = ({
                     />
                     <Row padding="0 0.8rem 0 0.8rem">
                         {id &&
-                            <DeleteButton type="button" onClick={() => handleDelete !== undefined && void handleDelete(id)} margin="0 8px 0 0">
+                            <DeleteButton type="button" id="delete-plant-btn" onClick={() => handleDelete !== undefined && void handleDelete(id)} margin="0 8px 0 0">
                                 <DeleteIcon sx={{ fontSize: 28 }} />
                             </DeleteButton>
                         }

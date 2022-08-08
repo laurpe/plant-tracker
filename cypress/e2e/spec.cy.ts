@@ -90,8 +90,6 @@ describe("Plant", () => {
     it("can be updated", () => {
         cy.contains("calathea").get("#edit-btn").click();
 
-        cy.contains("Plant details");
-
         cy.get("#plant-name-input").clear().type("calathea beauty star");
         cy.get("#plant-growingMedium-select").select(3);
         cy.get("#plant-lastWatered-input").clear().type("2022-05-01");
