@@ -32,10 +32,14 @@ interface Props {
 
 const StyledDiv = styled.div`
   position: relative;
+`;
+
+const DivNoImage = styled.div`
+position: relative;
   display: flex;
     justify-content: center;
     align-items: center;
-`;
+`
 
 const StyledIconButton = styled(IconButton)`
   top: 16px;
@@ -114,7 +118,7 @@ const PlantForm = ({
             <Column>
 
                 {!plant.imageName &&
-                    <StyledDiv>
+                    <DivNoImage>
                         <PicDiv />
                         <StyledRow justifyContent="flex-end" alignItems="start">
                             <CloseButton type="button"
@@ -134,7 +138,7 @@ const PlantForm = ({
                             accept="image/jpeg, image/png"
                             onChange={handleImageChange}
                         />
-                    </StyledDiv>
+                    </DivNoImage>
                 }
                 {plant.imageName && (
                     <StyledDiv>
