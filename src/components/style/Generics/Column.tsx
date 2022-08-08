@@ -6,6 +6,8 @@ interface Props {
     height?: string;
     padding?: string;
     position?: string;
+    backgroundColor?: string;
+    border?: string;
 }
 
 const Column = styled.div<Props>`
@@ -16,6 +18,8 @@ const Column = styled.div<Props>`
     height: ${(props) => props.height || "auto"};
     padding: ${(props) => props.padding || "0"};
     position: ${(props) => props.position || "static"};
+    background-color: ${(props) => props.backgroundColor || "transparent"};
+    border: ${(props) => props.border || "none"}
 `;
 
 export default Column;

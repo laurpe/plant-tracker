@@ -25,7 +25,7 @@ import { useUser } from "../hooks/useUser";
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
 const StyledColorsIconButton = styled(IconButton)`
-    background-color: #35746d;
+    background-color: #21998c;
     color: white;
     border-radius: 5px;
     height: 2.85rem;
@@ -189,14 +189,13 @@ const GrowingMediumForm = () => {
                     {growingMedium.composition.map((component, index) => {
                         return (
                             <Row key={index} alignItems="start">
-                                <Column flex={1}>
+                                <Column flex={1} border="2px solid black">
                                     <Label htmlFor="component">
                                         Component #{index + 1}
                                     </Label>
                                     <Select
-                                        id={`growing-medium-component-${
-                                            index + 1
-                                        }-select`}
+                                        id={`growing-medium-component-${index + 1
+                                            }-select`}
                                         onChange={(event) =>
                                             handleChange(event, index)
                                         }
@@ -222,15 +221,14 @@ const GrowingMediumForm = () => {
                                     </Select>
                                 </Column>
 
-                                <Column>
+                                <Column border="2px solid black">
                                     <Label htmlFor="percentage">
                                         Percentage
                                     </Label>
                                     <Input
                                         type="number"
-                                        id={`growing-medium-percentage-${
-                                            index + 1
-                                        }-input`}
+                                        id={`growing-medium-percentage-${index + 1
+                                            }-input`}
                                         name="percentage"
                                         onChange={(event) =>
                                             handleChange(event, index)
@@ -244,7 +242,7 @@ const GrowingMediumForm = () => {
                                         min="1"
                                     />
                                 </Column>
-                                <Column>
+                                <Column border="2px solid black">
                                     <Label color="white">-</Label>
                                     <StyledColorsIconButton
                                         type="button"
@@ -274,7 +272,7 @@ const GrowingMediumForm = () => {
                     id="growing-medium-submit-btn"
                     width="100%"
                 >
-                    Save growing medium
+                    Save
                 </Button>
             </Column>
         </Form>
