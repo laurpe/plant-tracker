@@ -13,7 +13,7 @@ import IconButton from "./style/Generics/IconButton";
 
 import CloseIcon from "@mui/icons-material/Close";
 import HideImageIcon from "@mui/icons-material/HideImage";
-import ImageIcon from '@mui/icons-material/Image';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import styled from "styled-components";
@@ -140,7 +140,7 @@ const PlantForm = ({
                             </CloseButton>
                         </StyledRow>
                         <StyledLabel htmlFor="plant-image-input">
-                            <ImageIcon sx={{ fontSize: 42 }} />
+                            <AddPhotoAlternateIcon sx={{ fontSize: 42 }} />
                         </StyledLabel>
                         <StyledInput
                             type="file"

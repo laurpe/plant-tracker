@@ -149,7 +149,7 @@ describe("Growing medium", () => {
 
         cy.get("#growing-medium-submit-btn").click();
 
-        cy.contains("Add plant");
+        cy.contains("Last watered");
         cy.get("#plant-growingMedium-select").select("customMix");
     });
 
