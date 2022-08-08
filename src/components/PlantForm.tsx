@@ -87,6 +87,7 @@ const StyledColumn = styled(Column)`
     margin-top: -40px;
     background-color: white;
     z-index: 9;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 1px 1px;
 `
 
 const PicDiv = styled.div`
