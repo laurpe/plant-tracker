@@ -59,10 +59,8 @@ const StyledLabel = styled(Label)`
 `
 
 const CloseButton = styled(IconButton)`
-  top: 8px;
-  right: 8px;
   background-color: transparent;
-  color: white;
+  color: ${(props: { color?: string }) => props.color || "#35746d"};
 `;
 
 const StyledRow = styled(Row)`
@@ -71,7 +69,7 @@ const StyledRow = styled(Row)`
     left: 0;
     width: 100%;
     height: 10vh;
-    background-image: linear-gradient(to bottom, #25252591, #00000000);
+    background: ${(props: { background?: string }) => props.background || "none"};
 `
 
 const StyledInput = styled(Input)`
@@ -144,7 +142,7 @@ const PlantForm = ({
                 {plant.imageName && (
                     <StyledDiv>
                         <PicDiv url={`${imgBaseUrl}/${plant.imageName}`} />
-                        <StyledRow justifyContent="space-between" alignItems="start">
+                        <StyledRow justifyContent="space-between" alignItems="start" background="linear-gradient(to bottom, #25252591, #00000000)">
                             <StyledIconButton
                                 type="button"
                                 id="img-remove-btn"
@@ -158,7 +156,9 @@ const PlantForm = ({
                                 id="close-form-btn"
                                 onClick={() => {
                                     navigate("/main");
-                                }}><CloseIcon sx={{ fontSize: 28 }} />
+                                }}
+                                color="white">
+                                <CloseIcon sx={{ fontSize: 28 }} />
                             </CloseButton>
                         </StyledRow>
                     </StyledDiv>
