@@ -13,9 +13,11 @@ import IconButton from "./style/Generics/IconButton";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import CloseIcon from "@mui/icons-material/Close";
+import HideImageIcon from "@mui/icons-material/HideImage";
 
 import styled from "styled-components";
 import { useGrowingMediums } from "../hooks/useGrowingMediums";
+
 
 const imgBaseUrl = process.env.REACT_APP_IMAGE_BASE_URL as string;
 
@@ -54,14 +56,6 @@ const StyledRow = styled(Row)`
     height: 10vh;
     background-image: linear-gradient(to bottom, #25252591, #00000000);
 `
-
-const StyledDeleteIcon = styled(DeleteIcon)`
-  background-color: rgba(0, 0, 0, 0.25);
-  border-radius: 50%;
-  padding: 2px;
-  height: 100px;
-  width: 100px;
-`;
 
 const StyledInput = styled(Input)`
     position: absolute;
@@ -128,13 +122,13 @@ const PlantForm = ({
                                     handleImageRemove();
                                 }}
                             >
-                                <StyledDeleteIcon sx={{ fontSize: 26 }} />
+                                <HideImageIcon sx={{ fontSize: 28 }} />
                             </StyledIconButton>
                             <CloseButton type="button"
                                 id="close-form-btn"
                                 onClick={() => {
                                     navigate("/main");
-                                }}><CloseIcon sx={{ fontSize: 26 }} /></CloseButton>
+                                }}><CloseIcon sx={{ fontSize: 28 }} /></CloseButton>
                         </StyledRow>
                     </StyledDiv>
                 )}
