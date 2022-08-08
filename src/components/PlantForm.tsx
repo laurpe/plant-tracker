@@ -14,6 +14,7 @@ import IconButton from "./style/Generics/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import HideImageIcon from "@mui/icons-material/HideImage";
 import ImageIcon from '@mui/icons-material/Image';
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import styled from "styled-components";
 import { useGrowingMediums } from "../hooks/useGrowingMediums";
@@ -47,6 +48,13 @@ const StyledIconButton = styled(IconButton)`
   background-color: transparent;
   color: white;
 `;
+
+const DeleteButton = styled(IconButton)`
+    color: white;
+    background-color: #ff6c6c;
+    border-radius: 5px;
+    height: 3.5rem;
+`
 
 const StyledLabel = styled(Label)`
     height: 3rem;
@@ -221,42 +229,14 @@ const PlantForm = ({
                         maximum-scale={1}
                         required
                     />
-                    <Label htmlFor="wateringCycle">Watering cycle</Label>
-                    <Input
-                        type="number"
-                        name="wateringCycle"
-                        id="plant-wateringCycle-input"
-                        onChange={handleChange}
-                        value={plant.wateringCycle}
-                        min="1"
-                        maximum-scale={1}
-                        required
-                    />
-                    <Label htmlFor="wateringCycle">Watering cycle</Label>
-                    <Input
-                        type="number"
-                        name="wateringCycle"
-                        id="plant-wateringCycle-input"
-                        onChange={handleChange}
-                        value={plant.wateringCycle}
-                        min="1"
-                        maximum-scale={1}
-                        required
-                    />
-                    <Label htmlFor="wateringCycle">Watering cycle</Label>
-                    <Input
-                        type="number"
-                        name="wateringCycle"
-                        id="plant-wateringCycle-input"
-                        onChange={handleChange}
-                        value={plant.wateringCycle}
-                        min="1"
-                        maximum-scale={1}
-                        required
-                    />
-                    <Button type="submit" id="submit-btn" width="calc(100vw - 1.4rem)" disabled={uploading}>
-                        Save
-                    </Button>
+                    <Row padding="0 0.8rem 0 0.8rem">
+                        <DeleteButton type="button" margin="0 8px 0 0">
+                            <DeleteIcon sx={{ fontSize: 28 }} />
+                        </DeleteButton>
+                        <Button type="submit" id="submit-btn" flex={1} disabled={uploading}>
+                            Save
+                        </Button>
+                    </Row>
                 </StyledColumn>
             </Column>
         </Form>

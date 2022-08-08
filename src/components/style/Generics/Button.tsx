@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
-const Button = styled.button`
+interface Props {
+    flex?: number;
+    width?: string;
+}
+
+const Button = styled.button<Props>`
     height: 3.5rem;
     font-family: inherit;
     font-size: 1rem;
@@ -8,7 +13,8 @@ const Button = styled.button`
     background-color: #21998c;
     border: none;
     border-radius: 5px;
-    width: ${(props: { width?: string }) => props.width || "auto"};
+    width: ${(props) => props.width || "auto"};
+    flex: ${(props) => props.flex || 0};
     align-self: center;
 `;
 
