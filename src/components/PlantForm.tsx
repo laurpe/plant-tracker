@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import { Plant, TempPlant } from "../types";
 
 import Input from "./style/Generics/Input";
@@ -10,6 +12,7 @@ import Row from "./style/Generics/Row";
 import IconButton from "./style/Generics/IconButton";
 
 import DeleteIcon from "@mui/icons-material/Delete";
+import CloseIcon from "@mui/icons-material/Close";
 
 import styled from "styled-components";
 import { useGrowingMediums } from "../hooks/useGrowingMediums";
@@ -30,13 +33,27 @@ const StyledDiv = styled.div`
 `;
 
 const StyledIconButton = styled(IconButton)`
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 0;
+  top: 16px;
+  left: 16px;
   background-color: transparent;
   color: white;
 `;
+
+const CloseButton = styled(IconButton)`
+  top: 8px;
+  right: 8px;
+  background-color: transparent;
+  color: white;
+`;
+
+const StyledRow = styled(Row)`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10vh;
+    background-image: linear-gradient(to bottom, #25252591, #00000000);
+`
 
 const StyledDeleteIcon = styled(DeleteIcon)`
   background-color: rgba(0, 0, 0, 0.25);
@@ -53,8 +70,8 @@ const StyledInput = styled(Input)`
 `;
 
 const StyledColumn = styled(Column)`
-    padding-top: 1rem;
-    border-radius: 20px;
+    padding: 16px 0 40px 0;
+    border-radius: 20px 20px 0 0;
     margin-top: -40px;
     background-color: white;
     z-index: 9;
@@ -82,25 +99,28 @@ const PlantForm = ({
 
     const maxDate = new Date().toISOString().substring(0, 10);
 
+    const navigate = useNavigate();
+
     return (
         <Form onSubmit={handleSubmit}>
             <Column>
-                <StyledDiv>
-                    {!plant.imageName &&
-                        <>
-                            <PicDiv />
-                            <StyledInput
-                                type="file"
-                                name="file"
-                                id="plant-image-input"
-                                accept="image/jpeg, image/png"
-                                onChange={handleImageChange}
-                            />
-                        </>
-                    }
-                    {plant.imageName && (
-                        <>
-                            <PicDiv url={`${imgBaseUrl}/${plant.imageName}`} />
+
+                {!plant.imageName &&
+                    <StyledDiv>
+                        <PicDiv />
+                        <StyledInput
+                            type="file"
+                            name="file"
+                            id="plant-image-input"
+                            accept="image/jpeg, image/png"
+                            onChange={handleImageChange}
+                        />
+                    </StyledDiv>
+                }
+                {plant.imageName && (
+                    <StyledDiv>
+                        <PicDiv url={`${imgBaseUrl}/${plant.imageName}`} />
+                        <StyledRow justifyContent="space-between" alignItems="start">
                             <StyledIconButton
                                 type="button"
                                 id="img-remove-btn"
@@ -110,9 +130,16 @@ const PlantForm = ({
                             >
                                 <StyledDeleteIcon sx={{ fontSize: 26 }} />
                             </StyledIconButton>
-                        </>
-                    )}
-                </StyledDiv>
+                            <CloseButton type="button"
+                                id="close-form-btn"
+                                onClick={() => {
+                                    navigate("/main");
+                                }}><CloseIcon sx={{ fontSize: 26 }} /></CloseButton>
+                        </StyledRow>
+                    </StyledDiv>
+                )}
+
+
                 <StyledColumn>
                     <Label htmlFor="name">Name</Label>
                     <Input
@@ -169,11 +196,43 @@ const PlantForm = ({
                         maximum-scale={1}
                         required
                     />
-                    <Button type="submit" id="submit-btn" width="100%" disabled={uploading}>
+                    <Label htmlFor="wateringCycle">Watering cycle</Label>
+                    <Input
+                        type="number"
+                        name="wateringCycle"
+                        id="plant-wateringCycle-input"
+                        onChange={handleChange}
+                        value={plant.wateringCycle}
+                        min="1"
+                        maximum-scale={1}
+                        required
+                    />
+                    <Label htmlFor="wateringCycle">Watering cycle</Label>
+                    <Input
+                        type="number"
+                        name="wateringCycle"
+                        id="plant-wateringCycle-input"
+                        onChange={handleChange}
+                        value={plant.wateringCycle}
+                        min="1"
+                        maximum-scale={1}
+                        required
+                    />
+                    <Label htmlFor="wateringCycle">Watering cycle</Label>
+                    <Input
+                        type="number"
+                        name="wateringCycle"
+                        id="plant-wateringCycle-input"
+                        onChange={handleChange}
+                        value={plant.wateringCycle}
+                        min="1"
+                        maximum-scale={1}
+                        required
+                    />
+                    <Button type="submit" id="submit-btn" width="calc(100vw - 1.4rem)" disabled={uploading}>
                         Save
                     </Button>
                 </StyledColumn>
-
             </Column>
         </Form>
     );
