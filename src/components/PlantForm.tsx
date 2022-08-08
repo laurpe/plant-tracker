@@ -8,7 +8,6 @@ import Column from "./style/Generics/Column";
 import Select from "./style/Generics/Select";
 import Row from "./style/Generics/Row";
 import IconButton from "./style/Generics/IconButton";
-import Image from "./style/Generics/Image";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -50,6 +49,7 @@ const StyledDeleteIcon = styled(DeleteIcon)`
 const StyledInput = styled(Input)`
     position: absolute;
     top: 1rem;
+    border: none;
 `;
 
 const StyledColumn = styled(Column)`
@@ -57,7 +57,7 @@ const StyledColumn = styled(Column)`
     border-radius: 20px;
     margin-top: -40px;
     background-color: white;
-    z-index: 100;
+    z-index: 9;
 `
 
 const PicDiv = styled.div`
@@ -65,7 +65,8 @@ const PicDiv = styled.div`
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
-    height: 500px;
+    background-size: cover;
+    height: 45vh;
     background-color: #ededed;
 `
 
@@ -83,7 +84,7 @@ const PlantForm = ({
 
     return (
         <Form onSubmit={handleSubmit}>
-            <Column justifyContent="space-between" height="100%">
+            <Column>
                 <StyledDiv>
                     {!plant.imageName &&
                         <>
@@ -168,10 +169,11 @@ const PlantForm = ({
                         maximum-scale={1}
                         required
                     />
+                    <Button type="submit" id="submit-btn" width="100%" disabled={uploading}>
+                        Save
+                    </Button>
                 </StyledColumn>
-                <Button type="submit" id="submit-btn" width="100%" disabled={uploading}>
-                    Save
-                </Button>
+
             </Column>
         </Form>
     );

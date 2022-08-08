@@ -152,18 +152,14 @@ const SinglePlant = () => {
     };
 
     return (
-        <StyledPopup>
-            <StyledColumn>
-                <PlantForm
-                    handleSubmit={(event) => void handleSubmit(event)}
-                    handleChange={handleChange}
-                    handleImageChange={(event) => void handleImageChange(event)}
-                    handleImageRemove={handleImageRemove}
-                    plant={plant}
-                    uploading={uploading}
-                />
-            </StyledColumn>
-        </StyledPopup>
+        <PlantForm
+            handleSubmit={(event) => void handleSubmit(event)}
+            handleChange={handleChange}
+            handleImageChange={(event) => void handleImageChange(event)}
+            handleImageRemove={handleImageRemove}
+            plant={plant}
+            uploading={uploading}
+        />
     );
 };
 
