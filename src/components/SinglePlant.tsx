@@ -159,6 +159,7 @@ const SinglePlant = () => {
             handleImageRemove={handleImageRemove}
             plant={plant}
             uploading={uploading}
+            mode="edit"
         />
     );
 };

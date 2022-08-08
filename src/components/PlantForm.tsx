@@ -29,6 +29,7 @@ interface Props {
     handleImageRemove: () => void;
     plant: Plant | TempPlant;
     uploading: boolean;
+    mode: string;
 }
 
 const StyledDiv = styled.div`
@@ -113,6 +114,7 @@ const PlantForm = ({
     handleImageRemove,
     plant,
     uploading,
+    mode
 }: Props) => {
     const { growingMediums } = useGrowingMediums();
 
@@ -230,9 +232,11 @@ const PlantForm = ({
                         required
                     />
                     <Row padding="0 0.8rem 0 0.8rem">
-                        <DeleteButton type="button" margin="0 8px 0 0">
-                            <DeleteIcon sx={{ fontSize: 28 }} />
-                        </DeleteButton>
+                        {mode === "edit" &&
+                            <DeleteButton type="button" margin="0 8px 0 0">
+                                <DeleteIcon sx={{ fontSize: 28 }} />
+                            </DeleteButton>
+                        }
                         <Button type="submit" id="submit-btn" flex={1} disabled={uploading}>
                             Save
                         </Button>
