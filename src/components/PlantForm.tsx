@@ -11,9 +11,9 @@ import Select from "./style/Generics/Select";
 import Row from "./style/Generics/Row";
 import IconButton from "./style/Generics/IconButton";
 
-import DeleteIcon from "@mui/icons-material/Delete";
 import CloseIcon from "@mui/icons-material/Close";
 import HideImageIcon from "@mui/icons-material/HideImage";
+import ImageIcon from '@mui/icons-material/Image';
 
 import styled from "styled-components";
 import { useGrowingMediums } from "../hooks/useGrowingMediums";
@@ -32,6 +32,9 @@ interface Props {
 
 const StyledDiv = styled.div`
   position: relative;
+  display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 const StyledIconButton = styled(IconButton)`
@@ -40,6 +43,16 @@ const StyledIconButton = styled(IconButton)`
   background-color: transparent;
   color: white;
 `;
+
+const StyledLabel = styled(Label)`
+    height: 3rem;
+    width: 3rem;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
 
 const CloseButton = styled(IconButton)`
   top: 8px;
@@ -59,8 +72,9 @@ const StyledRow = styled(Row)`
 
 const StyledInput = styled(Input)`
     position: absolute;
-    top: 1rem;
-    border: none;
+    top: 0;
+    left: 0;
+    visibility: hidden;
 `;
 
 const StyledColumn = styled(Column)`
@@ -78,7 +92,7 @@ const PicDiv = styled.div`
     background-position: center;
     background-size: cover;
     height: 45vh;
-    background-color: #ededed;
+    background-color: rgb(235, 243, 241);
 `
 
 const PlantForm = ({
@@ -102,6 +116,17 @@ const PlantForm = ({
                 {!plant.imageName &&
                     <StyledDiv>
                         <PicDiv />
+                        <StyledRow justifyContent="flex-end" alignItems="start">
+                            <CloseButton type="button"
+                                id="close-form-btn"
+                                onClick={() => {
+                                    navigate("/main");
+                                }}><CloseIcon sx={{ fontSize: 28 }} />
+                            </CloseButton>
+                        </StyledRow>
+                        <StyledLabel htmlFor="plant-image-input">
+                            <ImageIcon sx={{ fontSize: 42 }} />
+                        </StyledLabel>
                         <StyledInput
                             type="file"
                             name="file"
@@ -128,7 +153,8 @@ const PlantForm = ({
                                 id="close-form-btn"
                                 onClick={() => {
                                     navigate("/main");
-                                }}><CloseIcon sx={{ fontSize: 28 }} /></CloseButton>
+                                }}><CloseIcon sx={{ fontSize: 28 }} />
+                            </CloseButton>
                         </StyledRow>
                     </StyledDiv>
                 )}
