@@ -136,7 +136,6 @@ const AddPlant = () => {
                     handleImageRemove={handleImageRemove}
                     plant={plant}
                     uploading={uploading}
-                    mode="add"
                 />
             </Column>
         </Popup>

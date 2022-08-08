@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { Plant, TempPlant } from "../types";
 
@@ -29,7 +29,7 @@ interface Props {
     handleImageRemove: () => void;
     plant: Plant | TempPlant;
     uploading: boolean;
-    mode: string;
+    handleDelete?: (id: string) => Promise<void>;
 }
 
 const StyledDiv = styled.div`
@@ -114,13 +114,15 @@ const PlantForm = ({
     handleImageRemove,
     plant,
     uploading,
-    mode
+    handleDelete,
 }: Props) => {
     const { growingMediums } = useGrowingMediums();
 
     const maxDate = new Date().toISOString().substring(0, 10);
 
     const navigate = useNavigate();
+
+    const id = useParams().id;
 
     return (
         <Form onSubmit={handleSubmit}>
@@ -232,8 +234,8 @@ const PlantForm = ({
                         required
                     />
                     <Row padding="0 0.8rem 0 0.8rem">
-                        {mode === "edit" &&
-                            <DeleteButton type="button" margin="0 8px 0 0">
+                        {id &&
+                            <DeleteButton type="button" onClick={() => handleDelete !== undefined && void handleDelete(id)} margin="0 8px 0 0">
                                 <DeleteIcon sx={{ fontSize: 28 }} />
                             </DeleteButton>
                         }
