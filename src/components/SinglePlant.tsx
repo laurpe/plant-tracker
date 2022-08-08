@@ -1,5 +1,3 @@
-import Popup from "./style/Generics/Popup";
-
 import axios from "axios";
 
 import { Plant } from "../types";
@@ -7,29 +5,12 @@ import { usePlants } from "../hooks/usePlants";
 import { useUser } from "../hooks/useUser";
 
 import { useState, useEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
-import styled from "styled-components";
-
-import Column from "./style/Generics/Column";
-import Row from "./style/Generics/Row";
-import Title from "./style/Generics/Title";
+import { useParams, useNavigate } from "react-router-dom";
 
 import PlantForm from "./PlantForm";
 
-import DeleteIcon from "@mui/icons-material/Delete";
-import CloseIcon from "@mui/icons-material/Close";
-import IconButton from "./style/Generics/IconButton";
-
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 const imgBaseUrl = process.env.REACT_APP_IMAGE_UPLOAD_API_BASE_URL as string;
-
-const StyledColumn = styled(Column)`
-    padding-bottom: 40px;
-`;
-
-const StyledPopup = styled(Popup)`
-    padding: 0;
-`
 
 const SinglePlant = () => {
     const [plant, setPlant] = useState<Plant>({
