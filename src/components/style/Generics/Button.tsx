@@ -5,7 +5,7 @@ const Button = styled.button`
     font-family: inherit;
     font-size: 1rem;
     color: white;
-    background-color: #35746d;
+    background-color: #21998c;
     border: none;
     border-radius: 5px;
     width: ${(props: { width?: string }) => props.width || "auto"};
