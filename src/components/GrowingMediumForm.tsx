@@ -16,6 +16,7 @@ import Notification from "./style/Generics/Notification";
 import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
 import styled from "styled-components";
 import { useGrowingMediums } from "../hooks/useGrowingMediums";
@@ -24,9 +25,9 @@ import { useUser } from "../hooks/useUser";
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
 const StyledColorsIconButton = styled(IconButton)`
-    color: #225c55;
+    color: #df3131;
     border-radius: 50%;
-    height: 3.2rem;
+    height: 3.4rem;
     width: 2.85rem;
 `;
 
@@ -34,10 +35,8 @@ const StyledInput = styled.input`
     border: none;
     font-family: inherit;
     color: inherit;
-    padding: 1rem;
     font-size: 1.2rem;
     color: #225c55;
-    padding: 0.9rem;
     width: 100%;
     appearance: none;
     min-height: 1.5rem;
@@ -48,7 +47,7 @@ const StyledSelect = styled.select`
     font-family: inherit;
     font-size: 1.2rem;
     color: #225c55;
-    padding: 0.8rem;
+    padding: 0.8rem 0.8rem 0.9rem 0;
     height: 3.5rem;
 `
 
@@ -209,13 +208,22 @@ const GrowingMediumForm = () => {
                     value={growingMedium.name}
                     required
                 />
+                <Label>Components</Label>
                 {growingMedium.composition.map((component, index) => {
                     return (
-                        <StyledRow key={index} alignItems="start" margin="0 0 0.8rem 0" padding="">
-                            <Column flex="4">
-                                <Label htmlFor="component">
-                                    Component #{index + 1}
-                                </Label>
+                        <StyledRow key={index} alignItems="center" margin="0 0 0.8rem 0" >
+                            <Column flex="1">
+                                <StyledColorsIconButton
+                                    type="button"
+                                    onClick={() =>
+                                        handleRemoveComponents(index)
+                                    }
+                                    disabled={buttonDisabled}
+                                >
+                                    <RemoveCircleIcon sx={{ fontSize: 20 }} />
+                                </StyledColorsIconButton>
+                            </Column>
+                            <Column flex="5">
                                 <StyledSelect
                                     id={`growing-medium-component-${index + 1
                                         }-select`}
@@ -243,10 +251,7 @@ const GrowingMediumForm = () => {
                                 </StyledSelect>
                             </Column>
 
-                            <Column flex="1">
-                                <Label htmlFor="percentage">
-                                    %
-                                </Label>
+                            <Column flex="1.5" padding="0 0 0 0.8rem">
                                 <StyledInput
                                     type="number"
                                     id={`growing-medium-percentage-${index + 1
@@ -264,18 +269,8 @@ const GrowingMediumForm = () => {
                                     min="1"
                                 />
                             </Column>
-                            <Column flex="1">
-                                <Label color="white">-</Label>
-                                <StyledColorsIconButton
-                                    type="button"
-                                    onClick={() =>
-                                        handleRemoveComponents(index)
-                                    }
-                                    margin="0 0 0 0.8rem"
-                                    disabled={buttonDisabled}
-                                >
-                                    <HighlightOffIcon sx={{ fontSize: 20 }} />
-                                </StyledColorsIconButton>
+                            <Column flex="0.5">
+                                %
                             </Column>
                         </StyledRow>
                     );
