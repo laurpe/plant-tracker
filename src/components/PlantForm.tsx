@@ -41,6 +41,7 @@ position: relative;
   display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgb(235, 243, 241);
 `
 
 const StyledIconButton = styled(IconButton)`
@@ -95,7 +96,6 @@ const StyledColumn = styled(Column)`
     margin-top: -40px;
     background-color: white;
     z-index: 9;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 1px 1px;
 `
 
 const PicDiv = styled.div`
@@ -128,7 +128,6 @@ const PlantForm = ({
     return (
         <Form onSubmit={handleSubmit}>
             <Column>
-
                 {!plant.imageName &&
                     <DivNoImage>
                         <PicDiv />
@@ -176,8 +175,6 @@ const PlantForm = ({
                         </StyledRow>
                     </StyledDiv>
                 )}
-
-
                 <StyledColumn>
                     <Label htmlFor="name">Name</Label>
                     <Input

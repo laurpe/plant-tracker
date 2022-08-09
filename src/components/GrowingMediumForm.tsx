@@ -8,18 +8,12 @@ import Button from "./style/Generics/Button";
 import Column from "./style/Generics/Column";
 import Form from "./style/Generics/Form";
 import Row from "./style/Generics/Row";
-import Select from "./style/Generics/Select";
 import Input from "./style/Generics/Input";
 import Label from "./style/Generics/Label";
 import IconButton from "./style/Generics/IconButton";
 import Notification from "./style/Generics/Notification";
 
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
 import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
-import CloseIcon from "@mui/icons-material/Close";
-import DeleteIcon from '@mui/icons-material/Delete';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
@@ -197,7 +191,7 @@ const GrowingMediumForm = () => {
 
     return (
         <Form onSubmit={(event) => void handleSubmit(event)}>
-            <Column>
+            <Column padding="0 0 40px 0">
                 {notification !== "" && (
                     <Notification>
                         <Row alignItems="center">
@@ -294,15 +288,16 @@ const GrowingMediumForm = () => {
                 >
                     <AddCircleOutlineIcon sx={{ fontSize: 20 }} />
                 </StyledColorsIconButton>
+                <Button
+                    type="submit"
+                    id="growing-medium-submit-btn"
+                    width="calc(100vw - 32px)"
+                    padding="1rem"
+                >
+                    Save
+                </Button>
             </Column>
-            <Button
-                type="submit"
-                id="growing-medium-submit-btn"
-                width="100%"
-            >
-                Save
-            </Button>
-        </Form>
+        </Form >
     );
 };
 

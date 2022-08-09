@@ -14,7 +14,7 @@ const AddGrowingMedium = () => {
     const navigate = useNavigate();
 
     return (
-        <Column backgroundColor="white" height="100%" padding="0 0 40px 0">
+        <Column>
             <Row justifyContent="space-between" padding="0 0 16px 16px">
                 <Title>Add growing medium</Title>
                 <IconButton type="button" backgroundColor="transparent" onClick={() => navigate(-1)}>
