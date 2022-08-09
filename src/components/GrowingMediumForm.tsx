@@ -17,6 +17,11 @@ import Notification from "./style/Generics/Notification";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import CloseIcon from "@mui/icons-material/Close";
+import DeleteIcon from '@mui/icons-material/Delete';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 import styled from "styled-components";
 import { useGrowingMediums } from "../hooks/useGrowingMediums";
@@ -25,10 +30,9 @@ import { useUser } from "../hooks/useUser";
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
 const StyledColorsIconButton = styled(IconButton)`
-    background-color: #21998c;
-    color: white;
+    color: #225c55;
     border-radius: 50%;
-    height: 2.85rem;
+    height: 3.2rem;
     width: 2.85rem;
 `;
 
@@ -52,7 +56,6 @@ const StyledSelect = styled.select`
     color: #225c55;
     padding: 0.8rem;
     height: 3.5rem;
-    flex: ${(props: { flex?: number }) => props.flex || 0};
 `
 
 const StyledRow = styled(Row)`
@@ -194,113 +197,111 @@ const GrowingMediumForm = () => {
 
     return (
         <Form onSubmit={(event) => void handleSubmit(event)}>
-            <Column justifyContent="space-between" height="100%">
-                <Column>
-                    {notification !== "" && (
-                        <Notification>
-                            <Row alignItems="center">
-                                <PriorityHighIcon sx={{ fontSize: 26 }} />
-                                {notification}
-                            </Row>
-                        </Notification>
-                    )}
-                    <Label htmlFor="name">Name</Label>
-                    <Input
-                        type="text"
-                        id="growing-medium-name-input"
-                        name="name"
-                        onChange={handleMixNameChange}
-                        value={growingMedium.name}
-                        required
-                    />
-                    {growingMedium.composition.map((component, index) => {
-                        return (
-                            <StyledRow key={index} alignItems="start" margin="0 0 0.8rem 0">
-                                <Column flex={1}>
-                                    <Label htmlFor="component">
-                                        Component #{index + 1}
-                                    </Label>
-                                    <StyledSelect
-                                        id={`growing-medium-component-${index + 1
-                                            }-select`}
-                                        onChange={(event) =>
-                                            handleChange(event, index)
-                                        }
-                                        name="component"
-                                        value={
-                                            growingMedium.composition[index]
-                                                .component
-                                        }
-                                        required
-                                    >
-                                        <option hidden>select...</option>
-                                        {growingMediums.map((growingMedium) => {
-                                            return (
-                                                <option
-                                                    key={growingMedium.id}
-                                                    value={growingMedium.name}
-                                                >
-                                                    {growingMedium.name}
-                                                </option>
-                                            );
-                                        })}
-                                    </StyledSelect>
-                                </Column>
+            <Column>
+                {notification !== "" && (
+                    <Notification>
+                        <Row alignItems="center">
+                            <PriorityHighIcon sx={{ fontSize: 26 }} />
+                            {notification}
+                        </Row>
+                    </Notification>
+                )}
+                <Label htmlFor="name">Name</Label>
+                <Input
+                    type="text"
+                    id="growing-medium-name-input"
+                    name="name"
+                    onChange={handleMixNameChange}
+                    value={growingMedium.name}
+                    required
+                />
+                {growingMedium.composition.map((component, index) => {
+                    return (
+                        <StyledRow key={index} alignItems="start" margin="0 0 0.8rem 0" padding="">
+                            <Column flex={4}>
+                                <Label htmlFor="component">
+                                    Component #{index + 1}
+                                </Label>
+                                <StyledSelect
+                                    id={`growing-medium-component-${index + 1
+                                        }-select`}
+                                    onChange={(event) =>
+                                        handleChange(event, index)
+                                    }
+                                    name="component"
+                                    value={
+                                        growingMedium.composition[index]
+                                            .component
+                                    }
+                                    required
+                                >
+                                    <option hidden>select...</option>
+                                    {growingMediums.map((growingMedium) => {
+                                        return (
+                                            <option
+                                                key={growingMedium.id}
+                                                value={growingMedium.name}
+                                            >
+                                                {growingMedium.name}
+                                            </option>
+                                        );
+                                    })}
+                                </StyledSelect>
+                            </Column>
 
-                                <Column>
-                                    <Label htmlFor="percentage">
-                                        Percentage
-                                    </Label>
-                                    <StyledInput
-                                        type="number"
-                                        id={`growing-medium-percentage-${index + 1
-                                            }-input`}
-                                        name="percentage"
-                                        onChange={(event) =>
-                                            handleChange(event, index)
-                                        }
-                                        value={
-                                            growingMedium.composition[index]
-                                                .percentage
-                                        }
-                                        required
-                                        max="100"
-                                        min="1"
-                                    />
-                                </Column>
-                                <Column>
-                                    <Label color="white">-</Label>
-                                    <StyledColorsIconButton
-                                        type="button"
-                                        onClick={() =>
-                                            handleRemoveComponents(index)
-                                        }
-                                        margin="0 0 0 0.8rem"
-                                        disabled={buttonDisabled}
-                                    >
-                                        <RemoveIcon sx={{ fontSize: 20 }} />
-                                    </StyledColorsIconButton>
-                                </Column>
-                            </StyledRow>
-                        );
-                    })}
-                    <StyledColorsIconButton
-                        type="button"
-                        id="growing-medium-add-more-components-btn"
-                        onClick={handleAddMoreComponents}
-                        margin="0 0 0.8rem 0"
-                    >
-                        <AddIcon sx={{ fontSize: 20 }} />
-                    </StyledColorsIconButton>
-                </Column>
-                <Button
-                    type="submit"
-                    id="growing-medium-submit-btn"
-                    width="100%"
+                            <Column flex={1}>
+                                <Label htmlFor="percentage">
+                                    %
+                                </Label>
+                                <StyledInput
+                                    type="number"
+                                    id={`growing-medium-percentage-${index + 1
+                                        }-input`}
+                                    name="percentage"
+                                    onChange={(event) =>
+                                        handleChange(event, index)
+                                    }
+                                    value={
+                                        growingMedium.composition[index]
+                                            .percentage
+                                    }
+                                    required
+                                    max="100"
+                                    min="1"
+                                />
+                            </Column>
+                            <Column flex={1}>
+                                <Label color="white">-</Label>
+                                <StyledColorsIconButton
+                                    type="button"
+                                    onClick={() =>
+                                        handleRemoveComponents(index)
+                                    }
+                                    margin="0 0 0 0.8rem"
+                                    disabled={buttonDisabled}
+                                >
+                                    <HighlightOffIcon sx={{ fontSize: 20 }} />
+                                </StyledColorsIconButton>
+                            </Column>
+                        </StyledRow>
+                    );
+                })}
+                <StyledColorsIconButton
+                    type="button"
+                    id="growing-medium-add-more-components-btn"
+                    onClick={handleAddMoreComponents}
+                    margin="0 0 0.8rem 0"
                 >
-                    Save
-                </Button>
+                    <AddCircleOutlineIcon sx={{ fontSize: 20 }} />
+                </StyledColorsIconButton>
             </Column>
+            <Button
+                type="submit"
+                id="growing-medium-submit-btn"
+                width="100%"
+            >
+                Save
+            </Button>
         </Form>
     );
 };
