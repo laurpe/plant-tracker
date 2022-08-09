@@ -65,6 +65,7 @@ const StyledLabel = styled(Label)`
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 `
 
 const CloseButton = styled(IconButton)`

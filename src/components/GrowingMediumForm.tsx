@@ -27,10 +27,37 @@ const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 const StyledColorsIconButton = styled(IconButton)`
     background-color: #21998c;
     color: white;
-    border-radius: 5px;
+    border-radius: 50%;
     height: 2.85rem;
     width: 2.85rem;
 `;
+
+const StyledInput = styled.input`
+    border: none;
+    font-family: inherit;
+    color: inherit;
+    padding: 1rem;
+    font-size: 1.2rem;
+    color: #225c55;
+    padding: 0.9rem;
+    width: 100%;
+    appearance: none;
+    min-height: 1.5rem;
+`
+
+const StyledSelect = styled.select`
+    border: none;
+    font-family: inherit;
+    font-size: 1.2rem;
+    color: #225c55;
+    padding: 0.8rem;
+    height: 3.5rem;
+    flex: ${(props: { flex?: number }) => props.flex || 0};
+`
+
+const StyledRow = styled(Row)`
+    border-bottom: 1px solid #b9ccca;
+`
 
 const GrowingMediumForm = () => {
     const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
@@ -188,26 +215,25 @@ const GrowingMediumForm = () => {
                     />
                     {growingMedium.composition.map((component, index) => {
                         return (
-                            <Row key={index} alignItems="start">
-                                <Column flex={1} border="2px solid black">
+                            <StyledRow key={index} alignItems="start" margin="0 0 0.8rem 0">
+                                <Column flex={1}>
                                     <Label htmlFor="component">
                                         Component #{index + 1}
                                     </Label>
-                                    <Select
+                                    <StyledSelect
                                         id={`growing-medium-component-${index + 1
                                             }-select`}
                                         onChange={(event) =>
                                             handleChange(event, index)
                                         }
                                         name="component"
-                                        margin="0 0.8rem 0.8rem 0"
                                         value={
                                             growingMedium.composition[index]
                                                 .component
                                         }
                                         required
                                     >
-                                        <option hidden>Select...</option>
+                                        <option hidden>select...</option>
                                         {growingMediums.map((growingMedium) => {
                                             return (
                                                 <option
@@ -218,14 +244,14 @@ const GrowingMediumForm = () => {
                                                 </option>
                                             );
                                         })}
-                                    </Select>
+                                    </StyledSelect>
                                 </Column>
 
-                                <Column border="2px solid black">
+                                <Column>
                                     <Label htmlFor="percentage">
                                         Percentage
                                     </Label>
-                                    <Input
+                                    <StyledInput
                                         type="number"
                                         id={`growing-medium-percentage-${index + 1
                                             }-input`}
@@ -242,7 +268,7 @@ const GrowingMediumForm = () => {
                                         min="1"
                                     />
                                 </Column>
-                                <Column border="2px solid black">
+                                <Column>
                                     <Label color="white">-</Label>
                                     <StyledColorsIconButton
                                         type="button"
@@ -255,7 +281,7 @@ const GrowingMediumForm = () => {
                                         <RemoveIcon sx={{ fontSize: 20 }} />
                                     </StyledColorsIconButton>
                                 </Column>
-                            </Row>
+                            </StyledRow>
                         );
                     })}
                     <StyledColorsIconButton
