@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface Props {
-    flex?: number;
+    flex?: string;
     justifyContent?: string;
     height?: string;
     padding?: string;
@@ -13,7 +13,7 @@ interface Props {
 const Column = styled.div<Props>`
     display: flex;
     flex-direction: column;
-    flex: ${(props) => props.flex || 0};
+    flex: ${(props) => props.flex || "none"};
     justify-content: ${(props) => props.justifyContent || "flex-start"};
     height: ${(props) => props.height || "auto"};
     padding: ${(props) => props.padding || "0"};

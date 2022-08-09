@@ -74,7 +74,7 @@ const PlantCard = ({ plant, updatePlant, nextWatering }: Props) => {
                         : "https://as2.ftcdn.net/v2/jpg/01/85/31/71/1000_F_185317104_XmMUkvpcG2zJHLSTT2f2nTCOBrdWvwMJ.jpg"
                 }
             />
-            <Column flex={1}>
+            <Column flex="1">
                 <CardTitle>{plant.name}</CardTitle>
                 <CardButton
                     type="button"

@@ -212,7 +212,7 @@ const GrowingMediumForm = () => {
                 {growingMedium.composition.map((component, index) => {
                     return (
                         <StyledRow key={index} alignItems="start" margin="0 0 0.8rem 0" padding="">
-                            <Column flex={4}>
+                            <Column flex="4">
                                 <Label htmlFor="component">
                                     Component #{index + 1}
                                 </Label>
@@ -243,7 +243,7 @@ const GrowingMediumForm = () => {
                                 </StyledSelect>
                             </Column>
 
-                            <Column flex={1}>
+                            <Column flex="1">
                                 <Label htmlFor="percentage">
                                     %
                                 </Label>
@@ -264,7 +264,7 @@ const GrowingMediumForm = () => {
                                     min="1"
                                 />
                             </Column>
-                            <Column flex={1}>
+                            <Column flex="1">
                                 <Label color="white">-</Label>
                                 <StyledColorsIconButton
                                     type="button"
@@ -292,7 +292,7 @@ const GrowingMediumForm = () => {
                     type="submit"
                     id="growing-medium-submit-btn"
                     width="calc(100vw - 32px)"
-                    padding="1rem"
+                    flex="none"
                 >
                     Save
                 </Button>

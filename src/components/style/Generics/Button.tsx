@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface Props {
-    flex?: number;
+    flex?: string;
     width?: string;
     padding?: string;
 }
@@ -15,7 +15,7 @@ const Button = styled.button<Props>`
     border: none;
     border-radius: 5px;
     width: ${(props) => props.width || "auto"};
-    flex: ${(props) => props.flex || 0};
+    flex: ${(props) => props.flex || "none"};
     padding: ${(props) => props.padding || "0"};
     align-self: center;
 `;

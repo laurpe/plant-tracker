@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface Props {
-    flex?: number;
+    flex?: string;
     margin?: string;
 }
 
@@ -13,7 +13,7 @@ const Select = styled.select<Props>`
     color: #225c55;
     padding: 0.8rem;
     height: 3.5rem;
-    flex: ${(props) => props.flex || 0};
+    flex: ${(props) => props.flex || "none"};
     margin: ${(props) => props.margin || "0 0 0.8rem 0"};
 `;
 

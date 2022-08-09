@@ -195,7 +195,7 @@ const PlantForm = ({
                             name="growingMedium"
                             id="plant-growingMedium-select"
                             value={plant.growingMedium}
-                            flex={1}
+                            flex="1"
                             required
                         >
                             <option value="" disabled>
@@ -237,7 +237,7 @@ const PlantForm = ({
                                 <DeleteIcon sx={{ fontSize: 28 }} />
                             </DeleteButton>
                         }
-                        <Button type="submit" id="submit-btn" flex={1} disabled={uploading}>
+                        <Button type="submit" id="submit-btn" flex="1" disabled={uploading}>
                             Save
                         </Button>
                     </Row>
