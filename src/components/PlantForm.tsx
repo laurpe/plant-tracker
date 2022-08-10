@@ -34,7 +34,7 @@ interface Props {
     plant: Plant | TempPlant;
     uploading: boolean;
     handleDelete?: (id: string) => Promise<void>;
-    addGrowingMedium: boolean;
+    addNewGrowingMedium: boolean;
     hideGrowingMediumForm: () => void;
 }
 
@@ -121,10 +121,10 @@ const PlantForm = ({
     plant,
     uploading,
     handleDelete,
-    addGrowingMedium,
+    addNewGrowingMedium,
     hideGrowingMediumForm
 }: Props) => {
-    const { growingMediums } = useGrowingMediums();
+    const { growingMediums, addGrowingMedium } = useGrowingMediums();
 
     const maxDate = new Date().toISOString().substring(0, 10);
 
@@ -252,7 +252,7 @@ const PlantForm = ({
                     </StyledColumn>
                 </Column>
             </Form>
-            {addGrowingMedium &&
+            {addNewGrowingMedium &&
                 <Overlay>
                     <Row justifyContent="flex-end" alignItems="start">
                         <CloseButton type="button"
@@ -264,7 +264,7 @@ const PlantForm = ({
                         </CloseButton>
                     </Row>
                     <Popup>
-                        <GrowingMediumForm hideGrowingMediumForm={hideGrowingMediumForm} />
+                        <GrowingMediumForm hideGrowingMediumForm={hideGrowingMediumForm} growingMediums={growingMediums} addGrowingMedium={addGrowingMedium} />
                     </Popup>
                 </Overlay>
             }

@@ -79,17 +79,17 @@ const StyledColumn = styled(Column)`
 
 interface Props {
     hideGrowingMediumForm: () => void;
+    growingMediums: GrowingMedium[];
+    addGrowingMedium: (growingMedium: GrowingMedium) => void;
 }
 
-const GrowingMediumForm = ({ hideGrowingMediumForm }: Props) => {
+const GrowingMediumForm = ({ hideGrowingMediumForm, growingMediums, addGrowingMedium }: Props) => {
     const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
     const [growingMedium, setGrowingMedium] = useState<TempGrowingMedium>({
         name: "",
         composition: [{ component: "", percentage: 100 }],
     });
     const [notification, setNotification] = useState<string>("");
-
-    const { growingMediums, addGrowingMedium } = useGrowingMediums();
 
     const { user } = useUser();
 
