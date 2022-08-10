@@ -54,7 +54,11 @@ const StyledRow = styled(Row)`
     border-bottom: 1px solid #b9ccca;
 `
 
-const GrowingMediumForm = () => {
+interface Props {
+    hideGrowingMediumForm: () => void;
+}
+
+const GrowingMediumForm = ({ hideGrowingMediumForm }: Props) => {
     const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
     const [growingMedium, setGrowingMedium] = useState<TempGrowingMedium>({
         name: "",
@@ -183,7 +187,7 @@ const GrowingMediumForm = () => {
                 composition: [{ component: "", percentage: 100 }],
             });
 
-            navigate(-1);
+            hideGrowingMediumForm();
         }
     };
 
@@ -236,7 +240,7 @@ const GrowingMediumForm = () => {
                                     }
                                     required
                                 >
-                                    <option hidden>add more...</option>
+                                    <option hidden>select...</option>
                                     {growingMediums.map((growingMedium) => {
                                         return (
                                             <option

@@ -6,23 +6,27 @@ import Title from "./style/Generics/Title";
 import IconButton from "./style/Generics/IconButton";
 
 import GrowingMediumForm from "./GrowingMediumForm";
+import Overlay from "./style/Generics/Overlay";
 
 import CloseIcon from "@mui/icons-material/Close";
+import Popup from "./style/Generics/Popup";
 
 
 const AddGrowingMedium = () => {
     const navigate = useNavigate();
 
     return (
-        <Column>
-            <Row justifyContent="space-between" padding="0 0 16px 16px">
-                <Title>Add growing medium</Title>
-                <IconButton type="button" backgroundColor="transparent" onClick={() => navigate(-1)}>
-                    <CloseIcon sx={{ fontSize: 26 }} />
-                </IconButton>
-            </Row>
-            <GrowingMediumForm />
-        </Column>
+        <Overlay>
+            <Popup>
+                <Row justifyContent="space-between" padding="0 0 16px 16px">
+                    <Title>Add growing medium</Title>
+                    <IconButton type="button" backgroundColor="transparent" onClick={() => navigate(-1)}>
+                        <CloseIcon sx={{ fontSize: 26 }} />
+                    </IconButton>
+                </Row>
+                {/* <GrowingMediumForm /> */}
+            </Popup>
+        </Overlay>
     );
 };
 

@@ -25,6 +25,12 @@ const SinglePlant = () => {
 
     const { updatePlant, removePlant } = usePlants();
 
+    const [addGrowingMedium, setAddGrowingMedium] = useState<boolean>(false)
+
+    const hideGrowingMediumForm = () => {
+        setAddGrowingMedium(false)
+    }
+
     const id = useParams().id as string;
 
     const navigate = useNavigate();
@@ -141,6 +147,8 @@ const SinglePlant = () => {
             plant={plant}
             uploading={uploading}
             handleDelete={handleDelete}
+            addGrowingMedium={addGrowingMedium}
+            hideGrowingMediumForm={hideGrowingMediumForm}
         />
     );
 };
