@@ -14,7 +14,6 @@ import IconButton from "./style/Generics/IconButton";
 import Notification from "./style/Generics/Notification";
 
 import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
@@ -211,7 +210,7 @@ const GrowingMediumForm = () => {
                 <Label>Components</Label>
                 {growingMedium.composition.map((component, index) => {
                     return (
-                        <StyledRow key={index} alignItems="center" margin="0 0 0.8rem 0" >
+                        <StyledRow key={index} alignItems="center">
                             <Column flex="1">
                                 <StyledColorsIconButton
                                     type="button"
@@ -223,7 +222,7 @@ const GrowingMediumForm = () => {
                                     <RemoveCircleIcon sx={{ fontSize: 20 }} />
                                 </StyledColorsIconButton>
                             </Column>
-                            <Column flex="5">
+                            <Column flex="6">
                                 <StyledSelect
                                     id={`growing-medium-component-${index + 1
                                         }-select`}
@@ -237,7 +236,7 @@ const GrowingMediumForm = () => {
                                     }
                                     required
                                 >
-                                    <option hidden>select...</option>
+                                    <option hidden>add more...</option>
                                     {growingMediums.map((growingMedium) => {
                                         return (
                                             <option
@@ -251,7 +250,7 @@ const GrowingMediumForm = () => {
                                 </StyledSelect>
                             </Column>
 
-                            <Column flex="1.5" padding="0 0 0 0.8rem">
+                            <Column flex="1.3" padding="0 0 0 2.4rem">
                                 <StyledInput
                                     type="number"
                                     id={`growing-medium-percentage-${index + 1
@@ -269,7 +268,7 @@ const GrowingMediumForm = () => {
                                     min="1"
                                 />
                             </Column>
-                            <Column flex="0.5">
+                            <Column flex="0.5" padding="0 0.6rem 0 0">
                                 %
                             </Column>
                         </StyledRow>
@@ -283,6 +282,39 @@ const GrowingMediumForm = () => {
                 >
                     <AddCircleOutlineIcon sx={{ fontSize: 20 }} />
                 </StyledColorsIconButton>
+                <StyledRow alignItems="center" margin="0 0 0.8rem 0" >
+                    <Column flex="5">
+                        <StyledSelect
+                            id="add-new-gm-component-select"
+                            onChange={(event) =>
+                                handleAddMoreComponents()
+                            }
+                            name="dummy-component"
+                            value="Add more components"
+                        >
+                            <option hidden>add more components...</option>
+                            {growingMediums.map((growingMedium) => {
+                                return (
+                                    <option
+                                        key={growingMedium.id}
+                                        value={growingMedium.name}
+                                    >
+                                        {growingMedium.name}
+                                    </option>
+                                );
+                            })}
+                        </StyledSelect>
+                    </Column>
+
+                    <Column flex="1.5" padding="0 0 0 0.8rem">
+                        <StyledInput
+                            type="number"
+                        />
+                    </Column>
+                    <Column flex="0.5">
+                        %
+                    </Column>
+                </StyledRow>
                 <Button
                     type="submit"
                     id="growing-medium-submit-btn"
