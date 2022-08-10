@@ -25,7 +25,7 @@ import { useUser } from "../hooks/useUser";
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
 const StyledColorsIconButton = styled(IconButton)`
-    color: #df3131;
+    color: #ea5c5c;
     border-radius: 50%;
     height: 3.4rem;
     width: 2.85rem;
@@ -227,7 +227,7 @@ const GrowingMediumForm = ({ hideGrowingMediumForm }: Props) => {
                         </Row>
                     </Notification>
                 )}
-                <Label htmlFor="name">Name</Label>
+                <Label htmlFor="name">Growing medium name</Label>
                 <Input
                     type="text"
                     id="growing-medium-name-input"
@@ -303,7 +303,10 @@ const GrowingMediumForm = ({ hideGrowingMediumForm }: Props) => {
                         </StyledRow>
                     );
                 })}
-                <AddButton type="button" onClick={() => handleAddMoreComponents()}><p>Add another component</p><AddIcon sx={{ fontSize: 26 }} /></AddButton>
+                <AddButton type="button" onClick={() => handleAddMoreComponents()}>
+                    <p>Add another component</p>
+                    <AddIcon sx={{ fontSize: 26 }} />
+                </AddButton>
                 <Button
                     type="submit"
                     id="growing-medium-submit-btn"
