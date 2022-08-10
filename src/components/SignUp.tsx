@@ -5,7 +5,6 @@ import Form from "./style/Generics/Form";
 import Label from "./style/Generics/Label";
 import Input from "./style/Generics/Input";
 import Button from "./style/Generics/Button";
-import Popup from "./style/Generics/Popup";
 import Column from "./style/Generics/Column";
 import Row from "./style/Generics/Row";
 import Title from "./style/Generics/Title";
@@ -62,18 +61,14 @@ const SignUp = () => {
     };
 
     return (
-        <Popup>
-            <Column
-                justifyContent="space-between"
-                height="100%"
-                padding="0 0 40px 0"
-            >
-                <Row justifyContent="space-between">
-                    <Title>Sign up</Title>
-                    <IconButton type="button" onClick={() => navigate("/")}>
-                        <CloseIcon sx={{ fontSize: 26 }} />
-                    </IconButton>
-                </Row>
+        <Column>
+            <Row justifyContent="space-between" padding="0 0 1.2rem 1rem">
+                <Title>Sign up</Title>
+                <IconButton type="button" onClick={() => navigate("/")}>
+                    <CloseIcon sx={{ fontSize: 26 }} />
+                </IconButton>
+            </Row>
+            <Column padding="0 1rem 0 1rem">
                 {notification && <Notification>{notification}</Notification>}
                 <Form onSubmit={(event) => void handleSubmit(event)}>
                     <Label>Email</Label>
@@ -110,7 +105,7 @@ const SignUp = () => {
                     </Button>
                 </Form>
             </Column>
-        </Popup>
+        </Column>
     );
 };
 
