@@ -45,7 +45,7 @@ const AddButton = styled.button`
     justify-content: space-between;
     align-items: center;
     padding: 0 0.6rem 0 0.8rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 `
 
 const StyledInput = styled.input`
@@ -166,6 +166,11 @@ const GrowingMediumForm = ({ hideGrowingMediumForm }: Props) => {
 
     const handleAddMoreComponents = () => {
         setButtonDisabled(false);
+
+        if (growingMedium.composition.length === 4) {
+            setNotification("Can't add more than 4 components");
+            return;
+        }
 
         const newGrowingMedium: TempGrowingMedium = {
             ...growingMedium,
