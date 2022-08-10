@@ -256,6 +256,7 @@ const PlantForm = ({
                 <Overlay>
                     <CloseButton type="button"
                         id="close-gm-form-btn"
+                        color="white"
                         onClick={() => {
                             hideGrowingMediumForm();
                         }}><CloseIcon sx={{ fontSize: 28 }} />

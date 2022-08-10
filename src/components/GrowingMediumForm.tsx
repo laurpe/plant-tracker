@@ -16,6 +16,7 @@ import Notification from "./style/Generics/Notification";
 import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import AddIcon from '@mui/icons-material/Add';
 
 import styled from "styled-components";
 import { useGrowingMediums } from "../hooks/useGrowingMediums";
@@ -29,6 +30,23 @@ const StyledColorsIconButton = styled(IconButton)`
     height: 3.4rem;
     width: 2.85rem;
 `;
+
+const AddButton = styled.button`
+    height: 56px;
+    width: 100%;
+    font-family: inherit;
+    font-size: 1.2rem;
+    background-color: white;
+    border: none;
+    border-bottom: 1px solid #b9ccca;
+    color: #7b9c99;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0.6rem 0 0.8rem;
+    margin-bottom: 1rem;
+`
 
 const StyledInput = styled.input`
     border: none;
@@ -52,6 +70,13 @@ const StyledSelect = styled.select`
 
 const StyledRow = styled(Row)`
     border-bottom: 1px solid #b9ccca;
+`
+
+const StyledColumn = styled(Column)`
+    padding: 16px 0 40px 0;
+    border-radius: 20px 20px 0 0;
+    margin-top: -40px;
+    background-color: white;
 `
 
 interface Props {
@@ -193,7 +218,7 @@ const GrowingMediumForm = ({ hideGrowingMediumForm }: Props) => {
 
     return (
         <Form onSubmit={(event) => void handleSubmit(event)}>
-            <Column padding="0 0 40px 0">
+            <StyledColumn>
                 {notification !== "" && (
                     <Notification>
                         <Row alignItems="center">
@@ -278,47 +303,7 @@ const GrowingMediumForm = ({ hideGrowingMediumForm }: Props) => {
                         </StyledRow>
                     );
                 })}
-                <StyledColorsIconButton
-                    type="button"
-                    id="growing-medium-add-more-components-btn"
-                    onClick={handleAddMoreComponents}
-                    margin="0 0 0.8rem 0"
-                >
-                    <AddCircleOutlineIcon sx={{ fontSize: 20 }} />
-                </StyledColorsIconButton>
-                <StyledRow alignItems="center" margin="0 0 0.8rem 0" >
-                    <Column flex="5">
-                        <StyledSelect
-                            id="add-new-gm-component-select"
-                            onChange={(event) =>
-                                handleAddMoreComponents()
-                            }
-                            name="dummy-component"
-                            value="Add more components"
-                        >
-                            <option hidden>add more components...</option>
-                            {growingMediums.map((growingMedium) => {
-                                return (
-                                    <option
-                                        key={growingMedium.id}
-                                        value={growingMedium.name}
-                                    >
-                                        {growingMedium.name}
-                                    </option>
-                                );
-                            })}
-                        </StyledSelect>
-                    </Column>
-
-                    <Column flex="1.5" padding="0 0 0 0.8rem">
-                        <StyledInput
-                            type="number"
-                        />
-                    </Column>
-                    <Column flex="0.5">
-                        %
-                    </Column>
-                </StyledRow>
+                <AddButton type="button" onClick={() => handleAddMoreComponents()}><p>Add another component</p><AddIcon sx={{ fontSize: 26 }} /></AddButton>
                 <Button
                     type="submit"
                     id="growing-medium-submit-btn"
@@ -327,7 +312,7 @@ const GrowingMediumForm = ({ hideGrowingMediumForm }: Props) => {
                 >
                     Save
                 </Button>
-            </Column>
+            </StyledColumn>
         </Form >
     );
 };
