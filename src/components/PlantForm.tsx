@@ -254,13 +254,15 @@ const PlantForm = ({
             </Form>
             {addGrowingMedium &&
                 <Overlay>
-                    <CloseButton type="button"
-                        id="close-gm-form-btn"
-                        color="white"
-                        onClick={() => {
-                            hideGrowingMediumForm();
-                        }}><CloseIcon sx={{ fontSize: 28 }} />
-                    </CloseButton>
+                    <Row justifyContent="flex-end" alignItems="start">
+                        <CloseButton type="button"
+                            id="close-gm-form-btn"
+                            color="white"
+                            onClick={() => {
+                                hideGrowingMediumForm();
+                            }}><CloseIcon sx={{ fontSize: 28 }} />
+                        </CloseButton>
+                    </Row>
                     <Popup>
                         <GrowingMediumForm hideGrowingMediumForm={hideGrowingMediumForm} />
                     </Popup>
