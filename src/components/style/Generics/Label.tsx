@@ -1,7 +1,14 @@
 import styled from "styled-components";
 
-const Label = styled.label`
-    color: ${(props: { color?: string }) => props.color || "#225c55"};
+interface Props {
+    padding?: string;
+    color?: string;
+}
+
+const Label = styled.label<Props>`
+    color: ${(props) => props.color || "#7b9c99"};
+    padding: ${(props) => props.padding || "0 0 16px 0"};
+    font-size: 0.95rem;
 `;
 
 export default Label;

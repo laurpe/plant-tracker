@@ -1,5 +1,3 @@
-import Popup from "./style/Generics/Popup";
-
 import axios from "axios";
 
 import { Plant } from "../types";
@@ -7,26 +5,12 @@ import { usePlants } from "../hooks/usePlants";
 import { useUser } from "../hooks/useUser";
 
 import { useState, useEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
-import styled from "styled-components";
-
-import Column from "./style/Generics/Column";
-import Row from "./style/Generics/Row";
-import Title from "./style/Generics/Title";
+import { useParams, useNavigate } from "react-router-dom";
 
 import PlantForm from "./PlantForm";
 
-import DeleteIcon from "@mui/icons-material/Delete";
-import CloseIcon from "@mui/icons-material/Close";
-import IconButton from "./style/Generics/IconButton";
-
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 const imgBaseUrl = process.env.REACT_APP_IMAGE_UPLOAD_API_BASE_URL as string;
-
-const StyledColumn = styled(Column)`
-    height: 100%;
-    padding-bottom: 40px;
-`;
 
 const SinglePlant = () => {
     const [plant, setPlant] = useState<Plant>({
@@ -40,6 +24,12 @@ const SinglePlant = () => {
     const [uploading, setUploading] = useState<boolean>(false);
 
     const { updatePlant, removePlant } = usePlants();
+
+    const [addNewGrowingMedium, setAddNewGrowingMedium] = useState<boolean>(false)
+
+    const hideGrowingMediumForm = () => {
+        setAddNewGrowingMedium(false)
+    }
 
     const id = useParams().id as string;
 
@@ -99,7 +89,7 @@ const SinglePlant = () => {
             event.target.name === "growingMedium" &&
             event.target.value === "create new"
         ) {
-            navigate("/add-growing-medium");
+            setAddNewGrowingMedium(true)
         }
         setPlant({ ...plant, [event.target.name]: event.target.value });
     };
@@ -149,37 +139,17 @@ const SinglePlant = () => {
     };
 
     return (
-        <Popup>
-            <StyledColumn>
-                <Row justifyContent="space-between">
-                    <Title>Plant details</Title>
-                    <Row>
-                        <IconButton
-                            type="button"
-                            id="delete-plant-btn"
-                            onClick={() => {
-                                void handleDelete(id);
-                            }}
-                        >
-                            <DeleteIcon sx={{ fontSize: 26 }} />
-                        </IconButton>
-                        <Link to={"/main"}>
-                            <IconButton type="button">
-                                <CloseIcon sx={{ fontSize: 26 }} />
-                            </IconButton>
-                        </Link>
-                    </Row>
-                </Row>
-                <PlantForm
-                    handleSubmit={(event) => void handleSubmit(event)}
-                    handleChange={handleChange}
-                    handleImageChange={(event) => void handleImageChange(event)}
-                    handleImageRemove={handleImageRemove}
-                    plant={plant}
-                    uploading={uploading}
-                />
-            </StyledColumn>
-        </Popup>
+        <PlantForm
+            handleSubmit={(event) => void handleSubmit(event)}
+            handleChange={handleChange}
+            handleImageChange={(event) => void handleImageChange(event)}
+            handleImageRemove={handleImageRemove}
+            plant={plant}
+            uploading={uploading}
+            handleDelete={handleDelete}
+            addNewGrowingMedium={addNewGrowingMedium}
+            hideGrowingMediumForm={hideGrowingMediumForm}
+        />
     );
 };
 

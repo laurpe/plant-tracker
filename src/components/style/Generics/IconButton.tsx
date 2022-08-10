@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
-const IconButton = styled.button`
+interface Props {
+    margin?: string;
+    color?: string;
+    backgroundColor?: string;
+}
+
+const IconButton = styled.button<Props>`
     height: 3rem;
     width: 3rem;
-    background-color: white;
-    color: #35746d;
     border: none;
     border-radius: 50%;
     display: inline-flex;
@@ -12,7 +16,9 @@ const IconButton = styled.button`
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    margin: ${(props: { margin?: string }) => props.margin || "0"};
+    margin: ${(props) => props.margin || "0"};
+    color: ${(props) => props.color || "#35746d"};
+    background-color: ${(props) => props.backgroundColor || "white"};
 `;
 
 export default IconButton;

@@ -8,15 +8,7 @@ import axios from "axios";
 
 import { usePlants } from "../hooks/usePlants";
 
-import Title from "./style/Generics/Title";
-import Row from "./style/Generics/Row";
-import Popup from "./style/Generics/Popup";
-import Column from "./style/Generics/Column";
-import IconButton from "./style/Generics/IconButton";
-
 import PlantForm from "./PlantForm";
-
-import CloseIcon from "@mui/icons-material/Close";
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 const imgUploadUrl = process.env.REACT_APP_IMAGE_UPLOAD_API_BASE_URL as string;
@@ -32,6 +24,12 @@ const AddPlant = () => {
         imageName: "",
     });
     const [uploading, setUploading] = useState<boolean>(false);
+
+    const [addNewGrowingMedium, setAddNewGrowingMedium] = useState<boolean>(false)
+
+    const hideGrowingMediumForm = () => {
+        setAddNewGrowingMedium(false)
+    }
 
     const { addPlant } = usePlants();
 
@@ -62,7 +60,8 @@ const AddPlant = () => {
             event.target.name === "growingMedium" &&
             event.target.value === "create new"
         ) {
-            navigate("/add-growing-medium");
+            event.target.value = ""
+            setAddNewGrowingMedium(true)
         }
         setPlant({ ...plant, [event.target.name]: event.target.value });
     };
@@ -117,28 +116,16 @@ const AddPlant = () => {
     };
 
     return (
-        <Popup>
-            <Column
-                justifyContent="space-between"
-                height="100%"
-                padding="0 0 40px 0"
-            >
-                <Row justifyContent="space-between">
-                    <Title>Add plant</Title>
-                    <IconButton type="button" onClick={() => navigate("/main")}>
-                        <CloseIcon sx={{ fontSize: 26 }} />
-                    </IconButton>
-                </Row>
-                <PlantForm
-                    handleSubmit={(event) => void handleSubmit(event)}
-                    handleChange={handleChange}
-                    handleImageChange={(event) => void handleImageChange(event)}
-                    handleImageRemove={handleImageRemove}
-                    plant={plant}
-                    uploading={uploading}
-                />
-            </Column>
-        </Popup>
+        <PlantForm
+            handleSubmit={(event) => void handleSubmit(event)}
+            handleChange={handleChange}
+            handleImageChange={(event) => void handleImageChange(event)}
+            handleImageRemove={handleImageRemove}
+            plant={plant}
+            uploading={uploading}
+            addNewGrowingMedium={addNewGrowingMedium}
+            hideGrowingMediumForm={hideGrowingMediumForm}
+        />
     );
 };
 

@@ -90,8 +90,6 @@ describe("Plant", () => {
     it("can be updated", () => {
         cy.contains("calathea").get("#edit-btn").click();
 
-        cy.contains("Plant details");
-
         cy.get("#plant-name-input").clear().type("calathea beauty star");
         cy.get("#plant-growingMedium-select").select(3);
         cy.get("#plant-lastWatered-input").clear().type("2022-05-01");
@@ -119,7 +117,7 @@ describe("Plant", () => {
     });
 });
 
-describe("Growing medium", () => {
+describe.only("Growing medium", () => {
     beforeEach(() => {
         cy.deletePlants();
         cy.deleteUsers();
@@ -133,7 +131,7 @@ describe("Growing medium", () => {
         cy.get("#add-plant-form-btn").click();
         cy.get("#plant-growingMedium-select").select(1);
 
-        cy.contains("Add growing medium");
+        cy.contains("Growing medium name");
 
         cy.get("#growing-medium-name-input").type("customMix");
         cy.get("#growing-medium-component-1-select").select(3);
@@ -151,7 +149,7 @@ describe("Growing medium", () => {
 
         cy.get("#growing-medium-submit-btn").click();
 
-        cy.contains("Add plant");
+        cy.contains("Last watered");
         cy.get("#plant-growingMedium-select").select("customMix");
     });
 
@@ -159,7 +157,7 @@ describe("Growing medium", () => {
         cy.get("#add-plant-form-btn").click();
         cy.get("#plant-growingMedium-select").select(1);
 
-        cy.contains("Add growing medium");
+        cy.contains("Growing medium name");
 
         cy.get("#growing-medium-name-input").type("customMix");
         cy.get("#growing-medium-component-1-select").select(3);
@@ -184,7 +182,7 @@ describe("Growing medium", () => {
         cy.get("#add-plant-form-btn").click();
         cy.get("#plant-growingMedium-select").select(1);
 
-        cy.contains("Add growing medium");
+        cy.contains("Growing medium name");
 
         cy.get("#growing-medium-name-input").type("customMix");
         cy.get("#growing-medium-component-1-select").select(3);
@@ -203,7 +201,7 @@ describe("Growing medium", () => {
         cy.get("#add-plant-form-btn").click();
         cy.get("#plant-growingMedium-select").select(1);
 
-        cy.contains("Add growing medium");
+        cy.contains("Growing medium name");
 
         cy.get("#growing-medium-name-input").type("customMix");
         cy.get("#growing-medium-component-1-select").select(3);
