@@ -4,7 +4,6 @@ import Form from "./style/Generics/Form";
 import Label from "./style/Generics/Label";
 import Input from "./style/Generics/Input";
 import Button from "./style/Generics/Button";
-import Popup from "./style/Generics/Popup";
 import Column from "./style/Generics/Column";
 import Row from "./style/Generics/Row";
 import AppHeader from "./style/Header/AppHeader";
@@ -23,6 +22,7 @@ const StyledButton = styled(Button)`
     background-color: white;
     color: #35746d;
     font-weight: 700;
+    padding-left: 1rem;
 `;
 
 const SignupDiv = styled.div`
@@ -59,51 +59,49 @@ const LogIn = () => {
     };
 
     return (
-        <Popup>
-            <Column
-                justifyContent="space-between"
-                height="100%"
-                padding="0 0 40px 0"
-            >
-                <Row justifyContent="center">
-                    <AppHeader>
-                        <AppTitle>plant tracker</AppTitle>
-                    </AppHeader>
-                </Row>
-                {notification && <Notification>{notification}</Notification>}
-                <Form onSubmit={(event) => void handleSubmit(event)}>
-                    <Label>Email</Label>
-                    <Input
-                        type="email"
-                        name="email"
-                        id="login-email-input"
-                        onChange={handleChange}
-                        value={user.email}
-                        required
-                    />
-                    <Label>Password</Label>
-                    <Input
-                        type="password"
-                        name="password"
-                        id="login-password-input"
-                        onChange={handleChange}
-                        value={user.password}
-                        required
-                    />
-                    <Button type="submit" id="login-submit-btn" width="100%">
-                        Log in
-                    </Button>
-                    <SignupDiv>
-                        Don't have an account?
-                        <Link to="/signup">
-                            <StyledButton type="button" id="signup-btn">
-                                Sign up
-                            </StyledButton>
-                        </Link>
-                    </SignupDiv>
-                </Form>
-            </Column>
-        </Popup>
+        <Column
+            justifyContent="space-between"
+            height="100%"
+            padding="0 1rem 40px 1rem"
+        >
+            <Row justifyContent="center" padding="0 0 20px 0">
+                <AppHeader>
+                    <AppTitle>plant tracker</AppTitle>
+                </AppHeader>
+            </Row>
+            {notification && <Notification>{notification}</Notification>}
+            <Form onSubmit={(event) => void handleSubmit(event)}>
+                <Label>Email</Label>
+                <Input
+                    type="email"
+                    name="email"
+                    id="login-email-input"
+                    onChange={handleChange}
+                    value={user.email}
+                    required
+                />
+                <Label>Password</Label>
+                <Input
+                    type="password"
+                    name="password"
+                    id="login-password-input"
+                    onChange={handleChange}
+                    value={user.password}
+                    required
+                />
+                <Button type="submit" id="login-submit-btn" width="100%">
+                    Log in
+                </Button>
+                <SignupDiv>
+                    Don't have an account?
+                    <Link to="/signup">
+                        <StyledButton type="button" id="signup-btn">
+                            Sign up
+                        </StyledButton>
+                    </Link>
+                </SignupDiv>
+            </Form>
+        </Column>
     );
 };
 
