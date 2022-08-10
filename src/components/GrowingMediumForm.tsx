@@ -303,7 +303,7 @@ const GrowingMediumForm = ({ hideGrowingMediumForm, growingMediums, addGrowingMe
                         </StyledRow>
                     );
                 })}
-                <AddButton type="button" onClick={() => handleAddMoreComponents()}>
+                <AddButton type="button" id="growing-medium-add-more-components-btn" onClick={() => handleAddMoreComponents()}>
                     <p>Add another component</p>
                     <AddIcon sx={{ fontSize: 26 }} />
                 </AddButton>
