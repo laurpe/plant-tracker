@@ -17,7 +17,6 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import AddIcon from '@mui/icons-material/Add';
 
 import styled from "styled-components";
-import { useGrowingMediums } from "../hooks/useGrowingMediums";
 import { useUser } from "../hooks/useUser";
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
