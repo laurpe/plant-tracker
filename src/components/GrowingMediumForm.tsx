@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 import { GrowingMedium, TempGrowingMedium } from "../types";
 
@@ -14,7 +13,6 @@ import IconButton from "./style/Generics/IconButton";
 import Notification from "./style/Generics/Notification";
 
 import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import AddIcon from '@mui/icons-material/Add';
 
@@ -92,8 +90,6 @@ const GrowingMediumForm = ({ hideGrowingMediumForm }: Props) => {
     const [notification, setNotification] = useState<string>("");
 
     const { growingMediums, addGrowingMedium } = useGrowingMediums();
-
-    const navigate = useNavigate();
 
     const { user } = useUser();
 
