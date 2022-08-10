@@ -253,20 +253,13 @@ const PlantForm = ({
                 </Column>
             </Form>
             {addNewGrowingMedium &&
-                <Overlay>
-                    <Row justifyContent="flex-end" alignItems="start">
-                        <CloseButton type="button"
-                            id="close-gm-form-btn"
-                            color="white"
-                            onClick={() => {
-                                hideGrowingMediumForm();
-                            }}><CloseIcon sx={{ fontSize: 28 }} />
-                        </CloseButton>
-                    </Row>
+                <>
+                    <Overlay onClick={() => hideGrowingMediumForm()}>
+                    </Overlay>
                     <Popup>
                         <GrowingMediumForm hideGrowingMediumForm={hideGrowingMediumForm} growingMediums={growingMediums} addGrowingMedium={addGrowingMedium} />
                     </Popup>
-                </Overlay>
+                </>
             }
         </>
     );
