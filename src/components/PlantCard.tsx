@@ -28,7 +28,7 @@ const StyledCard = styled(Card)`
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
-    height: 30vh;
+    height: 32vh;
 `;
 
 const StyledRow = styled(Row)`
@@ -51,6 +51,7 @@ const WaterButton = styled.button`
     justify-content: center;
     background-color: transparent;
     color: white;
+    z-index: 500;
 `
 
 const WateringText = styled.div`
@@ -62,6 +63,14 @@ const WateringText = styled.div`
     border-radius: 10px;
     padding: 1rem;
     width: 100%;
+`
+
+const LinkArea = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 80%;
 `
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
@@ -99,17 +108,19 @@ const PlantCard = ({ plant, updatePlant, nextWatering }: Props) => {
     };
 
     return (
-        <Link to={`/plants/${plant.id}`}>
-            <StyledCard url={plant.imageName ? `${imageBaseUrl}/${plant.imageName}` : "http://source.unsplash.com/WS5yjFjycNY"}>
-                <StyledRow background="linear-gradient(to bottom, #25252591, #00000000)" justifyContent="space-between" padding="1rem 0.5rem 0 1rem">
-                    <CardTitle>{plant.name}</CardTitle>
-                    <WaterButton type="button" id="water-btn" onClick={() => void updateWatered(plant.id)}><OpacityIcon sx={{ fontSize: 42 }} /></WaterButton>
-                </StyledRow>
-                <WateringText>
-                    {formatNextWatering(nextWatering)}
-                </WateringText>
-            </StyledCard>
-        </Link>
+
+        <StyledCard url={plant.imageName ? `${imageBaseUrl}/${plant.imageName}` : "http://source.unsplash.com/WS5yjFjycNY"}>
+            <Link to={`/plants/${plant.id}`}>
+                <LinkArea />
+            </Link>
+            <StyledRow background="linear-gradient(to bottom, #25252591, #00000000)" justifyContent="space-between" padding="1rem 0.5rem 0 1rem">
+                <CardTitle>{plant.name}</CardTitle>
+                <WaterButton type="button" id="water-btn" onClick={() => void updateWatered(plant.id)}><OpacityIcon sx={{ fontSize: 42 }} /></WaterButton>
+            </StyledRow>
+            <WateringText>
+                {formatNextWatering(nextWatering)}
+            </WateringText>
+        </StyledCard>
     );
 };
 
