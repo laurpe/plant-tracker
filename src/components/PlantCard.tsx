@@ -115,8 +115,8 @@ const PlantCard = ({ plant, updatePlant, nextWatering }: Props) => {
 
     return (
 
-        <Card url={plant.imageName ? `${imageBaseUrl}/${plant.imageName}` : "http://source.unsplash.com/WS5yjFjycNY"}>
-            <Link to={`/plants/${plant.id}`}>
+        <Card id="plant-card" url={plant.imageName ? `${imageBaseUrl}/${plant.imageName}` : "http://source.unsplash.com/WS5yjFjycNY"}>
+            <Link id="plant-edit-link" to={`/plants/${plant.id}`}>
                 <LinkArea />
             </Link>
             <Header background="linear-gradient(to bottom, #25252591, #00000000)" justifyContent="space-between" padding="1rem 0.5rem 0 1rem">
