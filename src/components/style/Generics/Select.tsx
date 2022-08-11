@@ -15,6 +15,7 @@ const Select = styled.select<Props>`
     height: 3.5rem;
     flex: ${(props) => props.flex || "none"};
     margin: ${(props) => props.margin || "0 0 0.8rem 0"};
+    background-color: white;
 `;
 
 export default Select;
