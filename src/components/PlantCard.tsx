@@ -4,8 +4,6 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import { Link } from "react-router-dom";
 
-import CardTitle from "./style/PlantCard/CardTitle";
-
 import OpacityIcon from "@mui/icons-material/Opacity";
 
 import Row from "./style/Generics/Row";
@@ -18,7 +16,7 @@ import { useUser } from "../hooks/useUser";
 
 dayjs.extend(utc);
 
-const StyledCard = styled.div`
+const Card = styled.div`
     position: relative;
     margin-bottom: 16px;
     border-radius: 10px;
@@ -31,7 +29,7 @@ const StyledCard = styled.div`
     box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 3px 0.5px;
 `;
 
-const StyledRow = styled(Row)`
+const Header = styled(Row)`
     position: absolute;
     top: 0;
     left: 0;
@@ -72,6 +70,15 @@ const LinkArea = styled.div`
     z-index: 100;
 `
 
+const CardTitle = styled.h2`
+    color: white;
+    font-weight: 700;
+    font-size: 1.3rem;
+    text-shadow: 0.5px 0.5px 4px rgb(0, 0, 0, 0.6);
+    letter-spacing: 1px;
+    text-transform: capitalize;
+`;
+
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 const imageBaseUrl = process.env.REACT_APP_IMAGE_BASE_URL as string;
 
@@ -108,18 +115,18 @@ const PlantCard = ({ plant, updatePlant, nextWatering }: Props) => {
 
     return (
 
-        <StyledCard url={plant.imageName ? `${imageBaseUrl}/${plant.imageName}` : "http://source.unsplash.com/WS5yjFjycNY"}>
+        <Card url={plant.imageName ? `${imageBaseUrl}/${plant.imageName}` : "http://source.unsplash.com/WS5yjFjycNY"}>
             <Link to={`/plants/${plant.id}`}>
                 <LinkArea />
             </Link>
-            <StyledRow background="linear-gradient(to bottom, #25252591, #00000000)" justifyContent="space-between" padding="1rem 0.5rem 0 1rem">
+            <Header background="linear-gradient(to bottom, #25252591, #00000000)" justifyContent="space-between" padding="1rem 0.5rem 0 1rem">
                 <CardTitle>{plant.name}</CardTitle>
                 <WaterButton type="button" id="water-btn" onClick={() => void updateWatered(plant.id)}><OpacityIcon sx={{ fontSize: 42 }} /></WaterButton>
-            </StyledRow>
+            </Header>
             <WateringText>
                 {formatNextWatering(nextWatering)}
             </WateringText>
-        </StyledCard>
+        </Card>
     );
 };
 
