@@ -12,23 +12,63 @@ import CardInfo from "./style/PlantCard/CardInfo";
 import CardImage from "./style/PlantCard/CardImage";
 
 import OpacityIcon from "@mui/icons-material/Opacity";
-import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 
 import Column from "./style/Generics/Column";
+import Row from "./style/Generics/Row";
 
 import styled from "styled-components";
 
 import formatNextWatering from "../util/formatNextWatering";
 
 import { useUser } from "../hooks/useUser";
+import IconButton from "./style/Generics/IconButton";
 
 dayjs.extend(utc);
 
 const StyledCard = styled(Card)`
-    margin: 16px;
-    border-radius: 10px;
     position: relative;
+    margin-bottom: 16px;
+    border-radius: 10px;
+    background-image: url(${(props: { url?: string }) => props.url});
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    height: 30vh;
 `;
+
+const StyledRow = styled(Row)`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5rem;
+    background: ${(props: { background?: string }) => props.background || "none"};
+    align-items: flex-start;
+    border-radius: 10px 10px 0 0;
+`
+
+const WaterButton = styled.button`
+    height: 3rem;
+    width: 3rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+    color: white;
+`
+
+const WateringText = styled.div`
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    color: #7b9c99;
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    width: 100%;
+`
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 const imageBaseUrl = process.env.REACT_APP_IMAGE_BASE_URL as string;
@@ -65,35 +105,17 @@ const PlantCard = ({ plant, updatePlant, nextWatering }: Props) => {
     };
 
     return (
-        <StyledCard>
-            <CardImage
-                id="plant-image"
-                src={
-                    plant.imageName
-                        ? `${imageBaseUrl}/${plant.imageName}`
-                        : "https://as2.ftcdn.net/v2/jpg/01/85/31/71/1000_F_185317104_XmMUkvpcG2zJHLSTT2f2nTCOBrdWvwMJ.jpg"
-                }
-            />
-            <Column flex="1">
-                <CardTitle>{plant.name}</CardTitle>
-                <CardButton
-                    type="button"
-                    id="water-btn"
-                    right="83px"
-                    onClick={() => void updateWatered(plant.id)}
-                >
-                    <OpacityIcon sx={{ fontSize: 26 }} />
-                </CardButton>
-                <Link to={`/plants/${plant.id}`}>
-                    <CardButton type="button" id="edit-btn" right="16px">
-                        <ArticleOutlinedIcon sx={{ fontSize: 26 }} />
-                    </CardButton>
-                </Link>
-                <CardInfo>
-                    <TextWater>{formatNextWatering(nextWatering)}</TextWater>
-                </CardInfo>
-            </Column>
-        </StyledCard>
+        <Link to={`/plants/${plant.id}`}>
+            <StyledCard url={plant.imageName ? `${imageBaseUrl}/${plant.imageName}` : "http://source.unsplash.com/WS5yjFjycNY"}>
+                <StyledRow background="linear-gradient(to bottom, #25252591, #00000000)" justifyContent="space-between" padding="1rem 0.5rem 0 1rem">
+                    <CardTitle>{plant.name}</CardTitle>
+                    <WaterButton type="button" id="water-btn" onClick={() => void updateWatered(plant.id)}><OpacityIcon sx={{ fontSize: 42 }} /></WaterButton>
+                </StyledRow>
+                <WateringText>
+                    {formatNextWatering(nextWatering)}
+                </WateringText>
+            </StyledCard>
+        </Link>
     );
 };
 
