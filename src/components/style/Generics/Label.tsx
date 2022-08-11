@@ -7,7 +7,7 @@ interface Props {
 
 const Label = styled.label<Props>`
     color: ${(props) => props.color || "#7b9c99"};
-    padding: ${(props) => props.padding || "0 0 0 16px"};
+    padding: ${(props) => props.padding || "0"};
     font-size: 0.95rem;
 `;
 

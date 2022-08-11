@@ -184,7 +184,7 @@ const PlantForm = ({
                         </StyledDiv>
                     )}
                     <StyledColumn>
-                        <Label htmlFor="name">Name</Label>
+                        <Label htmlFor="name" padding="0 0 0 16px">Name</Label>
                         <Input
                             type="text"
                             name="name"
@@ -196,7 +196,7 @@ const PlantForm = ({
                             maximum-scale={1}
                             required
                         />
-                        <Label htmlFor="growingMedium">Growing medium</Label>
+                        <Label htmlFor="growingMedium" padding="0 0 0 16px">Growing medium</Label>
                         <Row alignItems="start">
                             <Select
                                 onChange={handleChange}
@@ -219,7 +219,7 @@ const PlantForm = ({
                                 })}
                             </Select>
                         </Row>
-                        <Label htmlFor="lastWatered">Last watered</Label>
+                        <Label htmlFor="lastWatered" padding="0 0 0 16px">Last watered</Label>
                         <Input
                             type="date"
                             name="lastWatered"
@@ -228,7 +228,7 @@ const PlantForm = ({
                             value={plant.lastWatered.substring(0, 10)}
                             max={maxDate}
                         />
-                        <Label htmlFor="wateringCycle">Watering cycle</Label>
+                        <Label htmlFor="wateringCycle" padding="0 0 0 16px">Watering cycle</Label>
                         <Input
                             type="number"
                             name="wateringCycle"
