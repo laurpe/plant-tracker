@@ -4,7 +4,6 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import { Link } from "react-router-dom";
 
-import Card from "./style/Generics/Card";
 import CardTitle from "./style/PlantCard/CardTitle";
 
 import OpacityIcon from "@mui/icons-material/Opacity";
@@ -19,7 +18,7 @@ import { useUser } from "../hooks/useUser";
 
 dayjs.extend(utc);
 
-const StyledCard = styled(Card)`
+const StyledCard = styled.div`
     position: relative;
     margin-bottom: 16px;
     border-radius: 10px;
@@ -29,6 +28,7 @@ const StyledCard = styled(Card)`
     background-position: center;
     background-size: cover;
     height: 32vh;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 3px 0.5px;
 `;
 
 const StyledRow = styled(Row)`
@@ -51,7 +51,6 @@ const WaterButton = styled.button`
     justify-content: center;
     background-color: transparent;
     color: white;
-    z-index: 500;
 `
 
 const WateringText = styled.div`
