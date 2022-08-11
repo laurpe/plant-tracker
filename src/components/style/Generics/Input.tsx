@@ -11,6 +11,7 @@ const Input = styled.input`
     appearance: none;
     min-height: 1.5rem;
     margin: ${(props: { margin?: string }) => props.margin || "0 0 0.8rem 0"};
+    background-color: white;
 `;
 
 export default Input;

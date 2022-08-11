@@ -65,8 +65,8 @@ const DeleteButton = styled(IconButton)`
 `
 
 const StyledLabel = styled(Label)`
-    height: 3rem;
-    width: 3rem;
+    height: 30vh;
+    width: 100%;
     padding: 0;
     margin: 0;
     display: flex;
@@ -142,9 +142,10 @@ const PlantForm = ({
                             <StyledRow justifyContent="flex-end" alignItems="start">
                                 <CloseButton type="button"
                                     id="close-form-btn"
+                                    color="#7b9c99"
                                     onClick={() => {
                                         navigate("/main");
-                                    }}><CloseIcon sx={{ fontSize: 28 }} />
+                                    }}><CloseIcon sx={{ fontSize: 36 }} />
                                 </CloseButton>
                             </StyledRow>
                             <StyledLabel htmlFor="plant-image-input">
@@ -170,7 +171,7 @@ const PlantForm = ({
                                         handleImageRemove();
                                     }}
                                 >
-                                    <HideImageIcon sx={{ fontSize: 28 }} />
+                                    <HideImageIcon sx={{ fontSize: 36 }} />
                                 </StyledIconButton>
                                 <CloseButton type="button"
                                     id="close-form-btn"
@@ -178,13 +179,13 @@ const PlantForm = ({
                                         navigate("/main");
                                     }}
                                     color="white">
-                                    <CloseIcon sx={{ fontSize: 28 }} />
+                                    <CloseIcon sx={{ fontSize: 36 }} />
                                 </CloseButton>
                             </StyledRow>
                         </StyledDiv>
                     )}
                     <StyledColumn>
-                        <Label htmlFor="name">Name</Label>
+                        <Label htmlFor="name" padding="0 0 0 16px">Name</Label>
                         <Input
                             type="text"
                             name="name"
@@ -196,7 +197,7 @@ const PlantForm = ({
                             maximum-scale={1}
                             required
                         />
-                        <Label htmlFor="growingMedium">Growing medium</Label>
+                        <Label htmlFor="growingMedium" padding="0 0 0 16px">Growing medium</Label>
                         <Row alignItems="start">
                             <Select
                                 onChange={handleChange}
@@ -219,7 +220,7 @@ const PlantForm = ({
                                 })}
                             </Select>
                         </Row>
-                        <Label htmlFor="lastWatered">Last watered</Label>
+                        <Label htmlFor="lastWatered" padding="0 0 0 16px">Last watered</Label>
                         <Input
                             type="date"
                             name="lastWatered"
@@ -228,7 +229,7 @@ const PlantForm = ({
                             value={plant.lastWatered.substring(0, 10)}
                             max={maxDate}
                         />
-                        <Label htmlFor="wateringCycle">Watering cycle</Label>
+                        <Label htmlFor="wateringCycle" padding="0 0 0 16px">Watering cycle</Label>
                         <Input
                             type="number"
                             name="wateringCycle"

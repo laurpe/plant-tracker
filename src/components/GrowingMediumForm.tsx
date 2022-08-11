@@ -227,7 +227,7 @@ const GrowingMediumForm = ({ hideGrowingMediumForm, growingMediums, addGrowingMe
                         </Row>
                     </Notification>
                 )}
-                <Label htmlFor="name">Growing medium name</Label>
+                <Label htmlFor="name" padding="0 0 0 16px">Growing medium name</Label>
                 <Input
                     type="text"
                     id="growing-medium-name-input"
@@ -236,7 +236,7 @@ const GrowingMediumForm = ({ hideGrowingMediumForm, growingMediums, addGrowingMe
                     value={growingMedium.name}
                     required
                 />
-                <Label>Components</Label>
+                <Label padding="0 0 0 16px">Components</Label>
                 {growingMedium.composition.map((component, index) => {
                     return (
                         <StyledRow key={index} alignItems="center">

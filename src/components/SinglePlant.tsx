@@ -89,6 +89,7 @@ const SinglePlant = () => {
             event.target.name === "growingMedium" &&
             event.target.value === "create new"
         ) {
+            event.target.value = ""
             setAddNewGrowingMedium(true)
         }
         setPlant({ ...plant, [event.target.name]: event.target.value });
