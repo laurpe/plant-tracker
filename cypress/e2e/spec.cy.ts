@@ -79,16 +79,14 @@ describe("Plant", () => {
     });
     it("can be added", () => {
         cy.contains("calathea");
-        cy.get("#plant-image")
-            .should("be.visible")
-            .should(([img]) => {
-                const image = img as HTMLImageElement;
-                expect(image.naturalWidth).to.equal(194);
-                expect(image.naturalHeight).to.equal(259);
-            });
+        cy.get("#plant-card").then(($el) => {
+            cy.request($el.css("background-image")).then((res) => {
+                expect(res.status).to.eql(200);
+            })
+        });
     });
     it("can be updated", () => {
-        cy.contains("calathea").get("#edit-btn").click();
+        cy.contains("calathea").get("#plant-edit-link").click();
 
         cy.get("#plant-name-input").clear().type("calathea beauty star");
         cy.get("#plant-growingMedium-select").select(3);
@@ -102,7 +100,7 @@ describe("Plant", () => {
         cy.contains("calathea beauty star");
     });
     it("can be deleted", () => {
-        cy.contains("calathea").get("#edit-btn").click();
+        cy.contains("calathea").get("#plant-edit-link").click();
 
         cy.get("#delete-plant-btn").click();
 
@@ -117,7 +115,7 @@ describe("Plant", () => {
     });
 });
 
-describe.only("Growing medium", () => {
+describe("Growing medium", () => {
     beforeEach(() => {
         cy.deletePlants();
         cy.deleteUsers();
