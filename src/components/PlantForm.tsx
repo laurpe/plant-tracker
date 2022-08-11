@@ -142,9 +142,10 @@ const PlantForm = ({
                             <StyledRow justifyContent="flex-end" alignItems="start">
                                 <CloseButton type="button"
                                     id="close-form-btn"
+                                    color="#7b9c99"
                                     onClick={() => {
                                         navigate("/main");
-                                    }}><CloseIcon sx={{ fontSize: 28 }} />
+                                    }}><CloseIcon sx={{ fontSize: 36 }} />
                                 </CloseButton>
                             </StyledRow>
                             <StyledLabel htmlFor="plant-image-input">
@@ -170,7 +171,7 @@ const PlantForm = ({
                                         handleImageRemove();
                                     }}
                                 >
-                                    <HideImageIcon sx={{ fontSize: 28 }} />
+                                    <HideImageIcon sx={{ fontSize: 36 }} />
                                 </StyledIconButton>
                                 <CloseButton type="button"
                                     id="close-form-btn"
@@ -178,7 +179,7 @@ const PlantForm = ({
                                         navigate("/main");
                                     }}
                                     color="white">
-                                    <CloseIcon sx={{ fontSize: 28 }} />
+                                    <CloseIcon sx={{ fontSize: 36 }} />
                                 </CloseButton>
                             </StyledRow>
                         </StyledDiv>
