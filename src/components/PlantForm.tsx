@@ -65,8 +65,8 @@ const DeleteButton = styled(IconButton)`
 `
 
 const StyledLabel = styled(Label)`
-    height: 3rem;
-    width: 3rem;
+    height: 30vh;
+    width: 100%;
     padding: 0;
     margin: 0;
     display: flex;
