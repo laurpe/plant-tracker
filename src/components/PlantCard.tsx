@@ -6,14 +6,9 @@ import { Link } from "react-router-dom";
 
 import Card from "./style/Generics/Card";
 import CardTitle from "./style/PlantCard/CardTitle";
-import CardButton from "./style/PlantCard/CardButton";
-import TextWater from "./style//PlantCard/TextWater";
-import CardInfo from "./style/PlantCard/CardInfo";
-import CardImage from "./style/PlantCard/CardImage";
 
 import OpacityIcon from "@mui/icons-material/Opacity";
 
-import Column from "./style/Generics/Column";
 import Row from "./style/Generics/Row";
 
 import styled from "styled-components";
@@ -21,7 +16,6 @@ import styled from "styled-components";
 import formatNextWatering from "../util/formatNextWatering";
 
 import { useUser } from "../hooks/useUser";
-import IconButton from "./style/Generics/IconButton";
 
 dayjs.extend(utc);
 
