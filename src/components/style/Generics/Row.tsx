@@ -6,6 +6,7 @@ interface Props {
     padding?: string;
     border?: string;
     margin?: string;
+    background?: string;
 }
 
 const Row = styled.div<Props>`
@@ -16,6 +17,7 @@ const Row = styled.div<Props>`
     padding: ${(props) => props.padding || "0"};
     border: ${(props) => props.border || "none"};
     margin: ${(props) => props.margin || "0"};
+    background: ${(props) => props.background || "none"};
 `;
 
 export default Row;

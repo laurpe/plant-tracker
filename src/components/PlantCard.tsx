@@ -37,7 +37,6 @@ const StyledRow = styled(Row)`
     left: 0;
     width: 100%;
     height: 5rem;
-    background: ${(props: { background?: string }) => props.background || "none"};
     align-items: flex-start;
     border-radius: 10px 10px 0 0;
 `
@@ -70,6 +69,7 @@ const LinkArea = styled.div`
     left: 0;
     height: 100%;
     width: 80%;
+    z-index: 100;
 `
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
