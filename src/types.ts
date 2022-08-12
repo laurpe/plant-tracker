@@ -47,4 +47,7 @@ export interface User extends Omit<TempUser, "password"> {
     token: string;
 }
 
-
+export interface Notification {
+    type: "error" | "notification";
+    message: string;
+}
