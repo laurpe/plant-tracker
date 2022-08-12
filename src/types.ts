@@ -36,11 +36,6 @@ export interface GrowingMedium extends TempGrowingMedium {
     id: string;
 }
 
-export interface State {
-    plants?: Plant[];
-    growingMediums?: GrowingMedium[];
-}
-
 // User before saving
 export interface TempUser {
     email: string;
@@ -51,3 +46,5 @@ export interface TempUser {
 export interface User extends Omit<TempUser, "password"> {
     token: string;
 }
+
+
