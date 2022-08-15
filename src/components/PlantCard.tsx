@@ -56,7 +56,7 @@ const WateringText = styled.div`
     bottom: 0;
     color: #7b9c99;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 0 0 10px 10px;
     padding: 1rem;
     width: 100%;
 `;
