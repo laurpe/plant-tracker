@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { Notification } from "../types";
@@ -23,7 +23,24 @@ interface Props {
 }
 
 const ShowNotification = ({ notification }: Props) => {
-    return <NotificationDiv>{notification.message}</NotificationDiv>;
+    const [visible, setVisible] = useState<boolean>(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setVisible(false);
+        }, 5000);
+
+        return () => {
+            clearTimeout(timer);
+            setVisible(true);
+        };
+    }, [notification]);
+
+    if (!visible) {
+        return null;
+    }
+
+    return <NotificationDiv>{notification?.message}</NotificationDiv>;
 };
 
 export default ShowNotification;

@@ -91,10 +91,7 @@ const GrowingMediumForm = ({
         name: "",
         composition: [{ component: "", percentage: 100 }],
     });
-    const [notification, setNotification] = useState<Notification>({
-        type: "notification",
-        message: "",
-    });
+    const [notification, setNotification] = useState<Notification>(null);
 
     const { user } = useUser();
 
@@ -110,7 +107,7 @@ const GrowingMediumForm = ({
             });
             return true;
         } else {
-            setNotification({ type: "notification", message: "" });
+            setNotification(null);
             return false;
         }
     };
@@ -126,7 +123,7 @@ const GrowingMediumForm = ({
             setNotification({ type: "error", message: "Name already exists" });
             return true;
         } else {
-            setNotification({ type: "notification", message: "" });
+            setNotification(null);
             return false;
         }
     };
@@ -230,7 +227,7 @@ const GrowingMediumForm = ({
 
     return (
         <>
-            <ShowNotification notification={notification} />
+            {notification && <ShowNotification notification={notification} />}
             <Form onSubmit={(event) => void handleSubmit(event)}>
                 <StyledColumn>
                     <Label htmlFor="name" padding="0 0 0 16px">
