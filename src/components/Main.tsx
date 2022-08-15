@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 import ShowNotification from "./ShowNotification";
 
-import { Notification } from "../types";
+import { NotificationState } from "../types";
 
 const StyledColumn = styled(Column)`
     padding: 0 1rem 110px 1rem;
@@ -14,12 +14,8 @@ const StyledColumn = styled(Column)`
     min-height: 100vh;
 `;
 
-interface State {
-    notification: Notification;
-}
-
 const Main = () => {
-    const state = useLocation().state as State;
+    const state = useLocation().state as NotificationState;
 
     return (
         <>

@@ -51,3 +51,7 @@ export type Notification = {
     type: "error" | "notification";
     message: string;
 } | null;
+
+export interface NotificationState {
+    notification: Notification;
+}
