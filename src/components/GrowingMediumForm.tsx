@@ -141,7 +141,10 @@ const GrowingMediumForm = ({
             );
             addGrowingMedium(response.data);
         } catch (error) {
-            throw new Error("Could not add growing medium");
+            setNotification({
+                type: "error",
+                message: "Could not add growing medium",
+            });
         }
     };
 
