@@ -8,13 +8,14 @@ import Column from "./style/Generics/Column";
 import Row from "./style/Generics/Row";
 import AppHeader from "./style/Header/AppHeader";
 import AppTitle from "./style/Header/AppTitle";
-import Notification from "./style/Generics/Notification";
 
-import { useNavigate, Link } from "react-router-dom";
+import ShowNotification from "./ShowNotification";
+
+import { useNavigate, Link, useLocation } from "react-router-dom";
 
 import { useUser } from "../hooks/useUser";
 
-import { TempUser } from "../types";
+import { NotificationState, Notification, TempUser } from "../types";
 
 import styled from "styled-components";
 
@@ -32,7 +33,7 @@ const SignupDiv = styled.div`
 
 const LogIn = () => {
     const [user, setUser] = useState<TempUser>({ email: "", password: "" });
-    const [notification, setNotification] = useState<string>("");
+    const [notification, setNotification] = useState<Notification>(null);
     const { login } = useUser();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,6 +41,7 @@ const LogIn = () => {
     };
 
     const navigate = useNavigate();
+    const state = useLocation().state as NotificationState;
 
     const handleSubmit = async (
         event: React.FormEvent<HTMLFormElement>
@@ -49,12 +51,11 @@ const LogIn = () => {
         try {
             await login(user);
 
-            setNotification("");
             setUser({ email: "", password: "" });
             navigate("/main");
         } catch (error) {
             const err = error as Error;
-            setNotification(err.message);
+            setNotification({ type: "error", message: err.message });
         }
     };
 
@@ -69,7 +70,10 @@ const LogIn = () => {
                     <AppTitle>plant tracker</AppTitle>
                 </AppHeader>
             </Row>
-            {notification && <Notification>{notification}</Notification>}
+            {notification && <ShowNotification notification={notification} />}
+            {state?.notification && (
+                <ShowNotification notification={state?.notification} />
+            )}
             <Form onSubmit={(event) => void handleSubmit(event)}>
                 <Label>Email</Label>
                 <Input

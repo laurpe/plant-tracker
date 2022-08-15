@@ -50,7 +50,14 @@ const SignUp = () => {
                 setUser({ email: "", password: "" });
                 setPasswordConfirm("");
 
-                navigate("/");
+                navigate("/", {
+                    state: {
+                        notification: {
+                            type: "notification",
+                            message: "Account created",
+                        },
+                    },
+                });
             } catch (error) {
                 const err = error as Error;
                 setNotification({ type: "error", message: err.message });
