@@ -80,7 +80,14 @@ const SinglePlant = () => {
         } catch (error) {
             throw new Error("Could not delete plant");
         }
-        navigate("/main");
+        navigate("/main", {
+            state: {
+                notification: {
+                    type: "notification",
+                    message: "Plant deleted!",
+                },
+            },
+        });
     };
 
     // form functions
