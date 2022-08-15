@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../hooks/useUser";
 
-import { TempPlant, Plant } from "../types";
+import { TempPlant, Plant, Notification } from "../types";
 
 import axios from "axios";
 
 import { usePlants } from "../hooks/usePlants";
 
 import PlantForm from "./PlantForm";
+import ShowNotification from "./ShowNotification";
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 const imgUploadUrl = process.env.REACT_APP_IMAGE_UPLOAD_API_BASE_URL as string;
@@ -24,6 +25,7 @@ const AddPlant = () => {
         imageName: "",
     });
     const [uploading, setUploading] = useState<boolean>(false);
+    const [notification, setNotification] = useState<Notification>(null);
 
     const [addNewGrowingMedium, setAddNewGrowingMedium] =
         useState<boolean>(false);
@@ -50,7 +52,10 @@ const AddPlant = () => {
 
             addPlant(response.data);
         } catch (error) {
-            throw new Error("Could not add plant");
+            setNotification({
+                type: "error",
+                message: "Could not add plant, try again",
+            });
         }
     };
 
@@ -82,7 +87,10 @@ const AddPlant = () => {
                 }>(`${imgUploadUrl}/upload`, image, config);
                 setPlant({ ...plant, imageName: response.data.imgName });
             } catch (error) {
-                throw new Error("Could not upload image");
+                setNotification({
+                    type: "error",
+                    message: "Could not add image, try again",
+                });
             }
             setUploading(false);
         }
@@ -124,16 +132,19 @@ const AddPlant = () => {
     };
 
     return (
-        <PlantForm
-            handleSubmit={(event) => void handleSubmit(event)}
-            handleChange={handleChange}
-            handleImageChange={(event) => void handleImageChange(event)}
-            handleImageRemove={handleImageRemove}
-            plant={plant}
-            uploading={uploading}
-            addNewGrowingMedium={addNewGrowingMedium}
-            hideGrowingMediumForm={hideGrowingMediumForm}
-        />
+        <>
+            {notification && <ShowNotification notification={notification} />}
+            <PlantForm
+                handleSubmit={(event) => void handleSubmit(event)}
+                handleChange={handleChange}
+                handleImageChange={(event) => void handleImageChange(event)}
+                handleImageRemove={handleImageRemove}
+                plant={plant}
+                uploading={uploading}
+                addNewGrowingMedium={addNewGrowingMedium}
+                hideGrowingMediumForm={hideGrowingMediumForm}
+            />
+        </>
     );
 };
 
