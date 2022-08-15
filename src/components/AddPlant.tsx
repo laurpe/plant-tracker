@@ -25,11 +25,12 @@ const AddPlant = () => {
     });
     const [uploading, setUploading] = useState<boolean>(false);
 
-    const [addNewGrowingMedium, setAddNewGrowingMedium] = useState<boolean>(false)
+    const [addNewGrowingMedium, setAddNewGrowingMedium] =
+        useState<boolean>(false);
 
     const hideGrowingMediumForm = () => {
-        setAddNewGrowingMedium(false)
-    }
+        setAddNewGrowingMedium(false);
+    };
 
     const { addPlant } = usePlants();
 
@@ -60,8 +61,8 @@ const AddPlant = () => {
             event.target.name === "growingMedium" &&
             event.target.value === "create new"
         ) {
-            event.target.value = ""
-            setAddNewGrowingMedium(true)
+            event.target.value = "";
+            setAddNewGrowingMedium(true);
         }
         setPlant({ ...plant, [event.target.name]: event.target.value });
     };
@@ -108,7 +109,14 @@ const AddPlant = () => {
             imageName: "",
         });
 
-        navigate("/main");
+        navigate("/main", {
+            state: {
+                notification: {
+                    type: "notification",
+                    message: "New plant added!",
+                },
+            },
+        });
     };
 
     const handleImageRemove = () => {
