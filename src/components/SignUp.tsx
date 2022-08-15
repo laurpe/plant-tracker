@@ -9,18 +9,18 @@ import Column from "./style/Generics/Column";
 import Row from "./style/Generics/Row";
 import Title from "./style/Generics/Title";
 import IconButton from "./style/Generics/IconButton";
-import Notification from "./style/Generics/Notification";
 
 import CloseIcon from "@mui/icons-material/Close";
 
 import { useUser } from "../hooks/useUser";
 
-import { TempUser } from "../types";
+import { Notification, TempUser } from "../types";
+import ShowNotification from "./ShowNotification";
 
 const SignUp = () => {
     const [user, setUser] = useState<TempUser>({ email: "", password: "" });
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
-    const [notification, setNotification] = useState<string>("");
+    const [notification, setNotification] = useState<Notification>(null);
 
     const { createUser } = useUser();
 
@@ -42,7 +42,7 @@ const SignUp = () => {
         event.preventDefault();
 
         if (user.password === passwordConfirm) {
-            setNotification("");
+            setNotification(null);
 
             try {
                 await createUser(user);
@@ -53,10 +53,13 @@ const SignUp = () => {
                 navigate("/");
             } catch (error) {
                 const err = error as Error;
-                setNotification(err.message);
+                setNotification({ type: "error", message: err.message });
             }
         } else {
-            setNotification("Passwords do not match");
+            setNotification({
+                type: "error",
+                message: "Passwords do not match",
+            });
         }
     };
 
@@ -69,7 +72,9 @@ const SignUp = () => {
                 </IconButton>
             </Row>
             <Column padding="0 1rem 0 1rem">
-                {notification && <Notification>{notification}</Notification>}
+                {notification && (
+                    <ShowNotification notification={notification} />
+                )}
                 <Form onSubmit={(event) => void handleSubmit(event)}>
                     <Label>Email</Label>
                     <Input
