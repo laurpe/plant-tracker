@@ -25,11 +25,12 @@ const SinglePlant = () => {
 
     const { updatePlant, removePlant } = usePlants();
 
-    const [addNewGrowingMedium, setAddNewGrowingMedium] = useState<boolean>(false)
+    const [addNewGrowingMedium, setAddNewGrowingMedium] =
+        useState<boolean>(false);
 
     const hideGrowingMediumForm = () => {
-        setAddNewGrowingMedium(false)
-    }
+        setAddNewGrowingMedium(false);
+    };
 
     const id = useParams().id as string;
 
@@ -89,8 +90,8 @@ const SinglePlant = () => {
             event.target.name === "growingMedium" &&
             event.target.value === "create new"
         ) {
-            event.target.value = ""
-            setAddNewGrowingMedium(true)
+            event.target.value = "";
+            setAddNewGrowingMedium(true);
         }
         setPlant({ ...plant, [event.target.name]: event.target.value });
     };
@@ -132,7 +133,14 @@ const SinglePlant = () => {
             id: "",
         });
 
-        navigate("/main");
+        navigate("/main", {
+            state: {
+                notification: {
+                    type: "notification",
+                    message: "Plant updated!",
+                },
+            },
+        });
     };
 
     const handleImageRemove = () => {
