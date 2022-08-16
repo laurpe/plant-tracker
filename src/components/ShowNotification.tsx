@@ -18,15 +18,17 @@ const animation = keyframes`
     }
 `;
 
+interface NotificationProps {
+    type?: string;
+}
+
 const NotificationDiv = styled.div`
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 80px;
-    background-color: white;
     display: flex;
-    justify-content: center;
     align-items: center;
     font-size: 1rem;
     z-index: 1000;
@@ -34,6 +36,21 @@ const NotificationDiv = styled.div`
     animation-name: ${animation};
     animation-duration: 5s;
     color: #7b9c99;
+    background-color: white;
+`;
+
+const SideDiv = styled.div<NotificationProps>`
+    width: 6px;
+    height: 100%;
+    margin-right: 16px;
+    background-color: ${(props) => {
+        if (props.type === "notification") {
+            return "#21998c";
+        }
+        if (props.type === "error") {
+            return "#ea5c5c";
+        }
+    }};
 `;
 
 interface Props {
@@ -58,7 +75,12 @@ const ShowNotification = ({ notification }: Props) => {
         return null;
     }
 
-    return <NotificationDiv>{notification?.message}</NotificationDiv>;
+    return (
+        <NotificationDiv>
+            <SideDiv type={notification?.type} />
+            {notification?.message}
+        </NotificationDiv>
+    );
 };
 
 export default ShowNotification;
