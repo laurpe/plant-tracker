@@ -8,10 +8,10 @@ const animation = keyframes`
         height: 0;
     }
     20% {
-        height: 80px;
+        height: 120px;
     }
     80% {
-        height: 80px;
+        height: 120px;
     }
     100% {
         height: 0;
@@ -27,7 +27,7 @@ const NotificationDiv = styled.div`
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 80px;
+    height: 120px;
     display: flex;
     align-items: center;
     font-size: 1rem;
