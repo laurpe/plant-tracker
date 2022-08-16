@@ -37,7 +37,6 @@ const NotificationDiv = styled.div`
     animation-duration: 5s;
     color: #7b9c99;
     background-color: white;
-    padding-bottom: 40px;
 `;
 
 const SideDiv = styled.div<NotificationProps>`

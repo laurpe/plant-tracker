@@ -62,6 +62,7 @@ const StyledSelect = styled.select`
     color: #225c55;
     padding: 0.8rem 0.8rem 0.9rem 0;
     height: 3.5rem;
+    background: white;
 `;
 
 const StyledRow = styled(Row)`
