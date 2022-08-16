@@ -228,7 +228,7 @@ describe("Growing medium", () => {
     });
 });
 
-describe.only("Notification shows when", () => {
+describe("Notification shows when", () => {
     beforeEach(() => {
         cy.deletePlants();
         cy.deleteUsers();
@@ -266,5 +266,13 @@ describe.only("Notification shows when", () => {
 
     it("new account is created", () => {
         cy.get("#notification-container").contains("Account created");
+    })
+
+    it("user is trying to log in with wrong credentials", () => {
+        cy.get("#login-email-input").type("test@user.com");
+        cy.get("#login-password-input").type("wrong");
+        cy.get("#login-submit-btn").click();
+
+        cy.contains("Invalid email or password");
     })
 })
