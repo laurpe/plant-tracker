@@ -99,10 +99,11 @@ describe("Plant", () => {
 
         cy.contains("calathea beauty star");
     });
-    it("can be deleted", () => {
+    it.only("can be deleted", () => {
         cy.contains("calathea").get("#plant-edit-link").click();
 
         cy.get("#delete-plant-btn").click();
+        cy.get("#confirm-plant-delete-btn").click()
 
         cy.get("calathea").should("not.exist");
     });
