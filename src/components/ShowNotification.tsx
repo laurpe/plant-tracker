@@ -20,7 +20,7 @@ const animation = keyframes`
 
 const NotificationDiv = styled.div`
     position: fixed;
-    top: 0;
+    bottom: 0;
     left: 0;
     width: 100%;
     height: 80px;
@@ -30,7 +30,7 @@ const NotificationDiv = styled.div`
     align-items: center;
     font-size: 1rem;
     z-index: 1000;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 3px 0.5px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 3px 2px;
     animation-name: ${animation};
     animation-duration: 5s;
 `;
