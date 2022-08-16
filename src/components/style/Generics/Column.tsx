@@ -3,6 +3,7 @@ import styled from "styled-components";
 interface Props {
     flex?: string;
     justifyContent?: string;
+    alignItems?: string;
     height?: string;
     padding?: string;
     position?: string;
@@ -15,11 +16,12 @@ const Column = styled.div<Props>`
     flex-direction: column;
     flex: ${(props) => props.flex || "none"};
     justify-content: ${(props) => props.justifyContent || "flex-start"};
+    align-items: ${(props) => props.alignItems || "stretch"};
     height: ${(props) => props.height || "auto"};
     padding: ${(props) => props.padding || "0"};
     position: ${(props) => props.position || "static"};
     background-color: ${(props) => props.backgroundColor || "transparent"};
-    border: ${(props) => props.border || "none"}
+    border: ${(props) => props.border || "none"};
 `;
 
 export default Column;
