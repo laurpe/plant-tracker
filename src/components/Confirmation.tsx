@@ -34,6 +34,7 @@ const Confirmation = ({ deletePlant, hideConfirmation, id }: Props) => {
                     </StyledP>
                     <Row>
                         <Button
+                            type="button"
                             id="confirm-plant-delete-btn"
                             flex="1"
                             margin="0 0.8rem 0 0"
@@ -42,6 +43,7 @@ const Confirmation = ({ deletePlant, hideConfirmation, id }: Props) => {
                             Yes
                         </Button>
                         <Button
+                            type="button"
                             flex="1"
                             backgroundColor="#ea5c5c"
                             onClick={() => hideConfirmation()}
