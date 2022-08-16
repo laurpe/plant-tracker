@@ -235,20 +235,36 @@ describe.only("Notification shows when", () => {
         cy.deleteTestGrowingMedium();
         cy.visit("http://localhost:3000");
         cy.createUser("test@user.com", "secret");
-        cy.login("test@user.com", "secret");
     });
 
     it("new plant is added", () => {
+        cy.login("test@user.com", "secret");
         cy.addPlant();
         cy.get("#notification-container").contains("New plant added")
     })
 
     it("plant is deleted", () => {
+        cy.login("test@user.com", "secret");
         cy.addPlant();
         cy.contains("calathea").get("#plant-edit-link").click();
         cy.get("#delete-plant-btn").click()
         cy.get("#confirm-plant-delete-btn").click()
 
         cy.get("#notification-container").contains("Plant deleted!")
+    })
+
+    it("plant is updated", () => {
+        cy.login("test@user.com", "secret");
+        cy.addPlant();
+        cy.contains("calathea").get("#plant-edit-link").click();
+        cy.get("#plant-name-input").clear().type("calathea beauty star");
+
+        cy.get("#submit-btn").click();
+
+        cy.get("#notification-container").contains("Plant updated");
+    })
+
+    it("new account is created", () => {
+        cy.get("#notification-container").contains("Account created");
     })
 })
