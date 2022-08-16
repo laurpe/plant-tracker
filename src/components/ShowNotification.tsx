@@ -76,7 +76,7 @@ const ShowNotification = ({ notification }: Props) => {
     }
 
     return (
-        <NotificationDiv>
+        <NotificationDiv id="notification-container">
             <SideDiv type={notification?.type} />
             {notification?.message}
         </NotificationDiv>

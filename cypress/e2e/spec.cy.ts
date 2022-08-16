@@ -227,3 +227,28 @@ describe("Growing medium", () => {
         );
     });
 });
+
+describe.only("Notification shows when", () => {
+    beforeEach(() => {
+        cy.deletePlants();
+        cy.deleteUsers();
+        cy.deleteTestGrowingMedium();
+        cy.visit("http://localhost:3000");
+        cy.createUser("test@user.com", "secret");
+        cy.login("test@user.com", "secret");
+    });
+
+    it("new plant is added", () => {
+        cy.addPlant();
+        cy.get("#notification-container").contains("New plant added")
+    })
+
+    it("plant is deleted", () => {
+        cy.addPlant();
+        cy.contains("calathea").get("#plant-edit-link").click();
+        cy.get("#delete-plant-btn").click()
+        cy.get("#confirm-plant-delete-btn").click()
+
+        cy.get("#notification-container").contains("Plant deleted!")
+    })
+})
