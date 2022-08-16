@@ -29,7 +29,6 @@ const NotificationDiv = styled.div`
     width: 100%;
     height: 120px;
     display: flex;
-    align-items: center;
     font-size: 1rem;
     z-index: 1000;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 3px 2px;
@@ -51,6 +50,10 @@ const SideDiv = styled.div<NotificationProps>`
             return "#ea5c5c";
         }
     }};
+`;
+
+const StyledP = styled.p`
+    padding-top: 30px;
 `;
 
 interface Props {
@@ -78,7 +81,7 @@ const ShowNotification = ({ notification }: Props) => {
     return (
         <NotificationDiv id="notification-container">
             <SideDiv type={notification?.type} />
-            {notification?.message}
+            <StyledP>{notification?.message}</StyledP>
         </NotificationDiv>
     );
 };
