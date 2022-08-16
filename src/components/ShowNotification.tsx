@@ -33,6 +33,7 @@ const NotificationDiv = styled.div`
     box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 3px 2px;
     animation-name: ${animation};
     animation-duration: 5s;
+    color: #7b9c99;
 `;
 
 interface Props {

@@ -17,6 +17,7 @@ const StyledPopup = styled(Popup)`
 
 const StyledP = styled.p`
     text-align: center;
+    color: #7b9c99;
 `;
 
 const Confirmation = ({ deletePlant, hideConfirmation, id }: Props) => {
