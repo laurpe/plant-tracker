@@ -22,6 +22,7 @@ import styled from "styled-components";
 import { useGrowingMediums } from "../hooks/useGrowingMediums";
 import Overlay from "./style/Generics/Overlay";
 import Popup from "./style/Generics/Popup";
+import Confirmation from "./Confirmation";
 
 const imgBaseUrl = process.env.REACT_APP_IMAGE_BASE_URL as string;
 
@@ -34,9 +35,12 @@ interface Props {
     handleImageRemove: () => void;
     plant: Plant | TempPlant;
     uploading: boolean;
-    handleDelete?: (id: string) => Promise<void>;
+    handleDelete?: () => void;
+    deletePlant?: (id: string) => Promise<void>;
     addNewGrowingMedium: boolean;
     hideGrowingMediumForm: () => void;
+    hideConfirmation?: () => void;
+    confirmation?: boolean;
 }
 
 const StyledDiv = styled.div`
@@ -121,8 +125,11 @@ const PlantForm = ({
     plant,
     uploading,
     handleDelete,
+    deletePlant,
     addNewGrowingMedium,
     hideGrowingMediumForm,
+    confirmation,
+    hideConfirmation,
 }: Props) => {
     const { growingMediums, addGrowingMedium } = useGrowingMediums();
 
@@ -270,7 +277,7 @@ const PlantForm = ({
                                     id="delete-plant-btn"
                                     onClick={() =>
                                         handleDelete !== undefined &&
-                                        void handleDelete(id)
+                                        handleDelete()
                                     }
                                     margin="0 8px 0 0"
                                 >
@@ -300,6 +307,13 @@ const PlantForm = ({
                         />
                     </Popup>
                 </>
+            )}
+            {confirmation && deletePlant && hideConfirmation && id && (
+                <Confirmation
+                    deletePlant={deletePlant}
+                    hideConfirmation={hideConfirmation}
+                    id={id}
+                />
             )}
         </>
     );
