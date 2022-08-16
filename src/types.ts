@@ -36,11 +36,6 @@ export interface GrowingMedium extends TempGrowingMedium {
     id: string;
 }
 
-export interface State {
-    plants?: Plant[];
-    growingMediums?: GrowingMedium[];
-}
-
 // User before saving
 export interface TempUser {
     email: string;
@@ -50,4 +45,13 @@ export interface TempUser {
 // User after saving
 export interface User extends Omit<TempUser, "password"> {
     token: string;
+}
+
+export type Notification = {
+    type: "error" | "notification";
+    message: string;
+} | null;
+
+export interface NotificationState {
+    notification: Notification;
 }
