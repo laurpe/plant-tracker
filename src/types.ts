@@ -45,6 +45,7 @@ export interface TempUser {
 // User after saving
 export interface User extends Omit<TempUser, "password"> {
     token: string;
+    refreshToken: string;
 }
 
 export type Notification = {

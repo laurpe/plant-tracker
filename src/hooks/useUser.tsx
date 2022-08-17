@@ -5,7 +5,11 @@ import { useEffect, useState } from "react";
 import { AxiosError } from "axios";
 
 export const useUser = () => {
-    const [user, setUser] = useState<User>({ email: "", token: "" });
+    const [user, setUser] = useState<User>({
+        email: "",
+        token: "",
+        refreshToken: "",
+    });
 
     const navigate = useNavigate();
     const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
