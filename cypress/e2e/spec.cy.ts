@@ -266,7 +266,7 @@ describe("Notification shows when", () => {
         cy.addPlant();
         cy.contains("calathea").get("#plant-edit-link").click();
         cy.get("#delete-plant-btn").click()
-        cy.get("#confirm-plant-delete-btn").click()
+        cy.get("#confirm-action-btn").click()
 
         cy.get("#notification-container").contains("Plant deleted!")
     })
