@@ -39,7 +39,7 @@ const Confirmation = ({
                     <Row>
                         <Button
                             type="button"
-                            id="confirm-plant-delete-btn"
+                            id="confirm-action-btn"
                             flex="1"
                             margin="0 0.8rem 0 0"
                             onClick={() => void deleteResource(id)}

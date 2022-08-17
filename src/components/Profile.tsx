@@ -76,7 +76,11 @@ const Profile = () => {
                         <div>{user.email}</div>
                     </StyledRow>
                 </Column>
-                <Button type="button" onClick={() => handleDeleteClick()}>
+                <Button
+                    type="button"
+                    id="delete-account-btn"
+                    onClick={() => handleDeleteClick()}
+                >
                     Delete account
                 </Button>
             </Column>
