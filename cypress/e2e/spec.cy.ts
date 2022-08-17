@@ -67,7 +67,7 @@ describe("User", () => {
         cy.contains("calathea").should("not.exist");
     });
 
-    it.only("can delete their account", () => {
+    it("can delete their account", () => {
         cy.createUser("test@user.com", "secret");
         cy.login("test@user.com", "secret");
         cy.get("#profile-btn").click();

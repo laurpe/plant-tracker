@@ -22,6 +22,11 @@ const StyledRow = styled(Row)`
     padding: 1.2rem;
 `;
 
+const StyledButton = styled(Button)`
+    background: white;
+    color: #ea5c5c;
+`;
+
 const Profile = () => {
     const [confirm, setConfirm] = useState<boolean>(false);
     const navigate = useNavigate();
@@ -75,14 +80,16 @@ const Profile = () => {
                         <div>email</div>
                         <div>{user.email}</div>
                     </StyledRow>
+                    <Row padding="0 0 0 1rem">
+                        <StyledButton
+                            type="button"
+                            id="delete-account-btn"
+                            onClick={() => handleDeleteClick()}
+                        >
+                            Delete account
+                        </StyledButton>
+                    </Row>
                 </Column>
-                <Button
-                    type="button"
-                    id="delete-account-btn"
-                    onClick={() => handleDeleteClick()}
-                >
-                    Delete account
-                </Button>
             </Column>
             {confirm && (
                 <Confirmation
