@@ -66,6 +66,23 @@ describe("User", () => {
 
         cy.contains("calathea").should("not.exist");
     });
+
+    it("can delete their account", () => {
+        cy.createUser("test@user.com", "secret");
+        cy.login("test@user.com", "secret");
+        cy.get("#profile-btn").click();
+        cy.get("#delete-account-btn").click();
+        cy.contains("Are you sure you want to delete your account?")
+        cy.get("#confirm-action-btn").click()
+
+        cy.contains("Log in")
+
+        cy.get("#login-email-input").type("test@user.com");
+        cy.get("#login-password-input").type("secret");
+        cy.get("#login-submit-btn").click();
+
+        cy.contains("Invalid email or password")
+    })
 });
 
 describe("Plant", () => {
@@ -99,11 +116,11 @@ describe("Plant", () => {
 
         cy.contains("calathea beauty star");
     });
-    it.only("can be deleted", () => {
+    it("can be deleted", () => {
         cy.contains("calathea").get("#plant-edit-link").click();
 
         cy.get("#delete-plant-btn").click();
-        cy.get("#confirm-plant-delete-btn").click()
+        cy.get("#confirm-action-btn").click()
 
         cy.get("calathea").should("not.exist");
     });
@@ -249,7 +266,7 @@ describe("Notification shows when", () => {
         cy.addPlant();
         cy.contains("calathea").get("#plant-edit-link").click();
         cy.get("#delete-plant-btn").click()
-        cy.get("#confirm-plant-delete-btn").click()
+        cy.get("#confirm-action-btn").click()
 
         cy.get("#notification-container").contains("Plant deleted!")
     })

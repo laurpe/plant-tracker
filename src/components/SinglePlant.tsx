@@ -75,25 +75,27 @@ const SinglePlant = () => {
         setConfirmation(true);
     };
 
-    const deletePlant = async (id: string): Promise<void> => {
-        try {
-            await axios.delete<Plant>(`${baseUrl}/plants/${id}`, {
-                headers: { Authorization: `Bearer ${user.token || ""}` },
-            });
+    const deletePlant = async (id?: string): Promise<void> => {
+        if (id) {
+            try {
+                await axios.delete<Plant>(`${baseUrl}/plants/${id}`, {
+                    headers: { Authorization: `Bearer ${user.token || ""}` },
+                });
 
-            removePlant(id);
-        } catch (error) {
-            throw new Error("Could not delete plant");
-        }
+                removePlant(id);
+            } catch (error) {
+                throw new Error("Could not delete plant");
+            }
 
-        navigate("/main", {
-            state: {
-                notification: {
-                    type: "notification",
-                    message: "Plant deleted!",
+            navigate("/main", {
+                state: {
+                    notification: {
+                        type: "notification",
+                        message: "Plant deleted!",
+                    },
                 },
-            },
-        });
+            });
+        }
     };
 
     const hideConfirmation = () => {
@@ -173,7 +175,7 @@ const SinglePlant = () => {
             plant={plant}
             uploading={uploading}
             handleDelete={handleDelete}
-            deletePlant={deletePlant}
+            deleteResource={deletePlant}
             addNewGrowingMedium={addNewGrowingMedium}
             hideGrowingMediumForm={hideGrowingMediumForm}
             hideConfirmation={hideConfirmation}

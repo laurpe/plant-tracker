@@ -36,7 +36,7 @@ interface Props {
     plant: Plant | TempPlant;
     uploading: boolean;
     handleDelete?: () => void;
-    deletePlant?: (id: string) => Promise<void>;
+    deleteResource?: (id?: string) => Promise<void>;
     addNewGrowingMedium: boolean;
     hideGrowingMediumForm: () => void;
     hideConfirmation?: () => void;
@@ -125,7 +125,7 @@ const PlantForm = ({
     plant,
     uploading,
     handleDelete,
-    deletePlant,
+    deleteResource,
     addNewGrowingMedium,
     hideGrowingMediumForm,
     confirmation,
@@ -308,9 +308,10 @@ const PlantForm = ({
                     </Popup>
                 </>
             )}
-            {confirmation && deletePlant && hideConfirmation && id && (
+            {confirmation && deleteResource && hideConfirmation && id && (
                 <Confirmation
-                    deletePlant={deletePlant}
+                    text="Are you sure you want to delete this plant?"
+                    deleteResource={deleteResource}
                     hideConfirmation={hideConfirmation}
                     id={id}
                 />

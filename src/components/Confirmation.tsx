@@ -6,9 +6,10 @@ import Popup from "./style/Generics/Popup";
 import Row from "./style/Generics/Row";
 
 interface Props {
-    deletePlant: (id: string) => Promise<void>;
+    deleteResource: (id?: string) => Promise<void>;
     hideConfirmation: () => void;
-    id: string;
+    id?: string;
+    text: string;
 }
 
 const StyledPopup = styled(Popup)`
@@ -20,7 +21,12 @@ const StyledP = styled.p`
     color: #7b9c99;
 `;
 
-const Confirmation = ({ deletePlant, hideConfirmation, id }: Props) => {
+const Confirmation = ({
+    text,
+    deleteResource,
+    hideConfirmation,
+    id,
+}: Props) => {
     return (
         <Overlay onClick={() => hideConfirmation()}>
             <StyledPopup>
@@ -29,19 +35,19 @@ const Confirmation = ({ deletePlant, hideConfirmation, id }: Props) => {
                     justifyContent="space-between"
                     padding="32px"
                 >
-                    <StyledP>
-                        Are you sure you want to delete this plant?
-                    </StyledP>
+                    <StyledP>{text}</StyledP>
                     <Row>
                         <Button
-                            id="confirm-plant-delete-btn"
+                            type="button"
+                            id="confirm-action-btn"
                             flex="1"
                             margin="0 0.8rem 0 0"
-                            onClick={() => void deletePlant(id)}
+                            onClick={() => void deleteResource(id)}
                         >
                             Yes
                         </Button>
                         <Button
+                            type="button"
                             flex="1"
                             backgroundColor="#ea5c5c"
                             onClick={() => hideConfirmation()}
