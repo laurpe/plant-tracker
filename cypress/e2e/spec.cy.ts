@@ -79,9 +79,9 @@ describe("User", () => {
 
         cy.get("#login-email-input").type("test@user.com");
         cy.get("#login-password-input").type("secret");
+        cy.get("#login-submit-btn").click();
 
-        cy.contains("Invalid username or password")
-
+        cy.contains("Invalid email or password")
     })
 });
 
