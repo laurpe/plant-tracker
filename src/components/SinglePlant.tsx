@@ -1,4 +1,4 @@
-import axios from "axios";
+import { axiosPrivate } from "../util/axiosPrivate";
 
 import { Plant } from "../types";
 import { usePlants } from "../hooks/usePlants";
@@ -44,9 +44,12 @@ const SinglePlant = () => {
             return;
         }
         const fetchPlant = async () => {
-            const response = await axios.get<Plant>(`${baseUrl}/plants/${id}`, {
-                headers: { Authorization: `Bearer ${user.token || ""}` },
-            });
+            const response = await axiosPrivate.get<Plant>(
+                `${baseUrl}/plants/${id}`,
+                {
+                    headers: { Authorization: `Bearer ${user.token || ""}` },
+                }
+            );
             setPlant(response.data);
         };
 
@@ -57,7 +60,7 @@ const SinglePlant = () => {
 
     const update = async (plant: Plant): Promise<void> => {
         try {
-            const response = await axios.put<Plant>(
+            const response = await axiosPrivate.put<Plant>(
                 `${baseUrl}/plants/${id}`,
                 plant,
                 {
@@ -78,7 +81,7 @@ const SinglePlant = () => {
     const deletePlant = async (id?: string): Promise<void> => {
         if (id) {
             try {
-                await axios.delete<Plant>(`${baseUrl}/plants/${id}`, {
+                await axiosPrivate.delete<Plant>(`${baseUrl}/plants/${id}`, {
                     headers: { Authorization: `Bearer ${user.token || ""}` },
                 });
 
@@ -125,7 +128,7 @@ const SinglePlant = () => {
             const config = { headers: { "Content-Type": "image/jpeg" } };
 
             try {
-                const response = await axios.post<{
+                const response = await axiosPrivate.post<{
                     [key: string]: string;
                 }>(`${imgBaseUrl}/upload`, image, config);
                 setPlant({ ...plant, imageName: response.data.imgName });

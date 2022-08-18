@@ -1,5 +1,5 @@
 import { Plant } from "../types";
-import axios from "axios";
+import { axiosPrivate } from "../util/axiosPrivate";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import { Link } from "react-router-dom";
@@ -93,7 +93,7 @@ const PlantCard = ({ plant, updatePlant, nextWatering }: Props) => {
 
     const updateWatered = async (id: string): Promise<void> => {
         try {
-            const response = await axios.put<Plant>(
+            const response = await axiosPrivate.put<Plant>(
                 `${baseUrl}/plants/${id}`,
                 {
                     ...plant,

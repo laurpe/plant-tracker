@@ -4,7 +4,7 @@ import { useUser } from "../hooks/useUser";
 
 import { TempPlant, Plant, Notification } from "../types";
 
-import axios from "axios";
+import { axiosPrivate } from "../util/axiosPrivate";
 
 import { usePlants } from "../hooks/usePlants";
 
@@ -44,7 +44,7 @@ const AddPlant = () => {
 
     const add = async (plant: TempPlant): Promise<void> => {
         try {
-            const response = await axios.post<Plant>(
+            const response = await axiosPrivate.post<Plant>(
                 `${baseUrl}/plants`,
                 plant,
                 { headers: { Authorization: `Bearer ${user.token || ""}` } }
@@ -82,7 +82,7 @@ const AddPlant = () => {
             const config = { headers: { "Content-Type": "image/jpeg" } };
 
             try {
-                const response = await axios.post<{
+                const response = await axiosPrivate.post<{
                     [key: string]: string;
                 }>(`${imgUploadUrl}/upload`, image, config);
                 setPlant({ ...plant, imageName: response.data.imgName });
