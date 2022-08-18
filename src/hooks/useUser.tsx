@@ -70,7 +70,7 @@ export const useUser = () => {
                 JSON.stringify({ ...user, token: response.data.token })
             );
         } catch (error) {
-            navigate("/");
+            logout();
         }
     };
 
