@@ -25,7 +25,7 @@ axios.interceptors.response.use((response) => {
 
             if (newToken) {
                 config.headers = {
-                    ...config.headers, authorization: `Bearer ${newToken}`
+                    ...config.headers, Authorization: `Bearer ${newToken}`
                 }
             }
         }

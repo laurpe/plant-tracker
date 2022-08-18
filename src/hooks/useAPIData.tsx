@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { useUser } from "./useUser";
 
-import axios from "axios";
+import { axiosPrivate } from "../util/axiosPrivate";
 
 export const useAPIData = <T,>(url: string) => {
     const [data, setData] = useState<T | null>(null);
@@ -21,7 +21,7 @@ export const useAPIData = <T,>(url: string) => {
 
         const fetchData = async () => {
             try {
-                const response = await axios.get<T>(
+                const response = await axiosPrivate.get<T>(
                     `${baseUrl}/${url}`,
                     config
                 );

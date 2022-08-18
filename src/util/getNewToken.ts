@@ -7,8 +7,9 @@ export const getNewToken = async (refreshToken: string) => {
     try {
         const response = await axios.post<{ token: string }>(
             `${baseUrl}/refresh`,
-            refreshToken
+            {refreshToken}
         );
+        console.log(response.data)
         const user = localStorage.getItem("user")
         if (typeof user === "string") {
             const storedUser = JSON.parse(user) as User;
