@@ -57,22 +57,5 @@ export const useUser = () => {
         navigate("/");
     };
 
-    const getNewToken = async (refreshToken: string) => {
-        const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
-
-        try {
-            const response = await axios.post<{ token: string }>(
-                `${baseUrl}/refresh`,
-                refreshToken
-            );
-            localStorage.setItem(
-                "user",
-                JSON.stringify({ ...user, token: response.data.token })
-            );
-        } catch (error) {
-            logout();
-        }
-    };
-
-    return { user, login, logout, createUser, getNewToken };
+    return { user, login, logout, createUser };
 };
