@@ -4,13 +4,6 @@ import { getNewToken } from "./getNewToken";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL
 
-/* axios.interceptors.request.use((config) => {
-    return config;
-}, (error) => {
-    return Promise.reject(error);
-})
-*/
-
 axios.interceptors.response.use((response) => {
     return response
 }, async (error: AxiosError) => {
