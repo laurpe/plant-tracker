@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { axiosPrivate } from "../util/axiosPrivate";
 
 import { GrowingMedium, TempGrowingMedium, Notification } from "../types";
 
@@ -133,7 +133,7 @@ const GrowingMediumForm = ({
         growingMedium: TempGrowingMedium
     ): Promise<void> => {
         try {
-            const response = await axios.post<GrowingMedium>(
+            const response = await axiosPrivate.post<GrowingMedium>(
                 `${baseUrl}/growing-mediums`,
                 growingMedium,
                 {

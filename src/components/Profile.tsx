@@ -15,7 +15,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import styled from "styled-components";
 
 import { useUser } from "../hooks/useUser";
-import axios from "axios";
+import { axiosPrivate } from "../util/axiosPrivate";
 
 const StyledRow = styled(Row)`
     border-bottom: 1px solid #ccdbd9;
@@ -44,7 +44,7 @@ const Profile = () => {
 
     const deleteResource = async () => {
         try {
-            await axios.delete(`${baseUrl}/users`, {
+            await axiosPrivate.delete(`${baseUrl}/users`, {
                 headers: { Authorization: `Bearer ${user.token || ""}` },
             });
             logout();
