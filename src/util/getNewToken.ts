@@ -1,5 +1,6 @@
-import axios from "axios";
+import axios, {AxiosError} from "axios";
 import { User } from "../types";
+
 
 export const getNewToken = async (refreshToken: string) => {
     const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
@@ -9,7 +10,7 @@ export const getNewToken = async (refreshToken: string) => {
             `${baseUrl}/refresh`,
             {refreshToken}
         );
-        console.log(response.data)
+
         const user = localStorage.getItem("user")
         if (typeof user === "string") {
             const storedUser = JSON.parse(user) as User;
@@ -21,7 +22,12 @@ export const getNewToken = async (refreshToken: string) => {
         }
         return response.data.token
     } catch (error) {
-        localStorage.clear();
-        //TODO: navigate to login page
+        if (error instanceof AxiosError) {
+            if (error.response?.status === 400) {
+                localStorage.clear();
+                window.history.replaceState(null, "", "/")
+                window.location.reload();
+            }
+        }
     }
 };
