@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Main from "./components/Main";
 import SinglePlant from "./components/SinglePlant";
@@ -18,7 +18,13 @@ const App = () => {
                 <Routes>
                     <Route
                         path="/"
-                        element={user.token ? <Main /> : <LogIn />}
+                        element={
+                            user.token ? (
+                                <Navigate replace to="/main" />
+                            ) : (
+                                <LogIn />
+                            )
+                        }
                     />
                     <Route path="/main" element={<Main />} />
                     <Route path="/add" element={<AddPlant />} />
