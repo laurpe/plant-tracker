@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Main from "./components/Main";
 import SinglePlant from "./components/SinglePlant";
@@ -8,12 +8,24 @@ import SignUp from "./components/SignUp";
 import Profile from "./components/Profile";
 import ScrollToTop from "./components/ScrollToTop";
 
+import { useUser } from "./hooks/useUser";
+
 const App = () => {
+    const { user } = useUser();
     return (
         <BrowserRouter>
             <ScrollToTop>
                 <Routes>
-                    <Route path="/" element={<LogIn />} />
+                    <Route
+                        path="/"
+                        element={
+                            user.token ? (
+                                <Navigate replace to="/main" />
+                            ) : (
+                                <LogIn />
+                            )
+                        }
+                    />
                     <Route path="/main" element={<Main />} />
                     <Route path="/add" element={<AddPlant />} />
                     <Route path="/plants/:id" element={<SinglePlant />} />

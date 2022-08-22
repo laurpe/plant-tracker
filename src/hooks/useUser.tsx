@@ -1,6 +1,5 @@
 import { User, TempUser } from "../types";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { AxiosError } from "axios";
 
@@ -11,7 +10,6 @@ export const useUser = () => {
         refreshToken: "",
     });
 
-    const navigate = useNavigate();
     const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
     useEffect(() => {
@@ -54,7 +52,8 @@ export const useUser = () => {
 
     const logout = () => {
         localStorage.clear();
-        navigate("/");
+        window.history.replaceState(null, "", "/");
+        window.location.reload();
     };
 
     return { user, login, logout, createUser };
