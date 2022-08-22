@@ -52,6 +52,8 @@ export const useUser = () => {
 
     const logout = () => {
         localStorage.clear();
+        window.history.replaceState(null, "", "/");
+        window.location.reload();
     };
 
     return { user, login, logout, createUser };
