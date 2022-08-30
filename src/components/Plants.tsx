@@ -38,27 +38,56 @@ const Plants = () => {
     const { plants, updatePlant } = usePlants();
     const [search, setSearch] = useState<string>("");
 
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearch(event.target.value);
+    };
+
     return (
         <>
-            <StyledInput type="text" placeholder="search plant" />
-            {plants
-                .sort((a, b) => {
-                    const aNextWatering = calculateNextWatering(a);
-                    const bNextWatering = calculateNextWatering(b);
+            <StyledInput
+                type="text"
+                placeholder="search plant"
+                value={search}
+                onChange={handleChange}
+            />
+            {search &&
+                plants
+                    .filter((plant) =>
+                        plant.name
+                            .toLowerCase()
+                            .includes(search.toLowerCase().trim())
+                    )
+                    .map((plant) => {
+                        const nextWatering = calculateNextWatering(plant);
+                        return (
+                            <PlantCard
+                                plant={plant}
+                                key={plant.id}
+                                nextWatering={nextWatering}
+                                updatePlant={updatePlant}
+                            />
+                        );
+                    })}
 
-                    return aNextWatering.isBefore(bNextWatering) ? -1 : 1;
-                })
-                .map((plant) => {
-                    const nextWatering = calculateNextWatering(plant);
-                    return (
-                        <PlantCard
-                            plant={plant}
-                            key={plant.id}
-                            nextWatering={nextWatering}
-                            updatePlant={updatePlant}
-                        />
-                    );
-                })}
+            {!search &&
+                plants
+                    .sort((a, b) => {
+                        const aNextWatering = calculateNextWatering(a);
+                        const bNextWatering = calculateNextWatering(b);
+
+                        return aNextWatering.isBefore(bNextWatering) ? -1 : 1;
+                    })
+                    .map((plant) => {
+                        const nextWatering = calculateNextWatering(plant);
+                        return (
+                            <PlantCard
+                                plant={plant}
+                                key={plant.id}
+                                nextWatering={nextWatering}
+                                updatePlant={updatePlant}
+                            />
+                        );
+                    })}
         </>
     );
 };
