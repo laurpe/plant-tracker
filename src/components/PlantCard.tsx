@@ -79,8 +79,8 @@ const CardTitle = styled.h2`
     text-transform: capitalize;
 `;
 
-const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
-const imageBaseUrl = process.env.REACT_APP_IMAGE_BASE_URL as string;
+const baseUrl = import.meta.env.VITE_APP_API_BASE_URL as string;
+const imageBaseUrl = import.meta.env.VITE_APP_IMAGE_BASE_URL as string;
 
 interface Props {
     plant: Plant;

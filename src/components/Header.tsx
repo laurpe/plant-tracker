@@ -23,8 +23,7 @@ const HoveringIconButton = styled(IconButton)`
     color: white;
     height: 4rem;
     width: 4rem;
-`
-
+`;
 
 const Header = () => {
     return (

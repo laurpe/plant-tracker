@@ -18,7 +18,7 @@ import styled from "styled-components";
 import { useUser } from "../hooks/useUser";
 import ShowNotification from "./ShowNotification";
 
-const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
+const baseUrl = import.meta.env.VITE_APP_API_BASE_URL as string;
 
 const StyledColorsIconButton = styled(IconButton)`
     color: #ea5c5c;
