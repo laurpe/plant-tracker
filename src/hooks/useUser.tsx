@@ -10,7 +10,7 @@ export const useUser = () => {
         refreshToken: "",
     });
 
-    const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
+    const baseUrl = import.meta.env.VITE_APP_API_BASE_URL as string;
 
     useEffect(() => {
         const storage = localStorage.getItem("user");

@@ -9,7 +9,7 @@ export const useAPIData = <T,>(url: string) => {
     const { user } = useUser();
 
     useEffect(() => {
-        const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
+        const baseUrl = import.meta.env.VITE_APP_API_BASE_URL as string;
 
         if (user.token === "") {
             return;

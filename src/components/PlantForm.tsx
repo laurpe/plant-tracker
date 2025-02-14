@@ -24,7 +24,7 @@ import Overlay from "./style/Generics/Overlay";
 import Popup from "./style/Generics/Popup";
 import Confirmation from "./Confirmation";
 
-const imgBaseUrl = process.env.REACT_APP_IMAGE_BASE_URL as string;
+const imgBaseUrl = import.meta.env.VITE_APP_IMAGE_BASE_URL as string;
 
 interface Props {
     handleSubmit: React.FormEventHandler<HTMLFormElement>;

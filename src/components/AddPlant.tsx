@@ -11,8 +11,9 @@ import { usePlants } from "../hooks/usePlants";
 import PlantForm from "./PlantForm";
 import ShowNotification from "./ShowNotification";
 
-const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
-const imgUploadUrl = process.env.REACT_APP_IMAGE_UPLOAD_API_BASE_URL as string;
+const baseUrl = import.meta.env.VITE_APP_API_BASE_URL as string;
+const imgUploadUrl = import.meta.env
+    .VITE_APP_IMAGE_UPLOAD_API_BASE_URL as string;
 
 const AddPlant = () => {
     // states

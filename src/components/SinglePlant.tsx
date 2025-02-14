@@ -9,8 +9,8 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import PlantForm from "./PlantForm";
 
-const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
-const imgBaseUrl = process.env.REACT_APP_IMAGE_UPLOAD_API_BASE_URL as string;
+const baseUrl = import.meta.env.VITE_APP_API_BASE_URL as string;
+const imgBaseUrl = import.meta.env.VITE_APP_IMAGE_UPLOAD_API_BASE_URL as string;
 
 const SinglePlant = () => {
     const [plant, setPlant] = useState<Plant>({

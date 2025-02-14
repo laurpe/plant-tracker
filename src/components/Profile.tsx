@@ -32,7 +32,7 @@ const Profile = () => {
     const navigate = useNavigate();
     const { user, logout } = useUser();
 
-    const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
+    const baseUrl = import.meta.env.VITE_APP_API_BASE_URL as string;
 
     const handleDeleteClick = () => {
         setConfirm(true);
