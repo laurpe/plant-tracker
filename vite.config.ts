@@ -9,4 +9,15 @@ export default defineConfig({
         open: true,
         port: 3000,
     },
+    build: {
+        rollupOptions: {
+            external: ["cypress"],
+            input: {
+                main: "index.html",
+            },
+        },
+    },
+    optimizeDeps: {
+        exclude: ["cypress"],
+    },
 });

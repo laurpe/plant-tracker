@@ -11,6 +11,10 @@ axios.interceptors.response.use(
     async (error: AxiosError) => {
         const config = error?.config;
 
+        if (!config) {
+            return Promise.reject(error);
+        }
+
         if (error?.response?.status === 401) {
             const user = localStorage.getItem("user");
             if (typeof user === "string") {
@@ -19,10 +23,11 @@ axios.interceptors.response.use(
                 const newToken = await getNewToken(storedUser.refreshToken);
 
                 if (newToken) {
-                    config.headers = {
-                        ...config.headers,
-                        Authorization: `Bearer ${newToken}`,
-                    };
+                    config.headers.set &&
+                        config.headers.set(
+                            "Authorization",
+                            `Bearer ${newToken}`
+                        );
                 }
             }
             return axios(config);
