@@ -1,6 +1,6 @@
 # Plant Tracker
 
-App for keeping track of watering houseplants. Set a watering cycle for each plant, and the app will show you when it's time to water it next.
+A React app for keeping track of watering houseplants. Set a watering cycle for each plant, and the app will show you when it's time to water it next.
 
 Note: the app has been optimized for mobile, desktop layout is still a work in progress.
 
